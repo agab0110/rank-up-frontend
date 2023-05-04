@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon"  [routerLink]="['/admin/request-history']">
       <ion-icon name="arrow-back" size="large"></ion-icon>
     </ion-button>
 
@@ -15,7 +15,7 @@
       <ion-textarea class="descriptionArea" fill="outline" placeholder="     Commento [nome admin]" shape="round" [readonly] = true></ion-textarea>
 
       <app-bt-admin-small class="viewAttached" [text]="'Visualizza allegato'"></app-bt-admin-small>
-      <app-bt-admin-small class="close" [text]="'Chiudi'"></app-bt-admin-small>
+      <app-bt-admin-small class="close" [text]="'Chiudi'"  [routerLink]="['/admin/request-history']"></app-bt-admin-small>
 
   </div>
 </ion-content>
