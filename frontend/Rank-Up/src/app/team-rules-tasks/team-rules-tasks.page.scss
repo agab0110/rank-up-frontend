@@ -17,17 +17,21 @@
   margin-top: 10vh;
   margin-bottom: 5vh;
   --background: var(--ion-color-admin);
-  border-radius: 28px;
+  border-radius: 3vh;
 
-  width: 75%;
+  width: 38vh;
+  height: 5vh;
 
   ion-segment-button {
-      --border-radius: 28px;
+    --border-radius: 3vh;
+    min-height: 2px !important;
+    margin: 0.5vh;
+    font-size: 1.9vh;
   }
 }
 
 .list{
-  
+
  ion-item-sliding{
   width: 40vh;
   margin-top: 2vh;

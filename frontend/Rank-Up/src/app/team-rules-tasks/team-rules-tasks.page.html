@@ -4,7 +4,7 @@
 
     <div *ngSwitchCase="'rules'" class="backgroundAdmin">
 
-      <ion-button class="leftIcon"  [routerLink]="['/admin/admin-home-team']">
+      <ion-button class="leftIcon" size="large" [routerLink]="['/admin/admin-home-team']">
         <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
       </ion-button>
 
@@ -24,7 +24,7 @@
       </ion-segment>
 
     <ion-list class="list" lines="none">
-      <ion-item-sliding *ngFor="let item of [].constructor(3); let i = index">
+      <ion-item-sliding *ngFor="let item of [].constructor(5); let i = index">
         <app-admin-insert-bar class="listElement" [labelText]="'nome regola'" [buttonText]="'+0'"></app-admin-insert-bar>
         <ion-item-options side="end">
           <ion-item-option>
@@ -38,7 +38,7 @@
 
     <div *ngSwitchCase="'tasks'" class="backgroundAdmin">
 
-      <ion-button class="leftIcon">
+      <ion-button class="leftIcon" size="large">
         <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
       </ion-button>
 
