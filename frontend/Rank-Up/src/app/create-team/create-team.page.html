@@ -5,12 +5,11 @@
       <ion-icon name="arrow-back" size="large" class="iconaNotifiche"></ion-icon>
     </ion-button>
 
-    <ion-button id="modalAttached" class="clipIcon" fill="clear">
-      <ion-icon slot="icon-only" name="clipboard-outline"></ion-icon>
-    </ion-button>
 
     <h1 align="center" class="title">Crea Team</h1>
-    <u>Inserisci immagine del team</u>
+    <ion-button id="modalAttached" class="insertImage">Inserisci immagine del team
+      <ion-icon slot="end" name="clipboard-outline"></ion-icon>
+    </ion-button>
 
     <h5 class="teamCode">Codice del Team</h5>
 
@@ -22,14 +21,14 @@
     <h5 class="insertName">Inserisci nome del team</h5>
     <app-input class="teamName" [placeholder]="'Nome team'"></app-input>
 
-    <ion-button class="membersquare" [routerLink]="['/admin/add-user']">
-      <app-square-list [iconName]="'person-add-outline'"></app-square-list>
-    </ion-button>
+    <ion-item class="membersquare">
+      <ion-icon class="icon" name="person-add-outline"  [routerLink]="['/admin/add-user']"></ion-icon>
+    </ion-item>
       <ion-label class="memberlabel">Aggiungi membro</ion-label>
 
-      <ion-button class="rulesquare" [routerLink]="['/create-rule']">
-        <app-square-list [iconName]="'calendar-outline'"></app-square-list>
-      </ion-button>
+      <ion-item class="rulesquare">
+        <ion-icon class="icon" name="calendar-outline" [routerLink]="['/create-rule']"></ion-icon>
+      </ion-item>
         <ion-label class="rulelabel">Aggiungi regola</ion-label>
 
     <ion-button class="privacyTeam" (click)="presentAlert()">Privacy Team</ion-button>
@@ -46,7 +45,7 @@
       </ion-header>
       <ion-content>
         <div class="modal">
-          <ion-icon name="document-attach-outline" class="icon"></ion-icon>
+          <ion-icon name="document-attach-outline" class="icon-attach"></ion-icon>
           <ion-button fill="clear">
             <ion-input type="file" (change)="loadFileFromDevice($event)" id="file-input" accept="all">
             </ion-input>
