@@ -4,11 +4,11 @@
 
     <div *ngSwitchCase="'rules'" class="backgroundAdmin">
 
-      <ion-button class="leftIcon" size="large" [routerLink]="['/admin/admin-home-team']">
-        <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+      <ion-button class="leftIcon"  [routerLink]="['/admin/admin-home-team']">
+        <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
       </ion-button>
 
-      <ion-button class="rightIcon" [routerLink]="['/create-rule']">
+      <ion-button class="rightIcon" [routerLink] = "['/create-rule']">
         <ion-icon name="add-circle-outline" size="large"></ion-icon>
       </ion-button>
 

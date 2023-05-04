@@ -3,26 +3,18 @@
   <div class="back">
     
     <ion-button class="leftIcon">
-      <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+      <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
     <h1 align="center" class="task">Task completato <br> da [nome utente]</h1>
 
-   <app-user-element-bar [labelText]="'[nome task]'" [buttonText]="'Task'" class="task1"></app-user-element-bar>
-   <app-user-element-bar [labelText]="'punti'" [buttonText]="'Punti'" class="punti"></app-user-element-bar>
+   <app-user-element-bar class="taskbar" [buttonText] = "'Task'" [labelText]="'[nome Task]'"></app-user-element-bar>
+   <app-user-element-bar class="pointsbar" [buttonText] = "'Punti'" [labelText]="'[punti]'"></app-user-element-bar>
    
     <ion-textarea  fill="outline" placeholder="Descrizione" shape="round" [readonly] = true class="descrizione"></ion-textarea>
-    <ion-textarea  fill="outline" placeholder="Commento [nome admin]" shape="round" [readonly] = true class=""></ion-textarea>
+    <ion-textarea  fill="outline" placeholder="Commento [nome admin]" shape="round" [readonly] = true class="commento"></ion-textarea>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <app-bt-user-small shape="round"  clear [text]="'Visualizza allegato'"></app-bt-user-small>
-        </ion-col>
-        <ion-col>
-          <app-bt-user-small shape="round"  clear [text]="'chiudi'"></app-bt-user-small>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <app-bt-user-small id="present-alert" class="viewAttached" [text]="'Visualizza allegato'"></app-bt-user-small>
+    <app-bt-user-small class="close" [text]="'Chiudi'"></app-bt-user-small>
   </div>
 </ion-content>

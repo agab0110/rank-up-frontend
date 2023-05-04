@@ -9,12 +9,11 @@ import { Router } from '@angular/router';
 export class ParticipantsPage implements OnInit {
 
   constructor(private router: Router) { }
-  type='punteggio'
+  stato = false
 
   ngOnInit() {
   }
-   segmentChanged(ev: any){
-    console.log('Type changed ', ev)
+  showAsc(stato: boolean) {
+    this.stato = stato;
   }
-
 }
