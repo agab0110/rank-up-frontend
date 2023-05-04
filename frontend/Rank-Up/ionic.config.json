@@ -1,0 +1,7 @@
+{
+  "name": "Rank-Up",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

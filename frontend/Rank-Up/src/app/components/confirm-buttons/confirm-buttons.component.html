@@ -1,0 +1,20 @@
+<div class="pulsanteBox">
+  <div class="titoloBox" style="padding-right: 3vh;">
+    <ion-button class="pulsante rifiuta">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+    <div class="text">Rifiuta</div>
+  </div>
+  <div class="titoloBox" style="padding-left: 3vh;">
+    <ion-button class="pulsante conferma" id="conferma">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+    </ion-button>
+    <div class="text">Accetta</div>
+  </div>
+</div>
+
+<ion-alert
+  trigger="conferma"
+  header="Richiesta inviata con successo!"
+  [buttons]="confBtns"
+></ion-alert>

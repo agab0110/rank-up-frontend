@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundAdmin">
+
+    <ion-button class="leftIcon">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
+
+    <h1 class="title">{{team_name}}</h1>
+    <h2 class="team-code">Codice: {{team_code}}</h2>
+
+    <div class="buttons-div">
+    <ion-button (click)="presentAlert1()" class="settings-button">Modifica nome team</ion-button>
+    <ion-button class="settings-button" id="modalAttached">Modifica foto team</ion-button>
+    <ion-button class="settings-button">Richieste in attesa</ion-button>
+
+    <img src="..\..\assets\image\black-line.svg" alt="">
+
+    <ion-button (click)="presentAlert3()" class="settings-button">Privacy Utenti</ion-button>
+    <ion-button (click)="presentAlert4()" class="settings-button">Privacy Team</ion-button>
+
+    <ion-button (click)="presentAlert5()" class="delete-team">Elimina Team</ion-button>
+    </div>
+  
+  </div>
+</ion-content>
+
+<ion-modal trigger="modalAttached">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Modifica Foto</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="modal">
+        <ion-icon name="images-outline" class="icona" size="large"></ion-icon>
+        <ion-button fill="clear">
+          <ion-input type="file" (change)="loadFileFromDevice($event)" id="file-input" accept="all">
+          </ion-input>
+        </ion-button>
+        <div>
+          <app-bt-admin-small text="Annulla" (click)="closeModal()"></app-bt-admin-small>
+          <app-bt-user-small text="Conferma" (click)="attach()"></app-bt-user-small>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

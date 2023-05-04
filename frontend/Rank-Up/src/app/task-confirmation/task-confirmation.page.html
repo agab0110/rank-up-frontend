@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundAdmin">
+    <div class="aperto" *ngIf="stato">
+      <div class="click"(click)="mostra()">
+        <div class="barra" (click)="mostra()"></div>
+      </div>
+      <h1 class="hde">Attività confermata</h1>
+      <app-input [type]="'text'" [placeholder]="'Bonus/Malus'"></app-input>
+      <app-input [type]="'text'" [placeholder]="'Commento'"></app-input>
+    </div>
+
+    <div class="chiuso" *ngIf="!stato">
+      <div class="click" (click)="mostra()">
+        <div class="barra"></div>
+      </div>
+    </div>
+
+    <ion-button class="leftIcon">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
+
+    <h1 class="title">Richesta</h1>
+    <ion-button slot="start" class="btn">Vedi Allegato</ion-button>
+    <ion-button class="notBtn">Data: 01/05/2023</ion-button>
+
+    <div class="subTitle">Accettare richiesta di completamento?</div>
+    <div class="pulsanteBox">
+      <div class="titoloBox">
+        <ion-button (click)="presentAlert()" class="pulsante rifiuta">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+        <div class="text">Rifiuta</div>
+      </div>
+      <div class="titoloBox">
+        <ion-button (click)="presentAlert()" class="pulsante conferma">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <div class="text">Accetta</div>
+      </div>
+    </div>
+  </div>
+</ion-content>

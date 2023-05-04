@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundUser">
+
+    <ion-button class="leftIcon" [routerLink] = "['/user/team']">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
+
+    <div class="title" id="div-team-name">{{team_name}}</div>
+    <div id="div-code">Codice: {{team_code}}</div>
+
+    <div class="switch">
+      <ion-segment value="Regole" (ionChange)="switch($event)" id="bait"> 
+        <ion-segment-button value='Regole'>
+          <ion-label class="segmentText">Regole</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value='Tasks'>
+          <ion-label class="segmentText">Tasks</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div> 
+
+    <div id="div-rules-tasks" scroll="true">
+      <div id="div-rule-task" *ngFor="let rule_task of rules_tasks">
+        <div id="div-div-rules-tasks">
+          <div id="div-div-rules-tasks-name" >{{rule_task.rule_task_name}}</div>
+          <ion-button id="div-div-rules-tasks-button">+{{rule_task.rule_task_points}}</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

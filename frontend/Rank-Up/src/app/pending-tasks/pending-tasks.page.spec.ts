@@ -1,0 +1,17 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PendingTasksPage } from './pending-tasks.page';
+
+describe('PendingTasksPage', () => {
+  let component: PendingTasksPage;
+  let fixture: ComponentFixture<PendingTasksPage>;
+
+  beforeEach(async(() => {
+    fixture = TestBed.createComponent(PendingTasksPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,115 @@
+ion-button {
+    position: absolute;
+    --background: transparent;
+    --border-style: none;
+    --box-shadow: none;
+    margin-top: 5vh;
+    margin-right: 35vh;
+    color: var(--ion-color-black);
+}
+
+img {
+    margin-top: 8vh;
+    height: 10vh;
+    width: 10vh;
+    border-radius: 20px;
+}
+
+.square {
+    --background: var(--ion-color-grey);
+    position: relative;
+    border-radius: 2vh;
+    margin-top: 7vh;
+    height: 10vh;
+    width: 10vh;
+}
+
+.label {
+    height: 100px;
+    width: 100px;
+}
+
+.icon {
+    align-items: center;
+}
+
+.userName {
+    font-size: 2.3vh;
+}
+
+.points {
+    margin-top: 4vh;
+    font-size: 3.5vh;
+}
+
+ion-segment {
+    --background: var(--ion-color-user);
+    border-radius: 3vh;
+    padding-top: 0.4vh;
+    padding-bottom: 0.3vh;
+    padding-left: 0.4vh;
+    padding-right: 0.4vh;
+    margin-top: 3vh;
+    width: 38vh;
+    height: 5vh;
+}
+
+ion-segment-button {
+    --border-radius: 3vh;
+    height: 3.75vh;
+}
+
+.segmentText {
+    font-size: 1.9vh;
+}
+
+.listBox {
+    margin-top: 1vh;
+    width: 90%;
+    height: 48vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
+}
+
+ion-list{
+    background-color: transparent;
+}
+
+.fakebutton {
+    position: absolute;
+    color: black;
+    --background: var(--ion-color-admin);
+    font-size: 3vh;
+    --border-radius: 28px;
+
+    height: 7.58vh;
+    width: 35%;
+
+    margin: 0;
+    right: 0;
+    top: 0;
+
+    &[disabled] {
+        --background: var(--ion-color-light-user);
+        opacity: 1;
+    }
+}
+
+.item {
+    --background: var(--ion-color-grey);
+    font-size: 22px;
+    --border-radius: 3.3vh;
+    height: 7.58vh;
+    margin-top: 2vh;
+}
+
+.label {
+    height: 7.58vh;
+    font-size: 2.6vh;
+    margin: 0;
+    text-align: center;
+    margin-right: 12vh;
+    padding-top: 2vh;
+    color: black;
+}

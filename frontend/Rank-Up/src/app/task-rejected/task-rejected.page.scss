@@ -1,0 +1,65 @@
+.Title{
+  margin-top: 8vh;
+}
+
+p{
+  margin-top: 1vh;;
+}
+
+h2{
+  margin-top: 2.5vh;
+}
+
+.taskbar {
+  --background: var(--ion-color-grey);
+  font-size: 22px;
+  --border-radius: 28px;
+
+  height: 64px;
+  width: 90%;
+  margin-top: 6vh;
+
+}
+
+.pointsbar {
+  --background: var(--ion-color-grey);
+  font-size: 22px;
+  --border-radius: 28px;
+
+  height: 64px;
+  width: 90%;
+  margin-top: 2vh;
+}
+
+ion-textarea{
+  border: solid 3px var(--ion-color-grey);
+  border-radius: 30px;
+
+  height: 18vh;
+  width: 80%;
+
+  margin-top: 2vh;
+}
+
+.viewAttached{
+  position: absolute;
+
+  margin-top: 88vh;
+  margin-right: 50%;
+
+}
+
+.close{
+  position: absolute;
+
+  margin-top: 88vh;
+  margin-left: 50%;
+}
+
+ion-alert.custom-alert {
+  --backdrop-opacity: 0.6;
+}
+
+.custom-alert .alert-button-group {
+  padding: 8px;
+}

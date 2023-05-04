@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundAdmin">
+
+    <ion-button class="leftIcon">
+      <ion-icon name="arrow-back" size="large" class="iconaNotifiche"></ion-icon>
+    </ion-button>
+
+    <h1 align="center" class="Title">Task completato da
+      <p>[nome utente]</p>
+    </h1>
+
+      <app-admin-element-bar class="taskbar" [buttonText] = "'Task'" [labelText]="'[nome Task]'"></app-admin-element-bar>
+      <app-admin-element-bar class="pointsbar" [buttonText] = "'Punti'" [labelText]="'[punti]'"></app-admin-element-bar>
+
+      <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
+      <ion-textarea class="descriptionArea" fill="outline" placeholder="Commento [nome admin]" shape="round" [readonly] = true></ion-textarea>
+
+      <app-bt-admin-small id="present-alert" class="viewAttached" [text]="'Visualizza allegato'"></app-bt-admin-small>
+      <app-bt-admin-small class="close" [text]="'Chiudi'"></app-bt-admin-small>
+
+  </div>
+</ion-content>

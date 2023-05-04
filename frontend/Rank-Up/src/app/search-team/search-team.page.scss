@@ -1,0 +1,51 @@
+.title {
+  margin-top: 7vh;
+  color: var(--ion-color-black);
+}
+
+.searchbar {
+  margin-top: 3vh;
+  align-items: center;
+  width: 85%;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-tab-bar {
+  bottom: 5vh;
+  position: relative;
+  border-radius: 40px;
+  width: 60%;
+  margin: 0 auto;
+  height: 5.5vh;
+}
+
+.img-team-user {
+  width: 79%;
+  margin-top: 2vh;
+  border-radius: 20px;
+}
+
+.img-team-admin {
+  width: 79%;
+  margin-top: 2vh;
+}
+
+.listBox {
+  margin-top: 5vh;
+  width: 90%;
+  height: 55vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: transparent;
+}
+
+img{
+  margin-top: 0.5vh;
+  border-radius: 20px;
+}

@@ -1,0 +1,105 @@
+u{
+  margin-top: 0%;
+}
+
+.clipIcon{
+  position: absolute;
+    --background: transparent;
+    --border-style: none;
+    --box-shadow: none;
+    margin-top: 14vh;
+    margin-left: 29vh;
+    color: var(--ion-color-black);
+    font-size: 12px;
+}
+
+.teamCode{
+  margin-top: 8vh;
+  margin-bottom: -0.3vh;
+}
+
+.code{
+  margin-bottom: -2vh;
+}
+
+.insertName{
+  margin-top: 3vh;
+}
+
+.teamName{
+  margin-top: 0vh;
+}
+
+.membersquare {
+  --background: var(--ion-color-grey);
+  position: absolute;
+  margin-top: 50vh;
+  margin-right: 20vh;
+
+  height: 16vh;
+  width: 16vh;
+  --border-radius: 28px;
+}
+
+.memberlabel {
+  position: absolute;
+  text-align: center;
+  height: 100px;
+  width: 130px;
+  margin-top: 67vh;
+  margin-right: 20vh;
+}
+
+.rulesquare {
+  --background: var(--ion-color-grey);
+  position: absolute;
+  margin-top: 50vh;
+  margin-left: 20vh;
+
+  height: 16vh;
+  width: 16vh;
+
+  --border-radius: 28px;
+}
+
+.rulelabel {
+  position: absolute;
+  text-align: center;
+  height: 100px;
+  width: 130px;
+  margin-top: 67vh;
+  margin-left: 20vh;
+}
+
+.privacyTeam{
+  color: var(--ion-color-black);
+  --background: var(--ion-color-grey);
+  font-size: 22px;
+  --border-radius: 28px;
+
+  height: 8vh;
+  width: 40vh;
+
+  margin-top: 25vh;
+}
+
+.createTeam{
+color: var(--ion-color-black);
+--background: var(--ion-color-admin);
+font-size: 22px;
+--border-radius: 28px;
+
+height: 8vh;
+width: 40vh;
+
+margin-top: 3vh;
+}
+
+ion-alert.custom-alert {
+  --backdrop-opacity: 0.6;
+}
+
+.custom-alert .alert-button-group {
+  padding: 8px;
+}
+

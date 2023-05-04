@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundUser">
+
+    <ion-button fill="clear" class="leftIcon" [routerLink] = "['/user/team']">
+      <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
+    </ion-button>
+
+    
+    <img class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+      
+
+    <ion-label class="userName">[Nome Utente]</ion-label>
+
+    <ion-label class="points">Punti: [punti]</ion-label>
+
+    <div class="switch">
+      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+        <ion-segment-button value=1>
+          <ion-label class="segmentText">Compiti completati</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Premi riscossi</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="listBox" *ngIf="stato">
+      <ion-list>
+        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
+          <ion-label class="label">Task/Regola</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="!stato">
+      <ion-list>
+        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
+          <ion-label class="label">Premio {{i}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{-i*i}} pt</ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+  <!-- add navbar -->
+  </div>
+</ion-content>

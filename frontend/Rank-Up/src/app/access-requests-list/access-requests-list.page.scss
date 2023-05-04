@@ -1,0 +1,30 @@
+.title {
+    text-align: center;
+    margin-top: 7vh;
+    font-weight: bold;
+}
+
+.buttons {
+    --background: var(--ion-color-grey);
+    --border-radius: 28px;
+    margin-top: 2vh;
+    height: 64px;
+    width: 85%;
+    font-size: small;
+    height: 64px;
+    color: var(--ion-color-black);
+}
+
+.list {
+    text-align: center;
+    background-color: transparent;
+}
+
+.listBox {
+    margin-top: 8vh;
+    width: 90%;
+    height: 58vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
+}

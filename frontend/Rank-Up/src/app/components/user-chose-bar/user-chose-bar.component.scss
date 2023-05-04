@@ -1,0 +1,10 @@
+ion-segment {
+    --background: var(--ion-color-user);
+    border-radius: 28px;
+
+    width: 250px;
+}
+
+ion-segment-button {
+    --border-radius: 28px;
+}

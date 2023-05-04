@@ -1,0 +1,54 @@
+.title {
+    text-align: center;
+    margin-top: 6vh;
+    font-weight: bold;
+}
+
+.team-code {
+    text-align: center;
+    font-size: medium;
+    margin-top: 0vh;
+}
+
+.buttons-div {
+    margin-top: 12vh;
+    text-align: center;
+}
+
+.settings-button {
+    --background: var(--ion-color-grey);
+    --border-radius: 28px;
+    margin-top: 2vh;
+    height: 64px;
+    width: 85%;
+    font-size: 22px;
+    height: 64px;
+    color: var(--ion-color-black);
+    font-weight: bold;
+}
+
+img {
+    margin-top: 2vh;
+    width: 85%;
+}
+
+.delete-team {
+    --background: var(--ion-color-admin);
+    font-size: 22px;
+    --border-radius: 28px;
+    height: 64px;
+    margin-top: 5vh;
+    color: var(--ion-color-black);
+    font-weight: bold;
+    width: 85%;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icona {
+    margin-top: 2vh;
+}

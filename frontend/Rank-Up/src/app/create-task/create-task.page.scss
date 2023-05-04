@@ -1,0 +1,62 @@
+.title {
+    text-align: center;
+    margin-top: 8vh;
+}
+
+.text-input {
+    margin-top: 10vh;
+}
+
+.input-div {
+    margin-top: 1vh;
+}
+
+ion-textarea {
+    border: solid 1.5px rgb(195, 195, 195);
+    border-radius: 30px;
+
+    height: 18vh;
+    width: 100%;
+
+    margin-top: 1vh;
+
+    text-indent: 3vh;
+}
+
+.button-div {
+    margin-top: 1vh;
+    text-align: center;
+}
+
+.exclusive-button {
+    text-align: left;
+    --background: var(--ion-color-grey);
+    --border-radius: 30px;
+    border-radius: 30px;
+    border: solid 1.5px rgb(195, 195, 195);
+    margin-top: 1vh;
+    height: 64px;
+    width: 100%;
+    font-size: 16px;
+    height: 64px;
+    color: var(--ion-color-grey);
+}
+
+.internal-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.button-text {
+    margin-right: 4vh;
+}
+
+.button-icon {
+    margin-left: 4vh;
+}
+
+.create-task-button {
+    text-align: center;
+    margin-top: 3vh;
+}

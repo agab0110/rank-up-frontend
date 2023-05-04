@@ -1,0 +1,34 @@
+
+
+<ion-content [fullscreen]="true">
+    <div class="backgroundUser">
+        <ion-button class="leftIcon" size="large" [routerLink] = "['/user/home']">
+            <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+        </ion-button>
+
+        <ion-button class="rightIcon" size="large" [routerLink] = "['/user/user-team-profile']">
+            <ion-icon name="information-circle-outline"class="iconainfo"></ion-icon>
+        </ion-button>
+
+        <h1 align="center" class="title">Nome team</h1>
+        <p class="codice" align="center">Codice: [codice team]</p>
+
+        <ion-button class="premi" fill="clear" [routerLink] = "['/user/prizes-page']">
+            <app-square-list class="squareList" [iconName]="'trophy-outline'" [text]="'Premi'"></app-square-list>
+        </ion-button>
+        <ion-button class="partecipanti" fill="clear" [routerLink] = "['/user/participants']">
+            <app-square-list class="squareList" [iconName]="'people-outline'" [text]="'Partecipanti'"></app-square-list>
+        </ion-button>
+
+    <ion-button class="regole" fill="clear" [routerLink] = "['/user/rules-and-tasks-rules']">
+        <ion-item  class="item">
+            <ion-icon name="calendar-outline" class="iconaRegole"></ion-icon>
+            <ion-label class="testoRegole">Regole e task</ion-label>
+        </ion-item>
+    </ion-button>
+
+
+        <app-bt-user-large class="abbandona" [text]="'Abbandona team'" (click)="presentAlert()"></app-bt-user-large>
+    </div>
+
+</ion-content>

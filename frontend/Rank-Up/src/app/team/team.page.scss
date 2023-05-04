@@ -1,0 +1,73 @@
+.team{
+    margin-top: 5vh;
+  color: black;
+  font-weight: bold;
+}
+
+.premi{
+    position: absolute;
+    margin-top: 30vh;
+    margin-right: 20vh;
+
+    width: 20vh;
+    height: 20vh;
+}
+
+.squareList{
+  font-size: large;
+}
+
+.partecipanti{
+    position: absolute;
+    margin-top: 30vh;
+    margin-left: 20vh;
+
+    width: 20vh;
+    height: 20vh;
+}
+
+.task{
+    margin-top: 5vh;
+}
+
+.abbandona{
+    margin-top: 5vh;
+}
+
+.regole{
+    --background: var(--ion-color-grey);
+    border-radius: 30px;
+    width: 35vh;
+    height: 13vh;
+    margin-top: 35vh;
+}
+
+.item{
+    --background: var(--ion-color-grey);
+    border-radius: 5vh;
+    width: 35vh;
+    height: 20vh;
+}
+
+.testoRegole{
+    position:absolute;
+    margin-top: 20vh;
+    margin-left: 4vh;
+    text-align: center;
+    vertical-align: bottom;
+    width: 20vh;
+    height: 10vh;
+    font-size: large;
+}
+
+.iconaRegole{
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    margin-left: 10vh;
+    width: 8vh;
+    height: 8vh;
+}
+
+.codice{
+    margin-top: 0vh;
+}

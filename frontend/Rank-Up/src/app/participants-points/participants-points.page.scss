@@ -1,0 +1,39 @@
+.search{
+    margin-top: 1vh;
+    align-items: center;
+    width: 100%;
+}
+.team{
+    margin-top: 5vh;
+    color: black;
+    font-weight: bold;
+}
+.codice{
+    margin-top: 0vh;   
+}
+.chose-bar {
+    padding-top: 5vh;
+}
+.notifications {
+    padding-top: 3vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item {
+    --background: var(--ion-color-grey);
+    --border-radius: 28px;
+    margin-top: -9vh;
+    
+   height: 20vh;
+   width: 40vh;
+}
+.nome{
+    margin-top: 1vh;
+    margin-left: 5vh;
+}
+.icon{
+    margin-top: 1vh;
+    margin-left: 2vh;
+}

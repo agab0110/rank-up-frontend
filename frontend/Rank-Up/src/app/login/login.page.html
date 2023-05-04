@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundLightUser">
+
+    <div class="login">
+      <img src="../../assets/image/logo.svg" alt="logo" class="logo">
+
+      <h4>Rank Up</h4>
+
+      <div class="form">
+        <h3 class="titolo">Login</h3>
+        <app-input class="email" [type]="'email'" [placeholder]="'Email/Username'"></app-input>
+        <app-input class="password" [type]="'password'" [placeholder]="'Password'"></app-input>
+      </div>
+
+      <app-bt-user-small class="loginButton" (click)="login()" [text]="'Accedi'"></app-bt-user-small>
+
+      <div class="singUpBox">
+        <div class="linearGradientLeft"></div>
+        <ion-button class="singUpButton" [routerLink]="['/signup']" expand="block" fill="clear" shape="round">
+          Registrati
+        </ion-button>
+        <div class="linearGradientRight"></div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

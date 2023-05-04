@@ -1,0 +1,48 @@
+.chose-bar {
+  padding-top: 10vh;
+}
+
+.item {
+  --background: var(--ion-color-grey);
+  --border-radius: 28px;
+
+  margin: 0;
+  padding: 0;
+
+  height: 64px;
+  width: 90%;
+}
+
+.choseAdmin {
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+  --background: var(--ion-color-admin);
+  border-radius: 28px;
+
+  width: 75%;
+
+  ion-segment-button {
+      --border-radius: 28px;
+  }
+}
+
+.list{
+  
+ ion-item-sliding{
+  width: 40vh;
+  margin-top: 2vh;
+
+  color:black;
+ }
+}
+
+ion-item-options {
+  border-radius: 25px;
+  overflow: hidden;
+  background: transparent;
+
+  ion-item-option {
+      background: transparent;
+      color: red;
+  }
+}

@@ -1,0 +1,196 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+* {
+    font-family: 'Outfit' !important;
+}
+
+ion-label {
+    text-transform: none;
+    font-family: 'Outfit';
+}
+
+ion-button {
+    text-transform: none;
+    font-family: 'Outfit';
+    --background-focused: transparent;
+    --background-hover: transparent;
+    --background-activated: transparent;
+}
+
+.backgroundLightUser {
+    background-image: url("./assets/image/backgroundLightUser.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.backgroundUser {
+    background-image: url("./assets/image/backgroundUser.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.backgroundAdmin {
+    background-image: url("./assets/image/backgroundAdmin.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.leftIcon {
+    position: absolute;
+    --background: transparent;
+    --border-style: none;
+    --box-shadow: none;
+    margin-top: 5vh;
+    margin-right: 35vh;
+    color: var(--ion-color-black);
+}
+
+.rightIcon {
+    position: absolute;
+    --background: transparent;
+    --border-style: none;
+    --box-shadow: none;
+    margin-top: 5vh;
+    margin-left: 35vh;
+    color: var(--ion-color-black);
+}
+
+.title {
+    margin-top: 10vh;
+    color: var(--ion-color-black);
+    font-weight: bold;
+}
+
+ion-alert.custom-alert {
+    border: 3px solid var(--ion-color-admin);
+    border-radius: 28%;
+}
+
+.custom-alert .alert-button-group {
+    margin: 8px;
+}
+
+input.alert-input {
+    background-color: none;
+    color: black;
+}
+
+.md input.alert-input {
+    border-radius: 28px;
+}
+
+.ios input.alert-input {
+    border-radius: 28px;
+}
+
+button.alert-button.alert-button-red {
+    background-color: var(--ion-color-admin);
+    margin-bottom: 1vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    font-weight: bold;
+    color: var(--ion-color-black);
+}
+
+button.alert-button.alert-button-blue {
+    background-color: var(--ion-color-user);
+    margin-bottom: 1vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    font-weight: bold;
+    color: var(--ion-color-black);
+}
+
+input.alert-input {
+    background-color: none;
+    color: black;
+}
+
+.md input.alert-input {
+    border-radius: 28px;
+}
+
+.ios input.alert-input {
+    border-radius: 28px;
+}
+
+.md .custom-alert button.alert-button {
+    border: 3px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.2);
+}
+
+.md button.alert-button.alert-button-blue {
+    border-radius: 28px;
+}
+
+.md button.alert-button.alert-button-red {
+    border-radius: 28px;
+}
+
+.ios .custom-alert button.alert-button {
+    border: 3px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.2);
+}
+
+.ios button.alert-button.alert-button-red {
+    border-radius: 28px;
+}
+
+.ios button.alert-button.alert-button-blue {
+    border-radius: 28px;
+}
+
+ion-modal {
+    --height: 30%;
+    --width: 85%;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal ion-content {
+    --background: var(--ion-color-grey);
+}

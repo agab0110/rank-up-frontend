@@ -1,0 +1,60 @@
+.title {
+    margin-top: 12vh;
+    color: black;
+    font-weight: bold;
+}
+
+.chose-bar {
+    padding-top: 10vh;
+}
+
+.notifications {
+    padding-top: 3vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item {
+    --background: var(--ion-color-grey);
+    --border-radius: 28px;
+
+    margin: 0;
+    padding: 0;
+
+    height: 64px;
+    width: 90%;
+}
+
+.admin {
+    --background: var(--ion-color-light-admin);
+}
+
+.user {
+    --background: var(--ion-color-light-user);
+}
+
+.choseUser {
+    margin-top: 10vh;
+    --background: var(--ion-color-user);
+    border-radius: 28px;
+
+    width: 75%;
+    
+    ion-segment-button {
+        --border-radius: 28px;
+    }
+}
+
+.choseAdmin {
+    margin-top: 10vh;
+    --background: var(--ion-color-admin);
+    border-radius: 28px;
+
+    width: 75%;
+    
+    ion-segment-button {
+        --border-radius: 28px;
+    }
+}

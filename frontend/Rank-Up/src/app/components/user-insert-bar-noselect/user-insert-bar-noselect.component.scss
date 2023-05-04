@@ -1,0 +1,38 @@
+.item {
+    --background: var(--ion-color-grey);
+    font-size: 22px;
+    --border-radius: 28px;
+
+    height: 64px;
+    width: 100%;
+}
+
+.label {
+    height: 64px;
+    font-size: 22px;
+    margin: 0;
+    text-align: center;
+    margin-right: 20vh;
+    padding-top: 3vh;
+    color: black;
+}
+
+.button {
+    position: absolute;
+    color: black;
+    --background: var(--ion-color-user);
+    font-size: 22px;
+    --border-radius: 28px;
+
+    height: 64px;
+    width: 150px;
+
+    margin: 0;
+    top: 0;
+    right: 0;
+
+    &[disabled] {
+        --background: var(--ion-color-light-user);
+        opacity: 1;
+    }
+}

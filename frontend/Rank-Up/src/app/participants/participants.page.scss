@@ -1,0 +1,52 @@
+.search{
+    margin-top: -2vh;
+    align-items: center;
+    width: 100%;
+}
+
+.codice{
+    margin-top: -1vh;
+}
+
+.nome{
+    margin-top: 1vh;
+    margin-left: 10vh;
+}
+
+.icon{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vh;
+}
+
+.choseUser {
+    margin-top: 2vh;
+    --background: var(--ion-color-user);
+    border-radius: 28px;
+
+    width: 75%;
+
+    ion-segment-button {
+        --border-radius: 28px;
+    }
+}
+
+ion-list{
+  margin-top: 3vh;
+}
+
+.item {
+  width: 40vh;
+  margin-top: 1vh;
+  --background: var(--ion-color-grey);
+  --border-radius: 25px;
+}
+
+.list {
+  background-color: transparent;
+}
+
+.nome1{
+    margin-top: 1vh;
+    margin-left: 5vh;
+}

@@ -1,0 +1,24 @@
+.title {
+    margin-top: 12vh;
+    color: black;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-top: 8vh;
+    color: black;
+    font-weight: bold;
+}
+
+ion-textarea{
+    border: solid 3px var(--ion-color-grey);
+    border-radius: 30px;
+  
+    height: 50%;
+    width: 80%;
+    margin-top: 2vh;
+
+    &[placeholder]{
+        padding-left: 7px;
+    }
+  }

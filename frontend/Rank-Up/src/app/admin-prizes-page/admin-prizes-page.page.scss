@@ -1,0 +1,70 @@
+.item {
+    --background: var(--ion-color-grey);
+    font-size: 22px;
+    --border-radius: 3.3vh;
+    height: 7.58vh;
+    margin-top: 2vh;
+}
+
+.label {
+    height: 7.58vh;
+    font-size: 2.6vh;
+    margin: 0;
+    text-align: center;
+    margin-right: 12vh;
+    padding-top: 2vh;
+    color: black;
+}
+
+.fakebutton {
+    position: absolute;
+    color: black;
+    --background: var(--ion-color-admin);
+    font-size: 3vh;
+    --border-radius: 28px;
+
+    height: 7.58vh;
+    width: 35%;
+
+    margin: 0;
+    right: 0;
+    top: 0;
+
+    &[disabled] {
+        --background: var(--ion-color-admin);
+        opacity: 1;
+    }
+}
+
+ion-list{
+    background-color: transparent;
+    
+}
+
+
+.title{
+    margin-top: 7vh;
+}
+
+.subtitle{
+    font-weight: bold;
+    margin-top: -1vh;
+}
+
+ion-tab-bar {
+    bottom: 5vh;
+    position: relative;
+    border-radius: 40px;
+    width: 60%;
+    margin: 0 auto;
+    height: 5.5vh;
+}
+
+.listBox {
+    margin-top: 11vh;
+    width: 90%;
+    height: 59vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
+}

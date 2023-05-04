@@ -1,0 +1,18 @@
+.item {
+    --background: var(--ion-color-grey);
+    --border-radius: 28px;
+
+    margin: 0;
+    padding: 0;
+
+    height: 64px;
+    width: 90%;
+}
+
+.label {
+    text-align: center;
+    font-size: 22px;
+    margin: 0;
+    height: 64px;
+    color: black;
+}

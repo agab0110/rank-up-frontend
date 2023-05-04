@@ -1,0 +1,88 @@
+#div-image {
+    width: 10vh;
+    height: 10vh;
+    margin-top: 8vh;
+    border-radius: 20px;
+    background-color: black;
+}
+
+
+#div-image-title {
+    margin-top: 0.5vh;
+    color: var(--ion-color-black)
+}
+
+#div-points {
+    margin-top: 4vh;
+    color: var(--ion-color-black);
+}
+
+#div-title-prizes {
+    margin-top: 0.5vh;
+    padding-right: 230px;
+    
+    color: var(--ion-color-black);
+    left: 0;
+}
+
+#div-prize {
+    margin-top: 2vh;
+}
+
+#div-prizes {
+    margin-top: 2vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 50%;
+}
+
+#div-div-prizes {
+    background-color: var(--ion-color-grey);
+    font-size: 2vh;
+    border-radius: 28px;
+
+    height: 8vh;
+    width: 80vw;
+}
+
+#div-div-prizes-name {
+    height: 8vh;
+    font-size: 2vh;
+    color: var(--ion-color-black);
+    margin: 0;
+    width: 60%;
+    float: left;
+    padding-left: 5vw;
+    display: flex;
+    align-items: center;
+}
+
+#div-div-prizes-button {
+    --background: var(--ion-color-user);
+    font-size: 2vh;
+    --border-radius: 28px;
+
+    height: 8vh;
+    width: 40%;
+
+    margin: 0;
+    margin-right: -10;
+    top: 0;
+    right: 0;
+    float: left;
+}
+
+#div-div-prizes-button-disable {
+    --background-color: var(--ion-color-admin);
+    font-size: 2vh;
+    --border-radius: 28px;
+
+    height: 8vh;
+    width: 40%;
+
+    margin: 0;
+    margin-right: -10;
+    top: 0;
+    right: 0;
+    float: left;
+}

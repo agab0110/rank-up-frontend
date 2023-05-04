@@ -1,0 +1,73 @@
+.creaTeam {
+  --background: var(--ion-color-admin);
+  height: 7vh;
+  border-radius: 25px;
+  width: 30vh;
+  margin-top: 9vh;
+  height: 7vh;
+  width: 35vh;
+  font-size: 25px;
+}
+
+.barraricerca {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  width: 35vh;
+  color: var(--ion-color-black);
+  --background: var(--ion-color-white);
+  border: var(--ion-color-black) solid 1px;
+  border-radius: 25px;
+}
+
+.unisciti {
+  --background: var(--ion-color-user);
+  height: 100% !important;
+  width: 45%;
+  font-size: large;
+  --border-radius: 25px !important;
+  position: absolute;
+  right: 0;
+  margin: -2px;
+  margin-bottom: -2px;
+}
+
+.input-codice-team {
+  width: 55%;
+}
+
+
+.img-team-user {
+  border: 3px solid var(--ion-color-user);
+  border-radius: 20%;
+}
+
+.img-team-admin {
+  border: 3px solid var(--ion-color-admin);
+  border-radius: 20%;
+}
+
+img {
+  border-radius: 20%;
+}
+
+ion-grid {
+  width: 40vh;
+  height: 45vh;
+}
+
+ion-card-title {
+  font-size: 1em;
+}
+
+.team-name {
+  text-align: center;
+}
+
+.list-teams {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.margine {
+  margin-top: 10vh;
+}

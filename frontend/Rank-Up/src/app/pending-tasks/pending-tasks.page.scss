@@ -1,0 +1,45 @@
+.item {
+    --background: var(--ion-color-grey);
+    font-size: 22px;
+    --border-radius: 3.3vh;
+    height: 7.58vh;
+    margin-top: 2vh;
+}
+
+.label {
+    height: 7.58vh;
+    font-size: 2.6vh;
+    margin: 0;
+    padding-top: 2vh;
+    margin-right: 0vh;
+    color: black;
+}
+
+ion-list{
+    background-color: transparent;
+}
+
+.listBox {
+    margin-top: 13vh;
+    width: 90%;
+    height: 59vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
+}
+
+img {
+    height: 6vh;
+    width: 6vh;
+    border-radius: 12px;
+    margin-right: 2vh;
+}
+
+.title{
+    margin-top: 7vh;
+}
+
+.subtitle{
+    font-weight: bold;
+    margin-top: -1vh;
+}

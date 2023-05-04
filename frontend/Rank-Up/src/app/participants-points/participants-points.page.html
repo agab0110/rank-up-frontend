@@ -1,0 +1,45 @@
+
+<ion-content [fullscreen]="true">
+  <div class="backgroundUser">
+
+    <ion-button class="leftIcon">
+      <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+    </ion-button>
+    <h1 align="center" class="team">nome team</h1>
+    <p class="codice" align="center">codice :[codice team]</p>
+    <div class="search" align="center">
+      <app-search-bar></app-search-bar>
+    </div>
+    
+    <app-user-chose-bar class="chose-bar" text1="Nome" text2="Punteggio" default="Nome" (ionChange)="changePage()"></app-user-chose-bar>
+    
+    <ion-list class="partecipanti" lines="none">
+      <ion-item class="item">
+        <ion-icon name="person-outline" class="icon"></ion-icon>
+        <ion-label class="nome">[nome giocatore]</ion-label>
+        <ion-label class="punti">[punteggio giocatore]</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="person-outline" class="icon"></ion-icon>
+        <ion-label class="nome">[nome giocatore]</ion-label>
+        <ion-label class="punti">[punteggio giocatore]</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="person-outline" class="icon"></ion-icon>
+        <ion-label class="nome">[nome giocatore]</ion-label>
+        <ion-label class="punti">[punteggio giocatore]</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="person-outline" class="icon"></ion-icon>
+        <ion-label class="nome">[nome giocatore]</ion-label>
+        <ion-label class="punti">[punteggio giocatore]</ion-label>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="person-outline" class="icon"></ion-icon>
+        <ion-label class="nome">[nome giocatore]</ion-label>
+        <ion-label class="punti">[punteggio giocatore]</ion-label>
+      </ion-item>
+      
+    </ion-list>
+  </div>
+</ion-content>

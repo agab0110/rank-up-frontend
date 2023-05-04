@@ -1,0 +1,108 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundUser">
+
+    <ion-button class="leftIcon" [routerLink]="['/user/notifications']">
+      <ion-icon name="notifications-outline" size="large" class="iconaNotifiche"></ion-icon>
+    </ion-button>
+
+    <ion-button class="rightIcon" [routerLink]="['/user/search-team']">
+      <ion-icon name="search-outline" size="large" class="iconaRicerca"></ion-icon>
+    </ion-button>
+
+    <h1 class="title">Home</h1>
+
+    <app-bt-admin-large class="margine" [text]="'Crea nuovo team'" [routerLink]="['/create-team']"></app-bt-admin-large>
+
+    <ion-item class="barraricerca">
+      <ion-input class="input-codice-team" placeholder="Codice Team"></ion-input>
+      <ion-button shape="round" class="unisciti" clear [routerLink]="['/user/team']">Unisciti</ion-button>
+    </ion-item>
+
+    <div class="list-teams" scroll="true">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="team-card"[routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/admin/admin-home-team']">
+              <div class="img-team-admin">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" [routerLink]="['/user/team']">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                <span>Team Fasano</span>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+</ion-content>

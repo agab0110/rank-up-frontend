@@ -1,0 +1,91 @@
+#div-team-name {
+    font-size: 1.2em;
+}
+
+#div-code {
+    font-size: 0.8em;
+    color: var(--ion-color-black);
+}
+
+#div-choice-bar {
+    margin-top: 11vh;
+}
+
+#div-rule-task {
+    margin-top: 2vh;
+}
+
+#div-rules-tasks {
+    margin-top: 2vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 50%;
+}
+
+
+#div-prizes {
+    margin-top: 2vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 50%;
+}
+
+#div-div-rules-tasks {
+    background-color: var(--ion-color-grey);
+    font-size: 2vh;
+    border-radius: 28px;
+
+    height: 8vh;
+    width: 80vw;
+}
+
+
+
+#div-div-rules-tasks-name {
+    height: 8vh;
+    font-size: 2vh;
+    color: var(--ion-color-black);
+    margin: 0;
+    width: 60%;
+    float: left;
+    padding-left: 5vw;
+    display: flex;
+    align-items: center;
+}
+
+#div-div-rules-tasks-button {
+    --background: var(--ion-color-user);
+    font-size: 2vh;
+    --border-radius: 28px;
+
+    height: 8vh;
+    width: 40%;
+
+    margin: 0;
+    margin-right: -10;
+    top: 0;
+    right: 0;
+    float: left;
+}
+
+.switch {
+    margin-top: 10vh;
+}
+
+ion-segment {
+    --background: var(--ion-color-user);
+    border-radius: 3vh;
+    width: 38vh;
+    height: 5vh;
+    
+}
+
+ion-segment-button {
+    --border-radius: 3vh; 
+    min-height: 2px !important;  
+    margin: 0.5vh;
+}
+
+.segmentText {
+    font-size: 1.9vh;
+}

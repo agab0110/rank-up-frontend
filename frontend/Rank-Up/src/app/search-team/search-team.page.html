@@ -1,0 +1,101 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundUser">
+
+    <ion-button class="leftIcon" fill="clear" [routerLink] = "['/user/home']">
+      <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
+    </ion-button>
+
+    <h1 class="title">Cerca Team</h1>
+
+    <div class="searchbar">
+      <app-search-bar></app-search-bar>
+    </div>
+
+    <div class="listBox">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img fill="clear" sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-admin">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="team-card" (click)="presentAlert()">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+              </div>
+              <div class="team-name">
+                Team
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </div>
+</ion-content>

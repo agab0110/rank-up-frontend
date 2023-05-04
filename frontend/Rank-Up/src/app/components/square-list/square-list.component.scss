@@ -1,0 +1,32 @@
+.square {
+    --background: var(--ion-color-grey);
+    position: relative;
+    border-radius: 28px;
+
+    height: 16vh;
+    width: 16vh;
+}
+
+.label {
+    position: absolute;
+    text-align: center;
+    vertical-align: bottom;
+
+    margin-top: 23vh;
+
+    height: 16vh;
+    width: 12vh;
+
+    color: black;
+}
+
+.icon {
+    align-items: center;
+    vertical-align: middle;
+    padding-bottom: 7.2vh;
+    padding-left: 2.1vh;
+    padding-top: 3vh;
+    
+    height: 8vh;
+    width: 8vh;
+}

@@ -1,0 +1,76 @@
+.title {
+    color: black;
+    text-align: center;
+    margin-top: 10vh;
+    font-weight: bold;
+}
+
+.searchbar {
+    margin-top: 1vh;
+    align-items: center;
+    width: 90%;
+}
+
+.optionIcon {
+    position: absolute;
+    --background: transparent;
+    --border-style: none;
+    --box-shadow: none;
+    margin-top: 9vh;
+    margin-left: 35vh;
+    color: var(--ion-color-black);
+    font-size: 20px;
+}
+
+.icon {
+    margin-right: 1vh;
+}
+
+.label {
+    text-align: center;
+    font-size: 16px;
+    margin: 0;
+    height: 64px;
+}
+
+.notifications {
+    margin-top: 5vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemadmin {
+    --background: var(--ion-color-light-admin);
+    --border-radius: 28px;
+
+    margin: 0;
+    padding: 0;
+
+    height: 64px;
+    width: 90%;
+}
+
+.itemuser {
+    --background: var(--ion-color-light-user);
+    --border-radius: 28px;
+
+    margin: 0;
+    padding: 0;
+
+    height: 64px;
+    width: 90%;
+}
+
+.nomeutente {
+    margin-right: 1vh;
+}
+
+.nomeattivita {
+    margin-right: 1vh;
+}
+
+.data {
+    margin-left: 2vh;
+}
