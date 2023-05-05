@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-team-settings',
@@ -9,14 +11,11 @@ import { IonModal } from '@ionic/angular';
 })
 export class AdminTeamSettingsPage implements OnInit {
 
-  team_name : string = "[Nome Team]";
-  team_code : string = "[Codice Team]";
-
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private location: Location, private router: Router) { }
 
   async presentAlert1() {
     const alert = await this.alertController.create({
@@ -85,6 +84,7 @@ export class AdminTeamSettingsPage implements OnInit {
         {
           text: 'Sì',
           cssClass: 'alert-button-blue',
+          handler: () => { this.router.navigate(['/user/home']); }
         },
         {
           text: 'No',
@@ -119,6 +119,10 @@ export class AdminTeamSettingsPage implements OnInit {
 
   attach() {
     this.modal.dismiss();
+  }
+
+  backButton() {
+    this.location.back();
   }
 
 }

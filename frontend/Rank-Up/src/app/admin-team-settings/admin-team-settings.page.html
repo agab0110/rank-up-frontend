@@ -1,17 +1,17 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">{{team_name}}</h1>
-    <h2 class="team-code">Codice: {{team_code}}</h2>
+    <h1 class="title">[Nome Team]</h1>
+    <h2 class="team-code">Codice: [Codice Team]</h2>
 
     <div class="buttons-div">
     <ion-button (click)="presentAlert1()" class="settings-button">Modifica nome team</ion-button>
     <ion-button class="settings-button" id="modalAttached">Modifica foto team</ion-button>
-    <ion-button class="settings-button">Richieste in attesa</ion-button>
+    <ion-button class="settings-button" [routerLink]="['/admin/access-requests-list']">Richieste in attesa</ion-button>
 
     <img src="..\..\assets\image\black-line.svg" alt="">
 

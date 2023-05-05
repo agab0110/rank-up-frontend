@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-task',
@@ -8,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class CreateTaskPage implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private location: Location) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -35,6 +36,10 @@ export class CreateTaskPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  backButton() {
+    this.location.back();
   }
 
 }

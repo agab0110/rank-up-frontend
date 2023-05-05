@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
@@ -9,7 +9,7 @@
 
   <div class="listBox">
     <ion-list class="list" lines="none">
-      <ion-button *ngFor="let item of [].constructor(14); let i = index" class="buttons">[Data] - [Nome Utente] ha richiesto di<br/>entrare nel Team [Nome Team]</ion-button>
+      <ion-button (click)="presentAlert()" *ngFor="let item of [].constructor(14); let i = index" class="buttons">[Data] - [Nome Utente] ha richiesto di<br/>entrare nel Team [Nome Team]</ion-button>
     </ion-list>
   </div>
   
