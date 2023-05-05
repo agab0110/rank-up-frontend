@@ -1,74 +1,62 @@
 <ion-content [fullscreen]="true">
+  <div class="backgroundAdmin">
+    <ion-button class="leftIcon">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
 
-  <div [ngSwitch]="type">
+    <h1 class="title">Nome team</h1>
 
-    <div *ngSwitchCase="'rules'" class="backgroundAdmin">
+    <ion-button class="rightIcon" *ngIf="!stato" [routerLink] = "['/create-rule']">
+      <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
+    </ion-button>
 
-      <ion-button class="leftIcon"  [routerLink]="['/admin/admin-home-team']">
-        <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
-      </ion-button>
+    <ion-button class="rightIcon" *ngIf="stato" [routerLink] = "['/create-task']">
+      <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
+    </ion-button>
 
-      <ion-button class="rightIcon" [routerLink] = "['/create-rule']">
-        <ion-icon name="add-circle-outline" size="large"></ion-icon>
-      </ion-button>
-
-      <h1 align="center" class="title">Nome Team</h1>
-
-      <ion-segment class="choseAdmin" value="rules" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value=rules>
-          <ion-label>Regole</ion-label>
+    <div>
+      <ion-segment value="1" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value=1>
+          <ion-label class="segmentText">Regole</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="tasks">
-          <ion-label>Tasks</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-
-    <ion-list class="list" lines="none">
-      <ion-item-sliding *ngFor="let item of [].constructor(5); let i = index">
-        <app-admin-insert-bar class="listElement" [labelText]="'nome regola'" [buttonText]="'+0'"></app-admin-insert-bar>
-        <ion-item-options side="end">
-          <ion-item-option>
-            <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-
-    </div>
-
-    <div *ngSwitchCase="'tasks'" class="backgroundAdmin">
-
-      <ion-button class="leftIcon" size="large" [routerLink]="['/admin/admin-home-team']">
-        <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
-      </ion-button>
-
-      <ion-button class="rightIcon" [routerLink]="['/create-rule']">
-        <ion-icon name="add-circle-outline" size="large"></ion-icon>
-      </ion-button>
-
-      <h1 align="center" class="title">Nome Team</h1>
-
-      <ion-segment class="choseAdmin" value="tasks" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value=rules>
-          <ion-label>Regole</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="tasks">
-          <ion-label>Tasks</ion-label>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Task</ion-label>
         </ion-segment-button>
       </ion-segment>
-
-    <ion-list class="list" lines="none">
-      <ion-item-sliding *ngFor="let item of [].constructor(3); let i = index">
-        <app-admin-insert-bar class="listElement" [labelText]="'nome task'" [buttonText]="'+0'"></app-admin-insert-bar>
-        <ion-item-options side="end">
-          <ion-item-option>
-            <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-
     </div>
 
+    <div class="listBox" *ngIf="stato">
+      <ion-list class="list" lines="none">
+        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
+          <ion-item class="item">
+
+            <app-admin-insert-bar slot="end" [labelText]="'Nome task'" [buttonText]="'+0'"></app-admin-insert-bar>
+
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="!stato">
+      <ion-list class="list" lines="none">
+        <ion-item-sliding *ngFor="let item of [].constructor(14); let i = index">
+          <ion-item class="item">
+
+            <app-admin-insert-bar slot="end" [labelText]="'Nome regola'" [buttonText]="'+0'"></app-admin-insert-bar>
+
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
   </div>
 </ion-content>

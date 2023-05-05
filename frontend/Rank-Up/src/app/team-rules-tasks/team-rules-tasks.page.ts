@@ -9,14 +9,15 @@ export class TeamRulesTasksPage implements OnInit {
 
   public alertBtns = ["Accetta", "Rifiuta"];
   type='rules';
+  stato= false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  segmentChanged(ev: any){
-    console.log('Type changed', ev)
+  segmentChanged(event: any) {
+    this.stato = !this.stato;
   }
 
 }

@@ -8,7 +8,6 @@
 .subtitle {
     color: black;
     text-align: center;
-    font-weight: bold;
 }
 
 .settingsIcon {
@@ -28,7 +27,7 @@
 
     margin-top: 50vh;
 
-    height: 15vh;
+    height: 13vh;
     width: 35vh;
 }
 
@@ -48,6 +47,8 @@
 
     height: 16vh;
     width: 25vh;
+
+    font-weight: bold;
 }
 
 .iconActivity{
@@ -89,4 +90,8 @@
 
     width: 16vh;
     height: 16vh;
+}
+
+app-square-list{
+  font-weight: bold;
 }
