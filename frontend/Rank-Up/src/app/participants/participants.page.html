@@ -11,28 +11,20 @@
       <app-search-bar></app-search-bar>
     </div>
 
-    <div class="switch" *ngIf="!stato">
-      <div class="selected">
-        Nome
-      </div>
-      <div class="notSelected" (click)="showAsc(true)">
-        Punteggio
-      </div>
-    </div>
-
-    <div class="switch" *ngIf="stato">
-      <div class="notSelected" (click)="showAsc(false)">
-       Nome
-      </div>
-      <div class="selected">
-        Punteggio
-      </div>
+    <div>
+      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+        <ion-segment-button value=1>
+          <ion-label class="segmentText">Nome</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Punteggio</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </div>
 
     <div class="listBox" *ngIf="stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
-          <ion-item class="item">
+          <ion-item class="item" *ngFor="let item of [].constructor(4); let i = index">
 
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             <ion-label class="nomeUtente">Utente {{i+1}}</ion-label>
@@ -44,14 +36,12 @@
               <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
             </ion-item-option>
           </ion-item-options>
-        </ion-item-sliding>
       </ion-list>
     </div>
-
     <div class="listBox" *ngIf="!stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let item of [].constructor(14); let i = index">
-          <ion-item class="item">
+
+          <ion-item class="item" *ngFor="let item of [].constructor(10); let i = index">
 
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             <ion-label class="nomeUtente">Utente {{i+1}}</ion-label>
@@ -62,7 +52,6 @@
               <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
             </ion-item-option>
           </ion-item-options>
-        </ion-item-sliding>
       </ion-list>
     </div>
   </div>
