@@ -19,11 +19,7 @@ export class LoginPage {
     }
 
   login() {
-    this.service.login(this.user).subscribe(response => this.goToHome());
-  }
-
-  goToHome() {
-    this.router.navigate(['user/home']);
+    this.service.login(this.user).subscribe(response => this.router.navigate(['user/home']));
   }
 
 }
