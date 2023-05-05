@@ -16,11 +16,10 @@
 }
 
 .listBox {
-    width: 90%;
-    height: 53vh;
+    margin-top: 2vh;
     overflow: hidden;
     overflow-y: scroll;
-    background-color: transparent;
+    height: 50%;
 }
 
 .list {
@@ -34,18 +33,19 @@ h1 {
 ion-segment {
     --background: var(--ion-color-admin);
     border-radius: 3vh;
-    padding-top: 0.4vh;
-    padding-bottom: 0.3vh;
-    padding-left: 0.4vh;
-    padding-right: 0.4vh;
-    margin-top: 2vh;
     width: 38vh;
     height: 5vh;
+    
 }
 
 ion-segment-button {
-    --border-radius: 3vh;
-    height: 3.75vh;
+    --border-radius: 3vh; 
+    min-height: 2px !important;  
+    margin: 0.5vh;
+}
+
+.switch {
+    margin-top: 2vh;
 }
 
 .segmentText {
@@ -53,32 +53,36 @@ ion-segment-button {
 }
 
 .item {
-    --background: var(--ion-color-grey);
-    font-size: 22px;
-    --border-radius: 3.3vh;
-    height: 7.58vh;
     margin-top: 2vh;
 }
 
-.label {
-    height: 7.58vh;
-    font-size: 2.6vh;
-    margin: 0;
-    text-align: center;
-    margin-right: 12vh;
-    padding-top: 2vh;
-    color: black;
+.div-label-fakebutton {
+    background-color: var(--ion-color-grey);
+    font-size: 2vh;
+    border-radius: 28px;
+
+    height: 8vh;
+    width: 80vw;
 }
 
+.label {
+    height: 8vh;
+    color: var(--ion-color-black);
+    margin: 0;
+    width: 60%;
+    float: left;
+    padding-left: 5vw;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+
+
 .fakebutton {
-    position: absolute;
     color: black;
     --background: var(--ion-color-light-admin);
-    font-size: 3vh;
     --border-radius: 28px;
-
-    height: 7.58vh;
-    width: 35%;
 
     margin: 0;
     right: 0;
@@ -88,9 +92,16 @@ ion-segment-button {
         --background: var(--ion-color-light-admin);
         opacity: 1;
     }
-}
 
-.label {
-    height: 100px;
-    width: 100px;
+    color: var(--ion-color-black);
+
+    height: 8vh;
+    width: 40%;
+
+    margin: 0;
+    margin-right: -10;
+    top: 0;
+    right: 0;
+    float: left;
+    font-size: 20px;
 }
