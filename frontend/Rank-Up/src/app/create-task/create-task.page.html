@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon" (click)="backButton()" fill="clear">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
@@ -30,7 +30,7 @@
       </div>
 
       <div class="create-task-button">
-        <app-bt-admin-small text="Crea Task"></app-bt-admin-small>
+        <app-bt-admin-small text="Crea Task" [routerLink]="['/admin/team-rules-tasks']"></app-bt-admin-small>
       </div>
     </div>
   

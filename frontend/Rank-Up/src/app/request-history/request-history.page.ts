@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-request-history',
@@ -7,7 +8,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private location: Location) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -32,5 +33,10 @@ export class RequestHistoryPage implements OnInit {
   }  
 
   ngOnInit() {
-  }  
+  }
+  
+  backButton() {
+    this.location.back();
+  }
+
 }

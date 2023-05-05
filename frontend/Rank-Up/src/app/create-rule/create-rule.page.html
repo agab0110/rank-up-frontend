@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon" (click)="backButton()" fill="clear">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
@@ -17,7 +17,7 @@
       <ion-textarea fill="outline" placeholder="Descrizione"></ion-textarea>
 
       <div class="create-rule-button">
-        <app-bt-admin-small text="Crea Regola" [routerLink] = "['/admin/team-rules-tasks']"></app-bt-admin-small>
+        <app-bt-admin-small text="Crea Regola" (click)="backButton()"></app-bt-admin-small>
       </div>
     </div>
   
