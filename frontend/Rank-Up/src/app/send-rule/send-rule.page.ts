@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { BtAdminSmallComponent } from '../components/bt-admin-small/bt-admin-small.component';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-send-rule',
   templateUrl: './send-rule.page.html',
@@ -27,7 +27,7 @@ export class SendRulePage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(
+  constructor(private location: Location
   ) { }
 
   ngOnInit() {
@@ -54,5 +54,8 @@ export class SendRulePage implements OnInit {
 
   attach() {
     this.modal.dismiss();
+  }
+  backButton() {
+    this.location.back();
   }
 }
