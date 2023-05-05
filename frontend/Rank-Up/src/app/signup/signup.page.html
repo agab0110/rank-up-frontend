@@ -7,11 +7,16 @@
 
     <div class="signup">
       <h3 class="titolo">Registrazione</h3>
-      <app-input [(ngModel)]="user.name" [type]="'text'" [placeholder]="'Nome'"></app-input>
+      <!--app-input [(ngModel)]="user.name" [type]="'text'" [placeholder]="'Nome'"></app-input>
       <app-input [(ngModel)]="user.surname" [type]="'text'" [placeholder]="'Cognome'"></app-input>
       <app-input [(ngModel)]="user.email" [type]="'text'" [placeholder]="'Email'"></app-input>
       <app-input [(ngModel)]="user.username" [type]="'text'" [placeholder]="'Username'"></app-input>
-      <app-input [(ngModel)]="user.password" [type]="'password'" [placeholder]="'Password'"></app-input>
+      <app-input [(ngModel)]="user.password" [type]="'password'" [placeholder]="'Password'"></app-input-->
+      <ion-input [(ngModel)]="user.name" [type]="'text'" [placeholder]="'Nome'"></ion-input>
+      <ion-input [(ngModel)]="user.surname" [type]="'text'" [placeholder]="'Cognome'"></ion-input>
+      <ion-input [(ngModel)]="user.email" [type]="'text'" [placeholder]="'Email'"></ion-input>
+      <ion-input [(ngModel)]="user.username" [type]="'text'" [placeholder]="'Username'"></ion-input>
+      <ion-input [(ngModel)]="user.password" [type]="'password'" [placeholder]="'Password'"></ion-input>
 
       <app-bt-user-small (click)="signup()" [text]="'Registrati'"></app-bt-user-small>
     </div>

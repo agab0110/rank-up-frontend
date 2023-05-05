@@ -12,7 +12,7 @@ export class UserService {
   
   public save(user: User) {
     return this.http.post<User>(
-      this.userUrl + "/signup", user
+      this.userUrl + "/signUp", user
     );
   }
 }
