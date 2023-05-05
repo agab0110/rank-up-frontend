@@ -4,30 +4,23 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Partecipanti</h1>
+    <h1 class="title">Partecipanti [team]</h1>
 
     <ion-button class="rightIcon">
-      <ion-icon name="add-outline" size="large" class="iconaRicerca"></ion-icon>
+      <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
     </ion-button>
 
     <ion-searchbar placeholder="Cerca"></ion-searchbar>
 
-    <div class="switch" *ngIf="!stato">
-      <div class="selected">
-        Decrescente
-      </div>
-      <div class="notSelected" (click)="showAsc(true)">
-        Crescente
-      </div>
-    </div>
-
-    <div class="switch" *ngIf="stato">
-      <div class="notSelected" (click)="showAsc(false)">
-        Decrescente
-      </div>
-      <div class="selected">
-        Crescente
-      </div>
+    <div>
+      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+        <ion-segment-button value=1>
+          <ion-label class="segmentText">Decrescente</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Crescente</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </div>
 
     <div class="listBox" *ngIf="stato">

@@ -14,7 +14,7 @@ export class AdminProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  showPermi(stato: boolean) {
-    this.stato = stato;
+  segmentChanged(event: any) {
+    this.stato = !this.stato;
   }
 }
