@@ -15,4 +15,10 @@ export class UserService {
       this.userUrl + "/signUp", user
     );
   }
+
+  public login(user: User) {
+    return this.http.post<User>(
+      this.userUrl + "/login", user
+    );
+  }
 }

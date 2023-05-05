@@ -9,6 +9,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 
 import { ComponentsModule } from '../modules/components/components.module';
+import { UserService } from '../services/user/user.service';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ComponentsModule } from '../modules/components/components.module';
     LoginPageRoutingModule,
     ComponentsModule
   ],
+  providers: [UserService],
   declarations: [LoginPage]
 })
 export class LoginPageModule {
