@@ -14,8 +14,7 @@
     --background: var(--ion-color-grey);
     --border-radius: 28px;
 
-    margin: 0;
-    padding: 0;
+    margin-top: 2vh;
 
     height: 64px;
     width: 90%;
@@ -31,7 +30,6 @@
 
 .choseUser {
   margin-top: 10vh;
-  margin-bottom: 5vh;
   --background: var(--ion-color-user);
   border-radius: 3vh;
 
@@ -48,7 +46,6 @@
 
 .choseAdmin {
   margin-top: 10vh;
-  margin-bottom: 5vh;
   --background: var(--ion-color-admin);
   border-radius: 3vh;
 

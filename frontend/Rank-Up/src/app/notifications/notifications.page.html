@@ -8,7 +8,7 @@
 
     <div *ngSwitchCase="'utente'" class="backgroundUser" >
 
-      <ion-button class="leftIcon" [routerLink]="['/user/home']"> 
+      <ion-button class="leftIcon"  (click)="backButton()" > 
         <ion-icon name="arrow-back-outline" size="large" ></ion-icon>
       </ion-button>
     
