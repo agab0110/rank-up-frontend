@@ -194,3 +194,10 @@ ion-modal {
 ion-modal ion-content {
     --background: var(--ion-color-grey);
 }
+
+.input {
+    background-color: none;
+    margin-bottom: 2vh;
+    color: black;
+    width: 100%;
+}
