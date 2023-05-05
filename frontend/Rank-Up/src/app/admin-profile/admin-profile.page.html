@@ -8,8 +8,8 @@
     <h1 class="nameUser">[Nome Utente]</h1>
     <h2 class="scoreUser">Punti: 100</h2>
 
-    <div>
-      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+    <div class="switch">
+      <ion-segment value=1 (ionChange)="segmentChanged($event)" id="bait"> 
         <ion-segment-button value=1>
           <ion-label class="segmentText">Compiti completati</ion-label>
         </ion-segment-button>
@@ -17,28 +17,27 @@
           <ion-label class="segmentText">Premi riscossi</ion-label>
         </ion-segment-button>
       </ion-segment>
-    </div>
+    </div> 
+
+
 
     <div class="listBox" *ngIf="!stato">
-      <ion-list class="list" lines="none">
-        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-          <ion-label class="label">Regola {{i+1}}</ion-label>
-          <ion-button class="fakebutton" slot="end" size="large">
-            {{i+1*i+1*i+1}} pt
-          </ion-button>
-        </ion-item>
-      </ion-list>
+        <div class="item" *ngFor="let item of [].constructor(15); let i = index">
+          <div class="div-label-fakebutton">
+            <div class="label" >Regola {{i+1}}</div>
+            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+          </div>
+        </div>
     </div>
 
     <div class="listBox" *ngIf="stato">
-      <ion-list class="list" lines="none">
-        <ion-item class="item" *ngFor="let item of [].constructor(5); let i = index">
-          <ion-label class="label">Premio {{i+1}}</ion-label>
-          <ion-button class="fakebutton" [disabled]="true" slot="end" size="large">
-            -{{i+1*i+2*i+2}} pt
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </div>
+      <div class="item" *ngFor="let item of [].constructor(5); let i = index">
+        <div class="div-label-fakebutton">
+          <div class="label" >Regola Riscossa {{i+1}}</div>
+          <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+        </div>
+      </div>
+  </div>
+
   </div>
 </ion-content>

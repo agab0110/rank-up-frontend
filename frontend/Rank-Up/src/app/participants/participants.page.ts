@@ -13,7 +13,7 @@ export class ParticipantsPage implements OnInit {
 
   ngOnInit() {
   }
-  showAsc(stato: boolean) {
-    this.stato = stato;
+  segmentChanged(event: any) {
+    this.stato = !this.stato;
   }
 }
