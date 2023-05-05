@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  
 
   constructor(private router: Router) { }
 
