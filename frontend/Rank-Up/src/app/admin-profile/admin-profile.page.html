@@ -8,29 +8,22 @@
     <h1 class="nameUser">[Nome Utente]</h1>
     <h2 class="scoreUser">Punti: 100</h2>
 
-    <div class="switch" *ngIf="!stato">
-      <div class="selected">
-        Compiti completati
-      </div>
-      <div class="notSelected" (click)="showPermi(true)">
-        Permi riscossi
-      </div>
-    </div>
-
-    <div class="switch" *ngIf="stato">
-      <div class="notSelected" (click)="showPermi(false)">
-        Compiti completati
-      </div>
-      <div class="selected">
-        Permi riscossi
-      </div>
+    <div>
+      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+        <ion-segment-button value=1>
+          <ion-label class="segmentText">Compiti completati</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Premi riscossi</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </div>
 
     <div class="listBox" *ngIf="!stato">
       <ion-list class="list" lines="none">
         <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-          <ion-label class="nomeAttivita">Regola {{i+1}}</ion-label>
-          <ion-button class="btnOn" slot="end" size="large">
+          <ion-label class="label">Regola {{i+1}}</ion-label>
+          <ion-button class="fakebutton" slot="end" size="large">
             {{i+1*i+1*i+1}} pt
           </ion-button>
         </ion-item>
@@ -40,8 +33,8 @@
     <div class="listBox" *ngIf="stato">
       <ion-list class="list" lines="none">
         <ion-item class="item" *ngFor="let item of [].constructor(5); let i = index">
-          <ion-label class="nomeAttivita">Premio {{i+1}}</ion-label>
-          <ion-button class="btnOff" slot="end" size="large">
+          <ion-label class="label">Premio {{i+1}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true" slot="end" size="large">
             -{{i+1*i+2*i+2}} pt
           </ion-button>
         </ion-item>

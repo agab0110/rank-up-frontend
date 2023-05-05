@@ -15,42 +15,6 @@
     font-size: 25px;
 }
 
-.switch {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    border-radius: 25px;
-    height: 5vh;
-    width: 90%;
-    background-color: var(--ion-color-admin);
-}
-
-.selected {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 25px;
-    height: 4vh;
-    width: 18vh;
-    background-color: var(--ion-color-white);
-}
-
-.notSelected {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    height: 4vh;
-    width: 18vh;
-}
-
 .listBox {
     width: 90%;
     height: 53vh;
@@ -63,32 +27,70 @@
     background-color: transparent;
 }
 
-.item {
-    margin-top: 1vh;
-    --background: var(--ion-color-grey);
-    --border-radius: 25px;
-}
-
-.nomeAttivita {
-    font-size: 20px;
-    font-family: 'Outfit';
-    --color: var(--ion-color-black);
-}
-
-.btnOn {
-    --background: var(--ion-color-light-admin);
-    --border-radius: 25px;
-    width: 45%;
-    color: var(--ion-color-black);
-}
-
-.btnOff {
-    --background: var(--ion-color-light-admin);
-    --border-radius: 25px;
-    width: 45%;
-    color: var(--ion-color-black);
-}
-
 h1 {
     margin: 0;
+}
+
+ion-segment {
+    --background: var(--ion-color-admin);
+    border-radius: 3vh;
+    padding-top: 0.4vh;
+    padding-bottom: 0.3vh;
+    padding-left: 0.4vh;
+    padding-right: 0.4vh;
+    margin-top: 2vh;
+    width: 38vh;
+    height: 5vh;
+}
+
+ion-segment-button {
+    --border-radius: 3vh;
+    height: 3.75vh;
+}
+
+.segmentText {
+    font-size: 1.9vh;
+}
+
+.item {
+    --background: var(--ion-color-grey);
+    font-size: 22px;
+    --border-radius: 3.3vh;
+    height: 7.58vh;
+    margin-top: 2vh;
+}
+
+.label {
+    height: 7.58vh;
+    font-size: 2.6vh;
+    margin: 0;
+    text-align: center;
+    margin-right: 12vh;
+    padding-top: 2vh;
+    color: black;
+}
+
+.fakebutton {
+    position: absolute;
+    color: black;
+    --background: var(--ion-color-light-admin);
+    font-size: 3vh;
+    --border-radius: 28px;
+
+    height: 7.58vh;
+    width: 35%;
+
+    margin: 0;
+    right: 0;
+    top: 0;
+
+    &[disabled] {
+        --background: var(--ion-color-light-admin);
+        opacity: 1;
+    }
+}
+
+.label {
+    height: 100px;
+    width: 100px;
 }
