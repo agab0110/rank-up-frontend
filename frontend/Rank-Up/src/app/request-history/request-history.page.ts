@@ -12,11 +12,11 @@ export class RequestHistoryPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Filtra per:',
+      header: 'Ordina per:',
       buttons: [
         {
           text: 'Nome Utente',
-          cssClass: 'alert-button-red',
+          cssClass: 'alert-button-blue',
         },
         {
           text: 'Data di consegna',
@@ -24,7 +24,7 @@ export class RequestHistoryPage implements OnInit {
         },
         {
           text: 'Nome attività',
-          cssClass: 'alert-button-red',
+          cssClass: 'alert-button-blue',
         },
       ],
     });

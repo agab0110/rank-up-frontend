@@ -1,26 +1,28 @@
-
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
-    
-    <ion-button class="leftIcon" fill="clear">
-      <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
+      <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Regola di [nome utente] <br> rifiutata</h1>
+    <h1 class="title">Regola di<br/>[Nome Utente] rifiutata</h1>
 
-    <app-admin-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="'[nome regola]'"></app-admin-element-bar>
-    <app-admin-element-bar class="elementbar" [buttonText]="'[Punti]'" [labelText]="'[punti]'"></app-admin-element-bar>
+    <div class="div-element-bar">
+      <app-admin-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="'[Nome Regola]'"></app-admin-element-bar>
+      <div class="space-div"></div>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="'[Punti]'"></app-admin-element-bar>
+    </div>
 
     <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
-    <ion-textarea class="commentArea" fill="outline" placeholder="Commento [nome admin]" shape="round" [readonly] = true></ion-textarea>
+    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true></ion-textarea>
 
-    <ion-grid>
+    <ion-grid class="buttons-grid">
       <ion-row>
-        <ion-col>
-          <app-bt-admin-small shape="round"  clear [text]="'Visualizza allegato'"></app-bt-admin-small>
+        <ion-col class="left-col">
+          <ion-button class="visualize-attached">Visualizza<br/>Allegato</ion-button>
         </ion-col>
-        <ion-col>
-          <app-bt-admin-small shape="round"  clear [text]="'Chiudi'"></app-bt-admin-small>
+        <ion-col class=right-col>
+          <app-bt-admin-small shape="round"  clear [text]="'Chiudi'" [routerLink]="['/admin/request-history']"></app-bt-admin-small>
         </ion-col>
       </ion-row>
     </ion-grid>
