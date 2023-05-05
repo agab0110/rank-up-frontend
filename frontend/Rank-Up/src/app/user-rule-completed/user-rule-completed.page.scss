@@ -1,71 +1,60 @@
-.task{
-  margin-top: 9vh;
-color: black;
-font-weight: bold;
-}
-.back {
-  background-image: url("../../assets/image/backgroundUser.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  //align-items: center;
-  height: 100vh;
-  width: 100%;
+.title {
+  text-align: center;
+  margin-top: 8vh;
+  font-weight: bold;
 }
 
-.taskbar {
---background: var(--ion-color-grey);
-font-size: 22px;
---border-radius: 28px;
-
-height: 64px;
-width: 90%;
-margin-top: 7vh;
-margin-left: 3vh;
-
+.left-col {
+  margin-right: 1vh;
 }
-.pointsbar {
---background: var(--ion-color-grey);
-font-size: 22px;
---border-radius: 28px;
 
-height: 64px;
-width: 90%;
-margin-top: 2vh;
-
-margin-left: 3vh;
+.right-col {
+  margin-left: 1vh;
 }
-.descrizione{
-border: solid 3px var(--ion-color-grey);
-border-radius: 30px;
 
-height: 18vh;
-width: 80%;
-margin-top: 4vh;
-margin-left: 5vh;
+.visualize-attached {
+  color: var(--ion-color-white);
+  --background: var(--ion-color-user);
+  font-size: 22px;
+  --border-radius: 28px;
+
+  height: 64px;
+  width: 150px;
+
+  margin-bottom: 1vh;
+
+  color: black;
+  font-weight: bold;
 }
-.commento{
-border: solid 3px var(--ion-color-grey);
-border-radius: 30px;
 
-height: 18vh;
-width: 80%;
-margin-top: 4vh;
-margin-left: 5vh;
+.buttons-grid {
+  margin-top: 3vh;
 }
-.close{
-position: absolute;
 
-margin-top: 88vh;
-margin-left: 50%;
+ion-textarea{
+  border: solid 3px var(--ion-color-grey);
+  border-radius: 30px;
+
+  height: 18vh;
+  width: 80%;
+
+  margin-top: 3vh;
+  text-indent: 3vh;
 }
-.viewAttached{
-position: absolute;
 
-margin-top: 88vh;
-margin-right: 50%;
+.elementbar {
+  height: 64px;
+  width: 90%;
+}
 
+.space-div {
+  margin-top: 2vh;
+}
+
+.div-element-bar {
+  margin-top: 10vh;
+}
+
+.leftIcon {
+  --background: trasparent;
 }
