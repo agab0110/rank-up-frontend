@@ -22,7 +22,7 @@
           <ion-button class="visualize-attached">Visualizza<br/>Allegato</ion-button>
         </ion-col>
         <ion-col class=right-col>
-          <app-bt-admin-small shape="round"  clear [text]="'Chiudi'" [routerLink]="['/admin/request-history']"></app-bt-admin-small>
+          <app-bt-admin-small shape="round"  clear [text]="'Chiudi'" (click)="backButton()"></app-bt-admin-small>
         </ion-col>
       </ion-row>
     </ion-grid>
