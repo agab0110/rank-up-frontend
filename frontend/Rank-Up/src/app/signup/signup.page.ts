@@ -19,10 +19,7 @@ export class SignupPage {
   }
 
   signup() {
-    this.service.save(this.user).subscribe(result => this.goToLogin());
+    this.service.save(this.user).subscribe(result => this.router.navigate(['/login']));
   }
 
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
 }
