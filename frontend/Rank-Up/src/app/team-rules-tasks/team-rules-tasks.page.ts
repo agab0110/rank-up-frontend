@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-team-rules-tasks',
@@ -11,11 +12,14 @@ export class TeamRulesTasksPage implements OnInit {
   type='rules';
   stato= false;
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
 
+  backButton() {
+    this.location.back();
+  }
   segmentChanged(event: any) {
     this.stato = !this.stato;
   }
