@@ -65,6 +65,7 @@
 .div-large-tag {
 
     background-color: var(--ion-color-user);
+    color: var(--ion-color-black);
     font-size: 2vh;
     border-radius: 28px;
 
@@ -82,7 +83,7 @@
 }
 
 .div-large-value {
-
+    color: var(--ion-color-black);
     height: 6vh;
     font-size: 2vh;
     margin: 0;
