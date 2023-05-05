@@ -7,7 +7,7 @@ export class UserService {
   private userUrl: string;
 
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://localhost:8080/api'
+    this.userUrl = 'http://localhost:8080/userApi'
   }
   
   public save(user: User) {
