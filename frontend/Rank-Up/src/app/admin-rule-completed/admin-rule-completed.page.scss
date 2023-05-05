@@ -1,11 +1,4 @@
 
-.title{
-    text-align: center;
-    margin-top: 12vh;
-    color: black;
-    font-weight: bold;
-}
-
 ion-textarea{
     border: solid 3px var(--ion-color-grey);
     border-radius: 30px;
@@ -20,6 +13,9 @@ ion-textarea{
     padding-top: 4vh;
     height: 64px;
     width: 90%;
+
+    margin-top: 2vh;;
+
 }
 
 .leftIcon {

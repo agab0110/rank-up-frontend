@@ -11,10 +11,12 @@ export class SendTaskPage implements OnInit {
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
     {
-      text: 'Annulla'
+      text: 'Annulla',
+      cssClass: 'alert-button-red'
     },
     {
       text: 'Conferma',
+      cssClass: 'alert-button-blue',
       handler: () => {
         //cambia pagina
       }
