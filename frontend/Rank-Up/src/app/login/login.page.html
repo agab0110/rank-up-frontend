@@ -8,8 +8,8 @@
 
       <div class="form">
         <h3 class="titolo">Login</h3>
-        <ion-input [(ngModel)]="user.username" class="input" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
-        <ion-input [(ngModel)]="user.password" class="input" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="user.username" class="formInput" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="user.password" class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
       <app-bt-user-small class="loginButton" (click)="login()" [text]="'Accedi'"></app-bt-user-small>
