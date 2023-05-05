@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-send-task',
   templateUrl: './send-task.page.html',
@@ -26,7 +26,7 @@ export class SendTaskPage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(
+  constructor(private location: Location
   ) { }
 
   ngOnInit() {
@@ -53,5 +53,8 @@ export class SendTaskPage implements OnInit {
 
   attach() {
     this.modal.dismiss();
+  }
+  backButton() {
+    this.location.back();
   }
 }
