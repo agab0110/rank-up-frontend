@@ -5,9 +5,10 @@
     font-weight: bold;
 }
 
-.subtitle {
-    color: black;
+.team-code {
     text-align: center;
+    font-size: medium;
+    margin-top: 0vh;
 }
 
 .settingsIcon {
@@ -41,7 +42,7 @@
 
 .label {
     position: absolute;
-    margin-top: 15vh;
+    margin-top: 16vh;
     text-align: center;
     vertical-align: bottom;
 
@@ -52,7 +53,7 @@
 }
 
 .iconActivity{
-    margin-top: 4vh;
+    margin-top: 5vh;
     margin-bottom: 4vh;
     width: 6vh;
     height: 6vh;
