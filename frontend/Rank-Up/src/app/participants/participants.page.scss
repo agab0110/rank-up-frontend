@@ -22,12 +22,12 @@
 .choseUser {
     margin-top: 2vh;
     --background: var(--ion-color-user);
-    border-radius: 28px;
+    border-radius: 3vh;
 
     width: 75%;
 
     ion-segment-button {
-        --border-radius: 28px;
+        --border-radius: 3vh;
     }
 }
 

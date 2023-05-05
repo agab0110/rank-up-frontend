@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
+import { BtAdminSmallComponent } from '../components/bt-admin-small/bt-admin-small.component';
 
 @Component({
   selector: 'app-send-rule',
@@ -11,10 +12,12 @@ export class SendRulePage implements OnInit {
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
     {
-      text: 'Annulla'
+      text: 'Annulla',
+      cssClass: 'alert-button-red',
     },
     {
       text: 'Conferma',
+      cssClass: 'alert-button-blue',
       handler: () => {
         //cambia pagina
       }

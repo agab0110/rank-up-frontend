@@ -1,43 +1,20 @@
-.chose-bar {
-  padding-top: 10vh;
+.listBox {
+  width: 90%;
+  height: 53vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: transparent;
+  margin-top: 4vh;
+}
+
+.list {
+  background-color: transparent;
 }
 
 .item {
-  --background: var(--ion-color-grey);
-  --border-radius: 28px;
-
-  margin: 0;
-  padding: 0;
-
-  height: 64px;
-  width: 90%;
-}
-
-.choseAdmin {
-  margin-top: 10vh;
-  margin-bottom: 5vh;
-  --background: var(--ion-color-admin);
-  border-radius: 3vh;
-
-  width: 38vh;
-  height: 5vh;
-
-  ion-segment-button {
-    --border-radius: 3vh;
-    min-height: 2px !important;
-    margin: 0.5vh;
-    font-size: 1.9vh;
-  }
-}
-
-.list{
-
- ion-item-sliding{
-  width: 40vh;
   margin-top: 2vh;
-
-  color:black;
- }
+  --background: var(--ion-color-grey);
+  --border-radius: 30px;
 }
 
 ion-item-options {
@@ -47,6 +24,25 @@ ion-item-options {
 
   ion-item-option {
       background: transparent;
-      color: red;
   }
+}
+
+ion-segment {
+  --background: var(--ion-color-admin);
+  border-radius: 3vh;
+  width: 38vh;
+  height: 5vh;
+
+  margin-top: 13vh;
+
+}
+
+ion-segment-button {
+  --border-radius: 3vh;
+  min-height: 2px !important;
+  margin: 0.5vh;
+}
+
+.segmentText {
+  font-size: 1.9vh;
 }
