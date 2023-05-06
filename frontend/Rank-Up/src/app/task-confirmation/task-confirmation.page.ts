@@ -22,7 +22,7 @@ export class TaskConfirmationPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Richesta archiviata',
+      header: 'Richesta Archiviata',
       buttons: [
         {
           handler: () => { 

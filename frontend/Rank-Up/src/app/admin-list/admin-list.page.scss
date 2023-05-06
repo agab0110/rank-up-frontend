@@ -12,8 +12,8 @@
 }
 
 .imgUser {
-    width: 5vh;
-    height: 5vh;
+    width: 6vh;
+    height: 6vh;
     border-radius: 12px;
     margin-right: 2vh;
 }
@@ -36,6 +36,13 @@
     --background: var(--ion-color-grey);
     --border-radius: 25px;
     height: 7vh;
+}
+
+.item-div {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 7vh;;
 }
 
 .nomeUtente {
@@ -89,4 +96,11 @@ ion-segment-button {
 
 .segmentText {
     font-size: 1.9vh;
+}
+
+.points-label {
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 33vh;
 }
