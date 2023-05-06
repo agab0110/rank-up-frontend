@@ -10,6 +10,7 @@ import { UserService } from '../services/user/user.service';
 })
 export class SignupPage {
   user: User;
+  errorCheck: boolean = false;
 
   constructor(
     private router: Router,
@@ -19,7 +20,19 @@ export class SignupPage {
   }
 
   signup() {
-    this.service.save(this.user).subscribe(result => this.router.navigate(['/login']));
+    this.errorCheck = false;
+    this.service.save(this.user).subscribe(result => 
+      {
+        this.router.navigate(['/login']);
+      }, (error: Response) => {  
+        this.errorCheck = true;
+        if(error.status == 400)  
+          console.log("400 error");  
+        else {  
+          console.log('An unexpected error occured');   
+        }
+        console.log(error);
+      });
   }
 
 }
