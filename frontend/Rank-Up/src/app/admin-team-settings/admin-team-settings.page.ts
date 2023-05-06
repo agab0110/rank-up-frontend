@@ -17,6 +17,10 @@ export class AdminTeamSettingsPage implements OnInit {
 
   constructor(private alertController: AlertController, private location: Location, private router: Router) { }
 
+  choice_privacy_utente: Boolean = true;
+  choice_privacy_team: Boolean = true;
+
+
   async presentAlert1() {
     const alert = await this.alertController.create({
       header: 'Modifica Nome Team:',
@@ -47,11 +51,17 @@ export class AdminTeamSettingsPage implements OnInit {
       buttons: [
         {
           text: 'Pubblico',
-          cssClass: 'alert-button-blue',
+          cssClass: this.choice_privacy_team ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.choice_privacy_team = true;
+          }
         },
         {
           text: 'Privato',
-          cssClass: 'alert-button-red',
+          cssClass: this.choice_privacy_team ? 'alert-button-blue' : 'alert-button-red',
+          handler: () => {
+            this.choice_privacy_team = false;
+          }
         },
       ],
     });
@@ -65,11 +75,17 @@ export class AdminTeamSettingsPage implements OnInit {
       buttons: [
         {
           text: 'Sì',
-          cssClass: 'alert-button-blue',
+          cssClass: this.choice_privacy_utente ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.choice_privacy_utente = true;
+          }
         },
         {
           text: 'No',
-          cssClass: 'alert-button-red',
+          cssClass: this.choice_privacy_utente ? 'alert-button-blue' : 'alert-button-red',
+          handler: () => {
+            this.choice_privacy_utente = false;
+          }
         },
       ],
     });
