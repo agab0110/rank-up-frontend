@@ -26,13 +26,13 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list>
-        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index">
+        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/task-completed']">
           <ion-label class="label">[Nome Task]</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
         </ion-item>
 
         <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index">
-          <ion-label class="label">[Nome Regola]</ion-label>
+          <ion-label class="label" [routerLink]="['/user-rule-completed']">[Nome Regola]</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
         </ion-item>
       </ion-list>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-participants',
@@ -8,11 +9,16 @@ import { Router } from '@angular/router';
 })
 export class ParticipantsPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private location: Location) { }
   stato = false
 
   ngOnInit() {
   }
+
+  backButton() {
+    this.location.back();
+  }
+
   segmentChanged(event: any) {
     this.stato = !this.stato;
   }

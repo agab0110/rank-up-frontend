@@ -2,11 +2,12 @@
 <ion-content [fullscreen]="true">
  <div class="backgroundUser">
 
-    <ion-button class="leftIcon" [routerLink] = "['/user/team']">
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
-    <h1 align="center" class="title">Nome team</h1>
-    <p class="codice" align="center">Codice :[Codice team]</p>
+    <h1 class="title">[Nome Team]</h1>
+    <h2 class="team-code">Codice: [Codice Team]</h2>
+
     <div class="search">
       <app-search-bar></app-search-bar>
     </div>

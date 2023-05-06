@@ -2,7 +2,7 @@
 
 <ion-content [fullscreen]="true">
     <div class="backgroundUser">
-        <ion-button class="leftIcon" [routerLink] = "['/user/home']">
+        <ion-button class="leftIcon" (click)="backButton()">
             <ion-icon name="arrow-back-outline" size="large" class="iconaBack"></ion-icon>
         </ion-button>
 
@@ -10,8 +10,8 @@
             <ion-icon name="information-circle-outline"class="iconainfo"></ion-icon>
         </ion-button>
 
-        <h1 align="center" class="title">Nome team</h1>
-        <p class="codice" align="center">Codice: [codice team]</p>
+        <h1 class="title">[Nome Team]</h1>
+        <h2 class="team-code">Codice: [Codice Team]</h2>
 
         <ion-button class="premi" fill="clear" [routerLink] = "['/user/prizes-page']">
             <app-square-list class="squareList" [iconName]="'trophy-outline'" [text]="'Premi'"></app-square-list>
