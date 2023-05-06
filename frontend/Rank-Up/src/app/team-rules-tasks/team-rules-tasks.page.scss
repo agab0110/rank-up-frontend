@@ -3,15 +3,6 @@
   margin-top: 8vh;
 }
 
-.listBox {
-  width: 90%;
-  height: 53vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  background-color: transparent;
-  margin-top: 4vh;
-}
-
 .list {
   background-color: transparent;
 }
@@ -91,9 +82,11 @@ ion-segment-button {
 
   height: 8vh;
   width: 80vw;
+
+  display: flex;
+  flex-direction: row;
+
 }
-
-
 
 #div-div-rules-tasks-name {
   height: 8vh;
@@ -106,6 +99,7 @@ ion-segment-button {
   display: flex;
   align-items: center;
   font-size: 20px;
+
 }
 
 #div-div-rules-tasks-button {
@@ -119,10 +113,12 @@ ion-segment-button {
   width: 40%;
 
   margin: 0;
-  margin-right: -10;
+  margin-left: 0vh;
   top: 0;
   right: 0;
   float: left;
   font-size: 20px;
   font-weight: bold;
+
+  margin-right: -10vh;
 }

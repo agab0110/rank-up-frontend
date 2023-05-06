@@ -12,11 +12,21 @@
     <h1 class="title">Premi<br/>[Nome Team]</h1>
 
     <div class="listBox">
-      <ion-list>
-        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-          <ion-label class="label">[Nome Premio]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">46 pt</ion-button>
+      <ion-list class="list">
+        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
+          <ion-item id="div-rule-task">
+          <div id="div-div-rules-tasks">
+            <div id="div-div-rules-tasks-name">[Nome Premio]</div>
+            <ion-button id="div-div-rules-tasks-button">15</ion-button>
+          </div>
+
         </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
       </ion-list>
     </div>
   </div>
