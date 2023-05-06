@@ -1,13 +1,13 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon" [routerLink]="['/user/notifications']">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
     <h1 align="center" class="title">[Titolo notifica]</h1>
 
-    <h4 align="center" class="subtitle">[Data]</h4>
+    <h4 align="center" class="subtitle">[Data notifica]</h4>
 
     <ion-textarea fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
   </div>

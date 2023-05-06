@@ -1,10 +1,36 @@
+.title {
+  text-align: center;
+  margin-top: 8vh;
+  font-weight: bold;
+}
 
-.task{
-    margin-top: 9vh;
+.left-col {
+  margin-right: 1vh;
+}
+
+.right-col {
+  margin-left: 1vh;
+}
+
+.visualize-attached {
+  color: var(--ion-color-white);
+  --background: var(--ion-color-user);
+  font-size: 22px;
+  --border-radius: 28px;
+
+  height: 64px;
+  width: 150px;
+
+  margin-bottom: 1vh;
+
   color: black;
   font-weight: bold;
-  }
-  
+}
+
+.buttons-grid {
+  margin-top: 3vh;
+}
+
 ion-textarea{
   border: solid 3px var(--ion-color-grey);
   border-radius: 30px;
@@ -12,47 +38,23 @@ ion-textarea{
   height: 18vh;
   width: 80%;
 
+  margin-top: 3vh;
+  text-indent: 3vh;
+}
+
+.elementbar {
+  height: 64px;
+  width: 90%;
+}
+
+.space-div {
   margin-top: 2vh;
 }
-.back {
-  background-image: url("../../assets/image/backgroundUser.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  //align-items: center;
-  height: 100vh;
-  width: 100%;
+.div-element-bar {
+  margin-top: 10vh;
 }
 
-.regola{
-  margin-top: 7vh;
-  width: 40vh;
-  margin-left: 2vh;
-}
-.punti{
-  margin-top: 2vh;
-  width: 40vh;
-  margin-left: 2vh;
-}
-
-.descrizione{
-  border: solid 3px var(--ion-color-grey);
-  border-radius: 30px;
-
-  height: 18vh;
-  width: 80%;
-  margin-top: 4vh;
-  margin-left: 5vh;
-}
-.commento{
-  border: solid 3px var(--ion-color-grey);
-  border-radius: 30px;
-
-  height: 18vh;
-  width: 80%;
-  margin-top: 4vh;
-  margin-left: 5vh;
+.leftIcon {
+  --background: trasparent;
 }

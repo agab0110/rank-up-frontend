@@ -1,17 +1,16 @@
 <ion-content [fullscreen]="true">
     <div class="backgroundAdmin">
   
-      <ion-button class="leftIcon" fill="clear">
-        <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
+      <ion-button class="leftIcon" fill="clear" (click)="backButton()">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
       </ion-button>
   
-      <h1 class="title">Attività in</h1>
-      <h1 class="subtitle">sospeso</h1>
+      <h1 class="title">Attività in<br/>sospeso</h1>
   
       <div class="listBox">
         <ion-list>
-          <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-            <img class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+          <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index" [routerLink]="['/task-confirmation']">
+            <img  alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
             <ion-label class="label">Utente {{i+1}}</ion-label>
             <ion-label class="label">Attività {{i+1}}</ion-label>
           </ion-item>

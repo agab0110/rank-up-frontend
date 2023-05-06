@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-request-history',
@@ -7,23 +8,35 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  constructor(private alertController: AlertController) { }
+
+  filter: number = 1;
+
+  constructor(private alertController: AlertController, private location: Location) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Filtra per:',
+      header: 'Ricerca per:',
       buttons: [
         {
           text: 'Nome Utente',
-          cssClass: 'alert-button-red',
+          cssClass: this.filter === 1 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 1;
+          }
         },
         {
           text: 'Data di consegna',
-          cssClass: 'alert-button-red',
+          cssClass: this.filter === 2 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 2;
+          }
         },
         {
           text: 'Nome attività',
-          cssClass: 'alert-button-red',
+          cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 3;
+          }
         },
       ],
     });
@@ -32,5 +45,10 @@ export class RequestHistoryPage implements OnInit {
   }  
 
   ngOnInit() {
-  }  
+  }
+  
+  backButton() {
+    this.location.back();
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-rule-rejected',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RuleRejectedPage implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
+  }
+
+  backButton() {
+    this.location.back();
   }
 
 }

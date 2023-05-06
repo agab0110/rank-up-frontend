@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'admin-rule-completed',
     loadChildren: () => import('./admin-rule-completed/admin-rule-completed.module').then( m => m.AdminRuleCompletedPageModule)
   },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
 ];
 
 @NgModule({

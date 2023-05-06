@@ -1,14 +1,14 @@
 .title {
     color: black;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 8vh;
     font-weight: bold;
 }
 
-.subtitle {
-    color: black;
+.team-code {
     text-align: center;
-    font-weight: bold;
+    font-size: medium;
+    margin-top: 0vh;
 }
 
 .settingsIcon {
@@ -28,7 +28,7 @@
 
     margin-top: 50vh;
 
-    height: 15vh;
+    height: 13vh;
     width: 35vh;
 }
 
@@ -42,16 +42,18 @@
 
 .label {
     position: absolute;
-    margin-top: 15vh;
+    margin-top: 16vh;
     text-align: center;
     vertical-align: bottom;
 
     height: 16vh;
     width: 25vh;
+
+    font-weight: bold;
 }
 
 .iconActivity{
-    margin-top: 4vh;
+    margin-top: 5vh;
     margin-bottom: 4vh;
     width: 6vh;
     height: 6vh;
@@ -89,4 +91,8 @@
 
     width: 16vh;
     height: 16vh;
+}
+
+app-square-list{
+  font-weight: bold;
 }

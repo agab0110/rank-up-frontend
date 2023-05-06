@@ -24,9 +24,11 @@ export class PrizesPagePage implements OnInit {
         {
           text: 'No',
           role: 'no',
+          cssClass:'alert-button-red'
         },
         {
           text: 'Si',
+          cssClass:'alert-button-blue',
           handler: () => {
            this.user_points -= points;
           }

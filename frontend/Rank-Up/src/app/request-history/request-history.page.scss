@@ -1,12 +1,12 @@
 .title {
     color: black;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 8vh;
     font-weight: bold;
 }
 
 .searchbar {
-    margin-top: 1vh;
+    margin-top: 3vh;
     align-items: center;
     width: 90%;
 }
@@ -34,11 +34,21 @@
 }
 
 .notifications {
-    margin-top: 5vh;
+    margin-top: 4vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: transparent;
+}
+
+.listBox {
+    margin-top: 2vh;
+    width: 90%;
+    height: 58vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
 }
 
 .itemadmin {
@@ -50,6 +60,8 @@
 
     height: 64px;
     width: 90%;
+
+    align-items: center;
 }
 
 .itemuser {
@@ -63,14 +75,9 @@
     width: 90%;
 }
 
-.nomeutente {
-    margin-right: 1vh;
-}
-
-.nomeattivita {
-    margin-right: 1vh;
-}
-
-.data {
-    margin-left: 2vh;
+.label {
+    text-align: left;
+    margin-top: 1.2vh;
+    height: 60%;
+    font-size: small;
 }

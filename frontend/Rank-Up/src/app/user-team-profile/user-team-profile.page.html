@@ -1,17 +1,17 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundUser">
 
-    <ion-button fill="clear" class="leftIcon" [routerLink] = "['/user/team']">
+    <ion-button fill="clear" class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
     </ion-button>
 
     
-    <img class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+    <img alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
       
 
     <ion-label class="userName">[Nome Utente]</ion-label>
 
-    <ion-label class="points">Punti: [punti]</ion-label>
+    <ion-label class="points">Punti: [Punti]</ion-label>
 
     <div class="switch">
       <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
@@ -26,8 +26,13 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list>
-        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-          <ion-label class="label">Task/Regola</ion-label>
+        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/task-completed']">
+          <ion-label class="label">[Nome Task]</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
+        </ion-item>
+
+        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index">
+          <ion-label class="label" [routerLink]="['/user-rule-completed']">[Nome Regola]</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
         </ion-item>
       </ion-list>

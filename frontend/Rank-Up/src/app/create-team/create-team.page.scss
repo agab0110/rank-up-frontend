@@ -1,16 +1,14 @@
-u{
-  margin-top: 0%;
+.title {
+  margin-top: 8vh;
 }
 
-.clipIcon{
-  position: absolute;
-    --background: transparent;
-    --border-style: none;
-    --box-shadow: none;
-    margin-top: 14vh;
-    margin-left: 29vh;
-    color: var(--ion-color-black);
-    font-size: 12px;
+.insertImage{
+  --background: transparent;
+
+  color:black;
+  text-decoration: underline;
+
+  margin-top: -2vh;
 }
 
 .teamCode{
@@ -33,13 +31,38 @@ u{
 .membersquare {
   --background: var(--ion-color-grey);
   position: absolute;
+  border-radius: 28px;
+
   margin-top: 50vh;
   margin-right: 20vh;
 
   height: 16vh;
   width: 16vh;
-  --border-radius: 28px;
 }
+
+.rulesquare{
+  --background: var(--ion-color-grey);
+  position: absolute;
+  border-radius: 28px;
+
+  margin-top: 50vh;
+  margin-left: 20vh;
+
+  height: 16vh;
+  width: 16vh;
+}
+
+.icon {
+  align-items: center;
+  vertical-align: middle;
+  padding-bottom: 5vh;
+  padding-left: 2.3vh;
+  padding-top: 3.5vh;
+
+  height: 8vh;
+  width: 8vh;
+}
+
 
 .memberlabel {
   position: absolute;
@@ -48,18 +71,6 @@ u{
   width: 130px;
   margin-top: 67vh;
   margin-right: 20vh;
-}
-
-.rulesquare {
-  --background: var(--ion-color-grey);
-  position: absolute;
-  margin-top: 50vh;
-  margin-left: 20vh;
-
-  height: 16vh;
-  width: 16vh;
-
-  --border-radius: 28px;
 }
 
 .rulelabel {
@@ -74,7 +85,9 @@ u{
 .privacyTeam{
   color: var(--ion-color-black);
   --background: var(--ion-color-grey);
+
   font-size: 22px;
+  font-weight: bold;
   --border-radius: 28px;
 
   height: 8vh;
@@ -86,7 +99,9 @@ u{
 .createTeam{
 color: var(--ion-color-black);
 --background: var(--ion-color-admin);
+
 font-size: 22px;
+font-weight: bold;
 --border-radius: 28px;
 
 height: 8vh;
@@ -103,3 +118,10 @@ ion-alert.custom-alert {
   padding: 8px;
 }
 
+.icon-attach{
+  margin-top: 2vh;
+}
+
+.modal {
+  text-align: center;
+}

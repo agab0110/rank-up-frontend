@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -10,7 +10,7 @@ export class NotificationsPage implements OnInit {
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
@@ -18,5 +18,8 @@ export class NotificationsPage implements OnInit {
   segmentChanged(ev: any){
     console.log('Type changed ', ev)
   }
-
+  
+  backButton() {
+    this.location.back();
+  }
 }

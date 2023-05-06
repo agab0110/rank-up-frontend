@@ -1,52 +1,121 @@
-.search{
-    margin-top: -2vh;
+.title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8vh;
+}
+
+.team-code {
+    text-align: center;
+    font-size: medium;
+    margin-top: 0vh;
+}
+
+.item-div {
     align-items: center;
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 7vh;;
+}
+
+.points-label {
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 33vh;
+}
+
+.search{
+    margin-top: 1vh;
+    align-items: center;
+    width: 85%;
 }
 
 .codice{
     margin-top: -1vh;
 }
 
-.nome{
-    margin-top: 1vh;
-    margin-left: 10vh;
+.imgUser {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 12px;
+    margin-right: 2vh;
 }
 
-.icon{
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    margin-left: 2vh;
-}
-
-.choseUser {
-    margin-top: 2vh;
-    --background: var(--ion-color-user);
-    border-radius: 28px;
-
-    width: 75%;
-
-    ion-segment-button {
-        --border-radius: 28px;
-    }
-}
-
-ion-list{
-  margin-top: 3vh;
-}
-
-.item {
-  width: 40vh;
-  margin-top: 1vh;
-  --background: var(--ion-color-grey);
-  --border-radius: 25px;
+.listBox {
+    width: 90%;
+    height: 53vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: transparent;
 }
 
 .list {
-  background-color: transparent;
+    background-color: transparent;
+    margin-top: 2vh;
 }
 
-.nome1{
+.item {
     margin-top: 1vh;
-    margin-left: 5vh;
+    --background: var(--ion-color-grey);
+    --border-radius: 25px;
+}
+
+.nomeUtente {
+    font-size: 20px;
+    font-family: 'Outfit';
+    --color: var(--ion-color-black);
+}
+
+ion-item-options {
+    border-radius: 25px;
+    overflow: hidden;
+    background: transparent;
+
+    ion-item-option {
+        background: transparent;
+    }
+}
+
+ion-searchbar {
+    --box-shadow: none;
+    --background: var(--ion-color-grey);
+    --border-radius: 25px;
+
+    margin-top: 1vh;
+    width: 85%;
+    padding: 0;
+
+    background: transparent !important;
+}
+
+.change {
+    margin-top: 3vh;
+}
+
+ion-segment {
+    --background: var(--ion-color-user);
+    border-radius: 3vh;
+    padding-top: 0.4vh;
+    padding-bottom: 0.3vh;
+    padding-left: 0.4vh;
+    padding-right: 0.4vh;
+    margin-top: 2vh;
+    width: 38vh;
+    height: 5vh;
+}
+
+ion-segment-button {
+    --border-radius: 3vh;
+    height: 3.75vh;
+}
+
+.segmentText {
+    font-size: 1.9vh;
+}
+
+.title{
+    margin-top: 7vh;
+}
+.puntiUtente{
+    margin-top: 0.8vh;
 }

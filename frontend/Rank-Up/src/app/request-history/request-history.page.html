@@ -1,44 +1,45 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
-    
-    <ion-button class="leftIcon" fill="clear">
-      <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
+      <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
     <h1 class="title">Storico Richieste</h1>
 
-    <ion-button (click)="presentAlert()" class="optionIcon" fill="clear">
-      <ion-icon slot="icon-only" name="options-outline"></ion-icon>
+    <ion-button (click)="presentAlert()" class="rightIcon" fill="clear">
+      <ion-icon slot="icon-only" name="options-outline" size="large"></ion-icon>
     </ion-button>
 
-    <div align="center" class="searchbar">
+    <div slot="start" class="searchbar">
       <app-search-bar></app-search-bar>
     </div>
 
-    <ion-list class="notifications" lines="none">
+    <div class="listBox">
+      <ion-list class="notifications" lines="none">
 
-      <ion-item class="itemadmin">
-        <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
-        <ion-label class="nomeutente">[nome utente]</ion-label>
-        <ion-label class="nomeattivita">[nome attività]</ion-label>
-        <ion-label class="data">[data]</ion-label>
-      </ion-item>
+        <ion-item class="itemadmin" *ngFor="let item of [].constructor(3); let i = index" [routerLink]="['/task-rejected']">
+          <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
+          <ion-label class="label">[Nome Utente]  [Nome Task]  [Data]</ion-label>
+        </ion-item>
 
-      <ion-item class="itemadmin">
-        <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
-        <ion-label class="nomeutente">[nome utente]</ion-label>
-        <ion-label class="nomeattivita">[nome attività]</ion-label>
-        <ion-label class="data">[data]</ion-label>
-      </ion-item>
+        <ion-item class="itemuser" [routerLink]="['/admin-rule-completed']">
+          <ion-icon name="checkmark-circle-outline" size="small" class="icon"></ion-icon>
+          <ion-label class="label">[Nome Utente]  [Nome Regola]  [Data]</ion-label>
+        </ion-item>
 
-      <ion-item class="itemuser">
-        <ion-icon name="checkmark-circle-outline" size="small" class="icon"></ion-icon>
-        <ion-label class="nomeutente">[nome utente]</ion-label>
-        <ion-label class="nomeattivita">[nome attività]</ion-label>
-        <ion-label class="data">[data]</ion-label>
-      </ion-item>
-      
-    </ion-list>
+        <ion-item class="itemuser" *ngFor="let item of [].constructor(12); let i = index" [routerLink]="['/completed-task']">
+          <ion-icon name="checkmark-circle-outline" size="small" class="icon"></ion-icon>
+          <ion-label class="label">[Nome Utente]  [Nome Task]  [Data]</ion-label>
+        </ion-item>
+
+        <ion-item class="itemadmin" [routerLink]="['/rule-rejected']">
+          <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
+          <ion-label class="label">[Nome Utente]  [Nome Regola]  [Data]</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
 
   </div>
 </ion-content>

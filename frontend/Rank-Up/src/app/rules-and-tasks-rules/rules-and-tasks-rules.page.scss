@@ -51,12 +51,15 @@
     padding-left: 5vw;
     display: flex;
     align-items: center;
+    font-size: 20px;
 }
 
 #div-div-rules-tasks-button {
     --background: var(--ion-color-user);
     font-size: 2vh;
     --border-radius: 28px;
+
+    color: var(--ion-color-black);
 
     height: 8vh;
     width: 40%;
@@ -66,6 +69,7 @@
     top: 0;
     right: 0;
     float: left;
+    font-size: 20px;
 }
 
 .switch {

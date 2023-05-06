@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-profile',
@@ -9,12 +10,16 @@ export class AdminProfilePage implements OnInit {
 
   stato = false
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
   }
 
-  showPermi(stato: boolean) {
-    this.stato = stato;
+  backButton() {
+    this.location.back();
+  }
+
+  segmentChanged(event: any) {
+    this.stato = !this.stato;
   }
 }

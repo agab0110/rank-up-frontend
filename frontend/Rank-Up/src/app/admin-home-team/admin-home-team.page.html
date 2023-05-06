@@ -1,43 +1,43 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
     
-    <ion-button class="leftIcon" fill="clear" [routerLink] = "['/user/home']">
-      <ion-icon name="arrow-back-outline" class="iconaBack"></ion-icon>
+    <ion-button class="leftIcon" (click)="backButton()" fill="clear">
+      <ion-icon name="arrow-back-outline" size="large" class="iconaBack"></ion-icon>
     </ion-button>
 
     <div>
       <h1 class="title">[Nome team]</h1>
-      <h4 class="subtitle">Codice: [codice team]</h4>
+      <h2 class="team-code">Codice: [Codice Team]</h2>
     </div>
-    
-    <ion-button class="settingsIcon" fill="clear">
-      <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+
+    <ion-button class="rightIcon" fill="clear" [routerLink] = "['/admin-team-settings']">
+      <ion-icon slot="icon-only" name="settings-outline" size="large"></ion-icon>
     </ion-button>
-    
+
     <div>
-      <ion-button fill="clear" class="buttonrewards">
+      <ion-button fill="clear" class="buttonrewards" [routerLink] = "['/admin/admin-prizes-page']">
         <app-square-list [text]="'Premi'" [iconName]="'trophy-outline'"></app-square-list>
       </ion-button>
 
-      <ion-button fill="clear" class="buttonparticipants">
+      <ion-button fill="clear" class="buttonparticipants" [routerLink] = "['/admin/admin-list']">
         <app-square-list [text]="'Partecipanti'" [iconName]="'people-outline'"></app-square-list>
       </ion-button>
-      
-      <ion-button fill="clear" class="buttonrulesandtasks">
+
+      <ion-button fill="clear" class="buttonrulesandtasks" [routerLink] = "['/admin/team-rules-tasks']">
         <app-square-list [text]="'Regole e task'" [iconName]="'calendar-outline'"></app-square-list>
       </ion-button>
-      
-      <ion-button fill="clear" class="buttonhistory">
+
+      <ion-button fill="clear" class="buttonhistory" [routerLink] = "['/admin/request-history']">
         <app-square-list [text]="'Storico'" [iconName]="'file-tray-stacked-outline'"></app-square-list>
       </ion-button>
-      
-      <ion-button fill="clear" class="rectangle">
+
+      <ion-button fill="clear" class="rectangle" [routerLink] = "['/admin/pending-tasks']">
         <ion-item class="item">
           <ion-icon slot="start" name="checkbox-outline" class="iconActivity"></ion-icon>
           <ion-label class="label">Attività in sospeso</ion-label>
         </ion-item>
       </ion-button>
-      
+
     </div>
 
   </div>

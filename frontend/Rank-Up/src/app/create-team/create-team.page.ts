@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-team',
@@ -14,24 +15,35 @@ export class CreateTeamPage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(
-    private alertController: AlertController,
-    ) { }
+  constructor(private alertController: AlertController, private location: Location) { }
+
+  privacyTeam: boolean = true;
 
   ngOnInit() {
   }
 
+  backButton() {
+    this.location.back();
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Imposta privacy team',
+      header: 'Imposta Privacy Team:',
       buttons: [
         {
           text: 'Pubblico',
-          cssClass: 'alert-button-blue',
+          cssClass: this.privacyTeam ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.privacyTeam = true;
+          }
         },
         {
           text: 'Privato',
-          cssClass: 'alert-button-red',
+          cssClass: this.privacyTeam ? 'alert-button-blue' : 'alert-button-red',
+          handler: () => {
+            this.privacyTeam = false;
+          }
+
         },
       ],
     });

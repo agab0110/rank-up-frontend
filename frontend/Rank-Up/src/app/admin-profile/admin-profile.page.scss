@@ -8,87 +8,102 @@
 .nameUser {
     font-size: 20px;
     color: var(--ion-color-black);
+    font-weight: bold;
 }
 
 .scoreUser {
     margin-top: 4vh;
     font-size: 25px;
-}
-
-.switch {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    border-radius: 25px;
-    height: 5vh;
-    width: 90%;
-    background-color: var(--ion-color-admin);
-}
-
-.selected {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 25px;
-    height: 4vh;
-    width: 18vh;
-    background-color: var(--ion-color-white);
-}
-
-.notSelected {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    height: 4vh;
-    width: 18vh;
+    font-weight: bold;
 }
 
 .listBox {
-    width: 90%;
-    height: 53vh;
+    margin-top: 2vh;
     overflow: hidden;
     overflow-y: scroll;
-    background-color: transparent;
+    height: 50%;
 }
 
 .list {
     background-color: transparent;
 }
 
-.item {
-    margin-top: 1vh;
-    --background: var(--ion-color-grey);
-    --border-radius: 25px;
-}
-
-.nomeAttivita {
-    font-size: 20px;
-    font-family: 'Outfit';
-    --color: var(--ion-color-black);
-}
-
-.btnOn {
-    --background: var(--ion-color-light-admin);
-    --border-radius: 25px;
-    width: 45%;
-    color: var(--ion-color-black);
-}
-
-.btnOff {
-    --background: var(--ion-color-light-admin);
-    --border-radius: 25px;
-    width: 45%;
-    color: var(--ion-color-black);
-}
-
 h1 {
     margin: 0;
+}
+
+ion-segment {
+    --background: var(--ion-color-admin);
+    border-radius: 3vh;
+    width: 38vh;
+    height: 5vh;
+    
+}
+
+ion-segment-button {
+    --border-radius: 3vh; 
+    min-height: 2px !important;  
+    margin: 0.5vh;
+}
+
+.switch {
+    margin-top: 2vh;
+}
+
+.segmentText {
+    font-size: 1.9vh;
+}
+
+.item {
+    margin-top: 2vh;
+}
+
+.div-label-fakebutton {
+    background-color: var(--ion-color-grey);
+    font-size: 2vh;
+    border-radius: 28px;
+
+    height: 8vh;
+    width: 80vw;
+}
+
+.label {
+    height: 8vh;
+    color: var(--ion-color-black);
+    margin: 0;
+    width: 60%;
+    float: left;
+    padding-left: 5vw;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+
+
+.fakebutton {
+    color: black;
+    --background: var(--ion-color-light-admin);
+    --border-radius: 28px;
+
+    margin: 0;
+    right: 0;
+    top: 0;
+
+    &[disabled] {
+        --background: var(--ion-color-light-admin);
+        opacity: 1;
+    }
+
+    color: var(--ion-color-black);
+
+    height: 8vh;
+    width: 40%;
+
+    margin: 0;
+    margin-right: -10;
+    top: 0;
+    right: 0;
+    float: left;
+    font-size: 20px;
 }

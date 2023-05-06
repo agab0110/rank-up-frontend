@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -10,16 +11,23 @@ export class TaskConfirmationPage implements OnInit {
 
   stato = false
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private location: Location) { }
 
   ngOnInit() {
   }
 
+  backButton() {
+    this.location.back();
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Richesta archiviata',
+      header: 'Richesta Archiviata',
       buttons: [
         {
+          handler: () => { 
+            this.backButton()
+          },  
           text: 'Chiudi',
           cssClass: 'alert-button-red',
         },
