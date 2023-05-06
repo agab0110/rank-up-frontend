@@ -26,11 +26,11 @@
     <div class="listBox" *ngIf="stato">
       <ion-list class="list" lines="none">
           <ion-item class="item" *ngFor="let item of [].constructor(4); let i = index">
-
+            <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             <ion-label class="nomeUtente">Utente {{i+1}}</ion-label>
-            <h3 class="puntiUtente">{{i+2*i}}</h3>
-
+            <ion-label class="points-label">{{i+2*i}}</ion-label>
+            </div>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option>
@@ -43,10 +43,10 @@
       <ion-list class="list" lines="none">
 
           <ion-item class="item" *ngFor="let item of [].constructor(10); let i = index">
-
+            <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             <ion-label class="nomeUtente">Utente {{i+1}}</ion-label>
-
+            </div>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option>

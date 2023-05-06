@@ -10,6 +10,20 @@
     margin-top: 0vh;
 }
 
+.item-div {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 7vh;;
+}
+
+.points-label {
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 33vh;
+}
+
 .search{
     margin-top: 1vh;
     align-items: center;
