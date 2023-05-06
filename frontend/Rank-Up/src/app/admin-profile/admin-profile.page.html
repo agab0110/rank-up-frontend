@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
-    <ion-button class="leftIcon" [routerLink]="['/admin/admin-list-desc']">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
@@ -22,18 +22,25 @@
 
 
     <div class="listBox" *ngIf="!stato">
-        <div class="item" *ngFor="let item of [].constructor(15); let i = index">
+        <div class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/admin-rule-completed']">
           <div class="div-label-fakebutton">
             <div class="label" >Regola {{i+1}}</div>
+            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+          </div>
+        </div>
+
+        <div class="item" *ngFor="let item of [].constructor(3); let i = index" [routerLink]="['/completed-task']">
+          <div class="div-label-fakebutton">
+            <div class="label" >Task {{i+1}}</div>
             <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
           </div>
         </div>
     </div>
 
     <div class="listBox" *ngIf="stato">
-      <div class="item" *ngFor="let item of [].constructor(5); let i = index">
+      <div class="item" *ngFor="let item of [].constructor(7); let i = index">
         <div class="div-label-fakebutton">
-          <div class="label" >Regola Riscossa {{i+1}}</div>
+          <div class="label" >Premio Riscosso {{i+1}}</div>
           <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
         </div>
       </div>

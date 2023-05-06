@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-team',
@@ -14,11 +15,13 @@ export class CreateTeamPage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(
-    private alertController: AlertController,
-    ) { }
+  constructor(private alertController: AlertController, private location: Location) { }
 
   ngOnInit() {
+  }
+
+  backButton() {
+    this.location.back();
   }
 
   async presentAlert() {

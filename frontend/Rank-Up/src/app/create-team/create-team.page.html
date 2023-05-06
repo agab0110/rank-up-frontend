@@ -1,14 +1,14 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
 
-    <ion-button class="leftIcon" [routerLink]="['/home']">
-      <ion-icon name="arrow-back" size="large" class="iconaNotifiche"></ion-icon>
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
+      <ion-icon name="arrow-back-outline" size="large" class="iconaNotifiche"></ion-icon>
     </ion-button>
 
 
-    <h1 align="center" class="title">Crea Team</h1>
-    <ion-button id="modalAttached" class="insertImage">Inserisci immagine del team
-      <ion-icon slot="end" name="clipboard-outline"></ion-icon>
+    <h1 class="title">Crea Team</h1>
+    <ion-button id="modalAttached" class="insertImage">Inserisci Immagine del Team
+      <ion-icon slot="end" name="images-outline"></ion-icon>
     </ion-button>
 
     <h5 class="teamCode">Codice del Team</h5>
@@ -45,14 +45,15 @@
       </ion-header>
       <ion-content>
         <div class="modal">
-          <ion-icon name="document-attach-outline" class="icon-attach"></ion-icon>
+          <ion-icon name="images-outline" class="icon-attach" size="large"></ion-icon>
           <ion-button fill="clear">
             <ion-input type="file" (change)="loadFileFromDevice($event)" id="file-input" accept="all">
             </ion-input>
           </ion-button>
 
           <div>
-            <app-bt-admin-small text="Allega" (click)="attach()" style="margin-left: 10vh;"></app-bt-admin-small>
+            <app-bt-admin-small text="Annulla" (click)="closeModal()" style="margin-right: 0.5vh;"></app-bt-admin-small>
+            <app-bt-user-small text="Aggiungi" (click)="attach()" style="margin-left: 0.5vh;"></app-bt-user-small>
           </div>
         </div>
       </ion-content>

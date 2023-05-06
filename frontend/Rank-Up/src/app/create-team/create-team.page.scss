@@ -1,5 +1,5 @@
-u{
-  margin-top: 0%;
+.title {
+  margin-top: 8vh;
 }
 
 .insertImage{
@@ -119,10 +119,9 @@ ion-alert.custom-alert {
 }
 
 .icon-attach{
-  align-items: center;
-  vertical-align: middle;
-  margin-left: 15vh;
+  margin-top: 2vh;
+}
 
-  height: 8vh;
-  width: 8vh;
+.modal {
+  text-align: center;
 }

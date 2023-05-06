@@ -8,23 +8,35 @@ import { Location } from '@angular/common';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
+
+  filter: number = 1;
+
   constructor(private alertController: AlertController, private location: Location) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Ordina per:',
+      header: 'Ricerca per:',
       buttons: [
         {
           text: 'Nome Utente',
-          cssClass: 'alert-button-blue',
+          cssClass: this.filter === 1 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 1;
+          }
         },
         {
           text: 'Data di consegna',
-          cssClass: 'alert-button-red',
+          cssClass: this.filter === 2 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 2;
+          }
         },
         {
           text: 'Nome attività',
-          cssClass: 'alert-button-blue',
+          cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.filter = 3;
+          }
         },
       ],
     });
