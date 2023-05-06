@@ -17,6 +17,8 @@ export class CreateTeamPage implements OnInit {
 
   constructor(private alertController: AlertController, private location: Location) { }
 
+  privacyTeam: boolean = true;
+
   ngOnInit() {
   }
 
@@ -26,15 +28,22 @@ export class CreateTeamPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Imposta privacy team',
+      header: 'Imposta Privacy Team:',
       buttons: [
         {
           text: 'Pubblico',
-          cssClass: 'alert-button-blue',
+          cssClass: this.privacyTeam ? 'alert-button-red' : 'alert-button-blue',
+          handler: () => {
+            this.privacyTeam = true;
+          }
         },
         {
           text: 'Privato',
-          cssClass: 'alert-button-red',
+          cssClass: this.privacyTeam ? 'alert-button-blue' : 'alert-button-red',
+          handler: () => {
+            this.privacyTeam = false;
+          }
+
         },
       ],
     });

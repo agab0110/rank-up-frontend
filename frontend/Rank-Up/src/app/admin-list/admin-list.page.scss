@@ -1,6 +1,19 @@
+.title {
+    margin-top: 8vh;
+    text-align: center;
+}
+
+.search {
+    margin-top: 0vh;
+}
+
+.choice {
+    margin-top: 0vh;
+}
+
 .imgUser {
-    width: 6vh;
-    height: 6vh;
+    width: 5vh;
+    height: 5vh;
     border-radius: 12px;
     margin-right: 2vh;
 }
@@ -22,6 +35,7 @@
     margin-top: 1vh;
     --background: var(--ion-color-grey);
     --border-radius: 25px;
+    height: 7vh;
 }
 
 .nomeUtente {

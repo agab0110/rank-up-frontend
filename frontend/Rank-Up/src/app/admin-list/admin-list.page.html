@@ -1,18 +1,18 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundAdmin">
-    <ion-button class="leftIcon">
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Partecipanti [team]</h1>
+    <h1 class="title">Partecipanti<br/>[Nome Team]</h1>
 
-    <ion-button class="rightIcon">
+    <ion-button class="rightIcon" [routerLink]="['/admin/add-user']">
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
     </ion-button>
 
-    <ion-searchbar placeholder="Cerca"></ion-searchbar>
+    <ion-searchbar class="search" placeholder="Cerca"></ion-searchbar>
 
-    <div>
+    <div class="choice">
       <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
         <ion-segment-button value=1>
           <ion-label class="segmentText">Decrescente</ion-label>
@@ -25,8 +25,7 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index"
-          [routerLink]="['/admin/admin-profile']">
+        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
           <ion-item class="item">
 
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -45,8 +44,7 @@
 
     <div class="listBox" *ngIf="!stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let item of [].constructor(14); let i = index"
-          [routerLink]="['/admin/admin-profile']">
+        <ion-item-sliding *ngFor="let item of [].constructor(14); let i = index">
           <ion-item class="item">
 
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />

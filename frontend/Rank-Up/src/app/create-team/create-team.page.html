@@ -7,29 +7,29 @@
 
 
     <h1 class="title">Crea Team</h1>
-    <ion-button id="modalAttached" class="insertImage">Inserisci Immagine del Team
+    <ion-button id="modalAttached" class="insertImage">Inserire Immagine del Team
       <ion-icon slot="end" name="images-outline"></ion-icon>
     </ion-button>
 
-    <h5 class="teamCode">Codice del Team</h5>
+    <h5 class="teamCode">Codice Team</h5>
 
     <ion-item>
       <ion-input class="code" labelPlacement="stacked" [readonly]="true">
       </ion-input>
     </ion-item>
 
-    <h5 class="insertName">Inserisci nome del team</h5>
-    <app-input class="teamName" [placeholder]="'Nome team'"></app-input>
+    <h5 class="insertName">Inserire Nome del Team</h5>
+    <app-input class="teamName" [placeholder]="'Nome Team'"></app-input>
 
     <ion-item class="membersquare">
       <ion-icon class="icon" name="person-add-outline"  [routerLink]="['/admin/add-user']"></ion-icon>
     </ion-item>
-      <ion-label class="memberlabel">Aggiungi membro</ion-label>
+      <ion-label class="memberlabel">Aggiungi Membro</ion-label>
 
       <ion-item class="rulesquare">
         <ion-icon class="icon" name="calendar-outline" [routerLink]="['/create-rule']"></ion-icon>
       </ion-item>
-        <ion-label class="rulelabel">Aggiungi regola</ion-label>
+        <ion-label class="rulelabel">Aggiungi Regola</ion-label>
 
     <ion-button class="privacyTeam" (click)="presentAlert()">Privacy Team</ion-button>
     <ion-button class="createTeam" [routerLink]="['/admin/admin-home-team']">Crea Team</ion-button>
@@ -40,7 +40,7 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Aggiungi allegato</ion-title>
+          <ion-title>Immagine:</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
