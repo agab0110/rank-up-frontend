@@ -10,6 +10,7 @@ import { User } from '../classes/user';
 })
 export class LoginPage {
   user: User;
+  errorCheck: boolean = false;
 
   constructor(
     private router: Router,
@@ -19,9 +20,18 @@ export class LoginPage {
     }
 
   login() {
+    this.errorCheck = false;
     this.service.login(this.user).subscribe(response => {
       this.user = response;
       this.router.navigate(['user/home']);
+    }, (error: Response) => {  
+      this.errorCheck = true;
+      if(error.status == 400)  
+        console.log("400 error");  
+      else {  
+        console.log('An unexpected error occured');   
+      }
+      console.log(error);
     });
   }
 

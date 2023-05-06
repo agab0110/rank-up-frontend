@@ -8,6 +8,9 @@
 
       <div class="form">
         <h3 class="titolo">Login</h3>
+        <ul *ngIf="errorCheck">
+          Email o password errati
+       </ul>
         <ion-input [(ngModel)]="user.username" class="formInput" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
         <ion-input [(ngModel)]="user.password" class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
