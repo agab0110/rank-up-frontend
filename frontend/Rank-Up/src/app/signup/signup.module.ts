@@ -8,6 +8,7 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { ComponentsModule } from '../modules/components/components.module';
+import { UserService } from '../services/user/user.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from '../modules/components/components.module';
     SignupPageRoutingModule,
     ComponentsModule
   ],
+  providers: [UserService],
   declarations: [SignupPage]
 })
 export class SignupPageModule {}
