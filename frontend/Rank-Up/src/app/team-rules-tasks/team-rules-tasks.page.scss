@@ -56,20 +56,8 @@ ion-segment-button {
   margin-top: 11vh;
 }
 
-#div-rule-task {
-  margin-top: 2vh;
-}
-
 #div-rules-tasks {
-  margin-top: 2vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  height: 50%;
-}
-
-
-#div-prizes {
-  margin-top: 2vh;
+  margin-top: 0vh;
   overflow: hidden;
   overflow-y: scroll;
   height: 50%;
@@ -85,6 +73,9 @@ ion-segment-button {
 
   display: flex;
   flex-direction: row;
+
+  overflow: hidden;
+  overflow-y: scroll;
 
 }
 
@@ -103,7 +94,7 @@ ion-segment-button {
   top: 0;
 
   &[disabled] {
-      --background: var(--ion-color-light-admin);
+      --background: var(--ion-color-admin);
       opacity: 1;
   }
 }
@@ -111,17 +102,40 @@ ion-segment-button {
 .label {
   height: 45px;
   width: 300px;
-  font-size: large;
-}
-.listBox {
-  margin-top: 1vh;
-  width: 90%;
-  height: 48vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  background-color: transparent;
+  font-size: 1.3em;
+  margin-left: 3vh;
 }
 
-ion-list{
-  background-color: transparent;
+#div-div-rules-tasks-name {
+  height: 8vh;
+  font-size: 2vh;
+  color: var(--ion-color-black);
+  margin: 0;
+  width: 60%;
+  float: left;
+  padding-left: 5vw;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
 }
+
+#div-div-rules-tasks-button {
+  --background: var(--ion-color-admin);
+  font-size: 2vh;
+  --border-radius: 28px;
+
+  color: var(--ion-color-black);
+
+  height: 8vh;
+  width: 40%;
+
+  margin: 0;
+
+  margin-right: -6vh;
+  top: 0;
+  right: 0;
+  float: left;
+  font-size: 20px;
+}
+
+

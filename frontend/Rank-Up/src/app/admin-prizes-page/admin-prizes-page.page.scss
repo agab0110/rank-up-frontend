@@ -46,11 +46,6 @@ ion-tab-bar {
     background-color: transparent;
 }
 
-
-
-
-
-
 .list {
   background-color: transparent;
 }
@@ -105,16 +100,11 @@ ion-segment-button {
 }
 
 #div-rule-task {
-  margin-top: 2vh;
-}
-
-#div-rules-tasks {
-  margin-top: 2vh;
+  margin-top: 1vh;
   overflow: hidden;
   overflow-y: scroll;
   height: 50%;
 }
-
 
 #div-prizes {
   margin-top: 2vh;
@@ -134,6 +124,13 @@ ion-segment-button {
   display: flex;
   flex-direction: row;
 
+}
+
+.label {
+  height: 45px;
+  width: 300px;
+  font-size: 1.3em;
+  margin-left: 3vh;
 }
 
 #div-div-rules-tasks-name {
