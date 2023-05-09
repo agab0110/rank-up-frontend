@@ -154,6 +154,7 @@ input.alert-input {
 
 .md input.alert-input {
     border-radius: 28px;
+    flex-flow: column;
 }
 
 .ios input.alert-input {

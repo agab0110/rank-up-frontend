@@ -6,13 +6,14 @@
 }
 
 .nameUser {
-    font-size: 20px;
+    margin-top: 1vh;
+    font-size: 1em;
     color: var(--ion-color-black);
     font-weight: bold;
 }
 
 .scoreUser {
-    margin-top: 4vh;
+    margin-top: 3vh;
     font-size: 25px;
     font-weight: bold;
 }
@@ -37,12 +38,12 @@ ion-segment {
     border-radius: 3vh;
     width: 38vh;
     height: 5vh;
-    
+
 }
 
 ion-segment-button {
-    --border-radius: 3vh; 
-    min-height: 2px !important;  
+    --border-radius: 3vh;
+    min-height: 2px !important;
     margin: 0.5vh;
 }
 
