@@ -25,14 +25,12 @@
       </ion-segment>
     </div>
 
-    <div id="div-rules-tasks" scroll="true" *ngIf="!stato">
+    <div class="listbox" scroll="true" *ngIf="!stato">
       <ion-list class="list">
         <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
           <ion-item id="div-rule-task">
-          <div id="div-div-rules-tasks">
-            <div id="div-div-rules-tasks-name">[Nome Regola]</div>
-            <ion-button id="div-div-rules-tasks-button">+15</ion-button>
-          </div>
+            <ion-label class="label">[Nome Regola]</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">15 pt</ion-button>
 
         </ion-item>
           <ion-item-options side="end">
@@ -44,16 +42,15 @@
       </ion-list>
     </div>
 
-    <div class="div-rules-tasks" scroll="true" *ngIf="stato">
+    <div class="listbox" scroll="true" *ngIf="stato">
       <ion-list class="list">
-        <ion-item-sliding *ngFor="let item of [].constructor(7); let i = index">
+        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
           <ion-item id="div-rule-task">
-          <div id="div-div-rules-tasks">
-            <div id="div-div-rules-tasks-name">[Nome Task]</div>
-            <ion-button id="div-div-rules-tasks-button">+15</ion-button>
-          </div>
+            <ion-label class="label">[Nome Task]</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">15 pt</ion-button>
 
         </ion-item>
+    
           <ion-item-options side="end">
             <ion-item-option>
               <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
