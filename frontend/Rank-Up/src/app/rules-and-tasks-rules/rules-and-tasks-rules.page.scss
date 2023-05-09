@@ -1,3 +1,9 @@
+.title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 8vh;
+}
+
 #div-team-name {
     font-size: 1.2em;
 }
@@ -81,12 +87,12 @@ ion-segment {
     border-radius: 3vh;
     width: 38vh;
     height: 5vh;
-    
+
 }
 
 ion-segment-button {
-    --border-radius: 3vh; 
-    min-height: 2px !important;  
+    --border-radius: 3vh;
+    min-height: 2px !important;
     margin: 0.5vh;
 }
 

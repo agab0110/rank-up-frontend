@@ -16,7 +16,7 @@ export class UserProfilePage implements OnInit {
 
 
   constructor(private alertController: AlertController) { }
-  
+
   user_username: string = 'Username'
   user_name: string = '[Nome'
   user_surname: string = 'Cognome]'
@@ -51,7 +51,7 @@ export class UserProfilePage implements OnInit {
 
   async presentAlert1() {
     const alert = await this.alertController.create({
-      header: 'Imposta Privacy Team:',
+      header: 'Inserisci nuovo nome:',
       inputs: [
         {
           placeholder: 'Nome',
@@ -75,7 +75,7 @@ export class UserProfilePage implements OnInit {
 
   async presentAlert2() {
     const alert = await this.alertController.create({
-      header: 'Imposta Privacy Team:',
+      header: 'Inserisci nuovo username:',
       inputs: [
         {
           placeholder: 'Username',
@@ -117,7 +117,7 @@ export class UserProfilePage implements OnInit {
 
   async presentAlert4() {
     const alert = await this.alertController.create({
-      header: 'Imposta Privacy Team:',
+      header: 'Inserisci nuova email:',
       inputs: [
         {
           placeholder: 'Email',
@@ -141,7 +141,7 @@ export class UserProfilePage implements OnInit {
 
   async presentAlert5() {
     const alert = await this.alertController.create({
-      header: 'Imposta Privacy Team:',
+      header: 'Inserisci nuova password:',
       inputs: [
         {
           placeholder: 'Password',

@@ -9,7 +9,7 @@
     <div id="div-code">Codice: {{team_code}}</div>
 
     <div class="switch">
-      <ion-segment value="Regole" (ionChange)="switch($event)" id="bait"> 
+      <ion-segment value="Regole" (ionChange)="switch($event)" id="bait">
         <ion-segment-button value='Regole'>
           <ion-label class="segmentText">Regole</ion-label>
         </ion-segment-button>
@@ -17,13 +17,13 @@
           <ion-label class="segmentText">Tasks</ion-label>
         </ion-segment-button>
       </ion-segment>
-    </div> 
+    </div>
 
     <div id="div-rules-tasks" scroll="true">
       <div id="div-rule-task" *ngFor="let rule_task of rules_tasks">
         <div id="div-div-rules-tasks">
           <div id="div-div-rules-tasks-name" >{{rule_task.rule_task_name}}</div>
-          <ion-button id="div-div-rules-tasks-button">+{{rule_task.rule_task_points}}</ion-button>
+          <ion-button id="div-div-rules-tasks-button" [routerLink]="['/send-rule']">+{{rule_task.rule_task_points}}</ion-button>
         </div>
       </div>
     </div>

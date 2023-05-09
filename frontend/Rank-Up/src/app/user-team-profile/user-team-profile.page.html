@@ -5,16 +5,16 @@
       <ion-icon name="arrow-back-outline" size="large" color="dark"></ion-icon>
     </ion-button>
 
-    
+
     <img alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
-      
+
 
     <ion-label class="userName">[Nome Utente]</ion-label>
 
     <ion-label class="points">Punti: [Punti]</ion-label>
 
     <div class="switch">
-      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+      <ion-segment value="1" (ionChange)="segmentChanged($event)">
         <ion-segment-button value=1>
           <ion-label class="segmentText">Compiti completati</ion-label>
         </ion-segment-button>
@@ -27,12 +27,14 @@
     <div class="listBox" *ngIf="stato">
       <ion-list>
         <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/task-completed']">
-          <ion-label class="label">[Nome Task]</ion-label>
+          <ion-label class="label">[Task]</ion-label>
+          <ion-label class="data">[data]</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
         </ion-item>
 
         <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index">
-          <ion-label class="label" [routerLink]="['/user-rule-completed']">[Nome Regola]</ion-label>
+          <ion-label class="label" [routerLink]="['/user-rule-completed']">[Regola]</ion-label>
+          <ion-label class="data">[data]</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
         </ion-item>
       </ion-list>
@@ -46,7 +48,7 @@
         </ion-item>
       </ion-list>
     </div>
-    
+
   <!-- add navbar -->
   </div>
 </ion-content>
