@@ -6,7 +6,7 @@ import { User } from "../user/user";
 export class RuleCompleted {
     id!: number;
     attached!: string;
-    timeStamp!: Timestamp<any>;
+    timestamp!: Timestamp<any>;
     rule!: Rule;
     admin!: Admin;
     user!: User;
