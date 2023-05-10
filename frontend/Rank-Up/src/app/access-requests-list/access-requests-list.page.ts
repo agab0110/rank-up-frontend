@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
+import { AccessRequestService } from '../services/accessRequest/access-request.service';
+import { AccessRequest } from '../models/accessRequest/access-request';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -8,8 +10,15 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./access-requests-list.page.scss'],
 })
 export class AccessRequestsListPage implements OnInit {
+  accessRequest: AccessRequest;
 
-  constructor(private location: Location, private alertController: AlertController) { }
+  constructor(
+    private location: Location,
+    private alertController: AlertController,
+    private accessRequestService: AccessRequestService
+    ) {
+      this.accessRequest = new AccessRequest();
+    }
 
   ngOnInit() {
   }
@@ -29,6 +38,9 @@ export class AccessRequestsListPage implements OnInit {
         {
           text: 'Rifiuta',
           cssClass: 'alert-button-red',
+          handler: () => {
+            this.deleteRequest();
+          }
         },
       ],
     });
@@ -36,4 +48,7 @@ export class AccessRequestsListPage implements OnInit {
   await alert.present();
   }
 
+  deleteRequest(){
+    this.accessRequestService.deleteRequest(this.accessRequest); 
+  }
 }
