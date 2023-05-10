@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AccessRequest } from 'src/app/models/accessRequest/access-request';
+import { UserJoinsTeam } from 'src/app/models/userJoinsTeam/user-joins-team';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccessRequestService {
+export class UserJoinsTeamService {
   private accessRequestUrl: string;
   status!: string;
 
   constructor(private http: HttpClient) {
     this.accessRequestUrl = 'http://localhost:8080/accessRequestApi'
-  }
+   }
 
-  deleteRequest(accessRequest: AccessRequest) {
+   deleteRequest(userJoinTeam: UserJoinsTeam) {
     this.http.delete(
       this.accessRequestUrl + "/deleteRequest"
     ).subscribe(() => this.status = 'Delete successful');
