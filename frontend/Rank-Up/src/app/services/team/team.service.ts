@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Team } from 'src/app/models/team/team';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,13 @@ export class TeamService {
   }
 
   public changeTeamName(teamId: number, teamName: string) {
-    return this.http.patch(
+    return this.http.patch( //controllare se bisogna mettere <Team>
       this.teamUrl + "/changeName/" + teamId, teamName
     );
   }
 
   public deleteTeam(teamId: number) {
-    return this.http.delete(
+    return this.http.delete( //controllare se bisogna mettere <Team>
       this.teamUrl + "/deleteTeam/" + teamId
     );
   }
