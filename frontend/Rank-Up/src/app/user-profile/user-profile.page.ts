@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
+import { UserService } from '../services/user/user.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,15 +14,17 @@ export class UserProfilePage implements OnInit {
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
+  blobURL!: string;
 
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private userService: UserService) { }
 
-  user_username: string = 'Username'
-  user_name: string = '[Nome'
-  user_surname: string = 'Cognome]'
-  user_email: string = 'Email'
+  userId: number = 1;
+  user_username: string = 'Username';
+  user_name: string = '[Nome]';
+  user_surname: string = 'Cognome]';
+  user_email: string = 'Email';
+  user_foto: string = 'Foto';
 
   ngOnInit() {
 
@@ -41,11 +45,21 @@ export class UserProfilePage implements OnInit {
 
   closeModal() {
     this.blob = null;
-    this.blobURL = null;
+    //this.blobURL = null;
     this.modal.dismiss();
   }
 
   attach() {
+    this.userService.changePhoto(this.userId, "this.blobURL?.toString()").subscribe(
+      response => {},
+      (error: Response) => {
+        if (error.status == 400) {
+          console.log("Error 400");
+        } else {
+          console.log("Unespected error");
+        }
+        console.log(error);
+      });
     this.modal.dismiss();
   }
 

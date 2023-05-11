@@ -21,4 +21,8 @@ export class UserService {
       this.userUrl + "/login", user
     );
   }
+
+  public changePhoto(userId: number, photo: string) {
+    return this.http.patch(this.userUrl + "/changePhoto" + "/" + userId, photo);
+  }
 }

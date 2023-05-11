@@ -10,6 +10,7 @@ import { ComponentsModule } from './modules/components/components.module';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ComponentsModule,
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
