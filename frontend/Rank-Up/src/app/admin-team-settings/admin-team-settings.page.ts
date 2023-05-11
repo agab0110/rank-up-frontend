@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { TeamService } from '../services/team/team.service';
 
 @Component({
   selector: 'app-admin-team-settings',
@@ -15,7 +16,12 @@ export class AdminTeamSettingsPage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
 
-  constructor(private alertController: AlertController, private location: Location, private router: Router) { }
+  constructor(
+    private alertController: AlertController,
+    private location: Location,
+    private router: Router,
+    private teamService: TeamService;
+  ) { }
 
   choice_privacy_utente: Boolean = true;
   choice_privacy_team: Boolean = true;
@@ -34,6 +40,9 @@ export class AdminTeamSettingsPage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: () => {
+            //this.teamService.changeTeamName(this.teamId, this.teamName);
+          }
         },
         {
           text: 'Annulla',
@@ -100,7 +109,10 @@ export class AdminTeamSettingsPage implements OnInit {
         {
           text: 'Sì',
           cssClass: 'alert-button-blue',
-          handler: () => { this.router.navigate(['/user/home']); }
+          handler: () => {
+            //this.teamService.deleteTeam(this.teamId);
+            this.router.navigate(['/user/home']);
+          }
         },
         {
           text: 'No',
