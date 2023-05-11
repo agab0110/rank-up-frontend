@@ -20,7 +20,7 @@ export class AdminTeamSettingsPage implements OnInit {
     private alertController: AlertController,
     private location: Location,
     private router: Router,
-    private teamService: TeamService;
+    private teamService: TeamService
   ) { }
 
   choice_privacy_utente: Boolean = true;
