@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AccessRequestService } from './access-request.service';
+import { TaskService } from './task.service';
 
-describe('AccessRequestService', () => {
-  let service: AccessRequestService;
+describe('TaskService', () => {
+  let service: TaskService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AccessRequestService);
+    service = TestBed.inject(TaskService);
   });
 
   it('should be created', () => {

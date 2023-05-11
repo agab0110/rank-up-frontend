@@ -1,5 +1,4 @@
-export class AccessRequestKey {
+export class UserJoinsTeamKey {
     idUser!: number;
     idTeam!: number;
-
 }
