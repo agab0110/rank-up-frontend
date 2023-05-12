@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
-import { error } from 'console';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -50,18 +49,6 @@ export class AccessRequestsListPage implements OnInit {
   }
 
   deleteRequest(){
-    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam).subscribe(
-      response => {
-        console.log("Deleted "+ response + " succsesfully");
-      },
-      (error: Response) => {
-        if (error.status == 400) {
-          console.log("Error 400");
-        } else {
-          console.log("Unexpected error");
-        }
-        console.log(error);
-      }
-    ) 
+    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam); 
   }
 }
