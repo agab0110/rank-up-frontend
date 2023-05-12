@@ -29,7 +29,7 @@ export class AdminTeamSettingsPage implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
+      this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
   }
 
@@ -52,7 +52,7 @@ export class AdminTeamSettingsPage implements OnInit {
           cssClass: 'alert-button-blue',
           handler: (alertData) => {
             console.log(alertData[0]);
-            this.teamService.changeTeamName(3, alertData[0]).subscribe(response => {
+            this.teamService.changeTeamName(this.team.codice, alertData[0]).subscribe(response => {
               this.team = response;
               localStorage.setItem('team', JSON.stringify(this.team));
               console.log(this.team);
@@ -132,7 +132,7 @@ export class AdminTeamSettingsPage implements OnInit {
           text: 'Sì',
           cssClass: 'alert-button-blue',
           handler: () => {
-            this.teamService.deleteTeam(3).subscribe(response => {
+            this.teamService.deleteTeam(this.team.codice).subscribe(response => {
               console.log(response);
             });
             this.router.navigate(['/user/home']);
