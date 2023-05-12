@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
+import { AES } from 'crypto-js';
+//import { bcrypt } from 'bcryptjs';
 
 @Component({
   selector: 'app-signup',
@@ -20,9 +22,15 @@ export class SignupPage {
   }
 
   signup() {
+    const secretKey = 'Key123';
+    const encryptedPassword = AES.encrypt(this.user.password, secretKey).toString();
+    
+    this.user.password = encryptedPassword;
+
     this.errorCheck = false;
     this.service.save(this.user).subscribe(result => 
       {
+        console.log(this.user.password);
         this.router.navigate(['/login']);
       }, (error: Response) => {  
         this.errorCheck = true;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { User } from '../models/user/user';
+import { AES } from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -20,14 +21,22 @@ export class LoginPage {
     }
 
   login() {
+    const secretKey = 'Key123';
+    const encryptedPassword = AES.encrypt(this.user.password, secretKey).toString();
+
+    this.user.password = encryptedPassword;
+
     this.errorCheck = false;
     this.service.login(this.user).subscribe(response => {
       this.user = response;
+      console.log(this.user.password)
       this.router.navigate(['user/home']);
     }, (error: Response) => {  
       this.errorCheck = true;
-      if(error.status == 400)  
-        console.log("400 error");  
+      if(error.status == 400) {
+        console.log("400 error");
+        console.log(this.user.password);
+      }
       else {  
         console.log('An unexpected error occured');   
       }
