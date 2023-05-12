@@ -15,14 +15,15 @@ export class TeamService {
   }
 
   public changeTeamName(teamId: number, teamName: string) {
-    return this.http.patch( //controllare se bisogna mettere <Team>
+    return this.http.patch<Team>(
       this.teamUrl + "/changeName/" + teamId, teamName
     );
   }
 
   public deleteTeam(teamId: number) {
-    return this.http.delete( //controllare se bisogna mettere <Team>
-      this.teamUrl + "/deleteTeam/" + teamId
+    console.log(this.teamUrl + '/deleteTeam/' + teamId);
+    return this.http.delete(
+      this.teamUrl + '/deleteTeam/' + teamId
     );
   }
 }

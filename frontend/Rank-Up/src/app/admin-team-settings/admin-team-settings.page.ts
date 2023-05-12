@@ -4,6 +4,7 @@ import { IonModal } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TeamService } from '../services/team/team.service';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-admin-team-settings',
@@ -15,13 +16,22 @@ export class AdminTeamSettingsPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
+  team: Team;
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private router: Router,
     private teamService: TeamService
-  ) { }
+  ) {
+    this.team = new Team();
+   }
+
+  ngOnInit() {
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+  }
 
   choice_privacy_utente: Boolean = true;
   choice_privacy_team: Boolean = true;
@@ -40,8 +50,20 @@ export class AdminTeamSettingsPage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
-          handler: () => {
-            //this.teamService.changeTeamName(this.teamId, this.teamName);
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.teamService.changeTeamName(3, alertData[0]).subscribe(response => {
+              this.team = response;
+              localStorage.setItem('team', JSON.stringify(this.team));
+              console.log(this.team);
+            }, (error: Response) => {  
+              if(error.status == 400)  
+                console.log("400 error");  
+              else {  
+                console.log('An unexpected error occured');   
+              }
+              console.log(error);
+            });
           }
         },
         {
@@ -110,7 +132,9 @@ export class AdminTeamSettingsPage implements OnInit {
           text: 'Sì',
           cssClass: 'alert-button-blue',
           handler: () => {
-            //this.teamService.deleteTeam(this.teamId);
+            this.teamService.deleteTeam(3).subscribe(response => {
+              console.log(response);
+            });
             this.router.navigate(['/user/home']);
           }
         },
@@ -123,8 +147,6 @@ export class AdminTeamSettingsPage implements OnInit {
 
   await alert.present();
   }
-
-  ngOnInit() {}
 
   loadFileFromDevice(event: any) {
     const file = event.target.files[0];

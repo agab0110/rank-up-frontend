@@ -8,14 +8,17 @@ import { User } from '../models/user/user';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
+  user: User;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.user = new User();
+   }
 
   ngOnInit() {
     localStorage.setItem('teamId', '');
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
-    const user: User = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
   
   team(){
