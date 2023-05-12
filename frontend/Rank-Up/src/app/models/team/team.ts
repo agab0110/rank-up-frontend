@@ -4,7 +4,7 @@ import { Rule } from "../rule/rule";
 import { UserJoinsTeam } from "../userJoinsTeam/user-joins-team";
 
 export class Team {
-    codice!: Long;
+    codice!: number;
     name!: string;
     photo!: string;
     privacy!: boolean;

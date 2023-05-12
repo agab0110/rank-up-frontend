@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
-import { AccessRequestService } from '../services/accessRequest/access-request.service';
-import { AccessRequest } from '../models/accessRequest/access-request';
+import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -10,14 +10,14 @@ import { AccessRequest } from '../models/accessRequest/access-request';
   styleUrls: ['./access-requests-list.page.scss'],
 })
 export class AccessRequestsListPage implements OnInit {
-  accessRequest: AccessRequest;
+  userJoinsTeam: UserJoinsTeam;
 
   constructor(
     private location: Location,
     private alertController: AlertController,
-    private accessRequestService: AccessRequestService
+    private userJoinsTeamService: UserJoinsTeamService
     ) {
-      this.accessRequest = new AccessRequest();
+      this.userJoinsTeam = new UserJoinsTeam();
     }
 
   ngOnInit() {
@@ -49,6 +49,6 @@ export class AccessRequestsListPage implements OnInit {
   }
 
   deleteRequest(){
-    this.accessRequestService.deleteRequest(this.accessRequest); 
+    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam); 
   }
 }
