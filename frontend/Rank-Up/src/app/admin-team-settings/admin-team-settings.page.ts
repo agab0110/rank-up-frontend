@@ -168,6 +168,19 @@ export class AdminTeamSettingsPage implements OnInit {
   }
 
   attach() {
+    this.teamService.changePhoto(this.team.codice, "this.blobURL?.toString()").subscribe(
+      response => {
+        this.team = response;
+        localStorage.setItem('this.team');
+      },
+      (error: Response) => {
+        if (error.status == 400) {
+          console.log("Error 400");
+        } else {
+          console.log("Unespected error");
+        }
+        console.log(error);
+      });
     this.modal.dismiss();
   }
 
