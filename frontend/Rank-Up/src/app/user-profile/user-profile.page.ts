@@ -14,7 +14,7 @@ export class UserProfilePage implements OnInit {
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
-  blobURL!: string;
+  blobURL!: undefined | null | string;
 
 
   constructor(private alertController: AlertController, private userService: UserService) { }
@@ -45,22 +45,12 @@ export class UserProfilePage implements OnInit {
 
   closeModal() {
     this.blob = null;
-    //this.blobURL = null;
+    this.blobURL = null;
     this.modal.dismiss();
   }
 
   attach() {
-    this.userService.changePhoto(this.userId, "this.blobURL?.toString()").subscribe(
-      response => {},
-      (error: Response) => {
-        if (error.status == 400) {
-          console.log("Error 400");
-        } else {
-          console.log("Unespected error");
-        }
-        console.log(error);
-      });
-    this.modal.dismiss();
+    
   }
 
   async presentAlert1() {
