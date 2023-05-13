@@ -171,7 +171,7 @@ export class AdminTeamSettingsPage implements OnInit {
     this.teamService.changePhoto(this.team.codice, "this.blobURL?.toString()").subscribe(
       response => {
         this.team = response;
-        localStorage.setItem('this.team');
+        localStorage.setItem('this.team', JSON.stringify(this.team));
       },
       (error: Response) => {
         if (error.status == 400) {
