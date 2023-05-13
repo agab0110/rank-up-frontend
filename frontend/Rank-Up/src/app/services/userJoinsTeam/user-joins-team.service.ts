@@ -14,6 +14,7 @@ export class UserJoinsTeamService {
    }
 
    deleteRequest(userJoinTeam: UserJoinsTeam) {
-    return this.http.delete(this.accessRequestUrl + "/deleteRequest");
+    return this.http.delete(this.accessRequestUrl + "/deleteRequest")
+    .subscribe(() => this.status = 'Delete successful');
   }
 }
