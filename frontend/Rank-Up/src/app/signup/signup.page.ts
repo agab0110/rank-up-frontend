@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
-import { MD5 } from 'crypto-js';
+import { SHA3 } from 'crypto-js';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +22,7 @@ export class SignupPage {
   }
 
   signup() {
-    const hashedPassword = MD5(this.password).toString();
+    const hashedPassword = SHA3(this.password).toString();
 
     this.user.password = hashedPassword;
 
