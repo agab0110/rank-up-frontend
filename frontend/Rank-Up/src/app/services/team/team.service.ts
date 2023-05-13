@@ -26,4 +26,8 @@ export class TeamService {
       this.teamUrl + '/deleteTeam/' + teamId
     );
   }
+
+  public changePhoto(userId: number, photo: string) {
+    return this.http.patch(this.teamUrl + "/changePhoto" + "/" + userId, photo);
+  }
 }
