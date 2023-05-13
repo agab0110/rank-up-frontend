@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { User } from '../models/user/user';
-import { AES } from 'crypto-js';
+import { MD5 } from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +26,9 @@ export class LoginPage implements OnInit{
   }
 
   login() {
-    const secretKey = 'Key123';
-    const encryptedPassword = AES.encrypt(this.user.password, secretKey).toString();
+    const hashedPassword = MD5(this.user.password).toString();
 
-    this.user.password = encryptedPassword;
+    this.user.password = hashedPassword;
 
     this.errorCheck = false;
     this.service.login(this.user).subscribe(response => {

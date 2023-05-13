@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
-import { AES } from 'crypto-js';
-//import { bcrypt } from 'bcryptjs';
+import { MD5 } from 'crypto-js';
 
 @Component({
   selector: 'app-signup',
@@ -22,10 +21,9 @@ export class SignupPage {
   }
 
   signup() {
-    const secretKey = 'Key123';
-    const encryptedPassword = AES.encrypt(this.user.password, secretKey).toString();
-    
-    this.user.password = encryptedPassword;
+    const hashedPassword = MD5(this.user.password).toString();
+
+    this.user.password = hashedPassword;
 
     this.errorCheck = false;
     this.service.save(this.user).subscribe(result => 
