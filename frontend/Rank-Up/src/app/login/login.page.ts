@@ -11,6 +11,7 @@ import { MD5 } from 'crypto-js';
 })
 export class LoginPage implements OnInit{
   user: User;
+  password!: string;
   errorCheck: boolean = false;
 
   constructor(
@@ -26,7 +27,7 @@ export class LoginPage implements OnInit{
   }
 
   login() {
-    const hashedPassword = MD5(this.user.password).toString();
+    const hashedPassword = MD5(this.password).toString();
 
     this.user.password = hashedPassword;
 

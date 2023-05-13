@@ -12,7 +12,7 @@
           Email o password errati
        </ul>
         <ion-input [(ngModel)]="user.username" class="formInput" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
-        <ion-input [(ngModel)]="user.password" class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="password" class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
       <app-bt-user-small class="loginButton" (click)="login()" [text]="'Accedi'"></app-bt-user-small>
