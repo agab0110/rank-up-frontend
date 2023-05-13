@@ -28,6 +28,6 @@ export class TeamService {
   }
 
   public changePhoto(userId: number, photo: string) {
-    return this.http.patch(this.teamUrl + "/changePhoto" + "/" + userId, photo);
+    return this.http.patch<Team>(this.teamUrl + "/changePhoto" + "/" + userId, photo);
   }
 }
