@@ -15,4 +15,8 @@ export class RuleCompletedService {
   public getRuleDelivered(id: any) {
     return this.http.get(this.ruleCompletedUrl + "/request/" + id);
   }
+
+  public getUserHistory(id: any, nome: any) {
+    return this.http.get(this.ruleCompletedUrl + "/history/" + id + "/" + nome);
+  }
 }
