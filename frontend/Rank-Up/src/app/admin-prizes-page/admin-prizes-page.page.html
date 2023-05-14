@@ -13,10 +13,10 @@
 
     <div class="listBox">
       <ion-list class="list">
-        <ion-item-sliding id="div-rule-task" *ngFor="let item of [].constructor(10); let i = index">
+        <ion-item-sliding id="div-rule-task" *ngFor="let prize of prizes">
           <ion-item id="div-rule-task">
-            <ion-label class="label">[Nome Premio]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">+15</ion-button>
+            <ion-label class="label">{{prize.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{prize.price}}</ion-button>
 
         </ion-item>
           <ion-item-options side="end">
