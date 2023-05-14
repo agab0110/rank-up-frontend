@@ -25,4 +25,8 @@ export class TaskCompletedService {
       this.baseUrl + "/taskrejected/" + teamId
     );
   }
+
+  public getTaskDelivered(id: any) {
+    return this.http.get(this.taskCompletedUrl + "/request/" + id);
+  }
 }

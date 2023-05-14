@@ -10,30 +10,12 @@
 }
 
 .team-card {
+  margin-top: 1vh;
+  height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-ion-tab-bar {
-  bottom: 5vh;
-  position: relative;
-  border-radius: 40px;
-  width: 60%;
-  margin: 0 auto;
-  height: 5.5vh;
-}
-
-.img-team-user {
-  width: 79%;
-  margin-top: 2vh;
-  border-radius: 20px;
-}
-
-.img-team-admin {
-  width: 79%;
-  margin-top: 2vh;
 }
 
 .listBox {
@@ -46,6 +28,13 @@ ion-tab-bar {
 }
 
 img{
-  margin-top: 0.5vh;
+  width: 150px;
+  height: 150px;
   border-radius: 20px;
+}
+
+.grind {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
 }

@@ -10,11 +10,11 @@
 
     <div class="listBox">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let item of [].constructor(4); let i = index">
+        <ion-item-sliding *ngFor="let user of users">
           <ion-item class="item">
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
-            <ion-label class="nomeUtente">[Nome Utente]</ion-label>
+            <ion-label class="nomeUtente">{{user.name}}</ion-label>
             </div>
 
           </ion-item>
