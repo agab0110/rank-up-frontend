@@ -12,32 +12,15 @@
     </ion-button>
 
     <div slot="start" class="searchbar">
-      <app-search-bar></app-search-bar>
+      <app-search-bar (ionInput)="ricerca($event)"></app-search-bar>
     </div>
 
     <div class="listBox">
       <ion-list class="notifications" lines="none">
-
-        <ion-item class="itemadmin" *ngFor="let item of [].constructor(3); let i = index" [routerLink]="['/task-rejected']">
+        <ion-item class="itemadmin" [routerLink]="['/task-rejected']" *ngFor="let i of this.data">
           <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
-          <ion-label class="label">[Nome Utente]  [Nome Task]  [Data]</ion-label>
+          <ion-label class="label">{{this.data}} {{this.data}}  {{this.data}}</ion-label>
         </ion-item>
-
-        <ion-item class="itemuser" [routerLink]="['/admin-rule-completed']">
-          <ion-icon name="checkmark-circle-outline" size="small" class="icon"></ion-icon>
-          <ion-label class="label">[Nome Utente]  [Nome Regola]  [Data]</ion-label>
-        </ion-item>
-
-        <ion-item class="itemuser" *ngFor="let item of [].constructor(12); let i = index" [routerLink]="['/completed-task']">
-          <ion-icon name="checkmark-circle-outline" size="small" class="icon"></ion-icon>
-          <ion-label class="label">[Nome Utente]  [Nome Task]  [Data]</ion-label>
-        </ion-item>
-
-        <ion-item class="itemadmin" [routerLink]="['/rule-rejected']">
-          <ion-icon name="close-circle-outline" size="small" class="icon"></ion-icon>
-          <ion-label class="label">[Nome Utente]  [Nome Regola]  [Data]</ion-label>
-        </ion-item>
-
       </ion-list>
     </div>
 
