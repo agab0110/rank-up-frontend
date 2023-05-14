@@ -37,6 +37,19 @@ export class CreateRulePage implements OnInit{
     this.location.back();
   }
 
+   /* getTeam(){
+    this.teamService.getTeam(this.team.codice).subscribe(response =>{
+      this.team = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  } */
+
   public createRule(){
       //this.rule.admin = this.admin;
       //this.rule.team = this.team;
