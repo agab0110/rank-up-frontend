@@ -5,6 +5,7 @@ import { TaskCompleted } from '../models/taskCompleted/task-completed';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-request-history',
@@ -16,6 +17,7 @@ export class RequestHistoryPage implements OnInit {
   ruleRejected : RuleCompleted[];
   taskCompleted : TaskCompleted[];
   taskRejected : TaskCompleted[];
+  team:Team;
   filter: number = 1;
 
   constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
@@ -23,6 +25,7 @@ export class RequestHistoryPage implements OnInit {
     this.ruleRejected = new Array<RuleCompleted>;
     this.taskCompleted = new Array<TaskCompleted>;
     this.taskRejected = new Array<TaskCompleted>;
+    this.team = new Team();
    }
 
   async presentAlert() {
@@ -57,6 +60,12 @@ export class RequestHistoryPage implements OnInit {
   }  
 
   ngOnInit() {
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    //this.router.navigate(['user/home']);
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
   
   backButton() {
