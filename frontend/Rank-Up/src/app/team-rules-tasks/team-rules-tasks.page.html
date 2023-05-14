@@ -27,10 +27,10 @@
 
     <div id="div-rules-tasks" scroll="true" *ngIf="!stato">
       <ion-list id="div-rule-task">
-        <ion-item-sliding id="div-rule-task" *ngFor="let item of [].constructor(10); let i = index">
+        <ion-item-sliding id="div-rule-task" *ngFor="let rule of rules">
           <ion-item id="div-rule-task">
-            <ion-label class="label">[Nome Regola]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">+15</ion-button>
+            <ion-label class="label" >{{rule.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true" >{{rule.points}}</ion-button>
 
         </ion-item>
           <ion-item-options side="end">
@@ -44,10 +44,10 @@
 
     <div id="div-rules-tasks" scroll="true" *ngIf="stato">
       <ion-list id="div-rule-task">
-        <ion-item-sliding id="div-rule-task" *ngFor="let item of [].constructor(10); let i = index">
+        <ion-item-sliding id="div-rule-task" *ngFor="let task of tasks">
           <ion-item id="div-rule-task">
-            <ion-label class="label">[Nome Task]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">+15</ion-button>
+            <ion-label class="label">{{task.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{task.points}}</ion-button>
 
         </ion-item>
           <ion-item-options side="end">
