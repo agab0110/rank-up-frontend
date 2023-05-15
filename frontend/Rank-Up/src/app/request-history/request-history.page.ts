@@ -77,7 +77,7 @@ export class RequestHistoryPage implements OnInit {
 
   ruleComleleted(){
     this.rule.team = this.team;
-    this.rulecompletedservice.ruleAccepted(this.rule).subscribe(Response =>{
+    this.rulecompletedservice.ruleAccepted(this.rule.team.codice).subscribe(Response =>{
       this.rulecompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -91,7 +91,7 @@ export class RequestHistoryPage implements OnInit {
 
   rulerejected(){
     this.rule.team = this.team;
-    this.rulecompletedservice.rulerejected(this.rule).subscribe(Response =>{
+    this.rulecompletedservice.rulerejected(this.rule.team.codice).subscribe(Response =>{
       this.ruleRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -104,7 +104,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   taskAccepted(){
-    this.taskcompletedservice.taskAccepted(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.taskcompletedservice.taskAccepted(this.rule.team.codice).subscribe(Response =>{
       this.taskCompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -117,7 +118,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   taskrejected(){
-    this.taskcompletedservice.taskRejected(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.taskcompletedservice.taskRejected(this.rule.team.codice).subscribe(Response =>{
       this.taskRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
