@@ -7,6 +7,7 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
 import { Rule } from '../models/rule/rule';
+import { Task } from '../models/task/task';
 
 @Component({
   selector: 'app-request-history',
@@ -20,6 +21,7 @@ export class RequestHistoryPage implements OnInit {
   taskRejected : TaskCompleted[];
   team:Team;
   rule : Rule;
+  task :Task;
   filter: number = 1;
 
   constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
@@ -29,6 +31,7 @@ export class RequestHistoryPage implements OnInit {
     this.taskRejected = new Array<TaskCompleted>;
     this.team = new Team();
     this.rule = new Rule();
+    this.task = new Task();
    }
 
   async presentAlert() {
@@ -105,7 +108,7 @@ export class RequestHistoryPage implements OnInit {
 
   taskAccepted(){
     this.rule.team = this.team;
-    this.taskcompletedservice.taskAccepted(this.rule.team.codice).subscribe(Response =>{
+    this.taskcompletedservice.taskAccepted(this.task.team.codice).subscribe(Response =>{
       this.taskCompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -119,7 +122,7 @@ export class RequestHistoryPage implements OnInit {
 
   taskrejected(){
     this.rule.team = this.team;
-    this.taskcompletedservice.taskRejected(this.rule.team.codice).subscribe(Response =>{
+    this.taskcompletedservice.taskRejected(this.task.team.codice).subscribe(Response =>{
       this.taskRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
