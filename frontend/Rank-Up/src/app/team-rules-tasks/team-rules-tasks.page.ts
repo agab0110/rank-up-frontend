@@ -19,10 +19,14 @@ export class TeamRulesTasksPage implements OnInit {
   rules : Rule[];
   tasks : Task[];
   team : Team;
+  task : Task;
+  rule : Rule;
   constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService) {
     this.rules = new Array<Rule>;
     this.tasks = new Array<Task>;
     this.team = new Team();
+    this.rule = new Rule();
+    this.task = new Task();
     
    }
 
@@ -45,7 +49,8 @@ export class TeamRulesTasksPage implements OnInit {
     this.stato = !this.stato;
   }
   ListRule(){
-    this.ruleservice.listRule(1).subscribe(response =>{
+    this.rule.team = this.team;
+    this.ruleservice.listRule(this.rule.team.codice).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -58,7 +63,8 @@ export class TeamRulesTasksPage implements OnInit {
   }
 
   ListTask(){
-    this.taskservice.listTask(2).subscribe(response =>{
+    this.task.team = this.team;
+    this.taskservice.listTask(this.task.team.codice).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)
