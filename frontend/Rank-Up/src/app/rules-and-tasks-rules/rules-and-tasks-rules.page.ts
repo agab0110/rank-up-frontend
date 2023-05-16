@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user/user';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-rules-and-tasks-rules',
@@ -6,8 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rules-and-tasks-rules.page.scss'],
 })
 export class RulesAndTasksRulesPage implements OnInit {
+  user: User;
+  team: Team;
 
-  constructor() { }
+  constructor() {
+    this.user= new User;
+    this.team = new Team();
+  }
+
+  ngOnInit() {
+    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team.name = "Team prova"  //Set nome del team per provare "Api" numero 54, cancellare dopo implementato il local Storage
+    this.team.codice = 276387;  //Set codice del team per provare "Api" numero 54, cancellare dopo implementato il local Storage
+    //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+    //this.router.navigate(['user/home']);
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+  }
 
   text1: string = 'Regole'
   text2: string = 'Tasks'
@@ -51,13 +69,4 @@ export class RulesAndTasksRulesPage implements OnInit {
       }
     }
   }
-  ngOnInit() {
-    this.rules.forEach(rule => {
-      this.rules_tasks.push({
-        rule_task_name: rule.rule_name,
-        rule_task_points: rule.rule_points
-      });
-    });
-  }
-
 }
