@@ -6,7 +6,6 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 
 @Component({
   selector: 'app-request-history',
@@ -14,25 +13,28 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  rulecompleted : RuleCompleted[];
-  ruleRejected : RuleCompleted[];
-  taskCompleted : TaskCompleted[];
-  taskRejected : TaskCompleted[];
-  team:Team;
+  rulecompleted: RuleCompleted[];
+  ruleRejected: RuleCompleted[];
+  taskCompleted: TaskCompleted[];
+  taskRejected: TaskCompleted[];
+  team: Team;
   filter: number = 1;
   data: any;
   idTeam: any = 1;
 
-  constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
-    this.rulecompleted = new Array<RuleCompleted>;
-    this.ruleRejected = new Array<RuleCompleted>;
-    this.taskCompleted = new Array<TaskCompleted>;
-    this.taskRejected = new Array<TaskCompleted>;
-    this.team = new Team();
-    private alertController: AlertController, 
+  constructor(
+    private alertController: AlertController,
     private location: Location,
+    private rulecompletedservice: RuleCompletedService,
+    private taskcompletedservice: TaskCompletedService,
     private ruleCompletedService: RuleCompletedService
-    ) { }
+    ) {
+      this.rulecompleted = new Array<RuleCompleted>;
+      this.ruleRejected = new Array<RuleCompleted>;
+      this.taskCompleted = new Array<TaskCompleted>;
+      this.taskRejected = new Array<TaskCompleted>;
+      this.team = new Team();
+    }
 
   async presentAlert() {
     const alert = await this.alertController.create({

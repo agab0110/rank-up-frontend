@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-import { BtAdminSmallComponent } from '../components/bt-admin-small/bt-admin-small.component';
 import { Location } from '@angular/common';
 @Component({
   selector: 'app-send-rule',
