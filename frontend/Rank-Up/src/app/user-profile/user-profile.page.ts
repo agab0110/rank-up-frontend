@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-user-profile',
