@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+
 import { UserService } from '../services/user/user.service';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { AdminService } from '../services/admin/admin.service';
+
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
@@ -16,11 +19,13 @@ export class AddUserPage implements OnInit {
   team: Team;
   admin: Admin;
   query!: string;
+  id_user!: Number;
 
   constructor(
     private location: Location,
     private userService: UserService,
-    private userJoinsTeam: UserJoinsTeamService
+    private userJoinsTeam: UserJoinsTeamService,
+    private adminService: AdminService
     ) {
 
     this.users = new Array<User>;
@@ -61,6 +66,20 @@ export class AddUserPage implements OnInit {
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+
+  addAdmin(id_user: Number) {
+    this.adminService.newAdmin(this.team.codice, id_user).subscribe(response => {
+      console.log("Admin aggiunto con successo");
+      console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
       else {
         console.log('An unexpected error occured');
       }

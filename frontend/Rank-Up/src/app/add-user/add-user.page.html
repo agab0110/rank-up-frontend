@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h2 class="title">Aggiungi Utente al Team<br/>[Nome Team]</h2>
+    <h2 class="title">Aggiungi Utente al Team<br/>{{team.codice}}</h2>
 
     <ion-searchbar placeholder="Cerca" [(ngModel)]="query" (ionChange)="searchUser()"></ion-searchbar>
 
@@ -20,7 +20,7 @@
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option class="option-one">
-              <ion-icon slot="top" name="person-add-outline" size="large"></ion-icon>
+              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addAdmin(user.id)"></ion-icon>
               Admin
             </ion-item-option>
             <ion-item-option class="option-two">
