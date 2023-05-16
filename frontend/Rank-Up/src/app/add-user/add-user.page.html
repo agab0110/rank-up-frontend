@@ -6,7 +6,7 @@
 
     <h2 class="title">Aggiungi Utente al Team<br/>[Nome Team]</h2>
 
-    <ion-searchbar placeholder="Cerca"></ion-searchbar>
+    <ion-searchbar placeholder="Cerca" [(ngModel)]="query" (ionChange)="searchUser()"></ion-searchbar>
 
     <div class="listBox">
       <ion-list class="list" lines="none">

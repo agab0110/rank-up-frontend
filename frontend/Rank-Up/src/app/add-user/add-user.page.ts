@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from '../services/user/user.service';
+import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
@@ -14,10 +15,13 @@ export class AddUserPage implements OnInit {
   users : User[];
   team: Team;
   admin: Admin;
+  query!: string;
 
   constructor(
     private location: Location,
-    private userService: UserService) {
+    private userService: UserService,
+    private userJoinsTeam: UserJoinsTeamService
+    ) {
 
     this.users = new Array<User>;
     this.team = new Team();
@@ -51,4 +55,16 @@ export class AddUserPage implements OnInit {
     });
   }
 
+  searchUser() {
+    this.userJoinsTeam.getListUserSearch(this.query).subscribe(response => {
+      this.users = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
 }
