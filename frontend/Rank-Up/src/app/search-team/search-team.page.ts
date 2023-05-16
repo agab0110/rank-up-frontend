@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { TeamService } from '../services/team/team.service';
 
 @Component({
   selector: 'app-search-team',
@@ -10,11 +11,20 @@ import { Location } from '@angular/common';
 })
 export class SearchTeamPage implements OnInit {
 
-  constructor(private alertController: AlertController,
+  data: any;
+
+  constructor(
+    private alertController: AlertController,
     private router: Router,
-    private location: Location) { }
+    private location: Location,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
+    this.teamService.getTeamRand().subscribe(data => {
+      this.data = data
+      console.log(data)
+    })
   }
 
   backButton() {
@@ -38,7 +48,20 @@ export class SearchTeamPage implements OnInit {
         },
       ],
     });
+    await alert.present();
+  }
 
-  await alert.present();
+  ricerca(event: any) {
+    if(event.target.value != "") {
+      this.teamService.getTeam(event.target.value.toLowerCase()).subscribe(data => {
+        this.data = JSON.parse(JSON.stringify(data))
+
+        console.log(data)
+      })      
+    } else {
+      this.teamService.getTeamRand().subscribe(data => {
+        this.data = data
+      })
+    }
   }
 }

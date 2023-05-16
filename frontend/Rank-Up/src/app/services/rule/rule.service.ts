@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Rule } from 'src/app/models/rule/rule';
 
 @Injectable({
@@ -10,6 +11,12 @@ export class RuleService {
 
   constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8080/ruleApi";
+  }
+
+  public listRule(teamId: Number): Observable<Rule[]> {
+    return this.http.get<Rule[]>(
+      this.baseUrl + "/rules/" + teamId
+      );
   }
 
   public newRule(rule : Rule){

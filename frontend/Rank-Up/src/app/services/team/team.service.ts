@@ -30,4 +30,12 @@ export class TeamService {
   public changePhoto(userId: number, photo: string) {
     return this.http.patch<Team>(this.teamUrl + "/changePhoto" + "/" + userId, photo);
   }
+
+  public getTeam(nameTeam: any) {
+    return this.http.get(this.teamUrl + "/researchTeam/" + nameTeam);
+  }
+
+  public getTeamRand() {
+    return this.http.get(this.teamUrl + "/researchTeam");
+  }
 }
