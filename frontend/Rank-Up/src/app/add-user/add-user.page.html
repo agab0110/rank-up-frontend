@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h2 class="title">Aggiungi Utente al Team<br/>{{team.codice}}</h2>
+    <h2 class="title">Aggiungi Utente al Team<br/>{{team.name}}</h2>
 
     <ion-searchbar placeholder="Cerca" [(ngModel)]="query" (ionChange)="searchUser()"></ion-searchbar>
 
@@ -13,8 +13,8 @@
         <ion-item-sliding *ngFor="let user of users">
           <ion-item class="item">
             <div class="item-div">
-            <img class="imgUser" alt="User">{{user.photo}}
-            <ion-label class="nomeUtente">{{user.name}}</ion-label>
+            <img class="imgUser" alt="User" src="https://www.diregiovani.it/wp-content/uploads/2018/11/wilfred.jpg">
+            <ion-label class="nomeUtente">{{user.username}}</ion-label>
             </div>
 
           </ion-item>

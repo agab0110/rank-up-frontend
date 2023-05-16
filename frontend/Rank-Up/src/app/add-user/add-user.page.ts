@@ -25,7 +25,7 @@ export class AddUserPage implements OnInit {
     private location: Location,
     private userService: UserService,
     private userJoinsTeam: UserJoinsTeamService,
-    private adminService: AdminService
+    private adminService: AdminService,
     ) {
 
     this.users = new Array<User>;
@@ -34,7 +34,7 @@ export class AddUserPage implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
       //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
@@ -74,6 +74,7 @@ export class AddUserPage implements OnInit {
   }
 
   addAdmin(id_user: Number) {
+    console.log(id_user);
     this.adminService.newAdmin(1, id_user).subscribe(response => {
       console.log("Admin aggiunto con successo");
       console.log(response);

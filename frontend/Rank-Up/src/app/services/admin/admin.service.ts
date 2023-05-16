@@ -15,7 +15,8 @@ export class AdminService {
   }
 
   public newAdmin(id_team: Number, id_user: Number) {
-    const url = `${this.baseUrl}/addAdmin/${id_team}/${id_user}`;
-    return this.http.post<Admin[]>(url, id_user);
+    return this.http.post<Admin[]>(
+      this.baseUrl + "/addAdmin", id_user
+    );
   }
 }
