@@ -14,11 +14,11 @@ import { Team } from '../models/team/team';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  rulecompleted : RuleCompleted[];
-  ruleRejected : RuleCompleted[];
-  taskCompleted : TaskCompleted[];
-  taskRejected : TaskCompleted[];
-  team:Team;
+  rulecompleted: RuleCompleted[];
+  ruleRejected: RuleCompleted[];
+  taskCompleted: TaskCompleted[];
+  taskRejected: TaskCompleted[];
+  team: Team;
   filter: number = 1;
   data: any;
   idTeam: any = 1;
@@ -75,6 +75,7 @@ export class RequestHistoryPage implements OnInit {
 
     await alert.present();
   }
+
 
   backButton() {
     this.location.back();
