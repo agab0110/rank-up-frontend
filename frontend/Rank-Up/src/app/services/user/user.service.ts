@@ -28,4 +28,11 @@ export class UserService {
       this.userUrl + "/getAllUsers"
     );
   }
+
+    public changeUsername(teamId: number, username: string){
+      return this.http.patch<User>(
+        this.userUrl + "/changeUsername/" + teamId, username
+      );
+    }
+
 }

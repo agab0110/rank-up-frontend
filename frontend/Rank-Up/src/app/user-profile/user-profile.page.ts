@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
 import { error } from 'console';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +18,9 @@ export class UserProfilePage implements OnInit {
   blobURL!: undefined | null | string;
 
 
-  constructor(private alertController: AlertController, private userService: UserService) { }
+  constructor(private alertController: AlertController, private userService: UserService) { 
+    this.team = new Team();
+  }
 
   userId: number = 1;
   user_username: string = 'Username';
@@ -25,9 +28,15 @@ export class UserProfilePage implements OnInit {
   user_surname: string = 'Cognome]';
   user_email: string = 'Email';
   user_foto: string = 'Foto';
+  team: Team;
 
   ngOnInit() {
-
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    //this.router.navigate(['user/home']);
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
   loadFileFromDevice(event: any) {
