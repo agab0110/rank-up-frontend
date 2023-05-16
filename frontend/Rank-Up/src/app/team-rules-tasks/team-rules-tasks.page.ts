@@ -31,8 +31,8 @@ export class TeamRulesTasksPage implements OnInit {
    }
 
   ngOnInit() {
-    this.ListRule();
-    this.ListTask();
+    this.listRule();
+    this.listTask();
     if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
@@ -48,7 +48,7 @@ export class TeamRulesTasksPage implements OnInit {
   segmentChanged(event: any) {
     this.stato = !this.stato;
   }
-  ListRule(){
+  listRule(){
     this.rule.team = this.team;
     this.ruleservice.listRule(this.rule.team.codice).subscribe(response =>{
       this.rules = response;
@@ -62,7 +62,7 @@ export class TeamRulesTasksPage implements OnInit {
     });
   }
 
-  ListTask(){
+  listTask(){
     this.task.team = this.team;
     this.taskservice.listTask(this.task.team.codice).subscribe(response =>{
       this.tasks = response;

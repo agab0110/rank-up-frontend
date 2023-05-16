@@ -1,31 +1,52 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundUser">
-
-    <ion-button class="leftIcon" [routerLink] = "['/user/team']">
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">{{team_name}}</h1>
-    <div id="div-code">Codice: {{team_code}}</div>
+    <h1 class="title">[Nome Team]</h1>
 
-    <div class="switch">
-      <ion-segment value="Regole" (ionChange)="switch($event)" id="bait">
-        <ion-segment-button value='Regole'>
+    <div>
+      <ion-segment value="1" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value=1>
           <ion-label class="segmentText">Regole</ion-label>
         </ion-segment-button>
-        <ion-segment-button value='Tasks'>
-          <ion-label class="segmentText">Tasks</ion-label>
+        <ion-segment-button value=2>
+          <ion-label class="segmentText">Task</ion-label>
         </ion-segment-button>
       </ion-segment>
     </div>
 
-    <div id="div-rules-tasks" scroll="true">
-      <div id="div-rule-task" *ngFor="let rule_task of rules_tasks">
-        <div id="div-div-rules-tasks">
-          <div id="div-div-rules-tasks-name" >{{rule_task.rule_task_name}}</div>
-          <ion-button id="div-div-rules-tasks-button" [routerLink]="['/send-rule']">+{{rule_task.rule_task_points}}</ion-button>
-        </div>
-      </div>
+    <div id="div-rules-tasks" scroll="true" *ngIf="!stato">
+      <ion-list id="div-rule-task" *ngFor="let rule of rules">
+          <ion-item id="div-rule-task">
+            <ion-label class="label" >{{rule.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true" >{{rule.points}}</ion-button>
+
+        </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+      </ion-list>
     </div>
+
+    <div id="div-rules-tasks" scroll="true" *ngIf="stato">
+      <ion-list id="div-rule-task" *ngFor="let task of tasks">
+          <ion-item id="div-rule-task">
+            <ion-label class="label">{{task.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{task.points}}</ion-button>
+
+        </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+      </ion-list>
+    </div>
+
   </div>
+
 </ion-content>

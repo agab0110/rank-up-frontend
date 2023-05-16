@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +26,10 @@ export class RuleCompletedService {
   }
 
   public getRuleDelivered(id: any) {
-    return this.http.get(this.ruleCompletedUrl + "/request/" + id);
+    return this.http.get(this.baseUrl + "/request/" + id);
   }
 
   public getUserHistory(id: any, nome: any) {
-    return this.http.get(this.ruleCompletedUrl + "/history/" + id + "/" + nome);
+    return this.http.get(this.baseUrl + "/history/" + id + "/" + nome);
   }
 }
