@@ -52,16 +52,17 @@ export class PrizesPagePage implements OnInit {
 
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
       //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
     //this.router.navigate(['user/home']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.Listprize(this.team.codice);
    }
 
-  Listprize(){
-    this.prizeService.listPrize(1).subscribe(response =>{
+  Listprize(idTeam: Number){
+    this.prizeService.listPrize(idTeam).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)
