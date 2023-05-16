@@ -3,6 +3,8 @@ import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
 import { error } from 'console';
+import { User } from '../models/user/user';
+import { Route, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,9 +17,11 @@ export class UserProfilePage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL!: undefined | null | string;
+  user: User;
 
-
-  constructor(private alertController: AlertController, private userService: UserService) { }
+  constructor(private alertController: AlertController, private userService: UserService) {
+    this.user = new User();
+   }
 
   userId: number = 1;
   user_username: string = 'Username';
@@ -27,7 +31,9 @@ export class UserProfilePage implements OnInit {
   user_foto: string = 'Foto';
 
   ngOnInit() {
-
+    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      console.log("utente non presente")
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   loadFileFromDevice(event: any) {
@@ -50,7 +56,7 @@ export class UserProfilePage implements OnInit {
   }
 
   attach() {
-    
+
   }
 
   async presentAlert1() {
