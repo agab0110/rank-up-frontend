@@ -23,6 +23,8 @@ export class RequestHistoryPage implements OnInit {
   rule : Rule;
   task :Task;
   filter: number = 1;
+  data: any;
+  idTeam: any = 1;
 
   constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
     this.rulecompleted = new Array<RuleCompleted>;
@@ -33,6 +35,7 @@ export class RequestHistoryPage implements OnInit {
     this.rule = new Rule();
     this.task = new Task();
    }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -134,4 +137,13 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
+  ricerca(event: any) {
+    if(event.target.value != "") {
+      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
+        this.data = JSON.parse(JSON.stringify(data))
+
+        console.log(data)
+      });      
+    }
+  }
 }

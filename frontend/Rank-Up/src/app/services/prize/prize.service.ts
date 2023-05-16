@@ -17,4 +17,9 @@ export class PrizeService {
       this.baseUrl + "/prize/" + teamId
     );
   }
+
+   public newPrize(prize: Prize) {
+    return this.http.post<Prize>(
+    this.baseUrl + "/createPrize", prize);
+   }
 }
