@@ -29,7 +29,7 @@ export class AdminTeamSettingsPage implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      this.router.navigate(['user/home']);
+      //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
   }
 

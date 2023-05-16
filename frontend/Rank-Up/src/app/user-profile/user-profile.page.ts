@@ -4,6 +4,7 @@ import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
 import { error } from 'console';
 import { Team } from '../models/team/team';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +21,7 @@ export class UserProfilePage implements OnInit {
 
   constructor(private alertController: AlertController, private userService: UserService) { 
     this.team = new Team();
+    this.user = new User();
   }
 
   userId: number = 1;
@@ -29,6 +31,7 @@ export class UserProfilePage implements OnInit {
   user_email: string = 'Email';
   user_foto: string = 'Foto';
   team: Team;
+  user:User;
 
   ngOnInit() {
     if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
@@ -99,6 +102,21 @@ export class UserProfilePage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.userService.changeUsername(this.user.id, alertData[0]).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+            }, (error: Response) => {  
+              if(error.status == 400)  
+                console.log("400 error");  
+              else {  
+                console.log('An unexpected error occured');   
+              }
+              console.log(error);
+            });
+          }
         },
         {
           text: 'Annulla',
