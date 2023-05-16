@@ -139,7 +139,7 @@ export class RequestHistoryPage implements OnInit {
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
+      this.rulecompletedservice.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
 
         console.log(data)
