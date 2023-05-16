@@ -13,7 +13,7 @@
         <ion-item-sliding *ngFor="let user of users">
           <ion-item class="item">
             <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+            <img class="imgUser" alt="User">{{user.photo}}
             <ion-label class="nomeUtente">{{user.name}}</ion-label>
             </div>
 

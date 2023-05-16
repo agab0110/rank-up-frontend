@@ -7,10 +7,10 @@ import { TaskCompleted } from 'src/app/models/taskCompleted/task-completed';
   providedIn: 'root'
 })
 export class TaskCompletedService {
-  
+
   private baseUrl: String;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8080/taskCompletedApi";
   }
 
@@ -27,6 +27,6 @@ export class TaskCompletedService {
   }
 
   public getTaskDelivered(id: any) {
-    return this.http.get(this.taskCompletedUrl + "/request/" + id);
+    return this.http.get(this.baseUrl + "/request/" + id);
   }
 }

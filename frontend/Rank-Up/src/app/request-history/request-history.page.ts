@@ -6,7 +6,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
+
 
 @Component({
   selector: 'app-request-history',
@@ -23,16 +23,27 @@ export class RequestHistoryPage implements OnInit {
   data: any;
   idTeam: any = 1;
 
-  constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
-    this.rulecompleted = new Array<RuleCompleted>;
-    this.ruleRejected = new Array<RuleCompleted>;
-    this.taskCompleted = new Array<TaskCompleted>;
-    this.taskRejected = new Array<TaskCompleted>;
-    this.team = new Team();
-    private alertController: AlertController, 
+  constructor(
+    private alertController: AlertController,
     private location: Location,
-    private ruleCompletedService: RuleCompletedService
-    ) { }
+    private rulecompletedservice : RuleCompletedService,
+    private taskcompletedservice : TaskCompletedService) {
+
+      this.team = new Team();
+      this.rulecompleted = new Array<RuleCompleted>;
+      this.ruleRejected = new Array<RuleCompleted>;
+      this.taskCompleted = new Array<TaskCompleted>;
+      this.taskRejected = new Array<TaskCompleted>;
+     }
+
+     ngOnInit() {
+      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      //this.router.navigate(['user/home']);
+      this.team = JSON.parse(localStorage.getItem('team') || '{}');
+      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+      //this.router.navigate(['user/home']);
+      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -63,17 +74,8 @@ export class RequestHistoryPage implements OnInit {
     });
 
     await alert.present();
-  }  
-
-  ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
-  
+
   backButton() {
     this.location.back();
   }
@@ -132,11 +134,11 @@ export class RequestHistoryPage implements OnInit {
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
+      this.rulecompletedservice.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
 
         console.log(data)
-      });      
+      });
     }
   }
 }

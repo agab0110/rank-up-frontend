@@ -74,7 +74,7 @@ export class AddUserPage implements OnInit {
   }
 
   addAdmin(id_user: Number) {
-    this.adminService.newAdmin(this.team.codice, id_user).subscribe(response => {
+    this.adminService.newAdmin(1, id_user).subscribe(response => {
       console.log("Admin aggiunto con successo");
       console.log(response);
     }, (error: Response) => {
