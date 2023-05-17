@@ -29,4 +29,8 @@ export class TaskCompletedService {
   public getTaskDelivered(id: any) {
     return this.http.get(this.baseUrl + "/request/" + id);
   }
+
+  public insertTaskCompleted(taskCompleted: any) {
+    return this.http.post(this.baseUrl + "/taskCompleted", taskCompleted)
+  }
 }

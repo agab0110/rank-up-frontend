@@ -32,4 +32,8 @@ export class RuleCompletedService {
   public getUserHistory(id: any, nome: any) {
     return this.http.get(this.baseUrl + "/history/" + id + "/" + nome);
   }
+
+  public insertRuleCompleted(ruleCompleted: any) {
+    return this.http.post(this.baseUrl + "/ruleCompleted", ruleCompleted);
+  }
 }

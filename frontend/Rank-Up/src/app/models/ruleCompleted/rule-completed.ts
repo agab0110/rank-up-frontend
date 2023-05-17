@@ -13,5 +13,5 @@ export class RuleCompleted {
     revisionDate!: Date;
     bonus!: number;
     comment!: string;
-    acceptance!: boolean;
+    status!: number;
 }

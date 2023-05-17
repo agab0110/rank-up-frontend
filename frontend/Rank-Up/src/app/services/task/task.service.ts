@@ -18,4 +18,10 @@ export class TaskService {
       this.baseUrl + "/tasks/" + teamId
     );
   }
+
+  public getTask(idTask: any) {
+    return this.http.get(
+      this.baseUrl + "/task/" + idTask
+    );
+  }
 }
