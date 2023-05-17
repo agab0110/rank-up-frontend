@@ -30,9 +30,6 @@ export class RulesAndTasksRulesPage implements OnInit {
   text1: string = 'Regole'
   text2: string = 'Tasks'
 
-  team_name: string = 'Nome Team'
-  team_code: string = '83r5gd'
-
   tasks: {
     task_name: string,
     task_points: number
