@@ -30,6 +30,7 @@ export class TeamRulesTasksPage implements OnInit {
     this.team = new Team();
     this.rule = new Rule();
     this.task = new Task();
+    this.admin = new Admin();
     
    }
 
