@@ -21,7 +21,6 @@ export class RulesAndTasksRulesPage implements OnInit {
   stato= false;
   rules : Rule[];
   tasks : Task[];
-  team : Team;
   task : Task;
   rule : Rule;
   constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService) {
@@ -30,6 +29,7 @@ export class RulesAndTasksRulesPage implements OnInit {
     this.team = new Team();
     this.rule = new Rule();
     this.task = new Task();
+    this.user = new User();
     
    }
 
