@@ -5,6 +5,7 @@ import { RuleService } from '../services/rule/rule.service';
 import { TaskService } from '../services/task/task.service';
 import { Task } from '../models/task/task';
 import { Team } from '../models/team/team';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-team-rules-tasks',
@@ -21,6 +22,8 @@ export class TeamRulesTasksPage implements OnInit {
   team : Team;
   task : Task;
   rule : Rule;
+  admin: Admin;
+
   constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService) {
     this.rules = new Array<Rule>;
     this.tasks = new Array<Task>;
@@ -30,15 +33,18 @@ export class TeamRulesTasksPage implements OnInit {
     
    }
 
+
   ngOnInit() {
     this.listRule();
     this.listTask();
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
+      //this.router.navigate(['user/home']);
+    //}
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    /*if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == ''){
+      this.router.navigate(['user/home']);
+    }*/
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
 

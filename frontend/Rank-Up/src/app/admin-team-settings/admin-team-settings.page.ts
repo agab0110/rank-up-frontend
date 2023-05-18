@@ -56,11 +56,11 @@ export class AdminTeamSettingsPage implements OnInit {
               this.team = response;
               localStorage.setItem('team', JSON.stringify(this.team));
               console.log(this.team);
-            }, (error: Response) => {  
-              if(error.status == 400)  
-                console.log("400 error");  
-              else {  
-                console.log('An unexpected error occured');   
+            }, (error: Response) => {
+              if(error.status == 400)
+                console.log("400 error");
+              else {
+                console.log('An unexpected error occured');
               }
               console.log(error);
             });
@@ -75,7 +75,7 @@ export class AdminTeamSettingsPage implements OnInit {
 
   await alert.present();
   }
-  
+
   async presentAlert3() {
     const alert = await this.alertController.create({
       header: 'Imposta Privacy Team:',

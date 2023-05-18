@@ -66,17 +66,9 @@ export class RequestHistoryPage implements OnInit {
     });
 
     await alert.present();
-  }  
-
-  ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
-  
+
+
   backButton() {
     this.location.back();
   }
@@ -143,7 +135,7 @@ export class RequestHistoryPage implements OnInit {
         this.data = JSON.parse(JSON.stringify(data))
 
         console.log(data)
-      });      
+      });
     }
   }
 }

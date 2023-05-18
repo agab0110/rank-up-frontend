@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { Team } from '../models/team/team';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -11,6 +13,9 @@ import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 })
 export class AccessRequestsListPage implements OnInit {
   userJoinsTeam: UserJoinsTeam;
+  requests : Notification[];
+  team: Team;
+  admin: Admin;
 
   constructor(
     private location: Location,
@@ -18,9 +23,17 @@ export class AccessRequestsListPage implements OnInit {
     private userJoinsTeamService: UserJoinsTeamService
     ) {
       this.userJoinsTeam = new UserJoinsTeam();
+      this.requests = new Array<Notification>;
+      this.team = new Team();
+      this.admin = new Admin();
     }
 
   ngOnInit() {
+       //this.router.navigate(['user/home']);
+       this.team = JSON.parse(localStorage.getItem('team') || '{}');
+       if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+         //this.router.navigate(['user/home']);
+       this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
   backButton() {
@@ -49,6 +62,19 @@ export class AccessRequestsListPage implements OnInit {
   }
 
   deleteRequest(){
-    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam); 
+    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam);
   }
+
+ /* public getRequests(){
+    this.userJoinsTeamService.getListPendingRequests(this.team.codice).subscribe(response =>{
+      this.requests = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }*/
 }

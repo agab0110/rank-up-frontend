@@ -4,23 +4,23 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h2 class="title">Aggiungi Utente al Team<br/>[Nome Team]</h2>
+    <h2 class="title">Aggiungi Utente al Team<br/>{{team.name}}</h2>
 
-    <ion-searchbar placeholder="Cerca"></ion-searchbar>
+    <ion-searchbar placeholder="Cerca" [(ngModel)]="query" (ionChange)="searchUser()"></ion-searchbar>
 
     <div class="listBox">
       <ion-list class="list" lines="none">
         <ion-item-sliding *ngFor="let user of users">
           <ion-item class="item">
             <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
-            <ion-label class="nomeUtente">{{user.name}}</ion-label>
+            <img class="imgUser" alt="User" src="https://www.diregiovani.it/wp-content/uploads/2018/11/wilfred.jpg">
+            <ion-label class="nomeUtente">{{user.username}}</ion-label>
             </div>
 
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option class="option-one">
-              <ion-icon slot="top" name="person-add-outline" size="large"></ion-icon>
+              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addAdmin(user.id)"></ion-icon>
               Admin
             </ion-item-option>
             <ion-item-option class="option-two">

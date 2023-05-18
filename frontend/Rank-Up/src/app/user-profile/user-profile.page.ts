@@ -5,6 +5,7 @@ import { UserService } from '../services/user/user.service';
 import { error } from 'console';
 import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
+import { Route, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,6 +18,7 @@ export class UserProfilePage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL!: undefined | null | string;
+  user: User;
 
 
   constructor(private alertController: AlertController, private userService: UserService) { 
@@ -62,31 +64,7 @@ export class UserProfilePage implements OnInit {
   }
 
   attach() {
-    
-  }
 
-  async presentAlert1() {
-    const alert = await this.alertController.create({
-      header: 'Inserisci nuovo nome:',
-      inputs: [
-        {
-          placeholder: 'Nome',
-          cssClass: 'alert-input',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Conferma',
-          cssClass: 'alert-button-blue',
-        },
-        {
-          text: 'Annulla',
-          cssClass: 'alert-button-red',
-        },
-      ],
-    });
-
-  await alert.present();
   }
 
   async presentAlert2() {
@@ -194,5 +172,4 @@ export class UserProfilePage implements OnInit {
 
   await alert.present();
   }
-
 }

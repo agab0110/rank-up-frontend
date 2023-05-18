@@ -21,10 +21,10 @@ export class SearchTeamPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.teamService.getTeamRand().subscribe(data => {
-      this.data = data
-      console.log(data)
-    })
+    this.teamService.getTeamRand().subscribe(response => {
+      this.data = response
+      console.log(this.data)
+    });
   }
 
   backButton() {

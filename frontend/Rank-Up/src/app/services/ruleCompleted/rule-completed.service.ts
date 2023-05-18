@@ -18,7 +18,7 @@ export class RuleCompletedService {
       this.baseUrl + "/ruleAccepted/" + teamId
     );
   }
-  
+
   public rulerejected(teamId: Number): Observable<RuleCompleted[]> {
     return this.http.get<RuleCompleted[]>(
       this.baseUrl + "/rulerejected/" + teamId

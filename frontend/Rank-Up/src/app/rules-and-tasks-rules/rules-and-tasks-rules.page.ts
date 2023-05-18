@@ -4,6 +4,7 @@ import { Rule } from '../models/rule/rule';
 import { RuleService } from '../services/rule/rule.service';
 import { TaskService } from '../services/task/task.service';
 import { Task } from '../models/task/task';
+import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 
 @Component({
@@ -12,6 +13,8 @@ import { Team } from '../models/team/team';
   styleUrls: ['./rules-and-tasks-rules.page.scss'],
 })
 export class RulesAndTasksRulesPage implements OnInit {
+  user: User;
+  team: Team;
 
   public alertBtns = ["Accetta", "Rifiuta"];
   type='rules';
