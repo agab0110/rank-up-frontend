@@ -35,6 +35,18 @@ export class RequestHistoryPage implements OnInit {
     this.rule = new Rule();
     this.task = new Task();
    }
+  ngOnInit(){
+    this.ruleComleleted();
+    this.rulerejected();
+    this.taskAccepted();
+    this.taskrejected();
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    //this.router.navigate(['user/home']);
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+  }
 
 
   async presentAlert() {
@@ -75,7 +87,7 @@ export class RequestHistoryPage implements OnInit {
 
   ruleComleleted(){
     this.rule.team = this.team;
-    this.rulecompletedservice.ruleAccepted(this.rule.team.codice).subscribe(Response =>{
+    this.rulecompletedservice.ruleAccepted(this.team.codice).subscribe(Response =>{
       this.rulecompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -89,7 +101,7 @@ export class RequestHistoryPage implements OnInit {
 
   rulerejected(){
     this.rule.team = this.team;
-    this.rulecompletedservice.rulerejected(this.rule.team.codice).subscribe(Response =>{
+    this.rulecompletedservice.rulerejected(this.team.codice).subscribe(Response =>{
       this.ruleRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -103,7 +115,7 @@ export class RequestHistoryPage implements OnInit {
 
   taskAccepted(){
     this.rule.team = this.team;
-    this.taskcompletedservice.taskAccepted(this.task.team.codice).subscribe(Response =>{
+    this.taskcompletedservice.taskAccepted(this.team.codice).subscribe(Response =>{
       this.taskCompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -117,7 +129,7 @@ export class RequestHistoryPage implements OnInit {
 
   taskrejected(){
     this.rule.team = this.team;
-    this.taskcompletedservice.taskRejected(this.task.team.codice).subscribe(Response =>{
+    this.taskcompletedservice.taskRejected(this.team.codice).subscribe(Response =>{
       this.taskRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
