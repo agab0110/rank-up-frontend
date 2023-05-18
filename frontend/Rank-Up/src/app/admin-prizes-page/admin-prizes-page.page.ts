@@ -14,26 +14,30 @@ export class AdminPrizesPagePage implements OnInit {
 
   prizes:Prize[];
   team:Team;
+  prize:Prize;
   constructor(private location: Location, private pizeservice : PrizeService) {
     this.prizes = new Array<Prize>;
     this.team = new Team();
+    this.prize = new Prize();
   }
 
   ngOnInit() {
+    this.listprize();
     if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
     //this.router.navigate(['user/home']);
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    this.Listprize(this.team.codice);
+    
   }
 
   backButton() {
     this.location.back();
   }
-  Listprize(idTeam: Number){
-    this.pizeservice.listPrize(idTeam).subscribe(response =>{
+  listprize(){
+    this.prize.beloggingTeam = this.team;
+    this.pizeservice.listPrize(this.team.codice).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)
