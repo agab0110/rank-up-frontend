@@ -7,19 +7,19 @@
     <div id="div-image">
       <img>
     </div>
-    <div id="div-image-title">{{user_name}}</div>
+    <div id="div-image-title">{{user.username}} </div>
 
     <div id="div-points">Punti: {{user_points}}</div>
 
     <div id="div-title-prizes">Premi</div>
     <div id="div-prizes" scroll="true">
       <div id="div-prize" *ngFor="let prize of prizes">
-        
+
         <div id="div-div-prizes">
-          <div id="div-div-prizes-name" >{{prize.prize_name}}</div>
-          <ion-button *ngIf="user_points >= prize.prize_point; else conditionFalse" (click)="showAlert(prize.prize_name, prize.prize_point)" id="div-div-prizes-button">{{prize.prize_point}} pt.</ion-button>
+          <div id="div-div-prizes-name" >{{prize.name}}</div>
+          <ion-button *ngIf="user_points >= prize.price; else conditionFalse" (click)="showAlert(prize.name, prize.price)" id="div-div-prizes-button">{{prize.price}} pt.</ion-button>
           <ng-template #conditionFalse>
-            <ion-button [disabled]="true" (click)="showAlert(prize.prize_name, prize.prize_point)" id="div-div-prizes-button-disable">{{prize.prize_point}} pt.</ion-button>
+            <ion-button [disabled]="true" (click)="showAlert(prize.name, prize.price)" id="div-div-prizes-button-disable">{{prize.price}} pt.</ion-button>
           </ng-template>
         </div>
 

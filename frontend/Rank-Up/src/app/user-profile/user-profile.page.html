@@ -2,24 +2,24 @@
   <div class="backgroundUser">
 
     <div id="div-image">
-      
+
     </div>
-    <div id="div-image-title">{{user_name}} {{user_surname}}</div>
+    <div id="div-image-title">{{user.name}} {{user.surname}}</div>
 
     <div id="div-container">
-      
+
       <div id="div-top">
 
         <div class="div-large">
           <div class="div-large-tag">Username</div>
-          <div class="div-large-value">{{user_username}}</div>
+          <div class="div-large-value">{{user.username}}</div>
         </div>
 
         <div class="div-large">
           <div class="div-large-tag">Email</div>
-          <div class="div-large-value">{{user_email}}</div>
+          <div class="div-large-value">{{user.email}}</div>
         </div>
-        
+
       </div>
       <div id="div-middle">
         <ion-grid>
@@ -47,7 +47,7 @@
                 </div>
               </div>
             </ion-col>
-            
+
           </ion-row>
           <ion-row>
             <ion-col>
@@ -97,8 +97,8 @@
       </div>
     </div>
     <app-bt-user-large [text]="'Logout'" [routerLink]="['/login']"></app-bt-user-large>
-    
-    
+
+
   </div>
 </ion-content>
 

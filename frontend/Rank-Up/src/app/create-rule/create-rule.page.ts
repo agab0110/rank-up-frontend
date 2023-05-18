@@ -51,8 +51,8 @@ export class CreateRulePage implements OnInit{
   } */
 
   public createRule(){
-      //this.rule.admin = this.admin;
-      //this.rule.team = this.team;
+      //this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
+      //this.rule.team = this.team;     //setta il team presente nel local storage, api 1
       this.ruleService.newRule(this.rule).subscribe(response => {
       console.log("Regola creata con successo");
       console.log(response);
