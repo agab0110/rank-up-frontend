@@ -38,4 +38,8 @@ export class TeamService {
   public getTeamRand() {
     return this.http.get(this.teamUrl + "/researchTeam");
   }
+
+  public newTeam(team: any) {
+    return this.http.post(this.teamUrl + "/team", team)
+  }
 }
