@@ -29,7 +29,7 @@ export class RuleCompletedService {
 
   public rulerejected(teamId: Number): Observable<RuleCompleted[]> {
     return this.http.get<RuleCompleted[]>(
-      this.baseUrl + "/rulerejected/" + teamId
+      this.baseUrl + "/ruleRejected/" + teamId
     );
   }
 

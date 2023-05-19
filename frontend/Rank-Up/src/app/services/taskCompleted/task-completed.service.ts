@@ -26,7 +26,7 @@ export class TaskCompletedService {
 
   public taskRejected(teamId: Number): Observable<TaskCompleted[]> {
     return this.http.get<TaskCompleted[]>(
-      this.baseUrl + "/taskrejected/" + teamId
+      this.baseUrl + "/taskRejected/" + teamId
     );
   }
 
