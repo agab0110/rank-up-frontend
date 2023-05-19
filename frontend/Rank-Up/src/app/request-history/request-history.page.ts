@@ -36,7 +36,6 @@ export class RequestHistoryPage implements OnInit {
       this.ruleRejected = new Array<RuleCompleted>;
       this.taskCompleted = new Array<TaskCompleted>;
       this.taskRejected = new Array<TaskCompleted>;
-      this.activitySort = new Array<Object>;
      }
 
      ngOnInit() {
@@ -46,8 +45,7 @@ export class RequestHistoryPage implements OnInit {
       //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-      this.ruleComleleted();
-      this.sortByActivityName();
+      this.ruleCompleted();
     }
 
   async presentAlert() {
@@ -73,7 +71,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.sortByActivityName();
+            this.rulecompleted= this.sortByActivityName();
           }
         },
       ],
@@ -87,7 +85,7 @@ export class RequestHistoryPage implements OnInit {
     this.location.back();
   }
 
-  ruleComleleted(){
+  ruleCompleted(){
     this.rulecompletedservice.ruleAccepted(1).subscribe(Response =>{
       this.rulecompleted = Response;
     },(error: Response) => {
@@ -149,12 +147,13 @@ export class RequestHistoryPage implements OnInit {
     }
   }
 
-  sortByActivityName(){       //NON FUNZIONA API 22 
+  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
       this.rulecompleted.forEach((element : RuleCompleted) => {
-        sortList.push(element)
+        sortList.push(element);
       });
     console.log(sortList);
-    sortList.sort((a, b) => a.comment.localeCompare(b.comment));
+    sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
+    return sortList;
   }
 }
