@@ -6,7 +6,8 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-
+import { Rule } from '../models/rule/rule';
+import { Task } from '../models/task/task';
 
 @Component({
   selector: 'app-request-history',
@@ -14,54 +15,45 @@ import { Team } from '../models/team/team';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  rulecompleted: RuleCompleted[];
-  ruleRejected: RuleCompleted[];
-  taskCompleted: TaskCompleted[];
-  taskRejected: TaskCompleted[];
-  team: Team;
+  rulecompleted : RuleCompleted[];
+  ruleRejected : RuleCompleted[];
+  taskCompleted : TaskCompleted[];
+  taskRejected : TaskCompleted[];
+  team:Team;
+  rule : Rule;
+  task :Task;
   filter: number = 1;
   data: any;
   idTeam: any = 1;
   history: any[];
 
-  constructor(
-    private alertController: AlertController,
-    private location: Location,
-    private rulecompletedservice : RuleCompletedService,
-    private taskcompletedservice : TaskCompletedService) {
-
-      this.team = new Team();
-      this.rulecompleted = new Array<RuleCompleted>;
-      this.ruleRejected = new Array<RuleCompleted>;
-      this.taskCompleted = new Array<TaskCompleted>;
-      this.taskRejected = new Array<TaskCompleted>;
-      this.history = new Array<any>();
-     }
-
-     ngOnInit() {
-      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
-      this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-      //this.router.navigate(['user/home']);
-      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-      this.ruleComleleted();
-      this.rulerejected();
-      this.taskAccepted();
-      this.taskrejected();
-      this.history.push(this.rulecompleted);
-      this.history.push(this.ruleRejected);
-      this.history.push(this.taskCompleted);
-      this.history.push(this.taskRejected);
-      console.log(this.history);
-      console.log("--------------------")
-      this.dataHistory();
-      console.log(this.history);
-    }
+  constructor(private alertController: AlertController, private location: Location, private rulecompletedservice : RuleCompletedService, private taskcompletedservice : TaskCompletedService) {
+    this.rulecompleted = new Array<RuleCompleted>;
+    this.ruleRejected = new Array<RuleCompleted>;
+    this.taskCompleted = new Array<TaskCompleted>;
+    this.taskRejected = new Array<TaskCompleted>;
+    this.team = new Team();
+    this.rule = new Rule();
+    this.task = new Task();
+    this.history = new Array<any>();
+   }
+  ngOnInit(){
+    this.ruleComleleted();
+    this.rulerejected();
+    this.taskAccepted();
+    this.taskrejected();
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    //this.router.navigate(['user/home']);
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+  }
 
   dataHistory() {
     this.history.sort((a, b) => a.date - b.date);
   }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -100,7 +92,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   ruleComleleted(){
-    this.rulecompletedservice.ruleAccepted(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.rulecompletedservice.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.rulecompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -113,7 +106,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   rulerejected(){
-    this.rulecompletedservice.rulerejected(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.rulecompletedservice.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
       this.ruleRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -126,7 +120,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   taskAccepted(){
-    this.taskcompletedservice.taskAccepted(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.taskcompletedservice.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.taskCompleted = Response;
     },(error: Response) => {
       if(error.status == 400)
@@ -139,7 +134,8 @@ export class RequestHistoryPage implements OnInit {
   }
 
   taskrejected(){
-    this.taskcompletedservice.taskRejected(1).subscribe(Response =>{
+    this.rule.team = this.team;
+    this.taskcompletedservice.taskRejected(/*this.team.codice*/1).subscribe(Response =>{
       this.taskRejected = Response;
     },(error: Response) => {
       if(error.status == 400)
