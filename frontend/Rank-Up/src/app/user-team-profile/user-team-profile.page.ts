@@ -42,7 +42,7 @@ export class UserTeamProfilePage implements OnInit {
       console.log(response);
     });
 
-    this.ruleCompletedService.getRuleCompletedByUser(1,1).subscribe((response) => {
+    this.ruleCompletedService.getRulesCompletedByUser(1,1).subscribe((response) => {
       response.forEach(element => {
         this.activities.push(element);
       });
