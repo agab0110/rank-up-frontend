@@ -4,6 +4,7 @@ import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
+import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 
 @Component({
   selector: 'app-user-team-profile',
@@ -23,6 +24,7 @@ export class UserTeamProfilePage implements OnInit {
     private location: Location,
     private taskCompletedService: TaskCompletedService,
     private ruleCompletedService: RuleCompletedService,
+    private userGetPrizeService: UserGetPrizeService
     ) {
     this.user = new User();
     this.team = new Team();
@@ -47,7 +49,12 @@ export class UserTeamProfilePage implements OnInit {
       console.log(response);
     });
 
-    console.log(this.activities);
+    this.userGetPrizeService.getUserPrizes(1,1).subscribe((response) => {
+      response.forEach(element => {
+        this.prizes.push(element);
+      });
+      console.log(response);
+    });
   }
 
   segmentChanged(event:any) {

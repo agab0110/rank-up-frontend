@@ -13,7 +13,7 @@ export class UserGetPrizeService {
   }
 
   public getUserPrizes(userId: number, teamId: number) {
-    return this.http.get<Prize>(
+    return this.http.get<Prize[]>(
       this.userGetPrizeUrl + "/getPrizes/" + teamId + "/" + userId
     );
   }
