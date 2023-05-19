@@ -22,6 +22,7 @@ export class RequestHistoryPage implements OnInit {
   filter: number = 1;
   data: any;
   idTeam: any = 1;
+  history: any[];
 
   constructor(
     private alertController: AlertController,
@@ -34,6 +35,7 @@ export class RequestHistoryPage implements OnInit {
       this.ruleRejected = new Array<RuleCompleted>;
       this.taskCompleted = new Array<TaskCompleted>;
       this.taskRejected = new Array<TaskCompleted>;
+      this.history = new Array<any>();
      }
 
      ngOnInit() {
@@ -43,7 +45,23 @@ export class RequestHistoryPage implements OnInit {
       //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.ruleComleleted();
+      this.rulerejected();
+      this.taskAccepted();
+      this.taskrejected();
+      this.history.push(this.rulecompleted);
+      this.history.push(this.ruleRejected);
+      this.history.push(this.taskCompleted);
+      this.history.push(this.taskRejected);
+      console.log(this.history);
+      console.log("--------------------")
+      this.dataHistory();
+      console.log(this.history);
     }
+
+  dataHistory() {
+    this.history.sort((a, b) => a.date - b.date);
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
