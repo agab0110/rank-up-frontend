@@ -6,6 +6,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
+import { Rule } from '../models/rule/rule';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class RequestHistoryPage implements OnInit {
   ruleRejected: RuleCompleted[];
   taskCompleted: TaskCompleted[];
   taskRejected: TaskCompleted[];
+  activitySort: any;
   team: Team;
   filter: number = 1;
   data: any;
@@ -34,6 +36,7 @@ export class RequestHistoryPage implements OnInit {
       this.ruleRejected = new Array<RuleCompleted>;
       this.taskCompleted = new Array<TaskCompleted>;
       this.taskRejected = new Array<TaskCompleted>;
+      this.activitySort = new Array<Object>;
      }
 
      ngOnInit() {
@@ -43,6 +46,8 @@ export class RequestHistoryPage implements OnInit {
       //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.ruleComleleted();
+      this.sortByActivityName();
     }
 
   async presentAlert() {
@@ -68,6 +73,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
+            this.sortByActivityName();
           }
         },
       ],
@@ -141,5 +147,14 @@ export class RequestHistoryPage implements OnInit {
         console.log(data)
       });
     }
+  }
+
+  sortByActivityName(){       //NON FUNZIONA API 22 
+    let sortList: (RuleCompleted)[] = [];
+      this.rulecompleted.forEach((element : RuleCompleted) => {
+        sortList.push(element)
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.comment.localeCompare(b.comment));
   }
 }

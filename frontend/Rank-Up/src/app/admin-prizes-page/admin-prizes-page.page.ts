@@ -20,7 +20,7 @@ export class AdminPrizesPagePage implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
@@ -33,7 +33,7 @@ export class AdminPrizesPagePage implements OnInit {
     this.location.back();
   }
   Listprize(idTeam: Number){
-    this.pizeservice.listPrize(idTeam).subscribe(response =>{
+    this.pizeservice.listPrize(1).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)
