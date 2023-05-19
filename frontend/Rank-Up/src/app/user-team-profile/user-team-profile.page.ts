@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { User } from '../models/user/user';
+import { Team } from '../models/team/team';
+import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
+import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 
 @Component({
   selector: 'app-user-team-profile',
@@ -9,9 +13,41 @@ import { Location } from '@angular/common';
 export class UserTeamProfilePage implements OnInit {
   stato = true; 
 
-  constructor(private location: Location) { }
+  activities: any;
+  prizes: any[];
+
+  user: User;
+  team: Team;
+
+  constructor(
+    private location: Location,
+    private taskCompletedService: TaskCompletedService,
+    private ruleCompletedService: RuleCompletedService,
+    ) {
+    this.user = new User();
+    this.team = new Team();
+    this.activities = [];
+    this.prizes = [];
+   }
 
   ngOnInit() {
+    //TODO: inserire local storage quando sarà pronto
+
+    this.taskCompletedService.getTaskCompletedByUser(1,1).subscribe((response) => {
+      response.forEach(element => {
+        this.activities.push(element);
+      });
+      console.log(response);
+    });
+
+    this.ruleCompletedService.getRuleCompletedByUser(1,1).subscribe((response) => {
+      response.forEach(element => {
+        this.activities.push(element);
+      });
+      console.log(response);
+    });
+
+    console.log(this.activities);
   }
 
   segmentChanged(event:any) {

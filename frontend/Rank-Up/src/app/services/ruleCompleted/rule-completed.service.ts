@@ -13,6 +13,10 @@ export class RuleCompletedService {
     this.baseUrl = "http://localhost:8080/ruleCompletedApi";
    }
 
+   public getRuleCompletedByUser(idUser: number, idTeam: number) {
+    return this.http.get<RuleCompleted[]>(this.baseUrl + "/getRuleForSpecificUser/" + idTeam + "/" + idUser);
+  }
+
    public ruleAccepted(teamId: Number): Observable<RuleCompleted[]> {
     return this.http.get<RuleCompleted[]>(
       this.baseUrl + "/ruleAccepted/" + teamId
