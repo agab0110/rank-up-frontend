@@ -45,7 +45,7 @@ export class AdminListPage implements OnInit {
     this.stato = !this.stato;
   }
 
-  getPartecipants(id_team: Number){
+  getPartecipants(id_team: Number){   // API 18 mancano punti del partecipante
     this.userJoinsTeamService.getPartecipants(1).subscribe(result => {
       this.users = result;
     }, (error: Response) => {
