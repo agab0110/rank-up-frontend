@@ -29,6 +29,11 @@ export class UserService {
     );
   }
 
+    public changeUsername(teamId: number, username: string){
+      return this.http.patch<User>(
+        this.userUrl + "/changeUsername/" + teamId, username
+      );
+    }
 
   public changeName(userId: number, newName: string) {
     return this.http.patch<User>(
