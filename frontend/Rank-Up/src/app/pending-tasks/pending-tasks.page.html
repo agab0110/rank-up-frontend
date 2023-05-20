@@ -9,10 +9,16 @@
   
       <div class="listBox">
         <ion-list>
-          <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index" [routerLink]="['/task-confirmation']">
+          <ion-item class="item" *ngFor="let rule of rules" [routerLink]="['/task-confirmation']">
+            <img class="icon" name=iconName src="{{this.rule.photo}}">
+            <ion-label class="label">{{rule.username}}</ion-label>
+            <ion-label class="label">{{rule.name}}</ion-label>
+          </ion-item>
+
+          <ion-item class="item" [routerLink]="['/task-confirmation']">
             <img  alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
-            <ion-label class="label">Utente {{i+1}}</ion-label>
-            <ion-label class="label">Attività {{i+1}}</ion-label>
+            <ion-label class="label">Utente</ion-label>
+            <ion-label class="label">Attività</ion-label>
           </ion-item>
         </ion-list>
       </div>

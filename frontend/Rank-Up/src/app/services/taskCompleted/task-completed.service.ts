@@ -33,4 +33,8 @@ export class TaskCompletedService {
   public insertTaskCompleted(taskCompleted: any) {
     return this.http.post(this.baseUrl + "/taskCompleted", taskCompleted)
   }
+
+  public confirmationTaskCompleted(id_task_completed:any, status:any, comment: any) {
+    return this.http.patch(this.baseUrl + "/confirmation/" + id_task_completed + "/" + status, comment)
+  }
 }

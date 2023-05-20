@@ -36,4 +36,8 @@ export class RuleCompletedService {
   public insertRuleCompleted(ruleCompleted: any) {
     return this.http.post(this.baseUrl + "/ruleCompleted", ruleCompleted);
   }
+
+  public getPending(id_team: any) {
+    return this.http.get(this.baseUrl + "/pending/" + id_team);
+  }
 }

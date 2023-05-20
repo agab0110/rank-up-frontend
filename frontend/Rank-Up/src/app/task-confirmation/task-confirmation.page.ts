@@ -13,7 +13,7 @@ export class TaskConfirmationPage implements OnInit {
 
   data: any
   stato = false
-  id = 1
+  id = 1 // id ricevuto dalla schermata precedente
 
   constructor(
     private alertController: AlertController, 
@@ -60,5 +60,11 @@ export class TaskConfirmationPage implements OnInit {
 
   mostra() {
     this.stato = !this.stato;
+  }
+
+  invia(status:number) {
+    this.taskCompletedService.confirmationTaskCompleted(this.id, status, "ciao").subscribe(data => {
+      console.log(data)
+    })
   }
 }

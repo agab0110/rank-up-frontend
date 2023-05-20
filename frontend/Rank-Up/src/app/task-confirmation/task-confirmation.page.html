@@ -26,13 +26,13 @@
     <div class="subTitle">Accettare richiesta di completamento?</div>
     <div class="pulsanteBox">
       <div class="titoloBox">
-        <ion-button (click)="presentAlert()" class="pulsante rifiuta">
+        <ion-button (click)="invia(2)" class="pulsante rifiuta">
           <ion-icon name="close-circle-outline"></ion-icon>
         </ion-button>
         <div class="text">Rifiuta</div>
       </div>
       <div class="titoloBox">
-        <ion-button (click)="presentAlert()" class="pulsante conferma">
+        <ion-button (click)="invia(1)" class="pulsante conferma">
           <ion-icon name="checkmark-circle-outline"></ion-icon>
         </ion-button>
         <div class="text">Accetta</div>

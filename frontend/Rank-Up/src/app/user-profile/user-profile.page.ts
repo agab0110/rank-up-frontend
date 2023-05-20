@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
+import { User } from '../models/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,23 +12,41 @@ import { UserService } from '../services/user/user.service';
 })
 export class UserProfilePage implements OnInit {
 
+  user: User;
+
+  public user_name: string | undefined
+  public user_surname: string | undefined
+  public user_username: string | undefined
+  public user_email: string | undefined
+  public user_photo: string | undefined
+
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL!: undefined | null | string;
 
-
-  constructor(private alertController: AlertController, private userService: UserService) { }
-
-  userId: number = 1;
-  user_username: string = 'Username';
-  user_name: string = '[Nome]';
-  user_surname: string = 'Cognome]';
-  user_email: string = 'Email';
-  user_foto: string = 'Foto';
+  constructor(
+    private alertController: AlertController, 
+    private router: Router,
+    private userService: UserService
+  ) {
+    this.user = new User();
+  }
 
   ngOnInit() {
+    localStorage.setItem('teamId', '');
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      this.router.navigate(['login']);
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
+    this.userService.getUser(this.user.id).subscribe(data => {
+      console.log(data)
+      this.user_name = JSON.parse(JSON.stringify(data)).name;
+      this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+      this.user_username = JSON.parse(JSON.stringify(data)).username;
+      this.user_email = JSON.parse(JSON.stringify(data)).email;
+      this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+    });
   }
 
   loadFileFromDevice(event: any) {

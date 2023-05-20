@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -8,9 +9,18 @@ import { Location } from '@angular/common';
 })
 export class PendingTasksPage implements OnInit {
 
-  constructor(private location: Location) { }
+  public rules: any
+  public tasks: any
+
+  constructor(
+    private location: Location,
+    private ruleCompletedService: RuleCompletedService
+  ) { }
 
   ngOnInit() {
+    this.ruleCompletedService.getPending(2).subscribe(data => {
+      this.rules = data;
+    })
   }
 
   backButton() {

@@ -28,4 +28,10 @@ export class UserService {
       this.userUrl + "/getAllUsers"
     );
   }
+
+  public getUser(idUser: any) {
+    return this.http.get(
+      this.userUrl + "/getUser/" + idUser
+    );
+  }
 }
