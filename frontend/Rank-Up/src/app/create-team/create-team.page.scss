@@ -5,27 +5,32 @@
 .insertImage{
   --background: transparent;
 
-  color:black;
+  color: var(--ion-color-black);
   text-decoration: underline;
 
-  margin-top: -2vh;
+  margin-top: 1vh;
 }
 
 .teamCode{
-  margin-top: 8vh;
-  margin-bottom: -0.3vh;
+  margin-top: 5vh;
+}
+
+h4 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .code{
-  margin-bottom: -2vh;
+  text-align: center;
 }
 
 .insertName{
-  margin-top: 3vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
-.teamName{
-  margin-top: 0vh;
+.teamName {
+  width: 70%;
 }
 
 .membersquare {

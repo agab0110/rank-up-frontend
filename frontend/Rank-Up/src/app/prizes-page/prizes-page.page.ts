@@ -62,7 +62,7 @@ export class PrizesPagePage implements OnInit {
    }
 
   Listprize(idTeam: Number){
-    this.prizeService.listPrize(idTeam).subscribe(response =>{
+    this.prizeService.listPrize(1).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)

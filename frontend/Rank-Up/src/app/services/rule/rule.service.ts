@@ -16,12 +16,18 @@ export class RuleService {
   public listRule(teamId: Number): Observable<Rule[]> {
     return this.http.get<Rule[]>(
       this.baseUrl + "/rules/" + teamId
-      );
+    );
   }
 
-  public newRule(rule : Rule){
+  public newRule(rule: Rule) {
     return this.http.post<Rule>(
-    this.baseUrl + "/createRule", rule
+      this.baseUrl + "/createRule", rule
+    );
+  }
+
+  public getRule(idRule: any) {
+    return this.http.get(
+      this.baseUrl + "/rule/" + idRule
     );
   }
 }

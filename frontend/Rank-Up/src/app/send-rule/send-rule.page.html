@@ -7,10 +7,10 @@
 
     <h1 align="center" class="title">Regola</h1>
 
-    <div class="description">
-      <app-user-element-bar labelText="[Nome Regola]" buttonText="Regola"></app-user-element-bar>
+    <div class="description" *ngIf="this.data">
+      <app-user-element-bar *ngIf="this.data.ruleName" labelText={{this.data.ruleName}} buttonText="Regola"></app-user-element-bar>
       <br>
-      <app-user-element-bar labelText="[Punti]" buttonText="Punti"></app-user-element-bar>
+      <app-user-element-bar *ngIf="this.data.points" labelText={{this.data.points}} buttonText="Punti"></app-user-element-bar>
     </div>
 
     <div class="buttons">
@@ -22,7 +22,7 @@
       <h4 align="center">Inviare richiesta di completamento?</h4>
       <div class="pulsanteBox">
         <div class="titoloBox">
-          <ion-button class="pulsante rifiuta">
+          <ion-button class="pulsante rifiuta" [routerLink]="['/user/rules-and-tasks-rules']">
             <ion-icon name="close-circle-outline"></ion-icon>
           </ion-button>
           <div class="text">Rifiuta</div>
@@ -42,7 +42,7 @@
 <ion-alert
   trigger="descrizione"
   header="Descrizione"
-  message="[descrizione]"
+  message={{this.data.description}}
   [buttons]="descrBtns"
 ></ion-alert>
 

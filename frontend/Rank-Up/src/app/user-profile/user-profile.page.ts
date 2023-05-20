@@ -5,7 +5,7 @@ import { UserService } from '../services/user/user.service';
 import { error } from 'console';
 import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
-import { Route, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,33 +14,44 @@ import { Route, RouterLink } from '@angular/router';
 })
 export class UserProfilePage implements OnInit {
 
+  user: User;
+
+  public user_name: string | undefined
+  public user_surname: string | undefined
+  public user_username: string | undefined
+  public user_email: string | undefined
+  public user_photo: string | undefined
+  team: Team;
+
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL!: undefined | null | string;
-  user: User;
 
-
-  constructor(private alertController: AlertController, private userService: UserService) { 
+  constructor(
+    private alertController: AlertController, 
+    private router: Router,
+    private userService: UserService
+  ) {
     this.team = new Team();
     this.user = new User();
   }
 
-  userId: number = 1;
-  user_username: string = 'Username';
-  user_name: string = '[Nome]';
-  user_surname: string = 'Cognome]';
-  user_email: string = 'Email';
-  user_foto: string = 'Foto';
-  team: Team;
-
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    localStorage.setItem('teamId', '');
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      this.router.navigate(['login']);
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    this.userService.getUser(this.user.id).subscribe(data => {
+      console.log(data)
+      this.user_name = JSON.parse(JSON.stringify(data)).name;
+      this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+      this.user_username = JSON.parse(JSON.stringify(data)).username;
+      this.user_email = JSON.parse(JSON.stringify(data)).email;
+      this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+    });
+
   }
 
   async presentAlert1() {

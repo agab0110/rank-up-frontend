@@ -1,19 +1,23 @@
-#div-image {
+.imgUser {
+    margin-top: 8vh;
     width: 10vh;
     height: 10vh;
-    margin-top: 8vh;
-    border-radius: 20%;
-    background-color: black;
+    border-radius: 25px;
 }
 
 #div-image-title {
-    margin-top: 0.5vh;
+    margin-top: 1vh;
     color: var(--ion-color-black)
 }
 
 #div-container {
+    margin-top: 5vh;
+    width: 90%;
+}
+
+#div-middle {
     margin-top: 2vh;
-    width: 95%;
+    margin-bottom: 2vh;
 }
 
 .sep {
@@ -21,7 +25,7 @@
 }
 
 .div-element-text {
-    color: black;
+    color: var(--ion-color-black);
     text-align: center;
 
 }
@@ -40,14 +44,12 @@
 }
 
 .icon-black {
-    color: black;
+    color: var(--ion-color-black);
 }
 
 #div-top {
     text-align: center;
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 80%;
 }
 
 .div-large {
@@ -57,7 +59,7 @@
     border-radius: 28px;
 
     height: 6vh;
-    width: 280px;
+    width: 100%;
 }
 
 .div-large-tag {

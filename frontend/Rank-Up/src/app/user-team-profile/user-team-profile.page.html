@@ -26,25 +26,18 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list>
-        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/task-completed']">
-          <ion-label class="label">[Task]</ion-label>
-          <ion-label class="data">[data]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
+        <ion-item class="item" *ngFor="let activity of activities" [routerLink]="['/task-completed']">
+          <ion-label class="label">{{activity.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{activity.points}} pt</ion-button>
         </ion-item>
-
-        <ion-item class="item" *ngFor="let item of [].constructor(6); let i = index">
-          <ion-label class="label" [routerLink]="['/user-rule-completed']">[Regola]</ion-label>
-          <ion-label class="data">[data]</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">{{i*i}} pt</ion-button>
-        </ion-item>
-      </ion-list>
+    </ion-list>
     </div>
 
     <div class="listBox" *ngIf="!stato">
       <ion-list>
-        <ion-item class="item" *ngFor="let item of [].constructor(15); let i = index">
-          <ion-label class="label">Premio {{i}}</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">{{-i*i}} pt</ion-button>
+        <ion-item class="item" *ngFor="let prize of prizes">
+          <ion-label class="label">{{prize.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{prize.price}} pt</ion-button>
         </ion-item>
       </ion-list>
     </div>
