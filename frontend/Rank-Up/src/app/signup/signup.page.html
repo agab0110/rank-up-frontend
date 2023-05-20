@@ -16,7 +16,7 @@
       <ion-input [(ngModel)]="user.username" (ionInput)="username_checker()" [type]="'text'" [placeholder]="'Username'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
       <ion-input [(ngModel)]="password" (ionInput)="password_checker()" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
 
-      <ion-button [disabled]="!password_checker() || !username_checker()" id="btUserSmall" (click)="signup()">Registrati</ion-button><ion-button [disabled]="!password_checker() || !username_checker()" id="btUserSmall" (click)="signup()">Registrati</ion-button>
+      <ion-button [disabled]="!password_checker() || !username_checker()" id="btUserSmall" (click)="signup()">Registrati</ion-button>
     </div>
   </div>
 
