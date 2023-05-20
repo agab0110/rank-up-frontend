@@ -77,12 +77,11 @@ export class AddUserPage implements OnInit {
     });
   }
 
-  addAdmin(id_user: number, id_team:number) {
-    id_team = this.team.codice;
-    this.adminService.newAdmin(id_user, id_team).subscribe(response => {
-      this.responseData = response;
+  addAdmin(idUser: number, idTeam:number) {
+    idTeam = 1;
+    this.adminService.newAdmin(idUser, idTeam).subscribe(response => {
       console.log("Admin aggiunto con successo");
-      console.log(this.responseData);
+      console.log(response);
     }, (error: Response) => {
       if( error.status == 400)
       console.log("400 error");
