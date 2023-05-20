@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { User } from '../models/user/user';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Router } from '@angular/router';
 import { Team } from '../models/team/team';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { Prize } from '../models/prize/prize';
+
 
 @Component({
   selector: 'app-admin-profile',
@@ -12,15 +14,21 @@ import { Prize } from '../models/prize/prize';
   styleUrls: ['./admin-profile.page.scss'],
 })
 export class AdminProfilePage implements OnInit {
-
-  stato = false
-
-  userProfile: User;
   user: User;
+  userJoin: UserJoinsTeam;
+  stato = false;
+  userProfile: User;
   team: Team;
   //admin: 
   prizes: Prize[];
 
+  ngOnInit() {
+    //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      localStorage.getItem('viewUser');
+      localStorage.getItem('viewUserJoinsTeam');
+      this.user = JSON.parse(localStorage.getItem('viewUser') || '{}');
+      this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
+  }
 
   constructor(
     private location: Location,
@@ -31,6 +39,7 @@ export class AdminProfilePage implements OnInit {
       this.user = new User();
       this.team = new Team();
       this.prizes = [];
+      this.userJoin = new UserJoinsTeam();
      }
 
   ngOnInit() {

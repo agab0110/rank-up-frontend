@@ -15,11 +15,13 @@ import { Task } from '../models/task/task';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  ruleCompleted : RuleCompleted[];
-  ruleRejected : RuleCompleted[];
-  taskCompleted : TaskCompleted[];
-  taskRejected : TaskCompleted[];
-  team:Team;
+  rulecompleted: RuleCompleted[];
+  ruleRejected: RuleCompleted[];
+  taskCompleted: TaskCompleted[];
+  taskRejected: TaskCompleted[];
+  activitySort: any;
+  team: Team;
+
   filter: number = 1;
   data: any;
   idTeam: any = 1;
@@ -30,32 +32,31 @@ export class RequestHistoryPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private location: Location,
-    private ruleCompletedService : RuleCompletedService,
-    private taskCompletedService : TaskCompletedService
-    ) {
-    this.ruleCompleted = [];
-    this.ruleRejected = [];
-    this.taskCompleted = [];
-    this.taskRejected = [];
-    this.team = new Team();
-    this.history = [];
-   }
+    private rulecompletedservice : RuleCompletedService,
+    private taskcompletedservice : TaskCompletedService) {
+      this.history = [];
+      this.team = new Team();
+      this.rulecompleted = new Array<RuleCompleted>;
+      this.ruleRejected = new Array<RuleCompleted>;
+      this.taskCompleted = new Array<TaskCompleted>;
+      this.taskRejected = new Array<TaskCompleted>;
+     }
 
-  ngOnInit(){
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+     ngOnInit() {
+      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      //this.router.navigate(['user/home']);
+      this.team = JSON.parse(localStorage.getItem('team') || '{}');
+      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+      //this.router.navigate(['user/home']);
+      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.getRulesCompleted();
+      this.getRulesRejected();
+      this.getTaskAccepted();
+      this.getTaskRejected();
 
-    this.getRulesCompleted();
-    this.getRulesRejected();
-    this.getTaskAccepted();
-    this.getTaskRejected();
-    
-    this.dataHistory();
-  }
+      this.dataHistory();
+    }
+
 
   dataHistory() {
     console.log(this.history);
@@ -87,6 +88,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
+            this.rulecompleted= this.sortByActivityName();
           }
         },
       ],
@@ -176,5 +178,15 @@ export class RequestHistoryPage implements OnInit {
         console.log(data)
       });
     }
+  }
+
+  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (RuleCompleted)[] = [];
+      this.rulecompleted.forEach((element : RuleCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
+    return sortList;
   }
 }

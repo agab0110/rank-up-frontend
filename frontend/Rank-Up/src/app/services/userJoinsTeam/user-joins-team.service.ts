@@ -37,5 +37,4 @@ export class UserJoinsTeamService {
   public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
-
 }

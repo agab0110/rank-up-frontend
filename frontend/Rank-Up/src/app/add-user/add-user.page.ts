@@ -72,19 +72,4 @@ export class AddUserPage implements OnInit {
       console.log(error);
     });
   }
-
-  addAdmin(id_user: Number) {
-    console.log(id_user);
-    this.adminService.newAdmin(1, id_user).subscribe(response => {
-      console.log("Admin aggiunto con successo");
-      console.log(response);
-    }, (error: Response) => {
-      if( error.status == 400)
-      console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
-  }
 }
