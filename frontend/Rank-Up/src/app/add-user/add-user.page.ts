@@ -21,7 +21,8 @@ export class AddUserPage implements OnInit {
   query!: string;
   id_user!: Number;
   user : User;
-  responseData!: string;
+  idTeam! : number;
+  responseData: any;
 
   constructor(
     private location: Location,
@@ -76,15 +77,12 @@ export class AddUserPage implements OnInit {
     });
   }
 
-  addAdmin(idUser: number) {
-    //this.user.id = idUser;
-    //this.admin.user = this.user;
-    //this.team.codice = 1;
-    //this.admin.team = this.team;
-    //console.log(this.admin);
-    this.adminService.newAdmin(idUser, 2).subscribe(response => {
+  addAdmin(id_user: number, id_team:number) {
+    id_team = this.team.codice;
+    this.adminService.newAdmin(id_user, id_team).subscribe(response => {
+      this.responseData = response;
       console.log("Admin aggiunto con successo");
-      console.log(response);
+      console.log(this.responseData);
     }, (error: Response) => {
       if( error.status == 400)
       console.log("400 error");

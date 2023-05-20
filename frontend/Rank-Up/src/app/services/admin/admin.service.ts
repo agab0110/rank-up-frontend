@@ -14,8 +14,11 @@ export class AdminService {
     this.baseUrl = "http://localhost:8080/adminManageTeamApi"
   }
 
-  public newAdmin(idUser:number, idTeam: number) {
-    const param = new HttpParams().set('idUser',idUser).set('idTeam',idTeam);
+  public newAdmin(id_user:number, id_team: number) {
+    const param = new HttpParams();
+    param.append('id_user',id_user);
+    param.append('id_team',id_team);
+
     return this.http.post<Admin>(
       this.baseUrl + "/addAdmin " ,{param}
     );
