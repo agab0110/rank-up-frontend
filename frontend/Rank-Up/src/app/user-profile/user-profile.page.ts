@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
+import { error } from 'console';
+import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 
@@ -19,6 +21,7 @@ export class UserProfilePage implements OnInit {
   public user_username: string | undefined
   public user_email: string | undefined
   public user_photo: string | undefined
+  team: Team;
 
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
@@ -30,6 +33,7 @@ export class UserProfilePage implements OnInit {
     private router: Router,
     private userService: UserService
   ) {
+    this.team = new Team();
     this.user = new User();
   }
 
@@ -47,6 +51,7 @@ export class UserProfilePage implements OnInit {
       this.user_email = JSON.parse(JSON.stringify(data)).email;
       this.user_photo = JSON.parse(JSON.stringify(data)).photo;
     });
+
   }
 
   async presentAlert1() {
@@ -87,7 +92,7 @@ export class UserProfilePage implements OnInit {
 
   await alert.present();
   }
-
+  
   loadFileFromDevice(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -124,6 +129,21 @@ export class UserProfilePage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.userService.changeUsername(this.user.id, alertData[0]).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+            }, (error: Response) => {  
+              if(error.status == 400)  
+                console.log("400 error");  
+              else {  
+                console.log('An unexpected error occured');   
+              }
+              console.log(error);
+            });
+          }
         },
         {
           text: 'Annulla',

@@ -16,9 +16,11 @@ export class TaskConfirmationPage implements OnInit {
 
   data: any
   stato = false
-  id = 2 // id ricevuto dalla schermata precedente
+  id = 1 // id ricevuto dalla schermata precedente
   public user: User;
-  ruleCompleted: RuleCompleted
+  ruleCompleted: RuleCompleted;
+  comment!: string;
+  bonusPoints!: number;
 
   constructor(
     private alertController: AlertController, 
@@ -54,13 +56,30 @@ export class TaskConfirmationPage implements OnInit {
     this.location.back();
   }
 
-  async presentAlert() {
+  async presentAlertReject() {
     const alert = await this.alertController.create({
-      header: 'Richesta Archiviata',
+      header: 'Richesta Rifiutata',
       buttons: [
         {
           handler: () => { 
-            this.backButton()
+            this.rejectActivity();
+          },  
+          text: 'Chiudi',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+  await alert.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Richesta Accettata',
+      buttons: [
+        {
+          handler: () => { 
+            this.confirmActivity();
           },  
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -84,5 +103,16 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.ruleCompleted).subscribe(data => {
       console.log(data)
     })
+    
+  rejectActivity() {
+    const status = 2;
+    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.backButton();
+  }
+
+  confirmActivity() {
+    const status = 1;
+    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.backButton();
   }
 }
