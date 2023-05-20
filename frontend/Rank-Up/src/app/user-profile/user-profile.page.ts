@@ -49,6 +49,45 @@ export class UserProfilePage implements OnInit {
     });
   }
 
+  async presentAlert1() {
+    const alert = await this.alertController.create({
+      header: 'Inserisci nuovo nome:',
+      inputs: [
+        {
+          placeholder: 'Nome',
+          cssClass: 'alert-input',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Conferma',
+          cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.userService.changeName(this.user.id, alertData[0]).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+            }, (error: Response) => {
+              if(error.status == 400)
+                console.log("400 error");
+              else {
+                console.log('An unexpected error occured');
+              }
+              console.log(error);
+            });
+          }
+        },
+        {
+          text: 'Annulla',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+  await alert.present();
+  }
+
   loadFileFromDevice(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -69,31 +108,7 @@ export class UserProfilePage implements OnInit {
   }
 
   attach() {
-    
-  }
 
-  async presentAlert1() {
-    const alert = await this.alertController.create({
-      header: 'Inserisci nuovo nome:',
-      inputs: [
-        {
-          placeholder: 'Nome',
-          cssClass: 'alert-input',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Conferma',
-          cssClass: 'alert-button-blue',
-        },
-        {
-          text: 'Annulla',
-          cssClass: 'alert-button-red',
-        },
-      ],
-    });
-
-  await alert.present();
   }
 
   async presentAlert2() {
@@ -186,5 +201,4 @@ export class UserProfilePage implements OnInit {
 
   await alert.present();
   }
-
 }

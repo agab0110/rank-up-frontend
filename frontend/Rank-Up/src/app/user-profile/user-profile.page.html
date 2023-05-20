@@ -1,22 +1,26 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundUser">
 
-    <img class="imgUser" src="{{this.user_photo}}" />
-
+    <div id="div-image">
+      
+    </div>
     <div id="div-image-title">{{user_name}} {{user_surname}}</div>
 
     <div id="div-container">
+      
+      <div id="div-top">
 
-      <div class="div-large">
-        <div class="div-large-tag">Username</div>
-        <div class="div-large-value">{{user_username}}</div>
+        <div class="div-large">
+          <div class="div-large-tag">Username</div>
+          <div class="div-large-value">{{user_username}}</div>
+        </div>
+
+        <div class="div-large">
+          <div class="div-large-tag">Email</div>
+          <div class="div-large-value">{{user_email}}</div>
+        </div>
+        
       </div>
-
-      <div class="div-large">
-        <div class="div-large-tag">Email</div>
-        <div class="div-large-value">{{user_email}}</div>
-      </div>
-
       <div id="div-middle">
         <ion-grid>
           <ion-row>
@@ -43,7 +47,7 @@
                 </div>
               </div>
             </ion-col>
-
+            
           </ion-row>
           <ion-row>
             <ion-col>
@@ -93,6 +97,8 @@
       </div>
     </div>
     <app-bt-user-large [text]="'Logout'" [routerLink]="['/login']"></app-bt-user-large>
+    
+    
   </div>
 </ion-content>
 

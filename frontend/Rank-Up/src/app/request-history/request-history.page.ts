@@ -7,6 +7,7 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
 
+
 @Component({
   selector: 'app-request-history',
   templateUrl: './request-history.page.html',
@@ -25,15 +26,23 @@ export class RequestHistoryPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private location: Location,
-    private rulecompletedservice: RuleCompletedService,
-    private taskcompletedservice: TaskCompletedService,
-    private ruleCompletedService: RuleCompletedService
-    ) {
+    private rulecompletedservice : RuleCompletedService,
+    private taskcompletedservice : TaskCompletedService) {
+
+      this.team = new Team();
       this.rulecompleted = new Array<RuleCompleted>;
       this.ruleRejected = new Array<RuleCompleted>;
       this.taskCompleted = new Array<TaskCompleted>;
       this.taskRejected = new Array<TaskCompleted>;
-      this.team = new Team();
+     }
+
+     ngOnInit() {
+      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      //this.router.navigate(['user/home']);
+      this.team = JSON.parse(localStorage.getItem('team') || '{}');
+      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+      //this.router.navigate(['user/home']);
+      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     }
 
   async presentAlert() {
@@ -65,17 +74,9 @@ export class RequestHistoryPage implements OnInit {
     });
 
     await alert.present();
-  }  
-
-  ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
-  
+
+
   backButton() {
     this.location.back();
   }
@@ -134,11 +135,11 @@ export class RequestHistoryPage implements OnInit {
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
+      this.rulecompletedservice.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
 
         console.log(data)
-      });      
+      });
     }
   }
 }

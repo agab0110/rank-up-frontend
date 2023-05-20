@@ -29,9 +29,10 @@ export class UserService {
     );
   }
 
-  public getUser(idUser: any) {
-    return this.http.get(
-      this.userUrl + "/getUser/" + idUser
+
+  public changeName(userId: number, newName: string) {
+    return this.http.patch<User>(
+      this.userUrl + "/changeName/" + userId, newName
     );
   }
 }
