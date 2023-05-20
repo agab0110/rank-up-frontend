@@ -14,6 +14,7 @@ import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 })
 export class AdminListPage implements OnInit {
   users: User[];
+  user: User;
   usersJoinsTeam: UserJoinsTeam[];
   team: Team;
   admin: Admin;
@@ -27,17 +28,18 @@ export class AdminListPage implements OnInit {
       this.usersJoinsTeam = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
+      this.user = new User();
     }
 
   ngOnInit() {
      //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
       //this.router.navigate(['user/home']);
       //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      this.team.codice = 1;
       //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
         //this.router.navigate(['user/home']);
-      this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
       this.getPartecipants(this.team.codice);
+      this.getPartecipantsPoints(this.team.codice);
   }
 
   backButton() {
@@ -48,8 +50,22 @@ export class AdminListPage implements OnInit {
     this.stato = !this.stato;
   }
 
-  getPartecipants(id_team: Number){   // API 18 non prende attributi dell'utente
+  getPartecipants(id_team: Number){
     this.userJoinsTeamService.getPartecipants(1).subscribe(result => {
+      this.users = result;
+      console.log(this.users);
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+
+  getPartecipantsPoints(id_team: Number){
+    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(result => {
       this.usersJoinsTeam = result;
       console.log(this.usersJoinsTeam);
     }, (error: Response) => {
@@ -60,5 +76,13 @@ export class AdminListPage implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  clickUser(user: User, userJoinTeam: UserJoinsTeam){
+    let user1 = JSON.stringify(user);
+    localStorage.setItem("viewUser", user1);
+
+    let userJoin = JSON.stringify(userJoinTeam);
+    localStorage.setItem("viewUserJoinsTeam", userJoin);
   }
 }
