@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
 import { TaskCompleted } from 'src/app/models/taskCompleted/task-completed';
 
 @Injectable({
@@ -32,5 +33,17 @@ export class TaskCompletedService {
 
   public getTaskDelivered(id: any) {
     return this.http.get(this.baseUrl + "/request/" + id);
+  }
+
+  public insertTaskCompleted(taskCompleted: any) {
+    return this.http.post(this.baseUrl + "/taskCompleted", taskCompleted)
+  }
+
+  public confirmationTaskCompleted(id_task_completed: number, status: number ,ruleCompleted: RuleCompleted) {
+    return this.http.patch(this.baseUrl + "/confirmation/" + id_task_completed + "/" + status, ruleCompleted)
+  }
+
+  public getPending(id_team: any) {
+    return this.http.get(this.baseUrl + "/pending/" + id_team);
   }
 }

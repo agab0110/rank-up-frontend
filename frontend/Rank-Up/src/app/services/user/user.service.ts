@@ -40,4 +40,10 @@ export class UserService {
       this.userUrl + "/changeName/" + userId, newName
     );
   }
+
+  public getUser(idUser: any) {
+    return this.http.get(
+      this.userUrl + "/getUser/" + idUser
+    );
+  }
 }

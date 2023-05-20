@@ -8,9 +8,9 @@
     <h1 align="center" class="title">Task</h1>
 
     <div class="description">
-      <app-user-element-bar labelText="[Nome Task]" buttonText="Task"></app-user-element-bar>
+      <app-user-element-bar labelText={{this.data.taskName}} buttonText="Task"></app-user-element-bar>
       <br>
-      <app-user-element-bar labelText="[Punti]" buttonText="Punti"></app-user-element-bar>
+      <app-user-element-bar labelText={{this.data.points}} buttonText="Punti"></app-user-element-bar>
     </div>
 
     <div class="buttons">
@@ -41,7 +41,7 @@
 <ion-alert
   trigger="descrizione"
   header="Descrizione"
-  message="[descrizione]"
+  message={{this.data.description}}
   [buttons]="descrBtns"
 ></ion-alert>
 

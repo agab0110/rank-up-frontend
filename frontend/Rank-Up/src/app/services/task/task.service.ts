@@ -19,6 +19,13 @@ export class TaskService {
     );
   }
 
+
+  public getTask(idTask: any) {
+    return this.http.get(
+      this.baseUrl + "/task/" + idTask
+      );
+  }
+  
   public addTask( task: Task){
     return this.http.post<Task>(
       this.baseUrl + "add/task", task

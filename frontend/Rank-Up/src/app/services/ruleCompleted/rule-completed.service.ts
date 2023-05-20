@@ -11,7 +11,7 @@ export class RuleCompletedService {
 
   constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8080/ruleCompletedApi";
-   }
+  }
 
   public getRulesCompletedByUser(idTeam: number, IdUser: number) {
     return this.http.get<RuleCompleted[]>(this.baseUrl + "/getRuleForSpecificUser/" + idTeam + "/" + IdUser);
@@ -39,6 +39,15 @@ export class RuleCompletedService {
 
   public getUserHistory(id: any, nome: any) {
     return this.http.get(this.baseUrl + "/history/" + id + "/" + nome);
+  }
+
+  public insertRuleCompleted(ruleCompleted: any) {
+    return this.http.post(this.baseUrl + "/ruleCompleted", ruleCompleted);
+  }
+
+    public getPending(id_team: any) {
+      return this.http.get(this.baseUrl + "/pending/" + id_team);
+    }
   }
 
   public acceptationActivity(idRuleCompleted: number, comment: string, bonusPoints: number, status: number) {

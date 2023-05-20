@@ -11,7 +11,7 @@
 
     <h1 class="title">Home</h1>
 
-    <app-bt-admin-large class="margine" [text]="'Crea nuovo team'" [routerLink]="['/create-team']"></app-bt-admin-large>
+    <app-bt-admin-large (click)="newTeam()" class="margine" [text]="'Crea nuovo team'" [routerLink]="['/create-team']"></app-bt-admin-large>
 
     <ion-item class="barraricerca">
       <ion-input class="input-codice-team" placeholder="Codice Team"></ion-input>
