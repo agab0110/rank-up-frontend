@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
 import { error } from 'console';
+import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
 import { Route, RouterLink } from '@angular/router';
 
@@ -19,17 +20,27 @@ export class UserProfilePage implements OnInit {
   blobURL!: undefined | null | string;
   user: User;
 
-  constructor(
-    private alertController: AlertController,
-    private userService: UserService
-    ) {
+
+  constructor(private alertController: AlertController, private userService: UserService) { 
+    this.team = new Team();
     this.user = new User();
-   }
+  }
+
+  userId: number = 1;
+  user_username: string = 'Username';
+  user_name: string = '[Nome]';
+  user_surname: string = 'Cognome]';
+  user_email: string = 'Email';
+  user_foto: string = 'Foto';
+  team: Team;
 
   ngOnInit() {
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      console.log("utente non presente")
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    //this.router.navigate(['user/home']);
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
   async presentAlert1() {
@@ -70,7 +81,7 @@ export class UserProfilePage implements OnInit {
 
   await alert.present();
   }
-
+  
   loadFileFromDevice(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -107,6 +118,21 @@ export class UserProfilePage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.userService.changeUsername(this.user.id, alertData[0]).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+            }, (error: Response) => {  
+              if(error.status == 400)  
+                console.log("400 error");  
+              else {  
+                console.log('An unexpected error occured');   
+              }
+              console.log(error);
+            });
+          }
         },
         {
           text: 'Annulla',

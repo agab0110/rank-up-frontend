@@ -18,4 +18,10 @@ export class TaskService {
       this.baseUrl + "/tasks/" + teamId
     );
   }
+
+  public addTask( task: Task){
+    return this.http.post<Task>(
+      this.baseUrl + "add/task", task
+    );
+  }
 }

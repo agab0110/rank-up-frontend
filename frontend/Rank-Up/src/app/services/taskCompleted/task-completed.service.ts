@@ -14,6 +14,10 @@ export class TaskCompletedService {
     this.baseUrl = "http://localhost:8080/taskCompletedApi";
   }
 
+  public getTaskCompletedByUser(idUser: number, idTeam: number) {
+    return this.http.get<TaskCompleted[]>(this.baseUrl + "/getTaskForSpecificUser/" + idTeam + "/" + idUser);
+  }
+
   public taskAccepted(teamId: Number): Observable<TaskCompleted[]> {
     return this.http.get<TaskCompleted[]>(
       this.baseUrl + "/taskAccepted/" + teamId
@@ -22,7 +26,7 @@ export class TaskCompletedService {
 
   public taskRejected(teamId: Number): Observable<TaskCompleted[]> {
     return this.http.get<TaskCompleted[]>(
-      this.baseUrl + "/taskrejected/" + teamId
+      this.baseUrl + "/taskRejected/" + teamId
     );
   }
 

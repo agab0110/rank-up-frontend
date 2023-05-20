@@ -5,16 +5,16 @@
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Regola completato da<br/>[Nome Utente]</h1>
+    <h1 class="title">Regola completato da<br/>{{user.name}}</h1>
 
     <div class="div-element-bar">
-      <app-user-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="'[Nome Regola]'"></app-user-element-bar>
+      <app-user-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="rule.name"></app-user-element-bar>
       <div class="space-div"></div>
-      <app-user-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="'[Punti]'"></app-user-element-bar>
+      <app-user-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="rule.points"></app-user-element-bar>
     </div>
 
-    <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
-    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true></ion-textarea>
+    <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true>{{rule.description}}</ion-textarea>
+    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true>{{ruleCompleted.comment}}</ion-textarea>
 
     <ion-grid class="buttons-grid">
       <ion-row>

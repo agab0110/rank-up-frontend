@@ -1,6 +1,7 @@
 import { Timestamp } from "rxjs";
 import { Admin } from "../admin/admin";
 import { User } from "../user/user";
+import { Task } from "../task/task";
 
 export class TaskCompleted {
     id!: number;
