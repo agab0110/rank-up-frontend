@@ -19,7 +19,7 @@ export class SendRulePage implements OnInit {
 
   public user: User;
   public data: any;
-  public id_rule: number = 4;
+  public id_rule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public ruleCompleted: RuleCompleted
 
   public descrBtns = ["Chiudi"];

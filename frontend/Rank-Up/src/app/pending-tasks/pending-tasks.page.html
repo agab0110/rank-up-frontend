@@ -1,26 +1,30 @@
 <ion-content [fullscreen]="true">
-    <div class="backgroundAdmin">
-  
-      <ion-button class="leftIcon" fill="clear" (click)="backButton()">
-        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
-      </ion-button>
-  
-      <h1 class="title">Attività in<br/>sospeso</h1>
-  
-      <div class="listBox">
-        <ion-list>
+  <div class="backgroundAdmin">
+
+    <ion-button class="leftIcon" fill="clear" (click)="backButton()">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
+
+    <h1 class="title">Attività in<br />sospeso</h1>
+
+    <div class="listBox">
+      <ion-list>
+        <div *ngIf="this.rules">
           <ion-item class="item" *ngFor="let rule of rules" [routerLink]="['/task-confirmation']">
             <img class="icon" name=iconName src="{{this.rule.photo}}">
             <ion-label class="label">{{rule.username}}</ion-label>
             <ion-label class="label">{{rule.name}}</ion-label>
           </ion-item>
+        </div>
 
-          <ion-item class="item" [routerLink]="['/task-confirmation']">
-            <img  alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
-            <ion-label class="label">Utente</ion-label>
-            <ion-label class="label">Attività</ion-label>
+        <div *ngIf="this.tasks">
+          <ion-item class="item" *ngFor="let task of tasks" [routerLink]="['/task-confirmation']">
+            <img alt="User" class="icon" name=iconName src="{{this.task.photo}}">
+            <ion-label class="label">{{task.username}}</ion-label>
+            <ion-label class="label">{{task.name}}</ion-label>
           </ion-item>
-        </ion-list>
-      </div>
+        </div>
+      </ion-list>
     </div>
-  </ion-content>
+  </div>
+</ion-content>

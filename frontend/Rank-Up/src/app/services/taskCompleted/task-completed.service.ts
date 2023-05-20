@@ -37,4 +37,8 @@ export class TaskCompletedService {
   public confirmationTaskCompleted(id_task_completed:any, status:any, comment: any) {
     return this.http.patch(this.baseUrl + "/confirmation/" + id_task_completed + "/" + status, comment)
   }
+
+  public getPending(id_team: any) {
+    return this.http.get(this.baseUrl + "/pending/" + id_team);
+  }
 }

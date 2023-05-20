@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Team } from '../models/team/team';
 import { TeamService } from '../services/team/team.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-create-team',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CreateTeamPage implements OnInit {
 
+  public user: User;
   public codiceTeam: any;
   public nomeTeam: string = ""
 
@@ -26,11 +28,18 @@ export class CreateTeamPage implements OnInit {
     private location: Location,
     private teamService: TeamService,
     private router: Router
-  ) { }
+  ) { 
+    this.user = new User();
+  }
 
   privacyTeam: boolean = true;
 
   ngOnInit() {
+    localStorage.setItem('teamId', '');
+    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      this.router.navigate(['login']);
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
