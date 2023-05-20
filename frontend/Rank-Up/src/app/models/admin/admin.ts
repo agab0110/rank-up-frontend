@@ -7,11 +7,6 @@ import { User } from "../user/user";
 
 export class Admin {
     id!: number;
-    userToAdmin!: User;
-    createdTasks!: Task[];
-    createdRules!: Rule[];
-    createdPrizes!: Prize[];
-    createdTeams!: Team[];
-    rulesRevisioned!: RuleCompleted[];
-    taskRevisioned!: TaskCompleted[];
+    user!: User;
+    team!: Team;
 }

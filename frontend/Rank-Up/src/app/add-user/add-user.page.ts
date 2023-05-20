@@ -20,6 +20,8 @@ export class AddUserPage implements OnInit {
   admin: Admin;
   query!: string;
   id_user!: Number;
+  user : User;
+  responseData!: string;
 
   constructor(
     private location: Location,
@@ -31,6 +33,7 @@ export class AddUserPage implements OnInit {
     this.users = new Array<User>;
     this.team = new Team();
     this.admin = new Admin();
+    this.user = new User();
   }
 
   ngOnInit() {
@@ -73,9 +76,13 @@ export class AddUserPage implements OnInit {
     });
   }
 
-  addAdmin(id_user: Number) {
-    console.log(id_user);
-    this.adminService.newAdmin(1, id_user).subscribe(response => {
+  addAdmin(idUser: number) {
+    //this.user.id = idUser;
+    //this.admin.user = this.user;
+    //this.team.codice = 1;
+    //this.admin.team = this.team;
+    //console.log(this.admin);
+    this.adminService.newAdmin(idUser, 2).subscribe(response => {
       console.log("Admin aggiunto con successo");
       console.log(response);
     }, (error: Response) => {

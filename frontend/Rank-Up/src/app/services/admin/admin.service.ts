@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/models/admin/admin';
 
@@ -14,9 +14,10 @@ export class AdminService {
     this.baseUrl = "http://localhost:8080/adminManageTeamApi"
   }
 
-  public newAdmin(id_team: Number, id_user: Number) {
-    return this.http.post<Admin[]>(
-      this.baseUrl + "/addAdmin", id_user
+  public newAdmin(idUser:number, idTeam: number) {
+    const param = new HttpParams().set('idUser',idUser).set('idTeam',idTeam);
+    return this.http.post<Admin>(
+      this.baseUrl + "/addAdmin " ,{param}
     );
   }
 }
