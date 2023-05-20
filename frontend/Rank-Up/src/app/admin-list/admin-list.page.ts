@@ -5,6 +5,7 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 
 @Component({
   selector: 'app-admin-list',
@@ -13,6 +14,7 @@ import { Admin } from '../models/admin/admin';
 })
 export class AdminListPage implements OnInit {
   users: User[];
+  usersJoinsTeam: UserJoinsTeam[];
   team: Team;
   admin: Admin;
   stato = false
@@ -22,6 +24,7 @@ export class AdminListPage implements OnInit {
     private userJoinsTeamService: UserJoinsTeamService
     ) {
       this.users = new Array<User>;
+      this.usersJoinsTeam = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
     }
@@ -45,9 +48,10 @@ export class AdminListPage implements OnInit {
     this.stato = !this.stato;
   }
 
-  getPartecipants(id_team: Number){   // API 18 mancano punti del partecipante
+  getPartecipants(id_team: Number){   // API 18 non prende attributi dell'utente
     this.userJoinsTeamService.getPartecipants(1).subscribe(result => {
-      this.users = result;
+      this.usersJoinsTeam = result;
+      console.log(this.usersJoinsTeam);
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");

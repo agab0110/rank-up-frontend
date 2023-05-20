@@ -25,12 +25,12 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let user of users">
+        <ion-item-sliding *ngFor="let userJoin of usersJoinsTeam">
           <ion-item class="item" [routerLink]="['/admin/admin-profile']">
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{user.name}}</ion-label>
-            <ion-label class="points-label"></ion-label>
+            <ion-label class="nomeUtente">{{userJoin.key.idUser}}</ion-label>
+            <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
 
           </ion-item>
@@ -45,12 +45,12 @@
 
     <div class="listBox" *ngIf="!stato">
       <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let user of users; let i = index">
+        <ion-item-sliding *ngFor="let userJoin of usersJoinsTeam; let i = index">
           <ion-item class="item" [routerLink]="['/admin/admin-profile']">
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{user.name}}</ion-label>
-            <ion-label class="points-label"></ion-label>
+            <ion-label class="nomeUtente">{{userJoin.key.idUser}}</ion-label>
+            <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
           </ion-item>
           <ion-item-options side="end">
