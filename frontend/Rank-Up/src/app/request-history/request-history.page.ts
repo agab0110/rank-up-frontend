@@ -24,6 +24,8 @@ export class RequestHistoryPage implements OnInit {
   data: any;
   idTeam: any = 1;
   history: any[];
+  class: string = "itemadmin";
+  icon: string = "close-circle-outline";
 
   constructor(
     private alertController: AlertController,
