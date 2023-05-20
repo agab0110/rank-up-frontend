@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 import { User } from '../models/user/user';
 import { SHA3 } from 'crypto-js';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,22 @@ export class LoginPage implements OnInit{
   user: User;
   password!: string;
   errorCheck: boolean = false;
+  loginForm!: FormGroup;
 
   constructor(
     private router: Router,
-    private service: UserService
+    private service: UserService,
+    private formBuilder: FormBuilder
     ) { 
       this.user = new User();
+      this.loginForm = this.formBuilder.group({
+        user: ['', [Validators.required]],
+        password: ['', Validators.required],
+      });
+    }
+
+    isFormValid(): boolean {
+      return this.loginForm.valid;
     }
 
   ngOnInit() {
@@ -49,5 +60,5 @@ export class LoginPage implements OnInit{
       console.log(error);
     });
   }
-
+ 
 }

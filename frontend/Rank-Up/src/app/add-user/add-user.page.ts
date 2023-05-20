@@ -20,6 +20,9 @@ export class AddUserPage implements OnInit {
   admin: Admin;
   query!: string;
   id_user!: Number;
+  user : User;
+  idTeam! : number;
+  responseData: any;
 
   constructor(
     private location: Location,
@@ -31,6 +34,7 @@ export class AddUserPage implements OnInit {
     this.users = new Array<User>;
     this.team = new Team();
     this.admin = new Admin();
+    this.user = new User();
   }
 
   ngOnInit() {
@@ -72,4 +76,20 @@ export class AddUserPage implements OnInit {
       console.log(error);
     });
   }
+
+  addAdmin(idUser: number, idTeam:number) {
+    idTeam = 1;
+    this.adminService.newAdmin(idUser, idTeam).subscribe(response => {
+      console.log("Admin aggiunto con successo");
+      console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+
 }
