@@ -8,17 +8,15 @@ import { UserJoinsTeam } from 'src/app/models/userJoinsTeam/user-joins-team';
   providedIn: 'root'
 })
 export class UserJoinsTeamService {
-  private accessRequestUrl: string;
   status!: string;
   userJoinsTeamUrl: string;
 
   constructor(private http: HttpClient) {
-    this.accessRequestUrl = 'http://localhost:8080/accessRequestApi',
     this.userJoinsTeamUrl = 'http://localhost:8080/userJoinsTeamApi';
    }
 
    deleteRequest(userJoinTeam: UserJoinsTeam) {
-    return this.http.delete(this.accessRequestUrl + "/deleteRequest")
+    return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest")
     .subscribe(() => this.status = 'Delete successful');
   }
 
@@ -29,13 +27,14 @@ export class UserJoinsTeamService {
 
   public getListPendingRequests(id_team: string): Observable<Notification[]> {
     const params = new HttpParams().set('id_team', id_team);
-    return this.http.get<Notification[]>(this.accessRequestUrl + "/list/pendingRequests", {params})};
+    return this.http.get<Notification[]>(this.userJoinsTeamUrl + "/list/pendingRequests", {params})
+  }
 
-  public getPartecipants(id_team: Number): Observable<User[]> {
-    return this.http.get<User[]>(this.userJoinsTeamUrl + "/partecipants/" + id_team)
-  };
+  public getPartecipants(idTeam: number): Observable<User[]> {
+    return this.http.get<User[]>(this.userJoinsTeamUrl + "/partecipants/" + idTeam);
+  }
 
-  public getPartecipantsPoints(id_team: Number): Observable<UserJoinsTeam[]> {
-    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + id_team)
-  };
+  public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
+    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
+  }
 }

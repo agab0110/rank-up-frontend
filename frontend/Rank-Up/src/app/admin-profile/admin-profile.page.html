@@ -38,10 +38,10 @@
     </div>
 
     <div class="listBox" *ngIf="stato">
-      <div class="item" *ngFor="let item of [].constructor(7); let i = index">
+      <div class="item" *ngFor="let prize of prizes">
         <div class="div-label-fakebutton">
-          <div class="label" >Premio Riscosso {{i+1}}</div>
-          <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+          <div class="label" >{{prize.name}}</div>
+          <ion-button class="fakebutton">{{prize.price}} pt</ion-button>
         </div>
       </div>
   </div>

@@ -7,7 +7,7 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
 import { Rule } from '../models/rule/rule';
-
+import { Task } from '../models/task/task';
 
 @Component({
   selector: 'app-request-history',
@@ -21,16 +21,20 @@ export class RequestHistoryPage implements OnInit {
   taskRejected: TaskCompleted[];
   activitySort: any;
   team: Team;
+
   filter: number = 1;
   data: any;
   idTeam: any = 1;
+  history: any[];
+  class: string = "itemadmin";
+  icon: string = "close-circle-outline";
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private rulecompletedservice : RuleCompletedService,
     private taskcompletedservice : TaskCompletedService) {
-
+      this.history = [];
       this.team = new Team();
       this.rulecompleted = new Array<RuleCompleted>;
       this.ruleRejected = new Array<RuleCompleted>;
@@ -45,8 +49,20 @@ export class RequestHistoryPage implements OnInit {
       //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-      this.ruleCompleted();
+      this.getRulesCompleted();
+      this.getRulesRejected();
+      this.getTaskAccepted();
+      this.getTaskRejected();
+
+      this.dataHistory();
     }
+
+
+  dataHistory() {
+    console.log(this.history);
+    this.history.sort((a, b) => a.date - b.date);
+  }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -64,6 +80,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 2 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 2;
+            this.dataHistory();
           }
         },
         {
@@ -85,9 +102,13 @@ export class RequestHistoryPage implements OnInit {
     this.location.back();
   }
 
-  ruleCompleted(){
-    this.rulecompletedservice.ruleAccepted(1).subscribe(Response =>{
-      this.rulecompleted = Response;
+  getRulesCompleted(){
+    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
+      this.ruleCompleted = Response;
+      console.log(this.ruleCompleted);
+      this.ruleCompleted.forEach(element => {
+        this.history.push(element);
+      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -98,9 +119,13 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
-  rulerejected(){
-    this.rulecompletedservice.rulerejected(1).subscribe(Response =>{
+  getRulesRejected(){
+    this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
       this.ruleRejected = Response;
+      console.log(this.ruleRejected);
+      this.ruleRejected.forEach(element => {
+        this.history.push(element);
+      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -111,9 +136,13 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
-  taskAccepted(){
-    this.taskcompletedservice.taskAccepted(1).subscribe(Response =>{
+  getTaskAccepted(){
+    this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.taskCompleted = Response;
+      console.log(this.taskCompleted);
+      this.taskCompleted.forEach(element => {
+        this.history.push(element);
+      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -124,9 +153,13 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
-  taskrejected(){
-    this.taskcompletedservice.taskRejected(1).subscribe(Response =>{
+  getTaskRejected(){
+    this.taskCompletedService.taskRejected(/*this.team.codice*/1).subscribe(Response =>{
       this.taskRejected = Response;
+      console.log(this.taskRejected);
+      this.taskRejected.forEach(element => {
+        this.history.push(element);
+      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -139,7 +172,7 @@ export class RequestHistoryPage implements OnInit {
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.rulecompletedservice.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
+      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
 
         console.log(data)
