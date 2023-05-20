@@ -11,11 +11,11 @@
         <ul *ngIf="errorCheck">
           Email o password errati
        </ul>
-        <ion-input [(ngModel)]="user.username" class="formInput" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
-        <ion-input [(ngModel)]="password" class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="user.username" required class="formInput" [type]="'email'" [placeholder]="'Username'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="password" required class="formInput" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
-      <app-bt-user-small class="loginButton" (click)="login()" [text]="'Accedi'"></app-bt-user-small>
+      <ion-button [disabled]="!isFormValid()" id="btUserSmall" (click)="login()">Accedi</ion-button>
 
       <div class="singUpBox">
         <div class="linearGradientLeft"></div>
