@@ -14,6 +14,9 @@ export class TaskConfirmationPage implements OnInit {
   data: any
   stato = false
   id = 1
+  
+  comment!: string;
+  bonusPoints!: number;
 
   constructor(
     private alertController: AlertController, 
@@ -40,13 +43,30 @@ export class TaskConfirmationPage implements OnInit {
     this.location.back();
   }
 
-  async presentAlert() {
+  async presentAlertReject() {
     const alert = await this.alertController.create({
-      header: 'Richesta Archiviata',
+      header: 'Richesta Rifiutata',
       buttons: [
         {
           handler: () => { 
-            this.backButton()
+            this.rejectActivity();
+          },  
+          text: 'Chiudi',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+  await alert.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Richesta Accettata',
+      buttons: [
+        {
+          handler: () => { 
+            this.confirmActivity();
           },  
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -60,5 +80,17 @@ export class TaskConfirmationPage implements OnInit {
 
   mostra() {
     this.stato = !this.stato;
+  }
+
+  rejectActivity() {
+    const status = 2;
+    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.backButton();
+  }
+
+  confirmActivity() {
+    const status = 1;
+    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.backButton();
   }
 }

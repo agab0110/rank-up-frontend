@@ -25,6 +25,7 @@ export class SignupPage {
     const hashedPassword = SHA3(this.password).toString();
 
     this.user.password = hashedPassword;
+    this.user.photo = "https://ionicframework.com/docs/img/demos/avatar.svg";
 
     this.errorCheck = false;
     this.service.save(this.user).subscribe(result => 
