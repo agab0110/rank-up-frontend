@@ -5,15 +5,15 @@
     <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
-    <h1 class="title">[Nome Team]</h1>
-    <h2 class="team-code">Codice: [Codice Team]</h2>
+    <h1 class="title">{{team.name}}</h1>
+    <h2 class="team-code">Codice: {{team.codice}}</h2>
 
     <div class="search">
       <app-search-bar></app-search-bar>
     </div>
 
     <div>
-      <ion-segment value="1" (ionChange)="segmentChanged($event)"> 
+      <ion-segment value="1" (ionChange)="segmentChanged($event)">
         <ion-segment-button value=1>
           <ion-label class="segmentText">Nome</ion-label>
         </ion-segment-button>
@@ -31,7 +31,7 @@
               <ion-label class="nomeUtente">{{partecipants[i].username}}</ion-label>
               <ion-label class="points-label">{{p.points}}</ion-label>
             </div>
-          </ion-item>   
+          </ion-item>
       </ion-list>
     </div>
     <div class="listBox" *ngIf="!stato">

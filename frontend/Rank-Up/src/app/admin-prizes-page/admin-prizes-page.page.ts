@@ -24,19 +24,20 @@ export class AdminPrizesPagePage implements OnInit {
   ngOnInit() {
     //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     this.listPrize();
-    this.team.codice = 1;
+    this.team.name = "Team prova";
     //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
     //this.router.navigate(['user/home']);
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    
+
   }
 
   backButton() {
     this.location.back();
   }
   listPrize(){
+    this.team.codice = 1;
     this.prize.beloggingTeam = this.team;
     this.pizeservice.listPrize(this.team.codice).subscribe(response =>{
       this.prizes = response;

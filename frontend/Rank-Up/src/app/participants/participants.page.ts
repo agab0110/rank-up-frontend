@@ -14,13 +14,13 @@ import { User } from '../models/user/user';
 })
 export class ParticipantsPage implements OnInit {
   partecipants: User[];
-  partecipantsPoints: UserJoinsTeam[]; 
+  partecipantsPoints: UserJoinsTeam[];
   team: Team;
   admin: Admin;
   points!: number;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private location: Location,
     private userJoinsTeamService: UserJoinsTeamService
     ) {
@@ -36,6 +36,7 @@ export class ParticipantsPage implements OnInit {
     //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
     //this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team.name = "Team prova"
     this.team.codice = 1;
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);

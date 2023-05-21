@@ -23,12 +23,12 @@ export class TaskConfirmationPage implements OnInit {
   bonusPoints!: number;
 
   constructor(
-    private alertController: AlertController, 
+    private alertController: AlertController,
     private router: Router,
-    private location: Location, 
+    private location: Location,
     private ruleCompletedService: RuleCompletedService,
     private taskCompletedService: TaskCompletedService
-  ) { 
+  ) {
     this.user = new User();
     this.ruleCompleted = new RuleCompleted();
   }
@@ -48,7 +48,7 @@ export class TaskConfirmationPage implements OnInit {
       this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
         console.log(data)
-      })      
+      })
     }
   }
 
@@ -61,9 +61,9 @@ export class TaskConfirmationPage implements OnInit {
       header: 'Richesta Rifiutata',
       buttons: [
         {
-          handler: () => { 
+          handler: () => {
             this.rejectActivity();
-          },  
+          },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
         },
@@ -78,9 +78,9 @@ export class TaskConfirmationPage implements OnInit {
       header: 'Richesta Accettata',
       buttons: [
         {
-          handler: () => { 
+          handler: () => {
             this.confirmActivity();
-          },  
+          },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
         },
@@ -103,7 +103,8 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.ruleCompleted).subscribe(data => {
       console.log(data)
     })
-    
+  }
+
   rejectActivity() {
     const status = 2;
     this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
@@ -114,5 +115,5 @@ export class TaskConfirmationPage implements OnInit {
     const status = 1;
     this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
     this.backButton();
+    }
   }
-}

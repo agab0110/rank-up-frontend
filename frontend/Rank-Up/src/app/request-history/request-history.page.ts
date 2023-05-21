@@ -15,7 +15,7 @@ import { Task } from '../models/task/task';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  rulecompleted: RuleCompleted[];
+  ruleCompleted: RuleCompleted[];
   ruleRejected: RuleCompleted[];
   taskCompleted: TaskCompleted[];
   taskRejected: TaskCompleted[];
@@ -32,11 +32,11 @@ export class RequestHistoryPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private location: Location,
-    private rulecompletedservice : RuleCompletedService,
-    private taskcompletedservice : TaskCompletedService) {
+    private ruleCompletedService : RuleCompletedService,
+    private taskCompletedService : TaskCompletedService) {
       this.history = [];
       this.team = new Team();
-      this.rulecompleted = new Array<RuleCompleted>;
+      this.ruleCompleted = new Array<RuleCompleted>;
       this.ruleRejected = new Array<RuleCompleted>;
       this.taskCompleted = new Array<TaskCompleted>;
       this.taskRejected = new Array<TaskCompleted>;
@@ -88,7 +88,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.rulecompleted= this.sortByActivityName();
+            this.ruleCompleted= this.sortByActivityName();
           }
         },
       ],
@@ -103,7 +103,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
   getRulesCompleted(){
-    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
+    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/3).subscribe(Response =>{
       this.ruleCompleted = Response;
       console.log(this.ruleCompleted);
       this.ruleCompleted.forEach(element => {
@@ -182,7 +182,7 @@ export class RequestHistoryPage implements OnInit {
 
   sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
-      this.rulecompleted.forEach((element : RuleCompleted) => {
+      this.ruleCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
       });
     console.log(sortList);

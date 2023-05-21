@@ -29,7 +29,7 @@ export class UserProfilePage implements OnInit {
   blobURL!: undefined | null | string;
 
   constructor(
-    private alertController: AlertController, 
+    private alertController: AlertController,
     private router: Router,
     private userService: UserService
   ) {
@@ -73,6 +73,14 @@ export class UserProfilePage implements OnInit {
               this.user = response;
               localStorage.setItem('user', JSON.stringify(this.user));
               console.log(this.user);
+              this.userService.getUser(this.user.id).subscribe(data => {
+                console.log(data)
+                this.user_name = JSON.parse(JSON.stringify(data)).name;
+                this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+                this.user_username = JSON.parse(JSON.stringify(data)).username;
+                this.user_email = JSON.parse(JSON.stringify(data)).email;
+                this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+              });
             }, (error: Response) => {
               if(error.status == 400)
                 console.log("400 error");
@@ -92,7 +100,7 @@ export class UserProfilePage implements OnInit {
 
   await alert.present();
   }
-  
+
   loadFileFromDevice(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -135,11 +143,19 @@ export class UserProfilePage implements OnInit {
               this.user = response;
               localStorage.setItem('user', JSON.stringify(this.user));
               console.log(this.user);
-            }, (error: Response) => {  
-              if(error.status == 400)  
-                console.log("400 error");  
-              else {  
-                console.log('An unexpected error occured');   
+              this.userService.getUser(this.user.id).subscribe(data => {
+                console.log(data)
+                this.user_name = JSON.parse(JSON.stringify(data)).name;
+                this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+                this.user_username = JSON.parse(JSON.stringify(data)).username;
+                this.user_email = JSON.parse(JSON.stringify(data)).email;
+                this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+              });
+            }, (error: Response) => {
+              if(error.status == 400)
+                console.log("400 error");
+              else {
+                console.log('An unexpected error occured');
               }
               console.log(error);
             });
