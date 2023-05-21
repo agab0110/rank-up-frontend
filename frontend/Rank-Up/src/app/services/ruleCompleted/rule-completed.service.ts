@@ -50,13 +50,12 @@ export class RuleCompletedService {
     }
   }
 
-  public acceptationActivity(idRuleCompleted: number, comment: string, bonusPoints: number, status: number) {
+  public acceptationActivity(idRuleCompleted: Number, comment: String, bonusPoints: Number, status: Number) {
     const requestParams = {
       'comment': comment,
       'bonusPoints': bonusPoints,
       'status': status,
     };
-
     return this.http.patch(this.baseUrl + "/acceptance/" + idRuleCompleted, requestParams).subscribe(response => {
       console.log(response);
     }, (error: Response) => {
@@ -68,4 +67,4 @@ export class RuleCompletedService {
       console.log(error);
     });
   }
-}
+
