@@ -114,5 +114,6 @@ export class TaskConfirmationPage implements OnInit {
     const status = 1;
     this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
     this.backButton();
+    }
   }
 }
