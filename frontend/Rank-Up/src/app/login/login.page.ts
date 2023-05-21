@@ -20,10 +20,10 @@ export class LoginPage implements OnInit{
     private router: Router,
     private service: UserService,
     private formBuilder: FormBuilder
-    ) { 
+    ) {
       this.user = new User();
       this.loginForm = this.formBuilder.group({
-        user: ['', [Validators.required]],
+        user: ['email', [Validators.required]],
         password: ['', Validators.required],
       });
     }
@@ -48,17 +48,17 @@ export class LoginPage implements OnInit{
       console.log(this.user.password)
       this.router.navigate(['user/home']);
       localStorage.setItem('user', JSON.stringify(this.user));
-    }, (error: Response) => {  
+    }, (error: Response) => {
       this.errorCheck = true;
       if(error.status == 400) {
         console.log("400 error");
         console.log(this.user.password);
       }
-      else {  
-        console.log('An unexpected error occured');   
+      else {
+        console.log('An unexpected error occured');
       }
       console.log(error);
     });
   }
- 
+
 }
