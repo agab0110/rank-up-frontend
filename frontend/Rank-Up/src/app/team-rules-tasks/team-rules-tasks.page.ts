@@ -31,21 +31,22 @@ export class TeamRulesTasksPage implements OnInit {
     this.rule = new Rule();
     this.task = new Task();
     this.admin = new Admin();
-    
+
    }
 
 
   ngOnInit() {
     this.listRule();
     this.listTask();
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
+    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
       //this.router.navigate(['user/home']);
     //}
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     /*if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == ''){
       this.router.navigate(['user/home']);
     }*/
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.team.name= "Team prova";
   }
 
 
@@ -56,8 +57,7 @@ export class TeamRulesTasksPage implements OnInit {
     this.stato = !this.stato;
   }
   listRule(){
-    this.rule.team = this.team;
-    this.ruleservice.listRule(this.rule.team.codice).subscribe(response =>{
+    this.ruleservice.listRule(1).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -70,8 +70,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
 
   listTask(){
-    this.task.team = this.team;
-    this.taskservice.listTask(this.task.team.codice).subscribe(response =>{
+    this.taskservice.listTask(1).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)

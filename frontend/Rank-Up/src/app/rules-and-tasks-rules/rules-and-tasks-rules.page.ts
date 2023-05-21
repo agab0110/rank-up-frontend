@@ -30,15 +30,17 @@ export class RulesAndTasksRulesPage implements OnInit {
     this.rule = new Rule();
     this.task = new Task();
     this.user = new User();
-    
+
    }
 
   ngOnInit() {
     this.listRule();
     this.listTask();
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
     //this.router.navigate(['user/home']);
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team.name = "Team prova";
+    this.team.codice= 38457
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
     //this.router.navigate(['user/home']);
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
@@ -53,7 +55,7 @@ export class RulesAndTasksRulesPage implements OnInit {
   }
   listRule(){
     this.rule.team = this.team;
-    this.ruleservice.listRule(this.rule.team.codice).subscribe(response =>{
+    this.ruleservice.listRule(1).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -67,7 +69,7 @@ export class RulesAndTasksRulesPage implements OnInit {
 
   listTask(){
     this.task.team = this.team;
-    this.taskservice.listTask(this.task.team.codice).subscribe(response =>{
+    this.taskservice.listTask(1).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)

@@ -103,7 +103,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
   getRulesCompleted(){
-    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
+    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/3).subscribe(Response =>{
       this.ruleCompleted = Response;
       console.log(this.ruleCompleted);
       this.ruleCompleted.forEach(element => {

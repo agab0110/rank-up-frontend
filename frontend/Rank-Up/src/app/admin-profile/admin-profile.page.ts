@@ -27,7 +27,7 @@ export class AdminProfilePage implements OnInit {
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
       localStorage.getItem('viewUser');
       localStorage.getItem('viewUserJoinsTeam');
-      this.user = JSON.parse(localStorage.getItem('viewUser') || '{}');
+      this.userProfile = JSON.parse(localStorage.getItem('viewUser') || '{}');
       this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
   }
 

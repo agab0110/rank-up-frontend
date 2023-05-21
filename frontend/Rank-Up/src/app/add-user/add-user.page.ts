@@ -65,6 +65,9 @@ export class AddUserPage implements OnInit {
   }
 
   searchUser() {
+    if(this.query == ""){
+      this.getUsers();
+    }
     this.userJoinsTeam.getListUserSearch(this.query).subscribe(response => {
       this.users = response;
     }, (error: Response) => {
