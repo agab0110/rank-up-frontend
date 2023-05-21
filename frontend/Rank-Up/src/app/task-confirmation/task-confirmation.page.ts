@@ -117,4 +117,3 @@ export class TaskConfirmationPage implements OnInit {
     this.backButton();
     }
   }
-}
