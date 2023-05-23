@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Rule } from 'src/app/models/rule/rule';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
 
 @Injectable({
@@ -13,8 +14,8 @@ export class RuleCompletedService {
     this.baseUrl = "http://localhost:8080/ruleCompletedApi";
   }
 
-  public getRulesCompletedByUser(idTeam: number, IdUser: number) {
-    return this.http.get<RuleCompleted[]>(this.baseUrl + "/getRuleForSpecificUser/" + idTeam + "/" + IdUser);
+  public getRulesCompletedByUser(idTeam: number, IdUser: number): Observable<Rule[]> {
+    return this.http.get<Rule[]>(this.baseUrl + "/getRuleForSpecificUser/" + idTeam + "/" + IdUser);
   }
 
    public getRuleCompleted(idRule: number) {
