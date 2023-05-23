@@ -30,11 +30,18 @@
     <div class="listBox" *ngIf="segmentValue === 'rule'">
       <ion-list class="notifications" lines="none">
 
-        <ion-item class={{class}} *ngFor="let activity of history" [routerLink]="['/task-rejected']">
-          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
-          <ion-label class="label">{{activity.user.name}}</ion-label>
-          <ion-label class="label">{{activity.rule.name}}</ion-label>
-          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        <ion-item class={{classAccepted}} *ngFor="let rule of rulesCompleted" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{rule?.user?.name}}</ion-label>
+          <ion-label class="label">{{rule?.rule?.name}}</ion-label>
+          <ion-label class="label">{{rule.timestamp}}</ion-label>
+        </ion-item>
+
+        <ion-item class={{classRejected}} *ngFor="let rule of rulesRejected" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconRejected}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{rule?.user?.name}}</ion-label>
+          <ion-label class="label">{{rule?.rule?.name}}</ion-label>
+          <ion-label class="label">{{rule.timestamp}}</ion-label>
         </ion-item>
 
       </ion-list>
@@ -43,11 +50,19 @@
     <div class="listBox" *ngIf="segmentValue === 'task'">
       <ion-list class="notifications" lines="none">
 
-        <ion-item class="itemuser" *ngFor="let activity of history" [routerLink]="['/task-rejected']">
-          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
-          <ion-label class="label">{{activity.user.name}}</ion-label>
-          <ion-label class="label">{{activity.rule.name}}</ion-label>
-          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        <ion-item class={{classAccepted}} *ngFor="let task of tasksCompleted" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{task?.user?.name}}</ion-label>
+          <ion-label class="label">{{task?.task?.name}}</ion-label>
+          <ion-label class="label">{{task.timestamp}}</ion-label>
+        </ion-item>
+
+
+        <ion-item class={{classRejected}} *ngFor="let task of tasksRejected" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconRejected}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{task?.user?.name}}</ion-label>
+          <ion-label class="label">{{task?.task?.name}}</ion-label>
+          <ion-label class="label">{{task.timestamp}}</ion-label>
         </ion-item>
 
       </ion-list>
@@ -56,11 +71,9 @@
     <div class="listBox" *ngIf="segmentValue === 'prize'">
       <ion-list class="notifications" lines="none">
 
-        <ion-item *ngFor="let activity of history" [routerLink]="['/task-rejected']">
-          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
-          <ion-label class="label">{{activity.user.name}}</ion-label>
-          <ion-label class="label">{{activity.rule.name}}</ion-label>
-          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        <ion-item *ngFor="let prize of prizes" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{prize}}</ion-label>
         </ion-item>
 
       </ion-list>
