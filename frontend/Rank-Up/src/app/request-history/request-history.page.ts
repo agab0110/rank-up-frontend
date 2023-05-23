@@ -21,6 +21,7 @@ export class RequestHistoryPage implements OnInit {
   taskRejected: TaskCompleted[];
   activitySort: any;
   team: Team;
+  stato = 0;
 
   filter: number = 1;
   data: any;
@@ -28,6 +29,7 @@ export class RequestHistoryPage implements OnInit {
   history: any[];
   class: string = "itemadmin";
   icon: string = "close-circle-outline";
+  segmentValue: string = "rule";
 
   constructor(
     private alertController: AlertController,
@@ -66,7 +68,7 @@ export class RequestHistoryPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Ricerca per:',
+      header: 'Filtra per:',
       buttons: [
         {
           text: 'Nome Utente',
@@ -188,5 +190,24 @@ export class RequestHistoryPage implements OnInit {
     console.log(sortList);
     sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
     return sortList;
+  }
+
+  segmentChanged(event: any) {
+    const selectedValue = event.detail.value;
+
+    switch (selectedValue) {
+      case 'rule':
+        this.getRulesCompleted();
+        this.getRulesRejected();
+        break;
+      case 'task':
+        this.getTaskRejected
+        this.getTaskAccepted();
+        break;
+      case 'prize':
+        break;
+      default:
+        break;
+    }
   }
 }
