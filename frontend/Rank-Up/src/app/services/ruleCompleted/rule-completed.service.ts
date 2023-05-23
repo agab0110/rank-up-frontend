@@ -55,7 +55,7 @@ export class RuleCompletedService {
         'bonusPoints': bonusPoints,
         'status': status,
       };
-        return this.http.patch(this.baseUrl + "/acceptance/" + idRuleCompleted, requestParams).subscribe(response => {
+        return this.http.patch(this.baseUrl + "/acceptance/" + idRuleCompleted, {requestParams}).subscribe(response => {
         console.log(response);
       }, (error: Response) => {
         if(error.status == 400) {
