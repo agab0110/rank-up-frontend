@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
 import { Team } from '../models/team/team';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { Prize } from '../models/prize/prize';
-
+import { Rule } from '../models/rule/rule';
+import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
+import { Task } from '../models/task/task';
+import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -19,8 +22,9 @@ export class AdminProfilePage implements OnInit {
   stato = false;
   userProfile: User;
   team: Team;
-  //admin:
   prizes: Prize[];
+  rules: Rule[];
+  tasks: Task[];
 
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
@@ -29,18 +33,25 @@ export class AdminProfilePage implements OnInit {
       localStorage.getItem('viewUserJoinsTeam');
       this.userProfile = JSON.parse(localStorage.getItem('viewUser') || '{}');
       this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
+
+      this.getUserRules();
+      this.getUserTasks();
   }
 
   constructor(
     private location: Location,
     private router: Router,
     private userGetPrizeService: UserGetPrizeService,
+    private taskCompletedService: TaskCompletedService,
+    private ruleCompletedService: RuleCompletedService
     ) {
       this.userProfile = new User();
       this.user = new User();
       this.team = new Team();
       this.prizes = [];
       this.userJoin = new UserJoinsTeam();
+      this.rules = [];
+      this.tasks = [];
      }
 
   backButton() {
@@ -52,7 +63,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes(){
-  this.userGetPrizeService.getUserPrizes(/*this.userProfile.id*/1, /*this.team.codice*/1).subscribe(
+  this.userGetPrizeService.getUserPrizes(this.userProfile.id, /*this.team.codice*/1).subscribe(
     (response: any) => {
       this.prizes = response;
       console.log(this.prizes);
@@ -66,4 +77,34 @@ export class AdminProfilePage implements OnInit {
       console.log(error);
     });
   }
+
+  getUserRules(){
+    this.ruleCompletedService.getRulesCompletedByUser(this.userProfile.id, /*this.team.codice*/1).subscribe(response => {
+      this.rules = response;
+      console.log(this.tasks);
+    }), (error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error")
+      }
+      console.log(error);
+    }
+  }
+
+  getUserTasks() {
+    this.taskCompletedService.getTaskCompletedByUser(this.userProfile.id, /*this.team.codice*/1).subscribe(response => {
+      this.tasks = response;
+      console.log(this.tasks);
+    }), (error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error")
+      }
+      console.log(error);
+    }
+  }
+
+
 }
