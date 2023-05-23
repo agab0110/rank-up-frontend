@@ -15,10 +15,48 @@
       <app-search-bar (ionInput)="ricerca($event)"></app-search-bar>
     </div>
 
-    <div class="listBox">
+    <ion-segment class="choise" [(ngModel)] = "segmentValue" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="rule">
+        <ion-label class="segmentText">Regole</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="task">
+        <ion-label class="segmentText">Task</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="prize">
+        <ion-label class="segmentText">Premi</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="listBox" *ngIf="segmentValue === 'rule'">
       <ion-list class="notifications" lines="none">
 
         <ion-item class={{class}} *ngFor="let activity of history" [routerLink]="['/task-rejected']">
+          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{activity.user.name}}</ion-label>
+          <ion-label class="label">{{activity.rule.name}}</ion-label>
+          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="segmentValue === 'task'">
+      <ion-list class="notifications" lines="none">
+
+        <ion-item class="itemuser" *ngFor="let activity of history" [routerLink]="['/task-rejected']">
+          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{activity.user.name}}</ion-label>
+          <ion-label class="label">{{activity.rule.name}}</ion-label>
+          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="segmentValue === 'prize'">
+      <ion-list class="notifications" lines="none">
+
+        <ion-item *ngFor="let activity of history" [routerLink]="['/task-rejected']">
           <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
           <ion-label class="label">{{activity.user.name}}</ion-label>
           <ion-label class="label">{{activity.rule.name}}</ion-label>
