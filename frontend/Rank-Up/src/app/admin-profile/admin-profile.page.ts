@@ -34,6 +34,7 @@ export class AdminProfilePage implements OnInit {
       this.userProfile = JSON.parse(localStorage.getItem('viewUser') || '{}');
       this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
 
+      this.getUserPrizes();
       this.getUserRules();
       this.getUserTasks();
   }
@@ -63,11 +64,10 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes(){
-  this.userGetPrizeService.getUserPrizes(this.userProfile.id, /*this.team.codice*/1).subscribe(
-    (response: any) => {
+  this.userGetPrizeService.getUserPrizes(this.userProfile.id, /*this.team.codice*/1).subscribe(response => {
       this.prizes = response;
       console.log(this.prizes);
-    }, (error: Response) => {
+    }), (error: Response) => {
       if(error.status == 400) {
         console.log("400 error");
       }
@@ -75,7 +75,7 @@ export class AdminProfilePage implements OnInit {
         console.log('An unexpected error occured');
       }
       console.log(error);
-    });
+    };
   }
 
   getUserRules(){
