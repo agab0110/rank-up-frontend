@@ -5,6 +5,8 @@ import { TaskService } from '../services/task/task.service';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
+import { Task } from '../models/task/task';
+import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 
 @Component({
   selector: 'app-send-task',
@@ -30,27 +32,30 @@ export class SendTaskPage implements OnInit {
       cssClass: 'alert-button-blue',
       handler: () => {
         if(this.data) {
-          const body = {
-            "attached": this.blobURL,
-            "status": 0,
-            "id_user": this.user.id,
-            "id_task": this.idTask,
+          if(this.blobURL) {
+            this.taskCompleted.attached = this.blobURL;
           }
-          this.taskCompletedService.insertTaskCompleted(body).subscribe((data: any) => {
-            console.log(data)
-          });
+          this.taskCompleted.status = 0;
+          this.taskCompleted.user = this.user;
+          const task = new Task();
+          task.id = this.idTask;
+          this.taskCompleted.task = task;
         }
+    
+        this.taskCompletedService.insertTaskCompleted(this.taskCompleted).subscribe((data: any) => {
+          console.log(data)
+        });
       }
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
-  taskCompletedService: any;
 
   constructor(
     private location: Location,
     private taskService: TaskService,
+    private taskCompletedService: TaskCompletedService,
     private router: Router
   ) { 
     this.taskCompleted = new TaskCompleted();

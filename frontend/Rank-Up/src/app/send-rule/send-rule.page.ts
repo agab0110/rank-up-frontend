@@ -19,7 +19,7 @@ export class SendRulePage implements OnInit {
 
   public user: User;
   public data: any;
-  public id_rule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
+  public idRule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public ruleCompleted: RuleCompleted
 
   public descrBtns = ["Chiudi"];
@@ -39,7 +39,7 @@ export class SendRulePage implements OnInit {
           this.ruleCompleted.status = 0;
           this.ruleCompleted.user = this.user;
           const rule = new Rule();
-          rule.id = this.id_rule;
+          rule.id = this.idRule;
           this.ruleCompleted.rule = rule;
         }
     
@@ -69,7 +69,7 @@ export class SendRulePage implements OnInit {
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     
-    this.ruleService.getRule(this.id_rule).subscribe(data => {
+    this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data
       console.log(data)
     });
