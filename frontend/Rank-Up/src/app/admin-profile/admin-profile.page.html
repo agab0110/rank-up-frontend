@@ -22,17 +22,17 @@
 
 
     <div class="listBox" *ngIf="!stato">
-        <div class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/admin-rule-completed']">
+        <div class="item" *ngFor="let rule of rules" [routerLink]="['/admin-rule-completed']">
           <div class="div-label-fakebutton">
-            <div class="label" >Regola {{i+1}}</div>
-            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+            <div class="label" >{{rule.name}}</div>
+            <ion-button class="fakebutton">{{rule.points}} pt</ion-button>
           </div>
         </div>
 
-        <div class="item" *ngFor="let item of [].constructor(3); let i = index" [routerLink]="['/completed-task']">
+        <div class="item" *ngFor="let task of tasks" [routerLink]="['/completed-task']">
           <div class="div-label-fakebutton">
-            <div class="label" >Task {{i+1}}</div>
-            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+            <div class="label" >{{task.name}}</div>
+            <ion-button class="fakebutton">{{task.points}} pt</ion-button>
           </div>
         </div>
     </div>
