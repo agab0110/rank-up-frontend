@@ -6,6 +6,7 @@ import { error } from 'console';
 import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
+import { SHA3 } from 'crypto-js';
 
 @Component({
   selector: 'app-user-profile',
@@ -82,7 +83,7 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if(error.status == 400)
+              if (error.status == 400)
                 console.log("400 error");
               else {
                 console.log('An unexpected error occured');
@@ -98,7 +99,7 @@ export class UserProfilePage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   loadFileFromDevice(event: any) {
@@ -152,7 +153,7 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if(error.status == 400)
+              if (error.status == 400)
                 console.log("400 error");
               else {
                 console.log('An unexpected error occured');
@@ -168,7 +169,7 @@ export class UserProfilePage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   async presentAlert3() {
@@ -186,7 +187,7 @@ export class UserProfilePage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   async presentAlert4() {
@@ -202,6 +203,29 @@ export class UserProfilePage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log(alertData[0]);
+            this.userService.changeEmail(this.user.id, alertData[0]).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+              this.userService.getUser(this.user.id).subscribe(data => {
+                console.log(data)
+                this.user_name = JSON.parse(JSON.stringify(data)).name;
+                this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+                this.user_username = JSON.parse(JSON.stringify(data)).username;
+                this.user_email = JSON.parse(JSON.stringify(data)).email;
+                this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+              });
+            }, (error: Response) => {
+              if (error.status == 400)
+                console.log("400 error");
+              else {
+                console.log('An unexpected error occured');
+              }
+              console.log(error);
+            });
+          }
         },
         {
           text: 'Annulla',
@@ -210,7 +234,7 @@ export class UserProfilePage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   async presentAlert5() {
@@ -227,6 +251,31 @@ export class UserProfilePage implements OnInit {
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
+          handler: (alertData) => {
+            console.log("Ok");
+            const hashedPassword = SHA3(alertData[0]).toString();
+
+            this.userService.changePassword(this.user.id, hashedPassword).subscribe(response => {
+              this.user = response;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              console.log(this.user);
+              this.userService.getUser(this.user.id).subscribe(data => {
+                console.log(data)
+                this.user_name = JSON.parse(JSON.stringify(data)).name;
+                this.user_surname = JSON.parse(JSON.stringify(data)).surname;
+                this.user_username = JSON.parse(JSON.stringify(data)).username;
+                this.user_email = JSON.parse(JSON.stringify(data)).email;
+                this.user_photo = JSON.parse(JSON.stringify(data)).photo;
+              });
+            }, (error: Response) => {
+              if (error.status == 400)
+                console.log("400 error");
+              else {
+                console.log('An unexpected error occured');
+              }
+              console.log(error);
+            });
+          }
         },
         {
           text: 'Annulla',
@@ -235,6 +284,6 @@ export class UserProfilePage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 }
