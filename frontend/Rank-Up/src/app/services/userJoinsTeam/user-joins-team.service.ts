@@ -37,4 +37,12 @@ export class UserJoinsTeamService {
   public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
+
+  public manageRequest(idTeam: number, idUser: number, status: number) {
+    const param = new HttpParams().set('status', status);
+    
+    return this.http.patch(
+      this.userJoinsTeamUrl + "/manageRequest/" + idTeam + "/" + "idUser", {param}
+    )
+  }
 }
