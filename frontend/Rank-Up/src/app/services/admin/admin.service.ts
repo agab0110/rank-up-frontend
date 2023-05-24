@@ -14,14 +14,11 @@ export class AdminService {
     this.baseUrl = "http://localhost:8080/adminManageTeamApi"
   }
 
-  public newAdmin(idUser: number, idTeam: number) {
+  public newAdmin(idUser: number, idTeam: number) {  
     const params = new HttpParams()
-      .set('idUser', idUser.toString())
-      .set('idTeam', idTeam.toString());
-  
-    return this.http.post<Admin>(
-      this.baseUrl + "/addAdmin",
-      { 'params': params }
-    );
+    .set('idTeam', idTeam.toString())
+    .set('idUser', idUser.toString());
+
+    return this.http.post<Admin>(this.baseUrl + "/addAdmin",null, {params});
   }
 }
