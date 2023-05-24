@@ -40,6 +40,7 @@ export class AdminListPage implements OnInit {
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
       this.getPartecipants(this.team.codice);
       this.getPartecipantsPoints(this.team.codice);
+      this.sortDesc();
   }
 
   backButton() {
@@ -47,6 +48,12 @@ export class AdminListPage implements OnInit {
   }
 
   segmentChanged(event: any) {
+    if(this.stato){
+      this.sortAsc();
+    }
+    if(!this.stato){
+      this.sortDesc();
+    }
     this.stato = !this.stato;
   }
 
@@ -84,5 +91,13 @@ export class AdminListPage implements OnInit {
 
     let userJoin = JSON.stringify(userJoinTeam);
     localStorage.setItem("viewUserJoinsTeam", userJoin);
+  }
+
+  sortDesc(){
+     this.usersJoinsTeam.sort((a, b) =>  b.points - a.points);
+  }
+
+  sortAsc(){
+    this.usersJoinsTeam.sort((a, b) => a.points - b.points);
   }
 }

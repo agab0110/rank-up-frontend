@@ -14,7 +14,7 @@
 
     <div class="choice">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value=1>
+        <ion-segment-button value=1 >
           <ion-label class="segmentText">Decrescente</ion-label>
         </ion-segment-button>
         <ion-segment-button value=2>
@@ -29,7 +29,7 @@
           <ion-item class="item" (click)="clickUser(user, userJoin)" [routerLink]="['/admin/admin-profile']" >
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{users[i].name}}</ion-label>
+            <ion-label class="nomeUtente">{{userJoin.key.idUser}}</ion-label>
             <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
 

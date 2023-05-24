@@ -6,8 +6,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-import { Rule } from '../models/rule/rule';
-import { Task } from '../models/task/task';
+import { Prize } from '../models/prize/prize';
 
 @Component({
   selector: 'app-request-history',
@@ -15,31 +14,40 @@ import { Task } from '../models/task/task';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  ruleCompleted: RuleCompleted[];
-  ruleRejected: RuleCompleted[];
-  taskCompleted: TaskCompleted[];
-  taskRejected: TaskCompleted[];
+
+  rulesCompleted: RuleCompleted[];
+  rulesRejected: RuleCompleted[];
+  tasksCompleted: TaskCompleted[];
+  tasksRejected: TaskCompleted[];
+
+  prizes: Prize[];
   activitySort: any;
   team: Team;
+  stato = 0;
 
   filter: number = 1;
   data: any;
   idTeam: any = 1;
   history: any[];
-  class: string = "itemadmin";
-  icon: string = "close-circle-outline";
+  classAccepted: string = "itemuser";
+  classRejected: string = "itemadmin";
+  iconAccepted: string = "checkmark-circle-outline";
+  iconRejected: string = "close-circle-outline";
+  segmentValue: string = "rule";
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private ruleCompletedService : RuleCompletedService,
     private taskCompletedService : TaskCompletedService) {
+      this.rulesCompleted = new Array<RuleCompleted>;
+      this.rulesRejected = new Array<RuleCompleted>;
+      this.tasksCompleted = new Array<TaskCompleted>;
+      this.tasksRejected = new Array<TaskCompleted>;
+
       this.history = [];
       this.team = new Team();
-      this.ruleCompleted = new Array<RuleCompleted>;
-      this.ruleRejected = new Array<RuleCompleted>;
-      this.taskCompleted = new Array<TaskCompleted>;
-      this.taskRejected = new Array<TaskCompleted>;
+      this.prizes = new Array<Prize>;
      }
 
      ngOnInit() {
@@ -51,10 +59,9 @@ export class RequestHistoryPage implements OnInit {
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
       this.getRulesCompleted();
       this.getRulesRejected();
+
       this.getTaskAccepted();
       this.getTaskRejected();
-
-      this.dataHistory();
     }
 
 
@@ -66,7 +73,7 @@ export class RequestHistoryPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Ricerca per:',
+      header: 'Filtra per:',
       buttons: [
         {
           text: 'Nome Utente',
@@ -88,7 +95,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.ruleCompleted= this.sortByActivityName();
+            this.rulesCompleted= this.sortByActivityName();
           }
         },
       ],
@@ -102,11 +109,28 @@ export class RequestHistoryPage implements OnInit {
     this.location.back();
   }
 
+  segmentChanged(event: any) {
+    const selectedValue = event.detail.value;
+
+    switch (selectedValue) {
+      case 'rule':
+        break;
+      case 'task':
+        this.getTaskAccepted();
+        //this.getTaskRejected();
+        break;
+      case 'prize':
+        break;
+      default:
+        break;
+    }
+  }
+
   getRulesCompleted(){
     this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
-      this.ruleCompleted = Response;
-      console.log(this.ruleCompleted);
-      this.ruleCompleted.forEach(element => {
+      this.rulesCompleted = Response;
+      console.log(this.rulesCompleted);
+      this.rulesCompleted.forEach(element => {
         this.history.push(element);
       });
     },(error: Response) => {
@@ -121,9 +145,9 @@ export class RequestHistoryPage implements OnInit {
 
   getRulesRejected(){
     this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
-      this.ruleRejected = Response;
-      console.log(this.ruleRejected);
-      this.ruleRejected.forEach(element => {
+      this.rulesRejected = Response;
+      console.log(this.rulesRejected);
+      this.rulesRejected.forEach(element => {
         this.history.push(element);
       });
     },(error: Response) => {
@@ -138,9 +162,9 @@ export class RequestHistoryPage implements OnInit {
 
   getTaskAccepted(){
     this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
-      this.taskCompleted = Response;
-      console.log(this.taskCompleted);
-      this.taskCompleted.forEach(element => {
+      this.tasksCompleted = Response;
+      console.log(this.tasksCompleted);
+      this.tasksCompleted.forEach(element => {
         this.history.push(element);
       });
     },(error: Response) => {
@@ -153,11 +177,11 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
-  getTaskRejected(){
-    this.taskCompletedService.taskRejected(/*this.team.codice*/1).subscribe(Response =>{
-      this.taskRejected = Response;
-      console.log(this.taskRejected);
-      this.taskRejected.forEach(element => {
+    getTaskRejected(){
+    this.taskCompletedService.taskRejected(/*this.team.codice1*/1).subscribe(Response =>{
+      this.tasksRejected = Response;
+      console.log(this.tasksCompleted);
+      this.tasksCompleted.forEach(element => {
         this.history.push(element);
       });
     },(error: Response) => {
@@ -182,7 +206,7 @@ export class RequestHistoryPage implements OnInit {
 
   sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
-      this.ruleCompleted.forEach((element : RuleCompleted) => {
+      this.rulesCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
       });
     console.log(sortList);
