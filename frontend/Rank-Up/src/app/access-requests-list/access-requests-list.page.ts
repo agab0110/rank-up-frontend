@@ -18,6 +18,7 @@ export class AccessRequestsListPage implements OnInit {
   team: Team;
   admin: Admin;
   user: User;
+  userJoin: UserJoinsTeam[];
 
   constructor(
     private location: Location,
@@ -26,6 +27,7 @@ export class AccessRequestsListPage implements OnInit {
     ) {
       this.userJoinsTeam = new UserJoinsTeam();
       this.requests = new Array<Notification>;
+      this.userJoin = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
       this.user = new User();
@@ -37,6 +39,7 @@ export class AccessRequestsListPage implements OnInit {
        if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
          //this.router.navigate(['user/home']);
        this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+       this.getRequest();
        this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
@@ -81,6 +84,18 @@ export class AccessRequestsListPage implements OnInit {
       console.log(error);
     });
   }*/
+  public getRequest(){
+    this.userJoinsTeamService.getrequests(1).subscribe(response =>{
+      this.userJoin = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
 
   public manageRequest() {
     this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, this.user.id, 1);

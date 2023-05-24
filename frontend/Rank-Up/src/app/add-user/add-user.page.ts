@@ -8,6 +8,8 @@ import { AdminService } from '../services/admin/admin.service';
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { log } from 'console';
 
 @Component({
   selector: 'app-add-user',
@@ -19,7 +21,7 @@ export class AddUserPage implements OnInit {
   team: Team;
   admin: Admin;
   query!: string;
-  id_user!: Number;
+  idUser!: number;
   user : User;
   idTeam! : number;
   responseData: any;
@@ -27,7 +29,7 @@ export class AddUserPage implements OnInit {
   constructor(
     private location: Location,
     private userService: UserService,
-    private userJoinsTeam: UserJoinsTeamService,
+    private userJoinsTeamService: UserJoinsTeamService,
     private adminService: AdminService,
     ) {
 
@@ -68,7 +70,7 @@ export class AddUserPage implements OnInit {
     if(this.query == ""){
       this.getUsers();
     }
-    this.userJoinsTeam.getListUserSearch(this.query).subscribe(response => {
+    this.userJoinsTeamService.getListUserSearch(this.query).subscribe(response => {
       this.users = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -80,11 +82,46 @@ export class AddUserPage implements OnInit {
     });
   }
 
-  addAdmin(idUser: number, idTeam:number) {
-    idTeam = 1;
-    this.adminService.newAdmin(idUser, idTeam).subscribe(response => {
+  addAdmin(idUser: number) {
+    this.team.codice = 1;
+    this.idUser = idUser;
+    console.log(idUser);
+    
+    this.adminService.newAdmin(idUser, this.team.codice).subscribe(response => {
       console.log("Admin aggiunto con successo");
       console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+  
+  /*addUser(){
+    this.userJoinsTeamService.addUser(this.idUser,this.idTeam).subscribe(response => {
+      console.log("User aggiunto con successo");
+      console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }*/
+
+  addUser(idUser:number) {
+    const u = new UserJoinsTeam();
+    u.accepted = 1;
+    //u.user.id = idUser;
+    //u.team.codice = 1; /*this.team.codice*/
+    u.points = 0;
+    this.userJoinsTeamService.addUser(u).subscribe(response => {
+      console.log("Utente inserito");
     }, (error: Response) => {
       if( error.status == 400)
       console.log("400 error");
