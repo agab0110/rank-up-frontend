@@ -37,7 +37,7 @@ export class UserJoinsTeamService {
   public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
-  public getrequests(idTeam: number):Observable<UserJoinsTeam[]>{
+  public getRequests(idTeam: number):Observable<UserJoinsTeam[]>{
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
   public addUser(u: UserJoinsTeam){

@@ -81,7 +81,7 @@ export class AccessRequestsListPage implements OnInit {
     });
   }*/
   public getRequest(){
-    this.userJoinsTeamService.getrequests(1).subscribe(response =>{
+    this.userJoinsTeamService.getRequests(1).subscribe(response =>{
       this.userJoin = response;
     }, (error: Response) => {
       if(error.status == 400)
