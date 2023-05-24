@@ -7,6 +7,7 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
 import { Prize } from '../models/prize/prize';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-request-history',
@@ -28,7 +29,6 @@ export class RequestHistoryPage implements OnInit {
   filter: number = 1;
   data: any;
   idTeam: any = 1;
-  history: any[];
   classAccepted: string = "itemuser";
   classRejected: string = "itemadmin";
   iconAccepted: string = "checkmark-circle-outline";
@@ -45,7 +45,6 @@ export class RequestHistoryPage implements OnInit {
       this.tasksCompleted = new Array<TaskCompleted>;
       this.tasksRejected = new Array<TaskCompleted>;
 
-      this.history = [];
       this.team = new Team();
       this.prizes = new Array<Prize>;
      }
@@ -65,9 +64,121 @@ export class RequestHistoryPage implements OnInit {
     }
 
 
-  dataHistory() {
-    console.log(this.history);
-    this.history.sort((a, b) => a.date - b.date);
+  sortByData() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortByUsername() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortByActivity() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.rule.name > b.rule.name) {
+        return 1;
+      }
+      if (a.rule.name < b.rule.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.rule.name > b.rule.name) {
+        return 1;
+      }
+      if (a.rule.name < b.rule.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.task.name > b.task.name) {
+        return 1;
+      }
+      if (a.task.name < b.task.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.task.name > b.task.name) {
+        return 1;
+      }
+      if (a.task.name < b.task.name) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
 
@@ -80,6 +191,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 1 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 1;
+            this.sortByUsername();
           }
         },
         {
@@ -87,7 +199,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 2 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 2;
-            this.dataHistory();
+            this.sortByData();
           }
         },
         {
@@ -95,7 +207,8 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.rulesCompleted= this.sortByActivityName();
+            //this.rulesCompleted= this.sortByActivityName();
+            this.sortByActivity();
           }
         },
       ],
@@ -130,9 +243,6 @@ export class RequestHistoryPage implements OnInit {
     this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.rulesCompleted = Response;
       console.log(this.rulesCompleted);
-      this.rulesCompleted.forEach(element => {
-        this.history.push(element);
-      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -147,9 +257,6 @@ export class RequestHistoryPage implements OnInit {
     this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
       this.rulesRejected = Response;
       console.log(this.rulesRejected);
-      this.rulesRejected.forEach(element => {
-        this.history.push(element);
-      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -164,9 +271,6 @@ export class RequestHistoryPage implements OnInit {
     this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.tasksCompleted = Response;
       console.log(this.tasksCompleted);
-      this.tasksCompleted.forEach(element => {
-        this.history.push(element);
-      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -181,9 +285,6 @@ export class RequestHistoryPage implements OnInit {
     this.taskCompletedService.taskRejected(/*this.team.codice1*/1).subscribe(Response =>{
       this.tasksRejected = Response;
       console.log(this.tasksCompleted);
-      this.tasksCompleted.forEach(element => {
-        this.history.push(element);
-      });
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -204,7 +305,7 @@ export class RequestHistoryPage implements OnInit {
     }
   }
 
-  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+  /*sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
       this.rulesCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
@@ -212,5 +313,5 @@ export class RequestHistoryPage implements OnInit {
     console.log(sortList);
     sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
     return sortList;
-  }
+  }*/
 }
