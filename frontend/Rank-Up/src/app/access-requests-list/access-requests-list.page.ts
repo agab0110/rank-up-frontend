@@ -5,6 +5,7 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -16,6 +17,7 @@ export class AccessRequestsListPage implements OnInit {
   requests : Notification[];
   team: Team;
   admin: Admin;
+  user: User;
 
   constructor(
     private location: Location,
@@ -26,6 +28,7 @@ export class AccessRequestsListPage implements OnInit {
       this.requests = new Array<Notification>;
       this.team = new Team();
       this.admin = new Admin();
+      this.user = new User();
     }
 
   ngOnInit() {
@@ -34,6 +37,7 @@ export class AccessRequestsListPage implements OnInit {
        if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
          //this.router.navigate(['user/home']);
        this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+       this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
   backButton() {
@@ -77,4 +81,8 @@ export class AccessRequestsListPage implements OnInit {
       console.log(error);
     });
   }*/
+
+  public manageRequest() {
+    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, this.user.id, 1);
+  }
 }
