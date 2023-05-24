@@ -13,7 +13,9 @@
       <app-user-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="rule.points"></app-user-element-bar>
     </div>
 
+    <ion-label class="label">Descrizione:</ion-label>
     <ion-textarea class="descriptionArea" fill="outline" placeholder={{rule.description}} shape="round" [readonly] = true></ion-textarea>
+    <ion-label class="label">Commento:</ion-label>
     <ion-textarea class="commentArea" fill="outline" placeholder={{ruleCompleted.comment}} shape="round" [readonly] = true></ion-textarea>
 
     <ion-grid class="buttons-grid">
