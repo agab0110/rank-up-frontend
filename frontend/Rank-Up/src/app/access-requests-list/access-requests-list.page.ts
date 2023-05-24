@@ -39,8 +39,9 @@ export class AccessRequestsListPage implements OnInit {
        if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
          //this.router.navigate(['user/home']);
        this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-       this.getRequest();
        this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+       this.getRequest();
   }
 
   backButton() {
@@ -54,6 +55,9 @@ export class AccessRequestsListPage implements OnInit {
         {
           text: 'Accetta',
           cssClass: 'alert-button-blue',
+          handler: () => {
+            this.manageRequest();
+          }
         },
         {
           text: 'Rifiuta',
@@ -72,18 +76,6 @@ export class AccessRequestsListPage implements OnInit {
     this.userJoinsTeamService.deleteRequest(this.userJoinsTeam);
   }
 
- /* public getRequests(){
-    this.userJoinsTeamService.getListPendingRequests(this.team.codice).subscribe(response =>{
-      this.requests = response;
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
-  }*/
   public getRequest(){
     this.userJoinsTeamService.getrequests(1).subscribe(response =>{
       this.userJoin = response;
@@ -98,6 +90,16 @@ export class AccessRequestsListPage implements OnInit {
   }
 
   public manageRequest() {
-    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, this.user.id, 1);
+    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, /*userId*/1, "1").subscribe(() => {
+      console.log("patch successful");
+    }, (error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    }
+    );
   }
 }

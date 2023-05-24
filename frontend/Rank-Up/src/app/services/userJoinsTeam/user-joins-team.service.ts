@@ -38,18 +38,14 @@ export class UserJoinsTeamService {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
 
-  public manageRequest(idTeam: number, idUser: number, status: number) {
-    const param = new HttpParams().set('status', status);
-    
-    return this.http.patch(
-      this.userJoinsTeamUrl + "/manageRequest/" + idTeam + "/" + "idUser", {param}
-    )
+  public manageRequest(idTeam: number, idUser: number, status: string) {
+    return this.http.patch(this.userJoinsTeamUrl + "/manageRequest/" + idTeam + "/" + idUser, status);
   }
 
   public getrequests(idTeam: number):Observable<UserJoinsTeam[]>{
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
-  
+
   public addUser(u: UserJoinsTeam){
     return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUser", u);
   }
