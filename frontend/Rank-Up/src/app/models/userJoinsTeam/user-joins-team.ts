@@ -7,5 +7,5 @@ export class UserJoinsTeam {
     user!: User;
     team!: Team;
     points!: number;
-    accepted!: boolean;
+    accepted!: number;
 }
