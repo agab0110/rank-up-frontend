@@ -40,7 +40,11 @@ export class UserJoinsTeamService {
   public getRequests(idTeam: number):Observable<UserJoinsTeam[]>{
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
-  public addUser(u: UserJoinsTeam){
-    return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUser", u);
+  public addUser(idTeam:number, idUser:Number){
+    const params = new HttpParams()
+    .set('idTeam', idTeam.toString())
+    .set('idUser', idUser.toString());
+    
+    return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUser",null,{params});
   }
 }

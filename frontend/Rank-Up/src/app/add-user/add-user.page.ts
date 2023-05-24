@@ -115,12 +115,10 @@ export class AddUserPage implements OnInit {
   }*/
 
   addUser(idUser:number) {
-    const u = new UserJoinsTeam();
-    u.accepted = 1;
-    //u.user.id = idUser;
-    //u.team.codice = 1; /*this.team.codice*/
-    u.points = 0;
-    this.userJoinsTeamService.addUser(u).subscribe(response => {
+    this.team.codice = 1;
+    this.idUser = idUser;
+
+    this.userJoinsTeamService.addUser(this.team.codice,idUser).subscribe(response => {
       console.log("Utente inserito");
     }, (error: Response) => {
       if( error.status == 400)
