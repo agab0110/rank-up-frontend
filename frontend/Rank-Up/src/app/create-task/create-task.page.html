@@ -21,7 +21,7 @@
       <ion-textarea [(ngModel)]="task.desctiption" fill="outline" placeholder="Descrizione"></ion-textarea>
 
       <div class="button-div">
-        <ion-button (click)="presentAlert()" class="exclusive-button"  (click)="createTask()">
+        <ion-button (click)="presentAlert()" class="exclusive-button">
           <div class="internal-div">
             <span class="button-text">Rendi esclusivo per...</span>
             <ion-icon class="button-icon" name="add-outline" size="large"></ion-icon>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="create-task-button">
-        <app-bt-admin-small text="Crea Task" (click)="backButton()"></app-bt-admin-small>
+        <app-bt-admin-small text="Crea Task" (click)="backButton()" (click)="createTask()"></app-bt-admin-small>
       </div>
     </div>
   

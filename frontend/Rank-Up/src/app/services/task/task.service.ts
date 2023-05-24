@@ -27,7 +27,7 @@ export class TaskService {
   }
 
   public newTask(task: Task) {
-    return this.http.post(
+    return this.http.post<Task>(
       this.baseUrl + "/createTask", task
       );
   }
