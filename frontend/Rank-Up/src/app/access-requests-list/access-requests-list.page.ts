@@ -48,36 +48,45 @@ export class AccessRequestsListPage implements OnInit {
     this.location.back();
   }
 
-  async presentAlert() {
+  async presentAlert(u: UserJoinsTeam) {
     const alert = await this.alertController.create({
-      header: "Accettare l'utente [Nome Utente] nel Team [Nome Team]?",
+      header: "Accettare l'utente " + u.user.name + " nel Team " + u.team.name + "?",
       buttons: [
         {
           text: 'Accetta',
           cssClass: 'alert-button-blue',
           handler: () => {
-            this.manageRequest();
+            this.manageRequest(u.user.id);
           }
         },
         {
           text: 'Rifiuta',
           cssClass: 'alert-button-red',
           handler: () => {
-            this.deleteRequest();
+            this.deleteRequest(u.id);
           }
         },
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
-  deleteRequest(){
-    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam);
+  deleteRequest(id: number){
+    this.userJoinsTeamService.deleteRequest(id).subscribe(() => {
+      console.log('Delete successful');
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
   }
 
   public getRequest(){
-    this.userJoinsTeamService.getrequests(1).subscribe(response =>{
+    this.userJoinsTeamService.getrequests(/*this.team.codice*/1).subscribe(response =>{
       this.userJoin = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -89,8 +98,8 @@ export class AccessRequestsListPage implements OnInit {
     });
   }
 
-  public manageRequest() {
-    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, /*userId*/1, "1").subscribe(() => {
+  public manageRequest(id: number) {
+    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, id, "1").subscribe(() => {
       console.log("patch successful");
     }, (error: Response) => {
       if (error.status == 400) {
