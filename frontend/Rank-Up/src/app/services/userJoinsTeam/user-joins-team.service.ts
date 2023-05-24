@@ -15,9 +15,8 @@ export class UserJoinsTeamService {
     this.userJoinsTeamUrl = 'http://localhost:8080/userJoinsTeamApi';
    }
 
-   deleteRequest(userJoinTeam: UserJoinsTeam) {
-    return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest")
-    .subscribe(() => this.status = 'Delete successful');
+   deleteRequest(id: number) {
+    return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest/" + id);
   }
 
   public getListUserSearch(username: string): Observable<User[]> {
