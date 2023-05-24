@@ -20,8 +20,9 @@
 
         <ion-item class={{class}} *ngFor="let activity of history" [routerLink]="['/task-rejected']">
           <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
-          <ion-label class="label">{{activity.user.name}}</ion-label>
-          <ion-label class="label">{{activity.rule.name}}</ion-label>
+          <ion-label class="label">{{activity.user?.name}}</ion-label>
+          <ion-label class="label">{{activity.rule?.name}}</ion-label>
+          <ion-label class="label">{{activity.task?.name}}</ion-label>
           <ion-label class="label">{{activity.timestamp}}</ion-label>
         </ion-item>
 
