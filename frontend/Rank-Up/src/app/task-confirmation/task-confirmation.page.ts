@@ -107,13 +107,13 @@ export class TaskConfirmationPage implements OnInit {
 
   rejectActivity() {
     const status = 2;
-    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
     this.backButton();
   }
 
   confirmActivity() {
     const status = 1;
-    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
+    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
     this.backButton();
     }
   }
