@@ -19,4 +19,9 @@ export class NotificationService {
     );
   }
 
+  public getUserNotification(idNotification: Number): Observable<Notification> {
+    return this.http.get<Notification>(
+      this.baseUrl + "/userNotification/" + idNotification
+    )
+  }
 }

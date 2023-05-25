@@ -24,7 +24,7 @@
       </ion-segment>
 
       <ion-list class="notifications" lines="none" *ngFor="let notification of userNotification">
-        <ion-item class="item" [routerLink] = "['/user/user-notification-description']">
+        <ion-item class="item" [routerLink] = "['/user/user-notification-description', notification.id]">
           <ion-label class="data">{{notification.date}}</ion-label>
           <ion-label class="titolo">{{notification.title}}</ion-label>
           <ion-label class="nomeTeam">{{notification.team.name}}</ion-label>

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { NotificationService } from '../services/notification/notification.service';
 import { Notification } from '../models/notification/notification';
 import { User } from '../models/user/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -18,7 +19,11 @@ export class NotificationsPage implements OnInit {
   public alertBtns = ["Accetta", "Rifiuta"];
   type='admin';
 
-  constructor(private location: Location, private notificationService: NotificationService) {
+  constructor(
+    private location: Location,
+    private notificationService: NotificationService,
+    private route: ActivatedRoute
+    ) {
       this.userNotification = new Array<Notification>;
       this.user = new User;
       this.stato = true;
