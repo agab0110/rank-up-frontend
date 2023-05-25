@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 import { PrizeService } from '../services/prize/prize.service';
 import { Prize } from '../models/prize/prize';
@@ -17,6 +18,7 @@ export class PrizesPagePage implements OnInit {
   team: Team;
 
   constructor(
+    private location: Location,
     public alertCtrl: AlertController,
     private prizeService: PrizeService
     ) {
@@ -57,7 +59,7 @@ export class PrizesPagePage implements OnInit {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
       //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
     //this.router.navigate(['user/home']);
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.Listprize(this.team.codice);
    }
 
@@ -72,5 +74,9 @@ export class PrizesPagePage implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  backButton() {
+    this.location.back();
   }
 }
