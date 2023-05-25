@@ -7,7 +7,8 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { Rule } from '../models/rule/rule';
-import { timeStamp } from 'console';
+import { Notification } from '../models/notification/notification';
+import { NotificationService } from '../services/notification/notification.service';
 
 @Component({
   selector: 'app-send-rule',
@@ -16,7 +17,7 @@ import { timeStamp } from 'console';
 })
 
 export class SendRulePage implements OnInit {
-
+  notification: Notification;
   public user: User;
   public data: any;
   public id_rule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
@@ -57,10 +58,12 @@ export class SendRulePage implements OnInit {
     private location: Location,
     private ruleService: RuleService,
     private ruleCompletedService: RuleCompletedService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
+    this.notification = new Notification();
   }
 
   ngOnInit() {
@@ -99,5 +102,20 @@ export class SendRulePage implements OnInit {
   }
   backButton() {
     this.location.back();
+  }
+
+  sendNotification() {
+    this.notification.title = "Regola completata";
+    this.notification.description = "La regola " + this.ruleCompleted.rule.name + " e' stata completata da " + this.user.username;
+    this.notificationService.newNotification(this.notification, 1).subscribe(u => {
+      console.log(u);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
   }
 }
