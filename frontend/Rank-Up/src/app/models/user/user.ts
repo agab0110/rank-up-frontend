@@ -4,6 +4,7 @@ import { Task } from "../task/task";
 import { TaskCompleted } from "../taskCompleted/task-completed";
 import { UserGetPrize } from "../userGetPrize/user-get-prize";
 import { UserJoinsTeam } from "../userJoinsTeam/user-joins-team";
+import { UserReciveNotification } from "../userReciveNotification/user-recive-notification";
 
 export class User {
     id!: number;
@@ -16,7 +17,7 @@ export class User {
     adminToUser!: Admin;
     tasksCompleted!: TaskCompleted[];
     rulesCompleted!: RuleCompleted[];
-    notifications!: Notification[];
+    notifications!: UserReciveNotification[];
     assignedTasks!: Task[];
     userJoinsTeams!: UserJoinsTeam[];
     userGetPrize!: UserGetPrize[];
