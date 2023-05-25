@@ -13,10 +13,6 @@ export class NotificationService {
     this.notificationUrl = "http://localhost:8080/notificationApi";
   }
 
-  public getNotification(idUser: Number): Observable<Notification[]> {
-    return this.http.get<Notification[]>(
-      this.notificationUrl + "/getNotification/" + idUser
-    );
-  }
+ 
 
 }

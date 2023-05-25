@@ -4,6 +4,8 @@ import { NotificationService } from '../services/notification/notification.servi
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { Notification } from '../models/notification/notification';
+import { UserReciveNotification } from '../models/userReciveNotification/user-recive-notification';
+import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -13,11 +15,11 @@ export class NotificationsPage implements OnInit {
 
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
-  notifications:Notification[];
+  notifications:UserReciveNotification[];
   user: User;
   team: Team;
-  constructor(private location: Location, private notificationService:NotificationService) { 
-    this.notifications = new Array<Notification>;
+  constructor(private location: Location, private userNotificationService:UserReciveNotificationService) { 
+    this.notifications = new Array<UserReciveNotification>;
     this.team = new Team();
     this.user = new User();
 
@@ -41,7 +43,7 @@ export class NotificationsPage implements OnInit {
     this.location.back();
   }
   getNotification(){
-    this.notificationService.getNotification(1).subscribe(response =>{
+    this.userNotificationService.getNotification(1).subscribe(response =>{
      this.notifications = response;
     }, (error: Response) => {
       if(error.status == 400)
