@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { NotificationService } from '../services/notification/notification.service';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
+import { Notification } from '../models/notification/notification';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -15,7 +16,6 @@ export class NotificationsPage implements OnInit {
   notifications:Notification[];
   user: User;
   team: Team;
-  notification!:Notification;
   constructor(private location: Location, private notificationService:NotificationService) { 
     this.notifications = new Array<Notification>;
     this.team = new Team();
@@ -42,7 +42,7 @@ export class NotificationsPage implements OnInit {
   }
   getNotification(){
     this.notificationService.getNotification(1).subscribe(response =>{
-      this.notifications = response;
+     this.notifications = response;
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
