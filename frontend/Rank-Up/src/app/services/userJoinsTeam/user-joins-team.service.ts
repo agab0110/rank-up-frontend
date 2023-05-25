@@ -25,7 +25,7 @@ export class UserJoinsTeamService {
     return this.http.get<User[]>(this.userJoinsTeamUrl + "/list/userSearch", {params});
   }
 
-  public getListPendingRequests(id_team: string): Observable<Notification[]> {
+  public getListPendingRequests(id_team: number): Observable<Notification[]> {
     const params = new HttpParams().set('id_team', id_team);
     return this.http.get<Notification[]>(this.userJoinsTeamUrl + "/list/pendingRequests",  {params})
   }
@@ -36,6 +36,10 @@ export class UserJoinsTeamService {
 
   public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
+  }
+
+  public addUser(idTeam: number, idUer: number): Observable<User>{
+    return this.http.get<User>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
 
   public subtractUserPoints(idTeam: number, idUser: number, idPrize: number): Observable<UserJoinsTeam[]> {

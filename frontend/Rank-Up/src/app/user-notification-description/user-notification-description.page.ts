@@ -24,7 +24,7 @@ export class UserNotificationDescriptionPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.idNotification = params['notification.id'];
+      this.idNotification = params['n.notification.id'];
       this.getNotification(this.idNotification);
     });
   }

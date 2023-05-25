@@ -45,7 +45,7 @@ const routes: Routes = [
         loadChildren: () => import('../../participants/participants.module').then( m => m.ParticipantsPageModule)
       },
       {
-        path: 'user-notification-description',
+        path: 'user-notification-description/:n.notification.id',
         loadChildren: () => import('../../user-notification-description/user-notification-description.module').then( m => m.UserNotificationDescriptionPageModule)
       },
       {

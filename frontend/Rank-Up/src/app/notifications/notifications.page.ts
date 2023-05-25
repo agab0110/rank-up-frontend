@@ -6,26 +6,25 @@ import { Team } from '../models/team/team';
 import { Notification } from '../models/notification/notification';
 import { UserReciveNotification } from '../models/userReciveNotification/user-recive-notification';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  userNotification : Notification[];
   user : User;
   stato : Boolean;
-
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
   notifications:UserReciveNotification[];
-  user: User;
   team: Team;
+
   constructor(private location: Location, private userNotificationService:UserReciveNotificationService) {
     this.notifications = new Array<UserReciveNotification>;
     this.team = new Team();
     this.user = new User();
-
+    this.stato = false;
   }
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class NotificationsPage implements OnInit {
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
     //this.router.navigate(['user/home']);
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    this.getNotification();
+    this.getUserNotification(1);
   }
 
   segmentChanged(ev: any, idUser: Number){
@@ -52,8 +51,8 @@ export class NotificationsPage implements OnInit {
   }
 
   public getUserNotification(idUser: Number) {
-    this.notificationService.getUserNotifications(idUser).subscribe(response => {
-      this.userNotification = response;
+    this.userNotificationService.getNotification(2).subscribe(response => {
+      this.notifications= response;
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
