@@ -41,12 +41,12 @@ export class TeamRulesTasksPage implements OnInit {
     //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
       //this.router.navigate(['user/home']);
     //}
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team = JSON.parse(localStorage.getItem('this.team') || '{}');
     /*if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == ''){
       this.router.navigate(['user/home']);
     }*/
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    this.team.name= "Team prova";
+    //this.team.name= "Team prova";
   }
 
 
