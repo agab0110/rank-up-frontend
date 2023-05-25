@@ -5,7 +5,7 @@ import { User } from "../user/user";
 
 export class Task {
     id!: number;
-    name: string | undefined;
+    name!: string;
     points!: number;
     desctiption!: string;
     endDate!: Date;

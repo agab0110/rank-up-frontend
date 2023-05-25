@@ -70,6 +70,59 @@ export class RequestHistoryPage implements OnInit {
     this.history.sort((a, b) => a.date - b.date);
   }
 
+  sortRulesCompletedByName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (RuleCompleted)[] = [];
+      this.rulesCompleted.forEach((element : RuleCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
+    return sortList;
+  }
+
+  sortRulesRejecteddByName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (RuleCompleted)[] = [];
+      this.rulesRejected.forEach((element : RuleCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
+    return sortList;
+  }
+
+  sortTasksByName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (TaskCompleted)[] = [];
+      this.tasksCompleted.forEach((element : TaskCompleted) => {
+        sortList.push(element);
+      });
+      this.tasksRejected.forEach((element : TaskCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.task.name.localeCompare(b.task.name));
+    return sortList;
+  }
+
+  sortTasksCompletedByName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (TaskCompleted)[] = [];
+      this.tasksCompleted.forEach((element : TaskCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.task.name.localeCompare(b.task.name));
+    return sortList;
+  }
+
+  sortTasksRejectedByName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+    let sortList: (TaskCompleted)[] = [];
+      this.tasksRejected.forEach((element : TaskCompleted) => {
+        sortList.push(element);
+      });
+    console.log(sortList);
+    sortList.sort((a, b) => a.task.name.localeCompare(b.task.name));
+    return sortList;
+  }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -95,7 +148,10 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.rulesCompleted= this.sortByActivityName();
+            this.rulesCompleted =  this.sortRulesCompletedByName();
+            this.rulesRejected = this.sortRulesRejecteddByName();
+            this.tasksCompleted = this.sortTasksCompletedByName();
+            this.tasksRejected = this.sortTasksRejectedByName();
           }
         },
       ],
@@ -202,15 +258,5 @@ export class RequestHistoryPage implements OnInit {
         console.log(data)
       });
     }
-  }
-
-  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
-    let sortList: (RuleCompleted)[] = [];
-      this.rulesCompleted.forEach((element : RuleCompleted) => {
-        sortList.push(element);
-      });
-    console.log(sortList);
-    sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
-    return sortList;
   }
 }
