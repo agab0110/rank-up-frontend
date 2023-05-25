@@ -66,6 +66,10 @@ export class RuleCompletedService {
         console.log(error);
       });
     }
+
+    public getRulesCompleted(idRule: number) {
+      return this.http.get<RuleCompleted>(this.baseUrl + "/admin/ruleCompletedDetails/" + idRule);
+    }
   }
 
 
