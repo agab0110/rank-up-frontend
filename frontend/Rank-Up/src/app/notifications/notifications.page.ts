@@ -6,6 +6,7 @@ import { Team } from '../models/team/team';
 import { Notification } from '../models/notification/notification';
 import { UserReciveNotification } from '../models/userReciveNotification/user-recive-notification';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
 
 @Component({
   selector: 'app-notifications',
@@ -18,10 +19,12 @@ export class NotificationsPage implements OnInit {
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
   notifications:UserReciveNotification[];
+  adminNotifications: AdminReciveNotification[];
   team: Team;
 
   constructor(private location: Location, private userNotificationService:UserReciveNotificationService) {
     this.notifications = new Array<UserReciveNotification>;
+    this.adminNotifications = new Array<AdminReciveNotification>;
     this.team = new Team();
     this.user = new User();
     this.stato = false;
@@ -63,17 +66,16 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  public getAdminNotification(){}
-  getNotification(){
+  public getAdminNotification(){
     this.userNotificationService.getNotification(1).subscribe(response =>{
-     this.notifications = response;
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
+      this.adminNotifications = response;
+     }, (error: Response) => {
+       if(error.status == 400)
+         console.log("400 error");
+       else {
+         console.log('An unexpected error occured');
+       }
+       console.log(error);
+     });
   }
 }
