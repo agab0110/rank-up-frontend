@@ -25,10 +25,10 @@ export class TaskService {
       this.baseUrl + "/task/" + idTask
       );
   }
-  
-  public addTask( task: Task){
+
+  public newTask(task: Task) {
     return this.http.post<Task>(
-      this.baseUrl + "add/task", task
-    );
+      this.baseUrl + "/createTask", task
+      );
   }
 }
