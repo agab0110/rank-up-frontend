@@ -4,7 +4,7 @@ import { User } from '../models/user/user';
 import { TeamService } from '../services/team/team.service';
 import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
-import { AdminManageTeamService } from '../services/adminManageTeam/admin-manage-team.service';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private adminManageTeamService: AdminManageTeamService
+    private adminManageTeamService: AdminService
     ) {
     this.user = new User();
     this.teamsUser = [];
