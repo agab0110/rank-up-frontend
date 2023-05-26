@@ -25,9 +25,7 @@ export class AdminProfilePage implements OnInit {
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
-      localStorage.getItem('viewUser');
       localStorage.getItem('viewUserJoinsTeam');
-      this.userProfile = JSON.parse(localStorage.getItem('viewUser') || '{}');
       this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
   }
 
