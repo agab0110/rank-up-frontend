@@ -5,6 +5,7 @@ import { PrizeService } from '../services/prize/prize.service';
 import { Prize } from '../models/prize/prize';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prizes-page',
@@ -18,7 +19,8 @@ export class PrizesPagePage implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
-    private prizeService: PrizeService
+    private prizeService: PrizeService,
+    private router: Router
     ) {
       this.prizes = new Array<Prize>
       this.user = new User
@@ -52,17 +54,19 @@ export class PrizesPagePage implements OnInit {
 
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-    //this.router.navigate(['user/home']);
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
     this.Listprize(this.team.codice);
    }
 
   Listprize(idTeam: Number){
-    this.prizeService.listPrize(1).subscribe(response =>{
+    this.prizeService.listPrize(this.team.codice).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)
