@@ -55,7 +55,6 @@ export class RulesAndTasksRulesPage implements OnInit {
     this.stato = !this.stato;
   }
   listRule(){
-    this.rule.team = this.team;
     this.ruleservice.listRule(this.team.codice).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
@@ -69,7 +68,6 @@ export class RulesAndTasksRulesPage implements OnInit {
   }
 
   listTask(){
-    this.task.team = this.team;
     this.taskservice.listTask(this.team.codice).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {

@@ -40,8 +40,6 @@ export class TeamRulesTasksPage implements OnInit {
 
 
   ngOnInit() {
-    this.listRule();
-    this.listTask();
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     if (localStorage.getItem('team') == null) {
@@ -50,6 +48,9 @@ export class TeamRulesTasksPage implements OnInit {
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
     }
+    this.listRule();
+    this.listTask();
+    
   }
 
 

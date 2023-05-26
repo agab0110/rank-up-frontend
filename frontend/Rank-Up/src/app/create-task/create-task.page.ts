@@ -5,6 +5,8 @@ import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { Task } from '../models/task/task';
 import { TaskService } from '../services/task/task.service';
+import { Router } from '@angular/router';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-create-task',
@@ -15,11 +17,13 @@ export class CreateTaskPage implements OnInit {
   task: Task;
   team: Team;
   admin: Admin;
+  user:User;
 
-  constructor(private alertController: AlertController, private location: Location, private taskService:TaskService) {
+  constructor(private alertController: AlertController, private location: Location, private taskService:TaskService,private router: Router) {
     this.task = new Task();
     this.team = new Team();
     this.admin = new Admin();
+    this.user = new User();
    }
 
   async presentAlert() {
@@ -47,12 +51,14 @@ export class CreateTaskPage implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
   }
 
   backButton() {
