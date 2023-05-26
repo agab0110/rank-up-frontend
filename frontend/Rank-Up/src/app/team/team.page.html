@@ -10,8 +10,8 @@
             <ion-icon name="information-circle-outline"class="iconainfo"></ion-icon>
         </ion-button>
 
-        <h1 class="title">[Nome Team]</h1>
-        <h2 class="team-code">Codice: [Codice Team]</h2>
+        <h1 class="title">{{team.name}}</h1>
+        <h2 class="team-code">Codice: {{team.codice}}</h2>
 
         <ion-button class="premi" fill="clear" [routerLink] = "['/user/prizes-page']">
             <app-square-list class="squareList" [iconName]="'trophy-outline'" [text]="'Premi'"></app-square-list>

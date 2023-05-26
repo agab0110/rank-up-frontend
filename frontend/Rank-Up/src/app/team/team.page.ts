@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { User } from '../models/user/user';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-team',
@@ -9,12 +11,22 @@ import { Location } from '@angular/common';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
+  user: User;
+  team: Team;
 
   constructor(private alertController: AlertController,
     private router: Router,
-    private location: Location) { }
+    private location: Location) {
+      this.user = new User();
+      this.team = new Team();
+     }
 
   ngOnInit() {
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
   }
 
   backButton() {
