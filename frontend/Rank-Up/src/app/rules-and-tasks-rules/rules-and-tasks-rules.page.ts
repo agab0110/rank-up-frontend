@@ -6,6 +6,7 @@ import { TaskService } from '../services/task/task.service';
 import { Task } from '../models/task/task';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rules-and-tasks-rules',
@@ -23,7 +24,7 @@ export class RulesAndTasksRulesPage implements OnInit {
   tasks : Task[];
   task : Task;
   rule : Rule;
-  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService) {
+  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService,private router: Router) {
     this.rules = new Array<Rule>;
     this.tasks = new Array<Task>;
     this.team = new Team();
@@ -34,16 +35,16 @@ export class RulesAndTasksRulesPage implements OnInit {
    }
 
   ngOnInit() {
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
     this.listRule();
     this.listTask();
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    this.team.name = "Team prova";
-    this.team.codice= 38457
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
 
@@ -55,7 +56,7 @@ export class RulesAndTasksRulesPage implements OnInit {
   }
   listRule(){
     this.rule.team = this.team;
-    this.ruleservice.listRule(1).subscribe(response =>{
+    this.ruleservice.listRule(this.team.codice).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -69,7 +70,7 @@ export class RulesAndTasksRulesPage implements OnInit {
 
   listTask(){
     this.task.team = this.team;
-    this.taskservice.listTask(1).subscribe(response =>{
+    this.taskservice.listTask(this.team.codice).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)
