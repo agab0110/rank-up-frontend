@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Rule } from '../models/rule/rule';
 import { Notification } from '../models/notification/notification';
 import { NotificationService } from '../services/notification/notification.service';
+import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 
 @Component({
   selector: 'app-send-rule',
@@ -59,7 +60,8 @@ export class SendRulePage implements OnInit {
     private ruleService: RuleService,
     private ruleCompletedService: RuleCompletedService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private adminReciveNotificationService: AdminReciveNotificationService
   ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
@@ -107,8 +109,9 @@ export class SendRulePage implements OnInit {
   sendNotification() {
     this.notification.title = "Regola completata";
     this.notification.description = "La regola " + this.ruleCompleted.rule.name + " e' stata completata da " + this.user.username;
-    this.notificationService.newNotification(this.notification, 1).subscribe(u => {
-      console.log(u);
+    this.notificationService.newNotification(this.notification, 1).subscribe(n => {
+      console.log(n);
+      this.addAdminNotification(n);
     },(error: Response) => {
       if (error.status == 400) {
         console.log("Errore 400");
@@ -117,5 +120,17 @@ export class SendRulePage implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  addAdminNotification(n: Notification){
+    this.adminReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+      console.log(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+      console.log("Errore 400");
+    } else {
+      console.log("Unexpected error");
+    }
+    console.log(error);});
   }
 }
