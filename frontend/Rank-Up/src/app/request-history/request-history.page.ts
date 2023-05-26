@@ -207,8 +207,8 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            //this.rulesCompleted= this.sortByActivityName();
-            this.sortByActivity();
+            this.rulesCompleted= this.sortByActivityName();
+            //this.sortByActivity();
           }
         },
       ],
@@ -305,7 +305,7 @@ export class RequestHistoryPage implements OnInit {
     }
   }
 
-  /*sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
       this.rulesCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
@@ -313,5 +313,5 @@ export class RequestHistoryPage implements OnInit {
     console.log(sortList);
     sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
     return sortList;
-  }*/
+  }
 }
