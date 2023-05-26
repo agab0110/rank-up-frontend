@@ -44,7 +44,7 @@ export class PrizesPagePage implements OnInit {
           text: 'Si',
           cssClass:'alert-button-blue',
           handler: () => {
-           this.subtractUserPoints(1, 4, 1);
+           this.subtractUserPoints(1, 2, 1);
           }
         }
       ]

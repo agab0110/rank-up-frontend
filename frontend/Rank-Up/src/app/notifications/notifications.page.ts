@@ -7,6 +7,7 @@ import { Notification } from '../models/notification/notification';
 import { UserReciveNotification } from '../models/userReciveNotification/user-recive-notification';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
+import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 
 @Component({
   selector: 'app-notifications',
@@ -22,7 +23,11 @@ export class NotificationsPage implements OnInit {
   adminNotifications: AdminReciveNotification[];
   team: Team;
 
-  constructor(private location: Location, private userNotificationService:UserReciveNotificationService) {
+  constructor(
+    private location: Location,
+    private userNotificationService:UserReciveNotificationService,
+    private adminNotificationService: AdminReciveNotificationService
+    ) {
     this.notifications = new Array<UserReciveNotification>;
     this.adminNotifications = new Array<AdminReciveNotification>;
     this.team = new Team();
@@ -40,12 +45,12 @@ export class NotificationsPage implements OnInit {
     this.getUserNotification(1);
   }
 
-  segmentChanged(ev: any, idUser: Number){
+  segmentChanged(ev: any, idUser: Number, idAdmin: Number){
     this.stato = !this.stato;
     if(!this.stato){
       this.getUserNotification(idUser);
     }else{
-      this.getAdminNotification()
+      this.getAdminNotification(idAdmin)
     }
   }
 
@@ -66,8 +71,8 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  public getAdminNotification(){
-    this.userNotificationService.getNotification(1).subscribe(response =>{
+  public getAdminNotification(idAmin: Number){
+    this.adminNotificationService.getAdminNotification(1).subscribe(response =>{
       this.adminNotifications = response;
      }, (error: Response) => {
        if(error.status == 400)
