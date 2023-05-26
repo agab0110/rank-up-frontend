@@ -20,11 +20,14 @@ export class AdminHomeTeamPage implements OnInit {
      }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
     }
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
   }
 
   backButton() {
