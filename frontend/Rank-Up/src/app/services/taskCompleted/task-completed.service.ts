@@ -46,4 +46,8 @@ export class TaskCompletedService {
   public getPending(id_team: any) {
     return this.http.get(this.baseUrl + "/pending/" + id_team);
   }
+
+  public getTaskCompleted(idTask: number) {
+    return this.http.get<TaskCompleted>(this.baseUrl + "/taskCompletedDetails/" + idTask);
+  }
 }
