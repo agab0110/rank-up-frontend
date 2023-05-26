@@ -21,6 +21,35 @@
     <div class="list-teams" scroll="true">
       <ion-grid>
         <ion-row>
+          <ion-col *ngFor="let team of teamsUser">
+            <div class="team-card" (click)="goToTeamUser(team)">
+              <div class="img-team-user">
+                <img sizes="large" alt="Team" src={{team.photo}} />
+              </div>
+              <div class="team-name">
+                <span>{{team.name}}</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col *ngFor="let team of teamsAdmin">
+            <div class="team-card" (click)="goToTeamAdmin(team)">
+              <div class="img-team-admin">
+                <img sizes="large" alt="Team" src={{team.photo}} />
+              </div>
+              <div class="team-name">
+                <span>{{team.name}}</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <!--div class="list-teams" scroll="true">
+      <ion-grid>
+        <ion-row>
           <ion-col>
             <div class="team-card"[routerLink]="['/user/team']">
               <div class="img-team-user">
@@ -102,7 +131,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+    </div-->
 
   </div>
 </ion-content>
