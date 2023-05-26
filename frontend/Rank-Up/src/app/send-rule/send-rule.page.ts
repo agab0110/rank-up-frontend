@@ -108,7 +108,7 @@ export class SendRulePage implements OnInit {
 
   sendNotification() {
     this.notification.title = "Regola completata";
-    this.notification.description = "La regola " + this.ruleCompleted.rule.name + " e' stata completata da " + this.user.username;
+    this.notification.description = "La regola [Nome Regola] e' stata completata da " + this.user.username;
     this.notificationService.newNotification(this.notification, 1).subscribe(n => {
       console.log(n);
       this.addAdminNotification(n);
@@ -123,7 +123,7 @@ export class SendRulePage implements OnInit {
   }
 
   addAdminNotification(n: Notification){
-    this.adminReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+    this.adminReciveNotificationService.addNotification(/*this.admin.id*/1, n.id).subscribe(n => {
       console.log(n);
     },(error: Response) => {
       if (error.status == 400) {
