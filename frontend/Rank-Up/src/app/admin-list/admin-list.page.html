@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Partecipanti<br/>[Nome Team]</h1>
+    <h1 class="title">Partecipanti<br/>{{team.name}}</h1>
 
     <ion-button class="rightIcon" [routerLink]="['/admin/add-user']">
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
@@ -29,7 +29,7 @@
           <ion-item class="item" (click)="clickUser(user, userJoin)" [routerLink]="['/admin/admin-profile']" >
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{userJoin.user.id}}</ion-label>
+            <ion-label class="nomeUtente">{{userJoin.user.name}}</ion-label>
             <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
 
