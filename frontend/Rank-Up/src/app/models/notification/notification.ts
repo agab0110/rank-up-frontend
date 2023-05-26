@@ -1,5 +1,6 @@
+import { AdminReciveNotification } from "../adminReciveNotification/admin-recive-notification";
 import { Team } from "../team/team";
-import { User } from "../user/user";
+import { UserReciveNotification } from "../userReciveNotification/user-recive-notification";
 
 export class Notification {
     id!: number;
@@ -7,5 +8,6 @@ export class Notification {
     description!: string;
     date!: Date;
     team!: Team;
-    user!: User;
+    user!: UserReciveNotification[];
+    admin!: AdminReciveNotification[];
 }
