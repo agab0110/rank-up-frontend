@@ -37,11 +37,39 @@ export class HomePage implements OnInit {
 
     this.userJoinsTeamService.getTeams(this.user.id).subscribe(response => {
       this.teamsUser = response;
+      this.teamsUser.forEach(team => {
+        this.teams.push(team);
+      });
+      this.teams.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        else if (a.name < b.name) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
       console.log(this.teamsUser);
     });
 
     this.adminManageTeamService.getTeams(this.user.id).subscribe(response => {
       this.teamsAdmin = response;
+      this.teamsAdmin.forEach(team => {
+        this.teams.push(team);
+      });
+      this.teams.sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        else if (a.name < b.name) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
       console.log(this.teamsAdmin);
     });
 
@@ -65,5 +93,12 @@ export class HomePage implements OnInit {
   goToTeamAdmin(team: Team) {
     localStorage.setItem('team', JSON.stringify(team));
     this.router.navigate(['/admin/admin-home-team']);
+  }
+
+  userOrAdmin(team: Team) {
+    if(this.teamsUser.includes(team))
+      return true;
+    else
+      return false;
   }
 }
