@@ -8,6 +8,7 @@ import { NotificationService } from '../services/notification/notification.servi
 })
 export class NotificationsPage implements OnInit {
 
+  idUser: any = 2;
   nUser: any
   nAdmin: any
 
@@ -20,26 +21,26 @@ export class NotificationsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.notificationService.getUserNotification(1).subscribe(data => {
+    this.notificationService.getUserNotification(this.idUser).subscribe(data => {
       this.nUser = data;
       console.log(this.nUser)
     })
 
-    this.notificationService.getAdminNotification(1).subscribe(data => {
+    this.notificationService.getAdminNotification(this.idUser).subscribe(data => {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })
   }
 
   notificheUser(event: any){
-    this.notificationService.getUserNotification(1).subscribe(data => {
+    this.notificationService.getUserNotification(this.idUser).subscribe(data => {
       this.nUser = data;
       console.log(this.nUser)
     })
   }
 
   notificheAdmin(event: any){
-    this.notificationService.getAdminNotification(1).subscribe(data => {
+    this.notificationService.getAdminNotification(this.idUser).subscribe(data => {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })

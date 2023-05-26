@@ -39,8 +39,8 @@ export class TaskCompletedService {
     return this.http.post(this.baseUrl + "/taskCompleted", taskCompleted)
   }
 
-  public confirmationTaskCompleted(id_task_completed: number, status: number ,ruleCompleted: RuleCompleted) {
-    return this.http.patch(this.baseUrl + "/confirmation/" + id_task_completed + "/" + status, ruleCompleted)
+  public confirmationTaskCompleted(idTaskCompleted: number, status: number , taskCompleted: TaskCompleted) {
+    return this.http.patch(this.baseUrl + "/confirmation/" + idTaskCompleted + "/" + status, taskCompleted)
   }
 
   public getPending(id_team: any) {

@@ -11,12 +11,12 @@
       <app-search-bar (ionInput)="ricerca($event)"></app-search-bar>
     </div>
 
-    <div class="listBox" *ngIf="this.data">
+    <div class="listBox" *ngIf="this.teams">
       <div class="grind">
-        <div class="team-card" (click)="presentAlert()" *ngFor="let i of this.data">
-          <img fill="clear" sizes="large" alt="photo non presente nel db" src={{i.photo}} />
+        <div class="team-card" (click)="presentAlert()" *ngFor="let team of this.teams">
+          <img fill="clear" sizes="large" alt="photo non presente nel db" src={{team.photo}} />
           <h4 class="team-name">
-            {{i.name}}
+            {{team.name}}
           </h4>
         </div>
       </div>

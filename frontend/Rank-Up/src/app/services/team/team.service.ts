@@ -35,8 +35,8 @@ export class TeamService {
     return this.http.get(this.teamUrl + "/researchTeam/" + nameTeam);
   }
 
-  public getTeamRand() {
-    return this.http.get(this.teamUrl + "/researchTeam");
+  public getAllTeams() {
+    return this.http.get(this.teamUrl + "/getAllTeams");
   }
 
   public newTeam(team: any) {
