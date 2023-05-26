@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Team } from 'src/app/models/team/team';
 
@@ -41,5 +41,15 @@ export class TeamService {
 
   public newTeam(team: any) {
     return this.http.post(this.teamUrl + "/team", team)
+  }
+
+  public changePrivacyUser(teamId: number, privacy: boolean) {
+    const params = new HttpParams().set('privacy', privacy);
+    return this.http.patch<Team>(this.teamUrl + "/changePrivacyUser/" + teamId, params);
+  }
+
+  public changePrivacyTeam(teamId: number, privacy: boolean) {
+    const params = new HttpParams().set('privacy', privacy);
+    return this.http.patch<Team>(this.teamUrl + "/changePrivacyTeam/" + teamId, params);
   }
 }
