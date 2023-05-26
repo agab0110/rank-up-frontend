@@ -41,7 +41,7 @@ export class CreateTeamPage implements OnInit {
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    localStorage.setItem('admin','');
+    localStorage.setItem('adminId','');
     //localStorage.setItem('teamId', '');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -131,6 +131,9 @@ export class CreateTeamPage implements OnInit {
       }
       console.log(error);
     });
+  }
+  adminManegeteam(admin: Admin) {
+    localStorage.setItem('admin', JSON.stringify(admin));
   }
 }
 
