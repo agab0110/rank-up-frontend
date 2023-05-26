@@ -22,6 +22,7 @@ export class RuleConfirmationPage implements OnInit {
   ruleCompleted: RuleCompleted;
   comment!: string;
   bonusPoints!: number;
+  status!: number;
 
   constructor(
     private alertController: AlertController,
@@ -91,14 +92,40 @@ export class RuleConfirmationPage implements OnInit {
   }
 
   rejectActivity() {
-    const status = 2;
-    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
+    this.ruleCompleted.comment = this.comment;
+    this.ruleCompleted.bonus = this.bonusPoints;
+    this.status = 2;
+    
+    this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
+      console.log("patch succesfull");
+      console.log(r);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
     this.backButton();
   }
 
   confirmActivity() {
-    const status = 1;
-    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
+    this.ruleCompleted.comment = this.comment;
+    this.ruleCompleted.bonus = this.bonusPoints;
+    this.status = 1;
+
+    this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
+      console.log("patch succesfull");
+      console.log(r);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
     this.backButton();
     }
 }
