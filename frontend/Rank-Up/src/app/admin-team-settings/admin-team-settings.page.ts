@@ -28,9 +28,10 @@ export class AdminTeamSettingsPage implements OnInit {
    }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
   }
 
   choice_privacy_utente: Boolean = true;
