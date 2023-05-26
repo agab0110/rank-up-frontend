@@ -45,9 +45,12 @@ export class CreateTeamPage implements OnInit {
     //localStorage.setItem('teamId', '');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      this.router.navigate(['login']);
-   
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
     
     const team = new Team();
     team.name = "temp"
