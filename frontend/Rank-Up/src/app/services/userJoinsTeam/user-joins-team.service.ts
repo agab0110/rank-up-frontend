@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Team } from 'src/app/models/team/team';
 import { User } from 'src/app/models/user/user';
 import { UserJoinsTeam } from 'src/app/models/userJoinsTeam/user-joins-team';
 
@@ -37,6 +38,7 @@ export class UserJoinsTeamService {
   public getPartecipantsPoints(idTeam: number): Observable<UserJoinsTeam[]> {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
+
   public getRequests(idTeam: number):Observable<UserJoinsTeam[]>{
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
@@ -46,5 +48,9 @@ export class UserJoinsTeamService {
     .set('idUser', idUser.toString());
     
     return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUser",null,{params});
+  }
+
+  public getTeams(idUser: number) {
+    return this.http.get<Team[]>(this.userJoinsTeamUrl + "/teams/" + idUser);
   }
 }
