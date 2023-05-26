@@ -62,7 +62,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            this.rejectActivity();
+            
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -79,7 +79,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            this.confirmActivity();
+            
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -104,16 +104,4 @@ export class TaskConfirmationPage implements OnInit {
       console.log(data)
     })
   }
-
-  rejectActivity() {
-    const status = 2;
-    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
-    this.backButton();
-  }
-
-  confirmActivity() {
-    const status = 1;
-    this.ruleCompletedService.ruleAcceptation(this.id, this.comment, this.bonusPoints, status);
-    this.backButton();
-    }
-  }
+}
