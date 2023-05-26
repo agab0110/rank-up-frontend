@@ -17,8 +17,8 @@ export class AdminService {
 
   public newAdmin(idUser: number, idTeam: number) {  
     const params = new HttpParams()
-    .set('idTeam', idTeam.toString())
-    .set('idUser', idUser.toString());
+    .set('idTeam', idTeam)
+    .set('idUser', idUser);
 
     return this.http.post<Admin>(this.baseUrl + "/addAdmin",null, {params});
   }
