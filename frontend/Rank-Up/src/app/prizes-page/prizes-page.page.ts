@@ -6,6 +6,7 @@ import { Prize } from '../models/prize/prize';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 
 @Component({
   selector: 'app-prizes-page',
@@ -15,7 +16,9 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 export class PrizesPagePage implements OnInit {
   prizes: Prize[];
   user: User;
+  userJoin: UserJoinsTeam[];
   team: Team;
+  points: Number;
 
   constructor(
     public alertCtrl: AlertController,
@@ -25,6 +28,8 @@ export class PrizesPagePage implements OnInit {
       this.prizes = new Array<Prize>
       this.user = new User
       this.team = new Team
+      this.userJoin = new Array<UserJoinsTeam>;
+      this.points = 0;
      }
 
   user_name: string = '[Nome Utente]';
@@ -54,13 +59,11 @@ export class PrizesPagePage implements OnInit {
 
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-    //this.router.navigate(['user/home']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.Listprize(this.team.codice);
+    this.getUsersPoints(1);
+    this.getPoints(1);
    }
 
   Listprize(idTeam: Number){
@@ -86,6 +89,26 @@ export class PrizesPagePage implements OnInit {
           console.log('An unexpected error occured');
         }
         console.log(error);
+      });
+    }
+
+    getUsersPoints(idTeam: number){
+      this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response =>{
+      this.userJoin = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+    getPoints(idUser: number){
+      this.userJoin.forEach(element => {
+        if(element.user.id = idUser){
+          this.points = element.points;
+        }
       });
     }
 }
