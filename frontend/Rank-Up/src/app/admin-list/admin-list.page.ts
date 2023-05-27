@@ -63,7 +63,7 @@ export class AdminListPage implements OnInit {
   }
 
   getPartecipants(id_team: Number) {
-    this.userJoinsTeamService.getPartecipants(3).subscribe(result => {
+    this.userJoinsTeamService.getPartecipants(1).subscribe(result => {
       this.users = result;
       console.log(this.users);
     }, (error: Response) => {
@@ -77,7 +77,7 @@ export class AdminListPage implements OnInit {
   }
 
   getPartecipantsPoints(id_team: Number) {
-    this.userJoinsTeamService.getPartecipantsPoints(3).subscribe(result => {
+    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(result => {
       this.usersJoinsTeam = result;
       console.log(this.usersJoinsTeam);
     }, (error: Response) => {
@@ -115,7 +115,7 @@ export class AdminListPage implements OnInit {
   ricerca(event: any) {
     if(event.target.value != "") {
       this.statoRicerca = true
-      this.userJoinsTeamService.getListUserJoinsTeamSearch(event.target.value).subscribe(data => {
+      this.userJoinsTeamService.getListUserJoinsTeamSearch(1, event.target.value).subscribe(data => {
         this.userJoinsTeamSearch = JSON.parse(JSON.stringify(data))
         console.log(data)
       })      
