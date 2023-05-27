@@ -35,8 +35,8 @@ export class TeamService {
     return this.http.get(this.teamUrl + "/researchTeam/" + nameTeam);
   }
 
-  public getTeamRand() {
-    return this.http.get(this.teamUrl + "/researchTeam");
+  public getAllTeams() {
+    return this.http.get(this.teamUrl + "/getAllTeams");
   }
 
   public newTeam(team: any) {
@@ -51,5 +51,9 @@ export class TeamService {
   public changePrivacyTeam(teamId: number, privacy: boolean) {
     const params = new HttpParams().set('privacy', privacy);
     return this.http.patch<Team>(this.teamUrl + "/changePrivacyTeam/" + teamId, params);
+  }
+  
+  public undo(teamId: any) {
+    return this.http.delete(this.teamUrl + "/undo/" + teamId)
   }
 }

@@ -19,6 +19,11 @@ export class NotificationsPage implements OnInit {
   user : User;
   admin : Admin;
   stato : Boolean;
+
+  idUser: any = 2;
+  nUser: any
+  nAdmin: any
+
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
   notifications:UserReciveNotification[];
@@ -28,7 +33,8 @@ export class NotificationsPage implements OnInit {
   constructor(
     private location: Location,
     private userNotificationService:UserReciveNotificationService,
-    private adminNotificationService: AdminReciveNotificationService
+    private adminNotificationService: AdminReciveNotificationService,
+    private notificationService: NotificationService
     ) {
     this.notifications = new Array<UserReciveNotification>;
     this.adminNotifications = new Array<AdminReciveNotification>;
@@ -47,6 +53,16 @@ export class NotificationsPage implements OnInit {
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.getUserNotification(this.user.id);
+
+    this.notificationService.getUserNotifications(this.idUser).subscribe(data => {
+      this.nUser = data;
+      console.log(this.nUser)
+    })
+
+    this.notificationService.getAdminNotifications(this.idUser).subscribe(data => {
+      this.nAdmin = data;
+      console.log(this.nAdmin)
+    })
   }
 
   segmentChanged(ev: any, idUser: Number, idAdmin: Number){
@@ -56,6 +72,20 @@ export class NotificationsPage implements OnInit {
     }else{
       this.getAdminNotification(idAdmin)
     }
+  }
+
+  notificheUser(event: any){
+    this.notificationService.getUserNotifications(this.idUser).subscribe(data => {
+      this.nUser = data;
+      console.log(this.nUser)
+    })
+  }
+
+  notificheAdmin(event: any){
+    this.notificationService.getAdminNotifications(this.idUser).subscribe(data => {
+      this.nAdmin = data;
+      console.log(this.nAdmin)
+    })
   }
 
   backButton() {

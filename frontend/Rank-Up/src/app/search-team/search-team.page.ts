@@ -11,7 +11,7 @@ import { TeamService } from '../services/team/team.service';
 })
 export class SearchTeamPage implements OnInit {
 
-  data: any;
+  teams: any;
 
   constructor(
     private alertController: AlertController,
@@ -21,10 +21,7 @@ export class SearchTeamPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.teamService.getTeamRand().subscribe(response => {
-      this.data = response
-      console.log(this.data)
-    });
+    this.getTeams()
   }
 
   backButton() {
@@ -51,17 +48,21 @@ export class SearchTeamPage implements OnInit {
     await alert.present();
   }
 
+  getTeams() {
+    this.teamService.getAllTeams().subscribe(data => {
+      this.teams = JSON.parse(JSON.stringify(data))
+    })
+  }
+
   ricerca(event: any) {
     if(event.target.value != "") {
       this.teamService.getTeam(event.target.value.toLowerCase()).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
+        this.teams = JSON.parse(JSON.stringify(data))
 
         console.log(data)
       })      
     } else {
-      this.teamService.getTeamRand().subscribe(data => {
-        this.data = data
-      })
+      this.getTeams()
     }
   }
 }

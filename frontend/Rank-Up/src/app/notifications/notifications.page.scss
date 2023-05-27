@@ -10,6 +10,11 @@
     align-items: center;
 }
 
+.label {
+  text-align: center;
+  color: var(--ion-color-black)
+}
+
 .item {
     --background: var(--ion-color-grey);
     --border-radius: 28px;

@@ -26,4 +26,12 @@ export class NotificationService {
       this.notificationUrl + "/userNotification/" + idNotification
     );
   }
+
+  public getUserNotifications(idUser: number) {
+    return this.http.get(this.notificationUrl + "/getUserNotification/" + idUser);
+  }
+
+  public getAdminNotifications(idUser: number) {
+    return this.http.get(this.notificationUrl + "/getAdminNotification/" + idUser);
+  }
 }
