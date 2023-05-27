@@ -19,6 +19,7 @@ export class PrizesPagePage implements OnInit {
   userJoin: UserJoinsTeam[];
   team: Team;
   points: Number;
+  userJoinsTeam: UserJoinsTeam;
 
   constructor(
     public alertCtrl: AlertController,
@@ -30,6 +31,7 @@ export class PrizesPagePage implements OnInit {
       this.team = new Team
       this.userJoin = new Array<UserJoinsTeam>;
       this.points = 0;
+      this.userJoinsTeam = new UserJoinsTeam;
      }
 
   user_name: string = '[Nome Utente]';
@@ -49,7 +51,7 @@ export class PrizesPagePage implements OnInit {
           text: 'Si',
           cssClass:'alert-button-blue',
           handler: () => {
-           this.subtractUserPoints(1, 2, 1);
+           this.subtractUserPoints(this.team.codice, this.user.id, idPrize);
           }
         }
       ]
@@ -60,14 +62,14 @@ export class PrizesPagePage implements OnInit {
 
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
+
     this.Listprize(this.team.codice);
-    this.getUsersPoints(1);
-    this.getPoints(1);
    }
 
   Listprize(idTeam: Number){
-    this.prizeService.listPrize(1).subscribe(response =>{
+    this.prizeService.listPrize(this.team.codice).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -82,6 +84,8 @@ export class PrizesPagePage implements OnInit {
   subtractUserPoints(idTeam: number, idUser: number, idPrize: number) {
       this.userJoinsTeamService.subtractUserPoints(idTeam, idUser, idPrize).subscribe(response =>{
         console.log(response)
+        this.userJoinsTeam = response;
+        localStorage.setItem('userJoinsTeam', JSON.stringify(this.userJoinsTeam));
       }, (error: Response) => {
         if(error.status == 400)
           console.log("400 error");
@@ -89,26 +93,6 @@ export class PrizesPagePage implements OnInit {
           console.log('An unexpected error occured');
         }
         console.log(error);
-      });
-    }
-
-    getUsersPoints(idTeam: number){
-      this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response =>{
-      this.userJoin = response;
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
-  }
-    getPoints(idUser: number){
-      this.userJoin.forEach(element => {
-        if(element.user.id = idUser){
-          this.points = element.points;
-        }
       });
     }
 }

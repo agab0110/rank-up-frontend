@@ -43,13 +43,13 @@ export class UserJoinsTeamService {
     return this.http.get<User>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
 
-  public subtractUserPoints(idTeam: number, idUser: number, idPrize: number): Observable<UserJoinsTeam[]> {
+  public subtractUserPoints(idTeam: number, idUser: number, idPrize: number): Observable<UserJoinsTeam> {
     const body = {
       idTeam: idTeam,
       idUser: idUser,
       idPrize: idPrize
     }
-    return this.http.patch<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/subtractUserPoints/" + body.idTeam + "/" + body.idUser + "/" + body.idPrize, body);
+    return this.http.patch<UserJoinsTeam>(this.userJoinsTeamUrl + "/subtractUserPoints/" + body.idTeam + "/" + body.idUser + "/" + body.idPrize, body);
   }
 
   public getTeams(idUser: number) {
