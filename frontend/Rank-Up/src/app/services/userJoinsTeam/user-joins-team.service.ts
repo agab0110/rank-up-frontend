@@ -16,9 +16,8 @@ export class UserJoinsTeamService {
     this.userJoinsTeamUrl = 'http://localhost:8080/userJoinsTeamApi';
    }
 
-   deleteRequest(userJoinTeam: UserJoinsTeam) {
-    return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest")
-    .subscribe(() => this.status = 'Delete successful');
+   deleteRequest(id: number) {
+    return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest/" + id);
   }
 
   public getListUserSearch(username: string): Observable<User[]> {
@@ -42,6 +41,7 @@ export class UserJoinsTeamService {
   public getRequests(idTeam: number):Observable<UserJoinsTeam[]>{
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
+
   public addUser(idTeam:number, idUser:Number){
     const params = new HttpParams()
     .set('idTeam', idTeam.toString())
@@ -61,5 +61,13 @@ export class UserJoinsTeamService {
 
   public getTeams(idUser: number) {
     return this.http.get<Team[]>(this.userJoinsTeamUrl + "/teams/" + idUser);
+  }
+
+  public manageRequest(idTeam: number, idUser: number, status: string) {
+    return this.http.patch(this.userJoinsTeamUrl + "/manageRequest/" + idTeam + "/" + idUser, status);
+  }
+
+  public getrequests(idTeam: number):Observable<UserJoinsTeam[]>{
+    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
 }

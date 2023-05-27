@@ -16,7 +16,12 @@ export class AdminReciveNotificationService {
 
   public getAdminNotification(idAdmin: Number): Observable<AdminReciveNotification[]> {
     return this.http.get<AdminReciveNotification[]>(
-      this.adminReciveNotificationUrl + "/getAdminNotification/" + idAdmin
+      this.adminReciveNotificationUrl + "/getAdminNotification/" + idAdmin);
+  }
+  
+  public addNotification(idAdmin: number, idNotification: number) {
+    return this.http.post<AdminReciveNotification>(
+      this.adminReciveNotificationUrl + "/newNotification/" + idAdmin + "/" + idNotification, null
     );
   }
 }

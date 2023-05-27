@@ -10,7 +10,7 @@
     <div class="listBox">
       <ion-list>
         <div *ngIf="this.rules">
-          <ion-item class="item" *ngFor="let rule of rules" [routerLink]="['/task-confirmation']">
+          <ion-item class="item" *ngFor="let rule of rules" [routerLink]="['/rule-confirmation']">
             <img class="icon" name=iconName src="{{this.rule.photo}}">
             <ion-label class="label">{{rule.username}}</ion-label>
             <ion-label class="label">{{rule.name}}</ion-label>

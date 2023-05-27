@@ -9,7 +9,7 @@
 
   <div class="listBox">
     <ion-list class="list" lines="none">
-      <ion-button (click)="presentAlert()" *ngFor="let u of userJoin" class="buttons">{{u?.user?.name}} ha richiesto di<br/>entrare nel Team {{u?.team?.name}}</ion-button>
+      <ion-button *ngFor="let u of userJoin" (click)="presentAlert(u)" class="buttons">{{u.user.name}} ha richiesto di<br/>entrare nel Team {{u.team.name}}</ion-button>
     </ion-list>
   </div>
   

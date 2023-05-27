@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 
 @Component({
-  selector: 'app-task-confirmation',
-  templateUrl: './task-confirmation.page.html',
-  styleUrls: ['./task-confirmation.page.scss'],
+  selector: 'app-rule-confirmation',
+  templateUrl: './rule-confirmation.page.html',
+  styleUrls: ['./rule-confirmation.page.scss'],
 })
-export class TaskConfirmationPage implements OnInit {
+export class RuleConfirmationPage implements OnInit {
 
+  
   data: any
   stato = false
   id = 1 // id ricevuto dalla schermata precedente
@@ -21,13 +22,13 @@ export class TaskConfirmationPage implements OnInit {
   ruleCompleted: RuleCompleted;
   comment!: string;
   bonusPoints!: number;
+  status!: number;
 
   constructor(
     private alertController: AlertController,
     private router: Router,
     private location: Location,
     private ruleCompletedService: RuleCompletedService,
-    private taskCompletedService: TaskCompletedService
   ) {
     this.user = new User();
     this.ruleCompleted = new RuleCompleted();
@@ -44,11 +45,6 @@ export class TaskConfirmationPage implements OnInit {
         this.data = JSON.parse(JSON.stringify(data))
         console.log(data)
       })
-    } else {
-      this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
-        console.log(data)
-      })
     }
   }
 
@@ -62,7 +58,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            
+            this.rejectActivity();
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -79,7 +75,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            
+            this.confirmActivity();
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -95,13 +91,41 @@ export class TaskConfirmationPage implements OnInit {
     this.stato = !this.stato;
   }
 
-  invia(status:number) {
-    this.ruleCompleted.id = this.id
-    this.ruleCompleted.status = status
-    this.ruleCompleted.comment = "grggr"
-
-    this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.ruleCompleted).subscribe(data => {
-      console.log(data)
-    })
+  rejectActivity() {
+    this.ruleCompleted.comment = this.comment;
+    this.ruleCompleted.bonus = this.bonusPoints;
+    this.status = 2;
+    
+    this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
+      console.log("patch succesfull");
+      console.log(r);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+    this.backButton();
   }
+
+  confirmActivity() {
+    this.ruleCompleted.comment = this.comment;
+    this.ruleCompleted.bonus = this.bonusPoints;
+    this.status = 1;
+
+    this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
+      console.log("patch succesfull");
+      console.log(r);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+    this.backButton();
+    }
 }

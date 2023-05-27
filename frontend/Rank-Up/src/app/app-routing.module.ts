@@ -90,7 +90,11 @@ const routes: Routes = [
   {
     path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },  {
+    path: 'rule-confirmation',
+    loadChildren: () => import('./rule-confirmation/rule-confirmation.module').then( m => m.RuleConfirmationPageModule)
   },
+
 ];
 
 @NgModule({

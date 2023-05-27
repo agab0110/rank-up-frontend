@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Rule } from 'src/app/models/rule/rule';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
 
 @Injectable({
@@ -49,22 +50,10 @@ export class RuleCompletedService {
       return this.http.get(this.baseUrl + "/pending/" + id_team);
     }
 
-    public acceptationActivity(idRuleCompleted: Number, comment: String, bonusPoints: Number, status: Number) {
-      const requestParams = {
-        'comment': comment,
-        'bonusPoints': bonusPoints,
-        'status': status,
-      };
-        return this.http.patch(this.baseUrl + "/acceptance/" + idRuleCompleted, requestParams).subscribe(response => {
-        console.log(response);
-      }, (error: Response) => {
-        if(error.status == 400) {
-          console.log("400 error");
-        } else {
-          console.log("Unexpected error");
-        }
-        console.log(error);
-      });
+    public ruleAcceptation(idRuleCompleted: Number, status: number, ruleCompleted: RuleCompleted) {
+      return this.http.patch(
+        this.baseUrl + "/acceptance/" + idRuleCompleted + "/" + status, ruleCompleted
+      )
     }
   }
 

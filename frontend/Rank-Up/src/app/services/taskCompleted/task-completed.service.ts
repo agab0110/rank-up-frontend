@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
+import { Task } from 'src/app/models/task/task';
 import { TaskCompleted } from 'src/app/models/taskCompleted/task-completed';
 
 @Injectable({
@@ -15,8 +16,8 @@ export class TaskCompletedService {
     this.baseUrl = "http://localhost:8080/taskCompletedApi";
   }
 
-  public getTaskCompletedByUser(idUser: number, idTeam: number) {
-    return this.http.get<TaskCompleted[]>(this.baseUrl + "/getTaskForSpecificUser/" + idTeam + "/" + idUser);
+  public getTaskCompletedByUser(idUser: number, idTeam: number): Observable<Task[]> {
+    return this.http.get<Task[]>(this.baseUrl + "/getTaskForSpecificUser/" + idTeam + "/" + idUser);
   }
 
   public taskAccepted(teamId: Number): Observable<TaskCompleted[]> {

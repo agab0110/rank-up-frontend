@@ -7,15 +7,23 @@ import { Notification } from 'src/app/models/notification/notification';
   providedIn: 'root'
 })
 export class NotificationService {
-  private baseUrl: String;
+  private notificationUrl: string;
 
-  constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/notificationApi";
+  constructor(
+    private http: HttpClient
+  ) {
+    this.notificationUrl = "http://localhost:8080/notificationApi/";
+  }
+
+  public newNotification(notification: Notification, idTeam: number) {
+    return this.http.post<Notification>(
+      this.notificationUrl + "newNotification/" + idTeam, notification
+    );
   }
 
   public getUserNotification(idNotification: Number): Observable<Notification> {
     return this.http.get<Notification>(
-      this.baseUrl + "/userNotification/" + idNotification
-    )
+      this.notificationUrl + "/userNotification/" + idNotification
+    );
   }
 }

@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <div class="backgroundAdmin">
+    <div class="aperto" *ngIf="stato">
+      <div class="click"(click)="mostra()">
+        <div class="barra" (click)="mostra()"></div>
+      </div>
+      <h1 class="hde">Attività confermata</h1>
+      <ion-input [(ngModel)]="bonusPoints" [type]="'number'" [placeholder]="'Bonus/Malus'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="comment" [type]="'text'" [placeholder]="'Commento'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+    </div>
+
+    <div class="chiuso" *ngIf="!stato">
+      <div class="click" (click)="mostra()">
+        <div class="barra"></div>
+      </div>
+    </div>
+
+    <ion-button class="leftIcon" (click)="backButton()" fill="clear">
+      <ion-icon name="arrow-back-outline" size="large"></ion-icon>
+    </ion-button>
+
+    <h1 class="title" *ngIf="this.data">Richiesta {{this.data.username}} <br/>per  {{this.data.name}}</h1>
+    <ion-button slot="start" class="btn" *ngIf="this.data">Vedi Allegato</ion-button>
+    <ion-button class="notBtn" *ngIf="this.data">Data: {{this.data.timestamp}}</ion-button>
+
+    <div class="subTitle">Accettare richiesta di completamento?</div>
+    <div class="pulsanteBox">
+      <div class="titoloBox">
+        <ion-button (click)="presentAlertReject()" class="pulsante rifiuta">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+        <div class="text">Rifiuta</div>
+      </div>
+      <div class="titoloBox">
+        <ion-button (click)="presentAlertConfirm()" class="pulsante conferma">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <div class="text">Accetta</div>
+      </div>
+    </div>
+  </div>
+</ion-content>
