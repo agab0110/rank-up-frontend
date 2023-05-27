@@ -85,10 +85,7 @@ export class AdminListPage implements OnInit {
     });
   }
 
-  clickUser(user: User, userJoinTeam: UserJoinsTeam){
-    let user1 = JSON.stringify(user);
-    localStorage.setItem("viewUser", user1);
-
+  clickUser(userJoinTeam: UserJoinsTeam){
     let userJoin = JSON.stringify(userJoinTeam);
     localStorage.setItem("viewUserJoinsTeam", userJoin);
   }
