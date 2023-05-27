@@ -113,4 +113,8 @@ export class PrizesPagePage implements OnInit {
         }
       });
     }
+    
+    backButton() {
+      this.location.back();
+    }
 }

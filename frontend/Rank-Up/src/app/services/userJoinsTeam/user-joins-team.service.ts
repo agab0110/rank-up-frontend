@@ -26,6 +26,11 @@ export class UserJoinsTeamService {
     return this.http.get<User[]>(this.userJoinsTeamUrl + "/list/userSearch", {params});
   }
 
+  public getListUserJoinsTeamSearch(username: string): Observable<UserJoinsTeam[]> {
+    const params = new HttpParams().set('username', username);
+    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/list/userSearch", {params});
+  }
+
   public getListPendingRequests(id_team: number): Observable<Notification[]> {
     const params = new HttpParams().set('id_team', id_team);
     return this.http.get<Notification[]>(this.userJoinsTeamUrl + "/list/pendingRequests",  {params})
@@ -43,6 +48,10 @@ export class UserJoinsTeamService {
     return this.http.get<User>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
 
+  public getTeams(idUser: number) {
+    return this.http.get<Team[]>(this.userJoinsTeamUrl + "/teams/" + idUser);
+  }
+  
   public subtractUserPoints(idTeam: number, idUser: number, idPrize: number): Observable<UserJoinsTeam[]> {
     const body = {
       idTeam: idTeam,

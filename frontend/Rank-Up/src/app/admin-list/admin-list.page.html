@@ -10,7 +10,7 @@
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
     </ion-button>
 
-    <ion-searchbar class="search" placeholder="Cerca"></ion-searchbar>
+    <ion-searchbar class="search" [(ngModel)]="query" (ionChange)="searchUser()" placeholder="Cerca"></ion-searchbar>
 
     <div class="choice">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
@@ -29,7 +29,7 @@
           <ion-item class="item" (click)="clickUser(userJoin)" [routerLink]="['/admin/admin-profile']" >
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{userJoin.user.name}}</ion-label>
+            <ion-label class="nomeUtente">{{userJoin.user.username}}</ion-label>
             <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
 
@@ -49,7 +49,7 @@
           <ion-item class="item" (click)="clickUser(userJoin)" [routerLink]="['/admin/admin-profile']">
             <div class="item-div">
             <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{userJoin.user.name}}</ion-label>
+            <ion-label class="nomeUtente">{{userJoin.user.username}}</ion-label>
             <ion-label class="points-label">{{userJoin.points}}</ion-label>
             </div>
           </ion-item>

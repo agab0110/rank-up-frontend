@@ -17,8 +17,9 @@ export class AdminListPage implements OnInit {
   user: User;
   usersJoinsTeam: UserJoinsTeam[];
   team: Team;
+  query!: string;
   admin: Admin;
-  stato = false
+  stato = false;
 
   constructor(
     private location: Location,
@@ -96,5 +97,22 @@ export class AdminListPage implements OnInit {
 
   sortAsc(){
     this.usersJoinsTeam.sort((a, b) => a.points - b.points);
+  }
+
+  searchUser() {
+    if(this.query == ""){
+      this.getPartecipants(this.team.codice);
+      this.getPartecipantsPoints(this.team.codice);
+    }
+    this.userJoinsTeamService.getListUserJoinsTeamSearch(this.query).subscribe(response => {
+      this.usersJoinsTeam = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
   }
 }
