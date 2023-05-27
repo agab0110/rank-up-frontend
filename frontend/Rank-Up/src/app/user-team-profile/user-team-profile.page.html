@@ -26,13 +26,13 @@
 
     <div class="listBox" *ngIf="stato">
       <ion-list *ngFor="let activity of activities">
-        <ion-item class="item" *ngIf="ruleOrTask(activity)" [routerLink]="['/user-rule-completed']">
-          <ion-label class="label">{{activity.name}}</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">{{activity.points}} pt</ion-button>
+        <ion-item class="item" *ngIf="ruleOrTask(activity)" (click)="goToRule(activity)">
+          <ion-label class="label">{{activity.rule.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{activity.rule.points}} pt</ion-button>
         </ion-item>
-        <ion-item class="item" *ngIf="!ruleOrTask(activity)" [routerLink]="['/task-completed']">
-          <ion-label class="label">{{activity.name}}</ion-label>
-          <ion-button class="fakebutton" [disabled]="true">{{activity.points}} pt</ion-button>
+        <ion-item class="item" *ngIf="!ruleOrTask(activity)" (click)="goToTask(activity)">
+          <ion-label class="label">{{activity.task.name}}</ion-label>
+          <ion-button class="fakebutton" [disabled]="true">{{activity.task.points}} pt</ion-button>
         </ion-item>
     </ion-list>
     </div>
@@ -45,6 +45,6 @@
         </ion-item>
       </ion-list>
     </div>
-    
+
   </div>
 </ion-content>

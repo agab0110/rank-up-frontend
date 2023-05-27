@@ -13,7 +13,7 @@ export class RuleCompletedService {
     this.baseUrl = "http://localhost:8080/ruleCompletedApi";
   }
 
-  public getRulesCompletedByUser(idTeam: number, IdUser: number) {
+  public getRulesCompletedByUser(IdUser: number, idTeam: number) {
     return this.http.get<RuleCompleted[]>(this.baseUrl + "/getRuleForSpecificUser/" + idTeam + "/" + IdUser);
   }
 

@@ -36,6 +36,7 @@ export class LoginPage implements OnInit{
     localStorage.setItem('user', '');
     localStorage.setItem('team', '');
     localStorage.setItem('admin', '');
+    localStorage.setItem('userJoinsTeam', '');
   }
 
   login() {

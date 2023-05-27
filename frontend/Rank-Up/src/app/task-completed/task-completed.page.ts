@@ -4,6 +4,7 @@ import { TaskCompleted } from '../models/taskCompleted/task-completed';
 import { Task } from '../models/task/task';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-task-completed',
@@ -14,18 +15,25 @@ export class TaskCompletedPage implements OnInit {
   taskCompleted: TaskCompleted;
   task: Task;
   user: User;
+  id: number;
 
   constructor(
     private location: Location,
+    private route: ActivatedRoute,
     private taskCompletedService: TaskCompletedService
     ) {
     this.taskCompleted = new TaskCompleted();
     this.task = new Task();
     this.user = new User();
+    this.id = 0;
    }
 
   ngOnInit() {
-    this.taskCompletedService.getTaskCompleted(1).subscribe((response) => {
+    this.route.queryParams.subscribe((params) => {
+      this.id = params["taskId"];
+    });
+
+    this.taskCompletedService.getTaskCompleted(this.id).subscribe((response) => {
       this.taskCompleted = response;
       this.task = this.taskCompleted.task;
       this.user = this.taskCompleted.user;

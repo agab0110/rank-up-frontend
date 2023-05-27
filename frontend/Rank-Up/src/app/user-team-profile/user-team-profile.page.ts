@@ -5,12 +5,13 @@ import { Team } from '../models/team/team';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Rule } from '../models/rule/rule';
 import { Task } from '../models/task/task';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-team-profile',
@@ -21,8 +22,8 @@ export class UserTeamProfilePage implements OnInit {
   stato = true; 
 
   activities: any;
-  rules: RuleCompleted[];
-  tasks: TaskCompleted[];
+  rulesCompleted: RuleCompleted[];
+  tasksCompleted: TaskCompleted[];
   prizes: any[];
 
   user: User;
@@ -34,14 +35,16 @@ export class UserTeamProfilePage implements OnInit {
     private taskCompletedService: TaskCompletedService,
     private ruleCompletedService: RuleCompletedService,
     private userGetPrizeService: UserGetPrizeService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
+
     ) {
     this.user = new User();
     this.team = new Team();
     this.userJoinsTeam = new UserJoinsTeam();
     this.activities = [];
-    this.rules = [];
-    this.tasks = [];
+    this.rulesCompleted = [];
+    this.tasksCompleted = [];
     this.prizes = [];
    }
 
@@ -57,7 +60,7 @@ export class UserTeamProfilePage implements OnInit {
     }
 
     this.taskCompletedService.getTaskCompletedByUser(this.user.id, this.team.codice).subscribe((response) => {
-      this.tasks = response;
+      this.tasksCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
       });
@@ -65,7 +68,7 @@ export class UserTeamProfilePage implements OnInit {
     });
 
     this.ruleCompletedService.getRulesCompletedByUser(this.user.id, this.team.codice).subscribe((response) => {
-      this.rules = response;
+      this.rulesCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
       });
@@ -81,7 +84,7 @@ export class UserTeamProfilePage implements OnInit {
   }
 
   ruleOrTask(activity: any) {
-    if (this.rules.includes(activity)) {
+    if (this.rulesCompleted.includes(activity)) {
       return true;
     }
     else {
@@ -95,5 +98,23 @@ export class UserTeamProfilePage implements OnInit {
 
   backButton() {
     this.location.back();
+  }
+
+  goToTask(task: TaskCompleted) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        taskId: task.id
+      }
+    };
+    this.navCtrl.navigateForward(['/task-completed'], navigationExtras);
+  }
+
+  goToRule(rule: RuleCompleted) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        ruleId: rule.id
+      }
+    };
+    this.navCtrl.navigateForward(['/user-rule-completed'], navigationExtras);
   }
 }
