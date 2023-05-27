@@ -29,12 +29,13 @@ export class CreatePrizePage implements OnInit {
    }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-  this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+  if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    this.router.navigate(['user/home']);
   if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-  this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.router.navigate(['user/home']);
+  
   }
 
   backButton() {
@@ -42,8 +43,8 @@ export class CreatePrizePage implements OnInit {
   }
 
   public createPrize(){
-    //this.prize.beloggingTeam = this.team;     //setta il team tramite localStorage, api 9
-    //this.prize.admin = this.admin;            //setta l'admin tramite localStorage, api 9
+    this.prize.beloggingTeam = this.team;     //setta il team tramite localStorage, api 9
+    this.prize.admin = this.admin;            //setta l'admin tramite localStorage, api 9
     this.prizeService.newPrize(this.prize).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);

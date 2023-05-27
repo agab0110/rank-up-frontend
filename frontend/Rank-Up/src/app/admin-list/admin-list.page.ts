@@ -6,6 +6,7 @@ import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-list',
@@ -22,7 +23,8 @@ export class AdminListPage implements OnInit {
 
   constructor(
     private location: Location,
-    private userJoinsTeamService: UserJoinsTeamService
+    private userJoinsTeamService: UserJoinsTeamService,
+    private router: Router
     ) {
       this.users = new Array<User>;
       this.usersJoinsTeam = new Array<UserJoinsTeam>;
@@ -32,12 +34,12 @@ export class AdminListPage implements OnInit {
     }
 
   ngOnInit() {
-     //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
-      //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-        //this.router.navigate(['user/home']);
-      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.team = JSON.parse(localStorage.getItem('team') || '{}');
+      this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+        this.router.navigate(['user/home']);
+      if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+        this.router.navigate(['user/home']);
       this.getPartecipants(this.team.codice);
       this.getPartecipantsPoints(this.team.codice);
       this.sortDesc();
@@ -58,7 +60,7 @@ export class AdminListPage implements OnInit {
   }
 
   getPartecipants(id_team: Number){
-    this.userJoinsTeamService.getPartecipants(1).subscribe(result => {
+    this.userJoinsTeamService.getPartecipants(this.team.codice).subscribe(result => {
       this.users = result;
       console.log(this.users);
     }, (error: Response) => {
@@ -72,7 +74,7 @@ export class AdminListPage implements OnInit {
   }
 
   getPartecipantsPoints(id_team: Number){
-    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(result => {
+    this.userJoinsTeamService.getPartecipantsPoints(this.team.codice).subscribe(result => {
       this.usersJoinsTeam = result;
       console.log(this.usersJoinsTeam);
     }, (error: Response) => {
