@@ -17,10 +17,10 @@ import { Admin } from '../models/admin/admin';
 export class CreateTeamPage implements OnInit {
 
   public user: User;
-  public team:Team;
+  public team: Team;
   public codiceTeam: any;
   public nomeTeam: string = ""
-  public admin:Admin;
+  public admin: Admin;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
@@ -32,7 +32,7 @@ export class CreateTeamPage implements OnInit {
     private teamService: TeamService,
     private router: Router,
     private adminService: AdminService
-  ) { 
+  ) {
     this.user = new User();
     this.team = new Team();
     this.admin = new Admin();
@@ -59,7 +59,7 @@ export class CreateTeamPage implements OnInit {
     this.teamService.newTeam(team).subscribe(data => {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
     });
-    
+
   }
 
   backButton() {
@@ -119,24 +119,11 @@ export class CreateTeamPage implements OnInit {
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(data => {
-        this.router.navigate(['/admin/admin-home-team'])
+        this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
+          console.log("Admin aggiunto con successo");
+          this.router.navigate(['/admin/admin-home-team'])
+        })
       })
     }
   }
-  addAdmin() {
-    
-    this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
-      console.log("Admin aggiunto con successo");
-      console.log(response);
-    }, (error: Response) => {
-      if( error.status == 400)
-      console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
-  }
 }
-
-

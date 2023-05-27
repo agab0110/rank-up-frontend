@@ -47,7 +47,6 @@ export class AdminListPage implements OnInit {
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
     }
-      this.getPartecipants(this.team.codice);
       this.getPartecipantsPoints(this.team.codice);
       this.sortDesc();
   }

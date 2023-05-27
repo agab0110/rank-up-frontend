@@ -13,26 +13,25 @@ import { User } from '../models/user/user';
   styleUrls: ['./participants.page.scss'],
 })
 export class ParticipantsPage implements OnInit {
-  partecipants: User[];
   partecipantsPoints: UserJoinsTeam[];
+  userJoinsTeamSearch: any
   team: Team;
   admin: Admin;
   user: User;
   points!: number;
+  stato = false
+  statoRicerca = false
 
   constructor(
     private router: Router,
     private location: Location,
     private userJoinsTeamService: UserJoinsTeamService
     ) {
-      this.partecipants = new Array<User>;
       this.partecipantsPoints = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
       this.user = new User();
     }
-
-  stato = false
 
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
@@ -45,7 +44,6 @@ export class ParticipantsPage implements OnInit {
       this.router.navigate(["/login"]);
     }
     
-    this.getPartecipants(this.team.codice);
     this.getPartecipantsPoints(this.team.codice);
   }
 
@@ -55,24 +53,13 @@ export class ParticipantsPage implements OnInit {
 
   segmentChanged(event: any) {
     this.stato = !this.stato;
-  }
-
-  getPartecipants(idTeam: number) {
-    this.userJoinsTeamService.getPartecipants(idTeam).subscribe(response => {
-      this.partecipants = response;
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
+    this.statoRicerca = false
   }
 
   getPartecipantsPoints(idTeam: number) {
     this.userJoinsTeamService.getPartecipantsPoints(idTeam).subscribe(response => {
       this.partecipantsPoints = response;
+      console.log(this.partecipantsPoints);
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -83,4 +70,16 @@ export class ParticipantsPage implements OnInit {
     });
   }
 
+  ricerca(event: any) {
+    if(event.target.value != "") {
+      this.statoRicerca = true
+      this.userJoinsTeamService.getListUserJoinsTeamSearch(this.team.codice, event.target.value).subscribe(data => {
+        this.userJoinsTeamSearch = JSON.parse(JSON.stringify(data))
+        console.log(data)
+      })      
+    } else {
+      this.statoRicerca = false
+      this.getPartecipantsPoints(this.team.codice);
+    }
+  }
 }
