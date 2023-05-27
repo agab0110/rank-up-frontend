@@ -9,9 +9,9 @@
     <img alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
 
 
-    <ion-label class="userName">[Nome Utente]</ion-label>
+    <ion-label class="userName">{{user.name}}</ion-label>
 
-    <ion-label class="points">Punti: [Punti]</ion-label>
+    <ion-label class="points">Punti: {{ userjoin.points}}</ion-label>
 
     <div class="switch">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
