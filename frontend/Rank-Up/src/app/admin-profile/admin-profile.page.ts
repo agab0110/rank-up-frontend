@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { User } from '../models/user/user';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Team } from '../models/team/team';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { Prize } from '../models/prize/prize';
@@ -12,6 +12,7 @@ import { Task } from '../models/task/task';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-admin-profile',
@@ -25,12 +26,14 @@ export class AdminProfilePage implements OnInit {
   userProfile: User;
   team: Team;
   prizes: Prize[];
-  rules: RuleCompleted[];
-  tasks: TaskCompleted[];
+  rulesCompleted: RuleCompleted[];
+  tasksCompleted: TaskCompleted[];
+  activities: any[];
 
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.team = JSON.parse(localStorage.getItem('team') || '{}');
       localStorage.getItem('viewUserJoinsTeam');
       this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
 
@@ -44,15 +47,17 @@ export class AdminProfilePage implements OnInit {
     private router: Router,
     private userGetPrizeService: UserGetPrizeService,
     private taskCompletedService: TaskCompletedService,
-    private ruleCompletedService: RuleCompletedService
+    private ruleCompletedService: RuleCompletedService,
+    private navCtrl: NavController
     ) {
       this.userProfile = new User();
       this.user = new User();
       this.team = new Team();
       this.prizes = [];
       this.userJoin = new UserJoinsTeam();
-      this.rules = [];
-      this.tasks = [];
+      this.rulesCompleted = [];
+      this.tasksCompleted = [];
+      this.activities = [];
      }
 
   backButton() {
@@ -64,7 +69,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes(){
-  this.userGetPrizeService.getUserPrizes(this.userProfile.id, this.team.codice).subscribe(
+  this.userGetPrizeService.getUserPrizes(this.userJoin.id, this.team.codice).subscribe(
     (response: any) => {
       this.prizes = response;
       console.log(this.prizes);
@@ -80,9 +85,12 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserRules(){
-    this.ruleCompletedService.getRulesCompletedByUser(this.userProfile.id, this.team.codice).subscribe(response => {
-      this.rules = response;
-      console.log(this.tasks);
+    this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+      this.rulesCompleted = response;
+      response.forEach(element => {
+        this.activities.push(element);
+      });
+      console.log(this.tasksCompleted);
     }), (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
@@ -94,9 +102,12 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserTasks() {
-    this.taskCompletedService.getTaskCompletedByUser(this.userProfile.id, this.team.codice).subscribe(response => {
-      this.tasks = response;
-      console.log(this.tasks);
+    this.taskCompletedService.getTaskCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+      this.tasksCompleted = response;
+      response.forEach(element => {
+        this.activities.push(element);
+      });
+      console.log(this.tasksCompleted);
     }), (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
@@ -107,5 +118,30 @@ export class AdminProfilePage implements OnInit {
     }
   }
 
+  ruleOrTask(activity: any) {
+    if (this.rulesCompleted.includes(activity)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
+  goToTask(task: TaskCompleted) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        taskId: task.id
+      }
+    };
+    this.navCtrl.navigateForward(['/completed-task'], navigationExtras);
+  }
+
+  goToRule(rule: RuleCompleted) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        ruleId: rule.id
+      }
+    };
+    this.navCtrl.navigateForward(['/admin-rule-completed'], navigationExtras);
+  }
 }

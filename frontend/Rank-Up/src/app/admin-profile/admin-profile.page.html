@@ -22,19 +22,16 @@
 
 
     <div class="listBox" *ngIf="!stato">
-        <div class="item" *ngFor="let rule of rules" [routerLink]="['/admin-rule-completed']">
-          <div class="div-label-fakebutton">
-            <div class="label" >{{rule.name}}</div>
-            <ion-button class="fakebutton">{{rule.points}} pt</ion-button>
+        <ion-list *ngFor="let activity of activities">
+          <div class="div-label-fakebutton" *ngIf="ruleOrTask(activity)" (click)="goToRule(activity)">
+            <div class="label">{{activity.rule.name}}</div>
+            <ion-button class="fakebutton" [disabled]="true">{{activity.rule.points}} pt</ion-button>
           </div>
-        </div>
-
-        <div class="item" *ngFor="let task of tasks" [routerLink]="['/completed-task']">
-          <div class="div-label-fakebutton">
-            <div class="label" >{{task.name}}</div>
-            <ion-button class="fakebutton">{{task.points}} pt</ion-button>
+          <div class="div-label-fakebutton" *ngIf="!ruleOrTask(activity)" (click)="goToTask(activity)">
+            <div class="label">{{activity.task.name}}</div>
+            <ion-button class="fakebutton" [disabled]="true">{{activity.task.points}} pt</ion-button>
           </div>
-        </div>
+      </ion-list>
     </div>
 
     <div class="listBox" *ngIf="stato">

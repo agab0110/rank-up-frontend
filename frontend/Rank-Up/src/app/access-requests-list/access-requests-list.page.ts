@@ -99,7 +99,7 @@ export class AccessRequestsListPage implements OnInit {
   }
 
   public manageRequest(id: number) {
-    this.userJoinsTeamService.manageRequest(/*this.team.codice*/1, id, "1").subscribe(() => {
+    this.userJoinsTeamService.manageRequest(this.team.codice, id, "1").subscribe(() => {
       console.log("patch successful");
     }, (error: Response) => {
       if (error.status == 400) {
