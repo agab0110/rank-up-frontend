@@ -5,17 +5,17 @@
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Task di<br/>[Nome Utente] rifiutato</h1>
+    <h1 class="title">Task di<br/>{{user.name}} rifiutato</h1>
 
     <div class="div-element-bar">
-      <app-admin-element-bar class="elementbar" [buttonText]="'Task'" [labelText]="'[Nome Task]'"></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Task'" labelText={{task.name}}></app-admin-element-bar>
       <div class="space-div"></div>
-      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="'[Punti]'"></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" labelText={{task.points}}></app-admin-element-bar>
     </div>
 
-    <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
-    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true></ion-textarea>
-
+    <ion-label class="label">Commento:</ion-label>
+    <ion-textarea class="commentArea" fill="outline" placeholder={{taskCompleted.comment}} shape="round" [readonly] = true></ion-textarea>
+    
     <ion-grid class="buttons-grid">
       <ion-row>
         <ion-col class="left-col">
