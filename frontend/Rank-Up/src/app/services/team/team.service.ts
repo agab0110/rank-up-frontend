@@ -42,4 +42,8 @@ export class TeamService {
   public newTeam(team: any) {
     return this.http.post(this.teamUrl + "/team", team)
   }
+
+  public undo(teamId: any) {
+    return this.http.delete(this.teamUrl + "/undo/" + teamId)
+  }
 }

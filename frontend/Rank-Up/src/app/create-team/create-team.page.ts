@@ -28,7 +28,7 @@ export class CreateTeamPage implements OnInit {
     private location: Location,
     private teamService: TeamService,
     private router: Router
-  ) { 
+  ) {
     this.user = new User();
   }
 
@@ -36,10 +36,10 @@ export class CreateTeamPage implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    
+
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
@@ -50,7 +50,10 @@ export class CreateTeamPage implements OnInit {
   }
 
   backButton() {
-    this.location.back();
+    this.teamService.undo(this.codiceTeam).subscribe(data => {
+      console.log(JSON.parse(JSON.stringify(data)))
+      this.router.navigate(['/user/home'])
+    })
   }
 
   async presentAlert() {
@@ -70,7 +73,6 @@ export class CreateTeamPage implements OnInit {
           handler: () => {
             this.privacyTeam = false;
           }
-
         },
       ],
     });
