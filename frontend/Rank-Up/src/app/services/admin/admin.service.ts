@@ -29,4 +29,8 @@ export class AdminService {
   public getTeams(idUser: number) {
     return this.http.get<Team[]>(this.baseUrl + "/teams/" + idUser);
   }
+
+  public getAdmin(idTeam: number, idUser: number) {
+    return this.http.get<Admin>(this.baseUrl + "/getAdmin/" + idTeam + "/" + idUser);
+  }
 }

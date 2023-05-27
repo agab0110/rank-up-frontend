@@ -5,6 +5,7 @@ import { TeamService } from '../services/team/team.service';
 import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { AdminService } from '../services/admin/admin.service';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private adminManageTeamService: AdminService
+    private adminService: AdminService
     ) {
     this.user = new User();
     this.teamsUser = [];
@@ -54,7 +55,7 @@ export class HomePage implements OnInit {
       console.log(this.teamsUser);
     });
 
-    this.adminManageTeamService.getTeams(this.user.id).subscribe(response => {
+    this.adminService.getTeams(this.user.id).subscribe(response => {
       this.teamsAdmin = response;
       this.teamsAdmin.forEach(team => {
         this.teams.push(team);
@@ -92,6 +93,12 @@ export class HomePage implements OnInit {
 
   goToTeamAdmin(team: Team) {
     localStorage.setItem('team', JSON.stringify(team));
+    let admin = new Admin();
+    this.adminService.getAdmin(team.codice, this.user.id).subscribe(response => {
+      admin = response;
+      console.log(admin);
+    });
+    localStorage.setItem('admin', JSON.stringify(admin));
     this.router.navigate(['/admin/admin-home-team']);
   }
 
