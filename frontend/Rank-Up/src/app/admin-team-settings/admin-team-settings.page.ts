@@ -17,6 +17,8 @@ export class AdminTeamSettingsPage implements OnInit {
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
   team: Team;
+  choice_privacy_utente: boolean = true;
+  choice_privacy_team: boolean = true;
 
   constructor(
     private alertController: AlertController,
@@ -28,14 +30,13 @@ export class AdminTeamSettingsPage implements OnInit {
    }
 
   ngOnInit() {
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      this.router.navigate(['user/home']);
+
+    this.choice_privacy_utente = this.team.privacy;
+    this.choice_privacy_team = this.team.pointVisibility;
   }
-
-  choice_privacy_utente: Boolean = true;
-  choice_privacy_team: Boolean = true;
-
 
   async presentAlert1() {
     const alert = await this.alertController.create({
@@ -85,6 +86,11 @@ export class AdminTeamSettingsPage implements OnInit {
           cssClass: this.choice_privacy_team ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.choice_privacy_team = true;
+            this.teamService.changePrivacyTeam(this.team.codice, this.choice_privacy_team).subscribe(response => {
+              this.team = response;
+              localStorage.setItem('team', JSON.stringify(this.team));
+              console.log(this.team);
+            });
           }
         },
         {
@@ -92,6 +98,11 @@ export class AdminTeamSettingsPage implements OnInit {
           cssClass: this.choice_privacy_team ? 'alert-button-blue' : 'alert-button-red',
           handler: () => {
             this.choice_privacy_team = false;
+            this.teamService.changePrivacyTeam(this.team.codice, this.choice_privacy_team).subscribe(response => {
+              this.team = response;
+              localStorage.setItem('team', JSON.stringify(this.team));
+              console.log(this.team);
+            });
           }
         },
       ],
@@ -109,6 +120,11 @@ export class AdminTeamSettingsPage implements OnInit {
           cssClass: this.choice_privacy_utente ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.choice_privacy_utente = true;
+            this.teamService.changePrivacyUser(this.team.codice, this.choice_privacy_utente).subscribe(response => {
+              this.team = response;
+              localStorage.setItem('team', JSON.stringify(this.team));
+              console.log(this.team);
+            });
           }
         },
         {
@@ -116,6 +132,11 @@ export class AdminTeamSettingsPage implements OnInit {
           cssClass: this.choice_privacy_utente ? 'alert-button-blue' : 'alert-button-red',
           handler: () => {
             this.choice_privacy_utente = false;
+            this.teamService.changePrivacyUser(this.team.codice, this.choice_privacy_utente).subscribe(response => {
+              this.team = response;
+              localStorage.setItem('team', JSON.stringify(this.team));
+              console.log(this.team);
+            });
           }
         },
       ],

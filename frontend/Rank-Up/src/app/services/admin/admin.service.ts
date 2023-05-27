@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/models/admin/admin';
+import { Team } from 'src/app/models/team/team';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,13 @@ export class AdminService {
       this.baseUrl + "/addAdmin",
       { 'params': params }
     );
+  }
+
+  public getTeams(idUser: number) {
+    return this.http.get<Team[]>(this.baseUrl + "/teams/" + idUser);
+  }
+
+  public getAdmin(idTeam: number, idUser: number) {
+    return this.http.get<Admin>(this.baseUrl + "/getAdmin/" + idTeam + "/" + idUser);
   }
 }

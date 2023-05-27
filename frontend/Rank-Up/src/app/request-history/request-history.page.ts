@@ -6,8 +6,8 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-import { Rule } from '../models/rule/rule';
-import { Task } from '../models/task/task';
+import { Prize } from '../models/prize/prize';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-request-history',
@@ -15,31 +15,38 @@ import { Task } from '../models/task/task';
   styleUrls: ['./request-history.page.scss'],
 })
 export class RequestHistoryPage implements OnInit {
-  ruleCompleted: RuleCompleted[];
-  ruleRejected: RuleCompleted[];
-  taskCompleted: TaskCompleted[];
-  taskRejected: TaskCompleted[];
+
+  rulesCompleted: RuleCompleted[];
+  rulesRejected: RuleCompleted[];
+  tasksCompleted: TaskCompleted[];
+  tasksRejected: TaskCompleted[];
+
+  prizes: Prize[];
   activitySort: any;
   team: Team;
+  stato = 0;
 
   filter: number = 1;
   data: any;
   idTeam: any = 1;
-  history: any[];
-  class: string = "itemadmin";
-  icon: string = "close-circle-outline";
+  classAccepted: string = "itemuser";
+  classRejected: string = "itemadmin";
+  iconAccepted: string = "checkmark-circle-outline";
+  iconRejected: string = "close-circle-outline";
+  segmentValue: string = "rule";
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private ruleCompletedService : RuleCompletedService,
     private taskCompletedService : TaskCompletedService) {
-      this.history = [];
+      this.rulesCompleted = new Array<RuleCompleted>;
+      this.rulesRejected = new Array<RuleCompleted>;
+      this.tasksCompleted = new Array<TaskCompleted>;
+      this.tasksRejected = new Array<TaskCompleted>;
+
       this.team = new Team();
-      this.ruleCompleted = new Array<RuleCompleted>;
-      this.ruleRejected = new Array<RuleCompleted>;
-      this.taskCompleted = new Array<TaskCompleted>;
-      this.taskRejected = new Array<TaskCompleted>;
+      this.prizes = new Array<Prize>;
      }
 
      ngOnInit() {
@@ -51,28 +58,140 @@ export class RequestHistoryPage implements OnInit {
       //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
       this.getRulesCompleted();
       this.getRulesRejected();
+
       this.getTaskAccepted();
       this.getTaskRejected();
-
-      this.dataHistory();
     }
 
 
-  dataHistory() {
-    console.log(this.history);
-    this.history.sort((a, b) => a.date - b.date);
+  sortByData() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.timestamp > b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp < b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortByUsername() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  sortByActivity() {
+    this.rulesCompleted.sort((a, b) => {
+      if (a.rule.name > b.rule.name) {
+        return 1;
+      }
+      if (a.rule.name < b.rule.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.rulesRejected.sort((a, b) => {
+      if (a.rule.name > b.rule.name) {
+        return 1;
+      }
+      if (a.rule.name < b.rule.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksCompleted.sort((a, b) => {
+      if (a.task.name > b.task.name) {
+        return 1;
+      }
+      if (a.task.name < b.task.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.tasksRejected.sort((a, b) => {
+      if (a.task.name > b.task.name) {
+        return 1;
+      }
+      if (a.task.name < b.task.name) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Ricerca per:',
+      header: 'Filtra per:',
       buttons: [
         {
           text: 'Nome Utente',
           cssClass: this.filter === 1 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 1;
+            this.sortByUsername();
           }
         },
         {
@@ -80,7 +199,7 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 2 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 2;
-            this.dataHistory();
+            this.sortByData();
           }
         },
         {
@@ -88,7 +207,8 @@ export class RequestHistoryPage implements OnInit {
           cssClass: this.filter === 3 ? 'alert-button-red' : 'alert-button-blue',
           handler: () => {
             this.filter = 3;
-            this.ruleCompleted= this.sortByActivityName();
+            //this.rulesCompleted= this.sortByActivityName();
+            this.sortByActivity();
           }
         },
       ],
@@ -102,13 +222,44 @@ export class RequestHistoryPage implements OnInit {
     this.location.back();
   }
 
+  segmentChanged(event: any) {
+    const selectedValue = event.detail.value;
+
+    switch (selectedValue) {
+      case 'rule':
+        if(this.filter === 1)
+          this.sortByUsername();
+        else if(this.filter === 2)
+          this.sortByData();
+        else
+          this.sortByActivity();
+        break;
+      case 'task':
+        if(this.filter === 1)
+          this.sortByUsername();
+        else if(this.filter === 2)
+          this.sortByData();
+        else
+          this.sortByActivity();
+        break;
+      case 'prize':
+        if(this.filter === 1)
+          this.sortByUsername();
+        else if(this.filter === 2)
+          this.sortByData();
+        else
+          this.sortByActivity();
+        break;
+      default:
+        break;
+    }
+  }
+
   getRulesCompleted(){
-    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/3).subscribe(Response =>{
-      this.ruleCompleted = Response;
-      console.log(this.ruleCompleted);
-      this.ruleCompleted.forEach(element => {
-        this.history.push(element);
-      });
+    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
+      this.rulesCompleted = Response;
+      this.sortByUsername();
+      console.log(this.rulesCompleted);
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -121,11 +272,9 @@ export class RequestHistoryPage implements OnInit {
 
   getRulesRejected(){
     this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
-      this.ruleRejected = Response;
-      console.log(this.ruleRejected);
-      this.ruleRejected.forEach(element => {
-        this.history.push(element);
-      });
+      this.rulesRejected = Response;
+      this.sortByUsername();
+      console.log(this.rulesRejected);
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -138,11 +287,9 @@ export class RequestHistoryPage implements OnInit {
 
   getTaskAccepted(){
     this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
-      this.taskCompleted = Response;
-      console.log(this.taskCompleted);
-      this.taskCompleted.forEach(element => {
-        this.history.push(element);
-      });
+      this.tasksCompleted = Response;
+      this.sortByUsername();
+      console.log(this.tasksCompleted);
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -153,13 +300,11 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
-  getTaskRejected(){
-    this.taskCompletedService.taskRejected(/*this.team.codice*/1).subscribe(Response =>{
-      this.taskRejected = Response;
-      console.log(this.taskRejected);
-      this.taskRejected.forEach(element => {
-        this.history.push(element);
-      });
+    getTaskRejected(){
+    this.taskCompletedService.taskRejected(/*this.team.codice1*/1).subscribe(Response =>{
+      this.tasksRejected = Response;
+      this.sortByUsername();
+      console.log(this.tasksCompleted);
     },(error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -182,7 +327,7 @@ export class RequestHistoryPage implements OnInit {
 
   sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
-      this.ruleCompleted.forEach((element : RuleCompleted) => {
+      this.rulesCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
       });
     console.log(sortList);

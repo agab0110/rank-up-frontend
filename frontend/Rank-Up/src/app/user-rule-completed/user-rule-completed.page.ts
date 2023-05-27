@@ -32,6 +32,14 @@ export class UserRuleCompletedPage implements OnInit {
       this.user = this.ruleCompleted.user;
       console.log(response);
     });
+    if(!this.rule.description)
+    {
+      this.rule.description = "Descrizione assente";
+    }
+    if(!this.ruleCompleted.comment)
+    {
+      this.ruleCompleted.comment = "Commento assente";
+    }
   }
 
   backButton() {
