@@ -4,6 +4,7 @@ import { RuleService } from '../services/rule/rule.service';
 import { Rule } from '../models/rule/rule';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-rule',
@@ -17,7 +18,8 @@ export class CreateRulePage implements OnInit{
 
   constructor(
     private location: Location,
-    private ruleService:  RuleService
+    private ruleService:  RuleService,
+    private router: Router
     ) {
     this.rule = new Rule();
     this.team = new Team();
@@ -25,34 +27,24 @@ export class CreateRulePage implements OnInit{
   }
 
   ngOnInit(){
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+
+    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    this.router.navigate(['user/home']);
+    
+    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+    this.router.navigate(['user/home']);
+    
   }
 
   backButton() {
     this.location.back();
   }
 
-   /* getTeam(){
-    this.teamService.getTeam(this.team.codice).subscribe(response =>{
-      this.team = response;
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    });
-  } */
-
   public createRule(){
-      //this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
-      //this.rule.team = this.team;     //setta il team presente nel local storage, api 1
+      this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
+      this.rule.team = this.team;     //setta il team presente nel local storage, api 1
       this.ruleService.newRule(this.rule).subscribe(response => {
       console.log("Regola creata con successo");
       console.log(response);
