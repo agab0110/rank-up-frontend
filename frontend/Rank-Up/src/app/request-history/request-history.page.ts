@@ -228,12 +228,15 @@ export class RequestHistoryPage implements OnInit {
     switch (selectedValue) {
       case 'rule':
         this.filter = 1;
+        this.sortByUsername();
         break;
       case 'task':
         this.filter = 1;
+        this.sortByUsername();
         break;
       case 'prize':
         this.filter = 1;
+        this.sortByUsername();
         break;
       default:
         break;
