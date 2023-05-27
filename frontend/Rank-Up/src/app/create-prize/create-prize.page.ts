@@ -50,7 +50,7 @@ export class CreatePrizePage implements OnInit {
 
   public createPrize(){
     this.prize.beloggingTeam = this.team;     //setta il team tramite localStorage, api 9
-    //this.prize.admin = this.admin;            //setta l'admin tramite localStorage, api 9
+    this.prize.admin = this.admin;            //setta l'admin tramite localStorage, api 9
     this.prizeService.newPrize(this.prize).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);

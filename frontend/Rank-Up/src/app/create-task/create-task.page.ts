@@ -53,6 +53,7 @@ export class CreateTaskPage implements OnInit {
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     if (localStorage.getItem('team') == null) {
       this.router.navigate(["/user/home"]);
     }
@@ -65,8 +66,8 @@ export class CreateTaskPage implements OnInit {
     this.location.back();
   }
   public createTask(){
-    //this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
-    //this.rule.team = this.team;     //setta il team presente nel local storage, api 1
+    this.task.admin = this.admin;   //setta l'admin presente nel local storage, api 1
+    this.task.team = this.team;     //setta il team presente nel local storage, api 1
     this.taskService.newTask(this.task).subscribe(response => {
     console.log("task creato con sucesso");
     console.log(response);
