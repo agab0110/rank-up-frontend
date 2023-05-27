@@ -4,6 +4,7 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
+import { Team } from '../models/team/team';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -15,6 +16,7 @@ export class PendingTasksPage implements OnInit {
   public user: User;
   public rules: any
   public tasks: any
+  public team: Team;
 
   constructor(
     private location: Location,
@@ -23,17 +25,23 @@ export class PendingTasksPage implements OnInit {
     private router: Router
   ) { 
     this.user = new User();
+    this.team = new Team();
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+   
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-
-    this.ruleCompletedService.getPending(1).subscribe(data => {
+   
+    this.ruleCompletedService.getPending(this.team.codice).subscribe(data => {
       this.rules = data;
-      this.taskCompletedService.getPending(1).subscribe(data => {
+      this.taskCompletedService.getPending(this.team.codice).subscribe(data => {
         this.tasks = data;
       });
     })

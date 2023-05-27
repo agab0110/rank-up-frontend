@@ -49,6 +49,7 @@ export class UserTeamProfilePage implements OnInit {
    }
 
   ngOnInit() {
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
@@ -58,6 +59,9 @@ export class UserTeamProfilePage implements OnInit {
     if (localStorage.getItem('team') == null || localStorage.getItem('userJoinsTeam') == null) {
       this.router.navigate(["/user/home"]);
     }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    };
 
     this.taskCompletedService.getTaskCompletedByUser(this.user.id, this.team.codice).subscribe((response) => {
       this.tasksCompleted = response;
@@ -75,7 +79,7 @@ export class UserTeamProfilePage implements OnInit {
       console.log(response);
     });
 
-    this.userGetPrizeService.getUserPrizes(this.user.id, this.team.codice).subscribe((response) => {
+    this.userGetPrizeService.getUserPrizes(this.user.id,this.team.codice).subscribe((response) => {
       response.forEach(element => {
         this.prizes.push(element);
       });

@@ -17,6 +17,7 @@ export class ParticipantsPage implements OnInit {
   partecipantsPoints: UserJoinsTeam[];
   team: Team;
   admin: Admin;
+  user: User;
   points!: number;
 
   constructor(
@@ -28,19 +29,22 @@ export class ParticipantsPage implements OnInit {
       this.partecipantsPoints = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
+      this.user = new User();
     }
 
   stato = false
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    this.team.name = "Team prova"
-    this.team.codice = 1;
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-      //this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+    
     this.getPartecipants(this.team.codice);
     this.getPartecipantsPoints(this.team.codice);
   }

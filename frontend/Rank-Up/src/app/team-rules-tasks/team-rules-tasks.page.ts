@@ -6,6 +6,8 @@ import { TaskService } from '../services/task/task.service';
 import { Task } from '../models/task/task';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
+import { User } from '../models/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-rules-tasks',
@@ -23,19 +25,29 @@ export class TeamRulesTasksPage implements OnInit {
   task : Task;
   rule : Rule;
   admin: Admin;
+  user:User;
 
-  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService) {
+  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService,private router: Router) {
     this.rules = new Array<Rule>;
     this.tasks = new Array<Task>;
     this.team = new Team();
     this.rule = new Rule();
     this.task = new Task();
     this.admin = new Admin();
+    this.user= new User();
 
    }
 
 
   ngOnInit() {
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
     this.listRule();
     this.listTask();
     //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
@@ -57,7 +69,7 @@ export class TeamRulesTasksPage implements OnInit {
     this.stato = !this.stato;
   }
   listRule(){
-    this.ruleservice.listRule(1).subscribe(response =>{
+    this.ruleservice.listRule(this.team.codice).subscribe(response =>{
       this.rules = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -70,7 +82,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
 
   listTask(){
-    this.taskservice.listTask(1).subscribe(response =>{
+    this.taskservice.listTask(this.team.codice).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)

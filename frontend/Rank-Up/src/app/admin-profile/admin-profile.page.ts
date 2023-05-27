@@ -50,7 +50,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes(){
-  this.userGetPrizeService.getUserPrizes(/*this.userProfile.id*/1, /*this.team.codice*/1).subscribe(
+  this.userGetPrizeService.getUserPrizes(this.userProfile.id, this.team.codice).subscribe(
     (response: any) => {
       this.prizes = response;
       console.log(this.prizes);

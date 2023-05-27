@@ -6,6 +6,8 @@ import { Team } from '../models/team/team';
 import { TeamService } from '../services/team/team.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
+import { AdminService } from '../services/admin/admin.service';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-create-team',
@@ -15,9 +17,10 @@ import { User } from '../models/user/user';
 export class CreateTeamPage implements OnInit {
 
   public user: User;
+  public team:Team;
   public codiceTeam: any;
   public nomeTeam: string = ""
-
+  public admin:Admin;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
@@ -27,18 +30,27 @@ export class CreateTeamPage implements OnInit {
     private alertController: AlertController,
     private location: Location,
     private teamService: TeamService,
-    private router: Router
+    private router: Router,
+    private adminService: AdminService
   ) { 
     this.user = new User();
+    this.team = new Team();
+    this.admin = new Admin();
   }
 
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      this.router.navigate(['login']);
+    //localStorage.setItem('adminId','');
+    //localStorage.setItem('teamId', '');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
     
     const team = new Team();
     team.name = "temp"
@@ -46,7 +58,8 @@ export class CreateTeamPage implements OnInit {
     team.photo = "https://t3.ftcdn.net/jpg/00/64/67/52/240_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg"
     this.teamService.newTeam(team).subscribe(data => {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
-    })
+    });
+    
   }
 
   backButton() {
@@ -108,4 +121,20 @@ export class CreateTeamPage implements OnInit {
       })
     }
   }
+  addAdmin() {
+    
+    this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
+      console.log("Admin aggiunto con successo");
+      console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
 }
+
+

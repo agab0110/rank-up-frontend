@@ -10,6 +10,7 @@ import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { log } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -31,6 +32,7 @@ export class AddUserPage implements OnInit {
     private userService: UserService,
     private userJoinsTeamService: UserJoinsTeamService,
     private adminService: AdminService,
+    private router: Router
     ) {
 
     this.users = new Array<User>;
@@ -40,12 +42,16 @@ export class AddUserPage implements OnInit {
   }
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
+    localStorage.setItem('admin','');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-      //this.router.navigate(['user/home']);
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+   
     this.getUsers();
   }
 
@@ -83,7 +89,6 @@ export class AddUserPage implements OnInit {
   }
 
   addAdmin(idUser: number) {
-    this.team.codice = 1;
     this.idUser = idUser;
     console.log(idUser);
     
@@ -115,7 +120,6 @@ export class AddUserPage implements OnInit {
   }*/
 
   addUser(idUser:number) {
-    this.team.codice = 1;
     this.idUser = idUser;
 
     this.userJoinsTeamService.addUser(this.team.codice,idUser).subscribe(response => {

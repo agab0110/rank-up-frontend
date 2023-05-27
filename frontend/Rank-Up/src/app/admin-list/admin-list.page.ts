@@ -34,12 +34,15 @@ export class AdminListPage implements OnInit {
     }
 
   ngOnInit() {
-      this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-        this.router.navigate(['user/home']);
-      if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-        this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
       this.getPartecipants(this.team.codice);
       this.getPartecipantsPoints(this.team.codice);
       this.sortDesc();

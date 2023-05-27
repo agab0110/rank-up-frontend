@@ -5,6 +5,7 @@ import { Rule } from '../models/rule/rule';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { Router } from '@angular/router';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-create-rule',
@@ -15,6 +16,7 @@ export class CreateRulePage implements OnInit{
   rule: Rule;
   team: Team;
   admin: Admin;
+  user:User;
 
   constructor(
     private location: Location,
@@ -24,17 +26,19 @@ export class CreateRulePage implements OnInit{
     this.rule = new Rule();
     this.team = new Team();
     this.admin = new Admin();
+    this.user = new User();
   }
 
   ngOnInit(){
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-
-    if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    this.router.navigate(['user/home']);
-    
-    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    this.router.navigate(['user/home']);
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
     
   }
 

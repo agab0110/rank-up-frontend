@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { Prize } from '../models/prize/prize';
 import { PrizeService } from '../services/prize/prize.service';
 import { Team } from '../models/team/team';
+import { Router } from '@angular/router';
+import { User } from '../models/user/user';
 
 
 @Component({
@@ -15,21 +17,25 @@ export class AdminPrizesPagePage implements OnInit {
   prizes:Prize[];
   team:Team;
   prize:Prize;
-  constructor(private location: Location, private pizeservice : PrizeService) {
+  user: User;
+  constructor(private location: Location, private pizeservice : PrizeService,private router: Router) {
     this.prizes = new Array<Prize>;
     this.team = new Team();
     this.prize = new Prize();
+    this.user = new User();
   }
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
     this.listPrize();
-    this.team.name = "Team prova";
-    //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    
 
   }
 
@@ -37,8 +43,6 @@ export class AdminPrizesPagePage implements OnInit {
     this.location.back();
   }
   listPrize(){
-    this.team.codice = 1;
-    this.prize.beloggingTeam = this.team;
     this.pizeservice.listPrize(this.team.codice).subscribe(response =>{
       this.prizes = response;
     }, (error: Response) => {

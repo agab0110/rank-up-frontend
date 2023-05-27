@@ -39,8 +39,15 @@ export class UserJoinsTeamService {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
   }
 
-  public addUser(idTeam: number, idUer: number): Observable<User>{
-    return this.http.get<User>(this.userJoinsTeamUrl + "/partecipantsPoints/" + idTeam);
+  public getRequests(idTeam: number):Observable<UserJoinsTeam[]>{
+    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
+  }
+  public addUser(idTeam:number, idUser:Number){
+    const params = new HttpParams()
+    .set('idTeam', idTeam.toString())
+    .set('idUser', idUser.toString());
+    
+    return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUser",null,{params});
   }
 
   public subtractUserPoints(idTeam: number, idUser: number, idPrize: number): Observable<UserJoinsTeam> {
