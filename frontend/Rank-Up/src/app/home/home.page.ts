@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('teamId', '');
+    localStorage.setItem('admin', '');
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
