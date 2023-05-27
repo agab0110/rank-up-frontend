@@ -7,6 +7,10 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { Rule } from '../models/rule/rule';
+import { Task } from '../models/task/task';
+import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { TaskCompleted } from '../models/taskCompleted/task-completed';
 
 @Component({
   selector: 'app-user-team-profile',
@@ -17,6 +21,8 @@ export class UserTeamProfilePage implements OnInit {
   stato = true; 
 
   activities: any;
+  rules: RuleCompleted[];
+  tasks: TaskCompleted[];
   prizes: any[];
 
   user: User;
@@ -34,6 +40,8 @@ export class UserTeamProfilePage implements OnInit {
     this.team = new Team();
     this.userJoinsTeam = new UserJoinsTeam();
     this.activities = [];
+    this.rules = [];
+    this.tasks = [];
     this.prizes = [];
    }
 
@@ -49,6 +57,7 @@ export class UserTeamProfilePage implements OnInit {
     }
 
     this.taskCompletedService.getTaskCompletedByUser(this.user.id, this.team.codice).subscribe((response) => {
+      this.tasks = response;
       response.forEach(element => {
         this.activities.push(element);
       });
@@ -56,6 +65,7 @@ export class UserTeamProfilePage implements OnInit {
     });
 
     this.ruleCompletedService.getRulesCompletedByUser(this.user.id, this.team.codice).subscribe((response) => {
+      this.rules = response;
       response.forEach(element => {
         this.activities.push(element);
       });
@@ -68,6 +78,15 @@ export class UserTeamProfilePage implements OnInit {
       });
       console.log(response);
     });
+  }
+
+  ruleOrTask(activity: any) {
+    if (this.rules.includes(activity)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   segmentChanged(event:any) {
