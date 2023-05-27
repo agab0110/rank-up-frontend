@@ -81,8 +81,8 @@ export class AccessRequestsListPage implements OnInit {
     });
   }*/
   public getRequest(){
-    this.userJoinsTeamService.getListPendingRequests(this.team.codice).subscribe(response =>{
-      this.requests = response;
+    this.userJoinsTeamService.getRequests(this.team.codice).subscribe(response =>{
+      this.userJoin = response;
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");

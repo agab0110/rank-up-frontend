@@ -8,6 +8,7 @@ import { UserReciveNotification } from '../models/userReciveNotification/user-re
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-notifications',
@@ -16,6 +17,7 @@ import { AdminReciveNotificationService } from '../services/adminReciveNotificat
 })
 export class NotificationsPage implements OnInit {
   user : User;
+  admin : Admin;
   stato : Boolean;
   public alertBtns = ["Accetta", "Rifiuta"];
   type='utente';
@@ -32,6 +34,7 @@ export class NotificationsPage implements OnInit {
     this.adminNotifications = new Array<AdminReciveNotification>;
     this.team = new Team();
     this.user = new User();
+    this.admin = new Admin();
     this.stato = false;
   }
 
@@ -41,8 +44,9 @@ export class NotificationsPage implements OnInit {
     //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
     //this.router.navigate(['user/home']);
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    this.getUserNotification(1);
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.getUserNotification(this.user.id);
   }
 
   segmentChanged(ev: any, idUser: Number, idAdmin: Number){
@@ -59,7 +63,7 @@ export class NotificationsPage implements OnInit {
   }
 
   public getUserNotification(idUser: Number) {
-    this.userNotificationService.getNotification(2).subscribe(response => {
+    this.userNotificationService.getNotification(this.user.id).subscribe(response => {
       this.notifications= response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -72,7 +76,7 @@ export class NotificationsPage implements OnInit {
   }
 
   public getAdminNotification(idAmin: Number){
-    this.adminNotificationService.getAdminNotification(1).subscribe(response =>{
+    this.adminNotificationService.getAdminNotification(this.admin.id).subscribe(response =>{
       this.adminNotifications = response;
      }, (error: Response) => {
        if(error.status == 400)
