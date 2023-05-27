@@ -97,9 +97,8 @@ export class HomePage implements OnInit {
     let admin = new Admin();
     this.adminService.getAdmin(team.codice, this.user.id).subscribe(response => {
       admin = response;
-      console.log(admin);
+      localStorage.setItem('admin', JSON.stringify(admin));
     });
-    localStorage.setItem('admin', JSON.stringify(admin));
     this.router.navigate(['/admin/admin-home-team']);
   }
 
