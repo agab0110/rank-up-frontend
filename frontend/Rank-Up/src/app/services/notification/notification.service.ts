@@ -12,12 +12,12 @@ export class NotificationService {
   constructor(
     private http: HttpClient
   ) {
-    this.notificationUrl = "http://localhost:8080/notificationApi/";
+    this.notificationUrl = "http://localhost:8080/notificationApi";
   }
 
   public newNotification(notification: Notification, idTeam: number) {
     return this.http.post<Notification>(
-      this.notificationUrl + "newNotification/" + idTeam, notification
+      this.notificationUrl + "/newNotification/" + idTeam, notification
     );
   }
 

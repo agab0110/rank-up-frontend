@@ -54,12 +54,12 @@ export class NotificationsPage implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.getUserNotification(this.user.id);
 
-    this.notificationService.getUserNotifications(this.idUser).subscribe(data => {
+    this.notificationService.getUserNotifications(this.user.id).subscribe(data => {
       this.nUser = data;
       console.log(this.nUser)
     })
 
-    this.notificationService.getAdminNotifications(this.idUser).subscribe(data => {
+    this.notificationService.getAdminNotifications(this.user.id).subscribe(data => {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })
@@ -75,14 +75,14 @@ export class NotificationsPage implements OnInit {
   }
 
   notificheUser(event: any){
-    this.notificationService.getUserNotifications(this.idUser).subscribe(data => {
+    this.notificationService.getUserNotifications(this.user.id).subscribe(data => {
       this.nUser = data;
       console.log(this.nUser)
     })
   }
 
   notificheAdmin(event: any){
-    this.notificationService.getAdminNotifications(this.idUser).subscribe(data => {
+    this.notificationService.getAdminNotifications(this.user.id).subscribe(data => {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })
