@@ -6,6 +6,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { Router } from '@angular/router';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 
 @Component({
   selector: 'app-user-team-profile',
@@ -20,6 +21,7 @@ export class UserTeamProfilePage implements OnInit {
 
   user: User;
   team: Team;
+  userJoinsTeam: UserJoinsTeam;
 
   constructor(
     private location: Location,
@@ -30,6 +32,7 @@ export class UserTeamProfilePage implements OnInit {
     ) {
     this.user = new User();
     this.team = new Team();
+    this.userJoinsTeam = new UserJoinsTeam();
     this.activities = [];
     this.prizes = [];
    }
@@ -37,10 +40,11 @@ export class UserTeamProfilePage implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
     }
-    if (localStorage.getItem('team') == null) {
+    if (localStorage.getItem('team') == null || localStorage.getItem('userJoinsTeam') == null) {
       this.router.navigate(["/user/home"]);
     }
 

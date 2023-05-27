@@ -6,12 +6,12 @@
     </ion-button>
 
 
-    <img alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+    <img alt="User" class="icon" name=iconName src={{user.photo}}>
 
 
-    <ion-label class="userName">[Nome Utente]</ion-label>
+    <ion-label class="userName">{{user.name}}</ion-label>
 
-    <ion-label class="points">Punti: [Punti]</ion-label>
+    <ion-label class="points">Punti: {{userJoinsTeam.points}}</ion-label>
 
     <div class="switch">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">

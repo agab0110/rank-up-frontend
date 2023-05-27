@@ -31,8 +31,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
+    localStorage.setItem('team', '');
     localStorage.setItem('admin', '');
+    localStorage.setItem('userJoinsTeam', '');
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -89,6 +90,13 @@ export class HomePage implements OnInit {
 
   goToTeamUser(team: Team) {
     localStorage.setItem('team', JSON.stringify(team));
+    this.userJoinsTeamService.getPartecipantsPoints(team.codice).subscribe(response => {
+      response.forEach(userJoinsTeam => {
+        if (userJoinsTeam.user.id == this.user.id) {
+          localStorage.setItem('userJoinsTeam', JSON.stringify(userJoinsTeam));
+        }
+      });
+    });
     this.router.navigate(['/user/team']);
   }
 
