@@ -121,7 +121,7 @@ export class AdminListPage implements OnInit {
   ricerca(event: any) {
     if(event.target.value != "") {
       this.statoRicerca = true
-      this.userJoinsTeamService.getListUserJoinsTeamSearch(1, event.target.value).subscribe(data => {
+      this.userJoinsTeamService.getListUserJoinsTeamSearch(this.team.codice, event.target.value).subscribe(data => {
         this.userJoinsTeamSearch = JSON.parse(JSON.stringify(data))
         console.log(data)
       })      
