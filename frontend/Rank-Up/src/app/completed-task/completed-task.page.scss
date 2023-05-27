@@ -28,7 +28,7 @@
 }
 
 .buttons-grid {
-  margin-top: 3vh;
+  margin-top: 5vh;
 }
 
 ion-textarea{
@@ -48,13 +48,25 @@ ion-textarea{
 }
 
 .space-div {
-  margin-top: 2vh;
+  margin-top: 3vh;
 }
 
 .div-element-bar {
-  margin-top: 10vh;
+  margin-top: 12vh;
 }
 
 .leftIcon {
-  --background: var(--ion-color-admin);
+  --background: trasparent;
+}
+
+.commentArea {
+  height: 30vh;
+}
+
+.label {
+  margin-bottom: -3vh;
+  margin-top: 5vh;
+  text-align: left;
+  margin-left: 15vh;
+  width: 100%;
 }
