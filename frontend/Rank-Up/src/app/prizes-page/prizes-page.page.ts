@@ -28,18 +28,14 @@ export class PrizesPagePage implements OnInit {
     public alertCtrl: AlertController,
     private prizeService: PrizeService,
     private userJoinsTeamService: UserJoinsTeamService
-    ) {
-      this.prizes = new Array<Prize>
-      this.user = new User
-      this.team = new Team
-      this.userJoin = new Array<UserJoinsTeam>;
-      this.points = 0;
-      this.userJoinsTeam = new UserJoinsTeam;
-     }
-
-  user_name: string = '[Nome Utente]';
-  user_points: number = 500
-
+  ) {
+    this.prizes = new Array<Prize>
+    this.user = new User
+    this.team = new Team
+    this.userJoin = new Array<UserJoinsTeam>;
+    this.points = 0;
+    this.userJoinsTeam = new UserJoinsTeam;
+  }
 
   async showAlert(name: string, points: number, idPrize: number) {
     const alert = await this.alertCtrl.create({
@@ -48,13 +44,13 @@ export class PrizesPagePage implements OnInit {
         {
           text: 'No',
           role: 'no',
-          cssClass:'alert-button-red'
+          cssClass: 'alert-button-red'
         },
         {
           text: 'Si',
-          cssClass:'alert-button-blue',
+          cssClass: 'alert-button-blue',
           handler: () => {
-           this.subtractUserPoints(this.team.codice, this.user.id, idPrize);
+            this.subtractUserPoints(this.team.codice, this.user.id, idPrize);
           }
         }
       ]
@@ -69,13 +65,13 @@ export class PrizesPagePage implements OnInit {
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
 
     this.Listprize(this.team.codice);
-   }
+  }
 
-  Listprize(idTeam: Number){
-    this.prizeService.listPrize(this.team.codice).subscribe(response =>{
+  Listprize(idTeam: Number) {
+    this.prizeService.listPrize(this.team.codice).subscribe(response => {
       this.prizes = response;
     }, (error: Response) => {
-      if(error.status == 400)
+      if (error.status == 400)
         console.log("400 error");
       else {
         console.log('An unexpected error occured');
@@ -85,25 +81,12 @@ export class PrizesPagePage implements OnInit {
   }
 
   subtractUserPoints(idTeam: number, idUser: number, idPrize: number) {
-      this.userJoinsTeamService.subtractUserPoints(idTeam, idUser, idPrize).subscribe(response =>{
-        console.log(response)
-        this.userJoinsTeam = response;
-        localStorage.setItem('userJoinsTeam', JSON.stringify(this.userJoinsTeam));
-      }, (error: Response) => {
-        if(error.status == 400)
-          console.log("400 error");
-        else {
-          console.log('An unexpected error occured');
-        }
-        console.log(error);
-      });
-    }
-
-    getUsersPoints(idTeam: number){
-      this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response =>{
-      this.userJoin = response;
+    this.userJoinsTeamService.subtractUserPoints(idTeam, idUser, idPrize).subscribe(response => {
+      console.log(response)
+      this.userJoinsTeam = response;
+      localStorage.setItem('userJoinsTeam', JSON.stringify(this.userJoinsTeam));
     }, (error: Response) => {
-      if(error.status == 400)
+      if (error.status == 400)
         console.log("400 error");
       else {
         console.log('An unexpected error occured');
@@ -111,15 +94,28 @@ export class PrizesPagePage implements OnInit {
       console.log(error);
     });
   }
-    getPoints(idUser: number){
-      this.userJoin.forEach(element => {
-        if(element.user.id = idUser){
-          this.points = element.points;
-        }
-      });
-    }
-    
-    backButton() {
-      this.location.back();
-    }
+
+  getUsersPoints(idTeam: number) {
+    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response => {
+      this.userJoin = response;
+    }, (error: Response) => {
+      if (error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+  getPoints(idUser: number) {
+    this.userJoin.forEach(element => {
+      if (element.user.id = idUser) {
+        this.points = element.points;
+      }
+    });
+  }
+
+  backButton() {
+    this.location.back();
+  }
 }
