@@ -17,7 +17,7 @@
 
         <div id="div-div-prizes">
           <div id="div-div-prizes-name" >{{prize.name}}</div>
-          <ion-button *ngIf="user_points >= prize.price; else conditionFalse" (click)="showAlert(prize.name, prize.price, prize.id)" id="div-div-prizes-button">{{prize.price}} pt.</ion-button>
+          <ion-button *ngIf="userJoinsTeam.points >= prize.price; else conditionFalse" (click)="showAlert(prize.name, prize.price, prize.id)" id="div-div-prizes-button">{{prize.price}} pt.</ion-button>
           <ng-template #conditionFalse>
             <ion-button [disabled]="true" (click)="showAlert(prize.name, prize.price, prize.id)" id="div-div-prizes-button-disable">{{prize.price}} pt.</ion-button>
           </ng-template>

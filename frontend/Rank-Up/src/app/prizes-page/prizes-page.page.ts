@@ -8,7 +8,6 @@ import { Team } from '../models/team/team';
 import { Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
-import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 
 @Component({
   selector: 'app-prizes-page',
