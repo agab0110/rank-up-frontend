@@ -39,7 +39,7 @@ export class AdminProfilePage implements OnInit {
       this.team = new Team();
       this.prizes = [];
       this.userJoin = new UserJoinsTeam();
-     }
+    }
 
   backButton() {
     this.location.back();

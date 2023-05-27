@@ -28,7 +28,7 @@ export class UserJoinsTeamService {
 
   public getListUserJoinsTeamSearch(username: string): Observable<UserJoinsTeam[]> {
     const params = new HttpParams().set('username', username);
-    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/list/userSearch", {params});
+    return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/list/userjoinsteamsearch", {params});
   }
 
   public getListPendingRequests(id_team: number): Observable<Notification[]> {

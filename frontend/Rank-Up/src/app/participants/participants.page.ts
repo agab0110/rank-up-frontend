@@ -37,7 +37,7 @@ export class ParticipantsPage implements OnInit {
     //this.router.navigate(['user/home']);
     //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.team.name = "Team prova"
-    this.team.codice = 1;
+    this.team.codice = 3;
     //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
       //this.router.navigate(['user/home']);
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
