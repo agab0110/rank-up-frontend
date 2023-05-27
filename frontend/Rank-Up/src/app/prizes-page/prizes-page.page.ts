@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 import { PrizeService } from '../services/prize/prize.service';
 import { Prize } from '../models/prize/prize';
@@ -23,6 +24,7 @@ export class PrizesPagePage implements OnInit {
   userJoinsTeam: UserJoinsTeam;
 
   constructor(
+    private location: Location,
     public alertCtrl: AlertController,
     private prizeService: PrizeService,
     private userJoinsTeamService: UserJoinsTeamService
@@ -95,5 +97,29 @@ export class PrizesPagePage implements OnInit {
         }
         console.log(error);
       });
+    }
+
+    getUsersPoints(idTeam: number){
+      this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response =>{
+      this.userJoin = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+    getPoints(idUser: number){
+      this.userJoin.forEach(element => {
+        if(element.user.id = idUser){
+          this.points = element.points;
+        }
+      });
+    }
+    
+    backButton() {
+      this.location.back();
     }
 }

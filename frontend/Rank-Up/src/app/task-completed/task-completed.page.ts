@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./task-completed.page.scss'],
 })
 export class TaskCompletedPage implements OnInit {
+  
   taskCompleted: TaskCompleted;
   task: Task;
   user: User;

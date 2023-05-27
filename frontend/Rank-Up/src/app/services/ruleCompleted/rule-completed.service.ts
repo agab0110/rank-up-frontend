@@ -50,6 +50,10 @@ export class RuleCompletedService {
     return this.http.get(this.baseUrl + "/pending/" + id_team);
   }
 
+  public getRulesCompleted(idRule: number) {
+    return this.http.get<RuleCompleted>(this.baseUrl + "/admin/ruleCompletedDetails/" + idRule);
+  }
+
   public ruleAcceptation(idRuleCompleted: Number, status: number, ruleCompleted: RuleCompleted) {
     return this.http.patch(
       this.baseUrl + "/acceptance/" + idRuleCompleted + "/" + status, ruleCompleted

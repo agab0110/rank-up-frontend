@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundLightUser">
 
-    <ion-button class="leftIcon" [routerLink]="['/login']">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
@@ -10,11 +10,11 @@
       <ul *ngIf="errorCheck">
         Username già in uso o campi mancanti
      </ul>
-      <ion-input [(ngModel)]="user.name" [type]="'text'" [placeholder]="'Nome'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-input [(ngModel)]="user.surname" [type]="'text'" [placeholder]="'Cognome'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-input [(ngModel)]="user.email" [type]="'text'" [placeholder]="'Email'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-input [(ngModel)]="user.username" (ionInput)="username_checker()" [type]="'text'" [placeholder]="'Username'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-input [(ngModel)]="password" (ionInput)="password_checker()" [type]="'password'" [placeholder]="'Password'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="user.name" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="user.surname" [type]="'text'" label="Cognome" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="user.email" [type]="'text'" label="Email" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="user.username" (ionInput)="username_checker()" [type]="'text'" label="Username" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="password" (ionInput)="password_checker()" [type]="'password'" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
 
       <ion-button [disabled]="password_checker() || username_checker()" id="btUserSmall" (click)="signup()">Registrati</ion-button>
     </div>

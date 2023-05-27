@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
@@ -25,6 +26,7 @@ export class SignupPage {
 
 
   constructor(
+    private location: Location,
     private router: Router,
     private service: UserService
     ) {
@@ -114,5 +116,7 @@ export class SignupPage {
     return false;
   }
 
-
+  backButton() {
+    this.location.back();
+  }
 }

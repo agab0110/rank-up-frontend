@@ -7,6 +7,7 @@ import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Router } from '@angular/router';
+import { log } from 'console';
 
 @Component({
   selector: 'app-admin-list',
@@ -17,9 +18,12 @@ export class AdminListPage implements OnInit {
   users: User[];
   user: User;
   usersJoinsTeam: UserJoinsTeam[];
+  userJoinsTeamSearch: any
   team: Team;
+  query!: string;
   admin: Admin;
-  stato = false
+  stato = false;
+  statoRicerca = false
 
   constructor(
     private location: Location,
@@ -53,11 +57,13 @@ export class AdminListPage implements OnInit {
   }
 
   segmentChanged(event: any) {
-    if(this.stato){
-      this.sortAsc();
-    }
-    if(!this.stato){
+    if (this.stato) {
       this.sortDesc();
+      this.statoRicerca = false
+    }
+    if (!this.stato) {
+      this.sortAsc();
+      this.statoRicerca = false
     }
     this.stato = !this.stato;
   }
@@ -67,7 +73,7 @@ export class AdminListPage implements OnInit {
       this.users = result;
       console.log(this.users);
     }, (error: Response) => {
-      if(error.status == 400)
+      if (error.status == 400)
         console.log("400 error");
       else {
         console.log('An unexpected error occured');
@@ -81,7 +87,7 @@ export class AdminListPage implements OnInit {
       this.usersJoinsTeam = result;
       console.log(this.usersJoinsTeam);
     }, (error: Response) => {
-      if(error.status == 400)
+      if (error.status == 400)
         console.log("400 error");
       else {
         console.log('An unexpected error occured');
@@ -90,16 +96,38 @@ export class AdminListPage implements OnInit {
     });
   }
 
-  clickUser(userJoinTeam: UserJoinsTeam){
+  clickUser(userJoinTeam: UserJoinsTeam) {
     let userJoin = JSON.stringify(userJoinTeam);
     localStorage.setItem("viewUserJoinsTeam", userJoin);
   }
 
-  sortDesc(){
-     this.usersJoinsTeam.sort((a, b) =>  b.points - a.points);
+  clickUserId(id: number, username: any, points: number) {
+    const userJoinsTeam = new UserJoinsTeam;
+    userJoinsTeam.id = id
+    userJoinsTeam.user.username = username
+    userJoinsTeam.points = points
+    let userJoin = JSON.stringify(userJoinsTeam);
+    localStorage.setItem("viewUserJoinsTeam", userJoin);
   }
 
-  sortAsc(){
+  sortDesc() {
+    this.usersJoinsTeam.sort((a, b) => b.points - a.points);
+  }
+
+  sortAsc() {
     this.usersJoinsTeam.sort((a, b) => a.points - b.points);
+  }
+
+  ricerca(event: any) {
+    if(event.target.value != "") {
+      this.statoRicerca = true
+      this.userJoinsTeamService.getListUserJoinsTeamSearch(1, event.target.value).subscribe(data => {
+        this.userJoinsTeamSearch = JSON.parse(JSON.stringify(data))
+        console.log(data)
+      })      
+    } else {
+      this.statoRicerca = false
+      this.getPartecipantsPoints(this.team.codice);
+    }
   }
 }
