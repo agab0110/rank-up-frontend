@@ -227,12 +227,13 @@ export class RequestHistoryPage implements OnInit {
 
     switch (selectedValue) {
       case 'rule':
+        this.filter = 1;
         break;
       case 'task':
-        this.getTaskAccepted();
-        //this.getTaskRejected();
+        this.filter = 1;
         break;
       case 'prize':
+        this.filter = 1;
         break;
       default:
         break;
@@ -242,6 +243,7 @@ export class RequestHistoryPage implements OnInit {
   getRulesCompleted(){
     this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.rulesCompleted = Response;
+      this.sortByUsername();
       console.log(this.rulesCompleted);
     },(error: Response) => {
       if(error.status == 400)
@@ -256,6 +258,7 @@ export class RequestHistoryPage implements OnInit {
   getRulesRejected(){
     this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
       this.rulesRejected = Response;
+      this.sortByUsername();
       console.log(this.rulesRejected);
     },(error: Response) => {
       if(error.status == 400)
@@ -270,6 +273,7 @@ export class RequestHistoryPage implements OnInit {
   getTaskAccepted(){
     this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
       this.tasksCompleted = Response;
+      this.sortByUsername();
       console.log(this.tasksCompleted);
     },(error: Response) => {
       if(error.status == 400)
@@ -284,6 +288,7 @@ export class RequestHistoryPage implements OnInit {
     getTaskRejected(){
     this.taskCompletedService.taskRejected(/*this.team.codice1*/1).subscribe(Response =>{
       this.tasksRejected = Response;
+      this.sortByUsername();
       console.log(this.tasksCompleted);
     },(error: Response) => {
       if(error.status == 400)
@@ -305,7 +310,7 @@ export class RequestHistoryPage implements OnInit {
     }
   }
 
-  /*sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
+  sortByActivityName(){       //API 22 FUNZIONA SOLO PER LE REGOLE COMPLETATE
     let sortList: (RuleCompleted)[] = [];
       this.rulesCompleted.forEach((element : RuleCompleted) => {
         sortList.push(element);
@@ -313,5 +318,5 @@ export class RequestHistoryPage implements OnInit {
     console.log(sortList);
     sortList.sort((a, b) => a.rule.name.localeCompare(b.rule.name));
     return sortList;
-  }*/
+  }
 }
