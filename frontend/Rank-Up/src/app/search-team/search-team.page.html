@@ -14,7 +14,7 @@
     <div class="listBox" *ngIf="this.teams">
       <div class="grind">
         <div class="team-card" (click)="presentAlert(team.idTeam)" *ngFor="let team of this.teams">
-          <img fill="clear" sizes="large" alt="photo non presente nel db" src={{team.photo}} />
+          <img fill="clear" sizes="large" alt="photo non presente nel db" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images" />
           <h4 class="team-name">
             {{team.name}}
           </h4>
