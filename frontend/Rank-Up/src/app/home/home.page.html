@@ -14,8 +14,8 @@
     <app-bt-admin-large (click)="newTeam()" class="margine" [text]="'Crea nuovo team'" [routerLink]="['/create-team']"></app-bt-admin-large>
 
     <ion-item class="barraricerca">
-      <ion-input class="input-codice-team" placeholder="Codice Team"></ion-input>
-      <ion-button shape="round" class="unisciti" clear [routerLink]="['/user/team']">Unisciti</ion-button>
+      <ion-input class="input-codice-team" placeholder="Codice Team"  [(ngModel)]="idTeamInput"></ion-input>
+      <ion-button shape="round" class="unisciti" clear (click)="addTeam()">Unisciti</ion-button>
     </ion-item>
 
     <div class="list-teams" scroll="true">

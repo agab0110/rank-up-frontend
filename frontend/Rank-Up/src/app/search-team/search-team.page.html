@@ -13,7 +13,7 @@
 
     <div class="listBox" *ngIf="this.teams">
       <div class="grind">
-        <div class="team-card" (click)="presentAlert()" *ngFor="let team of this.teams">
+        <div class="team-card" (click)="presentAlert(team.idTeam)" *ngFor="let team of this.teams">
           <img fill="clear" sizes="large" alt="photo non presente nel db" src={{team.photo}} />
           <h4 class="team-name">
             {{team.name}}

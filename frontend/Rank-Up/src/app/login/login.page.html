@@ -10,7 +10,7 @@
         <h3 class="titolo">Login</h3>
         <ul *ngIf="errorCheck">
           Email o password errati
-       </ul>
+        </ul>
         <ion-input [(ngModel)]="user.username" required class="formInput" [type]="'username'" label="Username" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
         <ion-input [(ngModel)]="password" required class="formInput" [type]="'password'" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
       </div>
