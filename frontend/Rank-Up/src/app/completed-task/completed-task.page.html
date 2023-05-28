@@ -5,12 +5,12 @@
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Task completato da<br/>{{user.name}}</h1>
+    <h1 class="title">Task completato da<br/>{{task.user.name}}</h1>
 
     <div class="div-element-bar">
-      <app-admin-element-bar class="elementbar" [buttonText]="'Task'" labelText={{task.name}}></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Task'" labelText={{task.task.name}}></app-admin-element-bar>
       <div class="space-div"></div>
-      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" labelText={{task.points}}></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" labelText={{task.task.points}}></app-admin-element-bar>
     </div>
 
     <ion-label class="label">Commento:</ion-label>

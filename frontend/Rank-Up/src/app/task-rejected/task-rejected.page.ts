@@ -13,7 +13,7 @@ import { User } from '../models/user/user';
 export class TaskRejectedPage implements OnInit {
 
   taskCompleted: TaskCompleted;
-  task: Task;
+  task: TaskCompleted;
   user: User;
 
   constructor(
@@ -21,21 +21,12 @@ export class TaskRejectedPage implements OnInit {
     private taskCompletedService: TaskCompletedService
     ) {
     this.taskCompleted = new TaskCompleted();
-    this.task = new Task();
+    this.task = new TaskCompleted();
     this.user = new User();
    }
 
   ngOnInit() {
-    this.taskCompletedService.getTaskCompleted(1).subscribe((response) => {
-      this.taskCompleted = response;
-      this.task = this.taskCompleted.task;
-      this.user = this.taskCompleted.user;
-      console.log(response);
-    });
-    if(!this.taskCompleted.comment)
-    {
-      this.taskCompleted.comment = "Commento assente";
-    }
+    this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
   }
 
   backButton() {

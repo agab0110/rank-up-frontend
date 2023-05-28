@@ -8,6 +8,12 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
 import { Prize } from '../models/prize/prize';
 import { timestamp } from 'rxjs';
+import { User } from '../models/user/user';
+import { Admin } from '../models/admin/admin';
+import { Router } from '@angular/router';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { Task } from '../models/task/task';
+import { Rule } from '../models/rule/rule';
 
 @Component({
   selector: 'app-request-history',
@@ -25,7 +31,8 @@ export class RequestHistoryPage implements OnInit {
   activitySort: any;
   team: Team;
   stato = 0;
-
+  user: User;
+  admin: Admin;
   filter: number = 1;
   data: any;
   idTeam: any = 1;
@@ -34,12 +41,15 @@ export class RequestHistoryPage implements OnInit {
   iconAccepted: string = "checkmark-circle-outline";
   iconRejected: string = "close-circle-outline";
   segmentValue: string = "rule";
+  task:Task;
+  rules:Rule;
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private ruleCompletedService : RuleCompletedService,
-    private taskCompletedService : TaskCompletedService) {
+    private taskCompletedService : TaskCompletedService,
+    private router: Router) {
       this.rulesCompleted = new Array<RuleCompleted>;
       this.rulesRejected = new Array<RuleCompleted>;
       this.tasksCompleted = new Array<TaskCompleted>;
@@ -47,15 +57,23 @@ export class RequestHistoryPage implements OnInit {
 
       this.team = new Team();
       this.prizes = new Array<Prize>;
+      this.user = new User();
+      this.admin = new Admin();
+      this.task = new Task();
+      this.rules = new Rule();
      }
 
      ngOnInit() {
-      if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
       this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-      //this.router.navigate(['user/home']);
-      //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+     
       this.getRulesCompleted();
       this.getRulesRejected();
 
@@ -254,7 +272,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
   getRulesCompleted(){
-    this.ruleCompletedService.ruleAccepted(/*this.team.codice*/1).subscribe(Response =>{
+    this.ruleCompletedService.ruleAccepted(this.team.codice).subscribe(Response =>{
       this.rulesCompleted = Response;
       this.sortByUsername();
       console.log(this.rulesCompleted);
@@ -269,7 +287,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
   getRulesRejected(){
-    this.ruleCompletedService.rulerejected(/*this.team.codice*/1).subscribe(Response =>{
+    this.ruleCompletedService.rulerejected(this.team.codice).subscribe(Response =>{
       this.rulesRejected = Response;
       this.sortByUsername();
       console.log(this.rulesRejected);
@@ -284,7 +302,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
   getTaskAccepted(){
-    this.taskCompletedService.taskAccepted(/*this.team.codice*/1).subscribe(Response =>{
+    this.taskCompletedService.taskAccepted(this.team.codice).subscribe(Response =>{
       this.tasksCompleted = Response;
       this.sortByUsername();
       console.log(this.tasksCompleted);
@@ -299,7 +317,7 @@ export class RequestHistoryPage implements OnInit {
   }
 
     getTaskRejected(){
-    this.taskCompletedService.taskRejected(/*this.team.codice1*/1).subscribe(Response =>{
+    this.taskCompletedService.taskRejected(this.team.codice).subscribe(Response =>{
       this.tasksRejected = Response;
       this.sortByUsername();
       console.log(this.tasksCompleted);
@@ -321,5 +339,18 @@ export class RequestHistoryPage implements OnInit {
         console.log(data)
       });
     }
+  }
+  clickRule(rule:RuleCompleted) {
+    let rules = JSON.stringify(rule);
+    localStorage.setItem("viewRule", rules);
+  }
+
+  clickTask(task:TaskCompleted) {
+    let tasks = JSON.stringify(task);
+    localStorage.setItem("viewTask", tasks);
+  }
+  clickPrize(prize:Prize) {
+    let prizes = JSON.stringify(prize);
+    localStorage.setItem("viewPrize", prizes);
   }
 }

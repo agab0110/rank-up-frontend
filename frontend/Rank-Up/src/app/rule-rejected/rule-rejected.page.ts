@@ -14,7 +14,7 @@ export class RuleRejectedPage implements OnInit {
 
   ruleCompleted: RuleCompleted;
   user: User;
-  rule: Rule;
+  rule: RuleCompleted;
   
   constructor(
     private location: Location,
@@ -22,16 +22,11 @@ export class RuleRejectedPage implements OnInit {
     ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
-    this.rule = new Rule();
+    this.rule = new RuleCompleted();
   }
 
   ngOnInit() {
-    this.ruleCompletedService.getRuleCompleted(1).subscribe((response) => {
-      this.ruleCompleted = response;
-      this.rule = this.ruleCompleted.rule;
-      this.user = this.ruleCompleted.user;
-      console.log(response);
-    });
+    this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
   }
 
   backButton() {
