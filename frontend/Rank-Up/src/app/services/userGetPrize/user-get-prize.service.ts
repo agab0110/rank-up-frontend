@@ -18,4 +18,10 @@ export class UserGetPrizeService {
       this.userGetPrizeUrl + "/getPrizes/" + teamId + "/" + userId
     );
   }
+
+  public addUserPrizes(userId: number, idPrize: number) {
+    return this.http.get(
+      this.userGetPrizeUrl + "/addUserPrizes/" + idPrize + "/" + userId
+    );
+  }
 }

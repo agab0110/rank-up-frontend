@@ -5,6 +5,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
+import { Task } from '../models/task/task';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -18,8 +19,8 @@ export class TaskConfirmationPage implements OnInit {
   public user: User;
   public comment!: string;
   public bonusPoints!: number;
-
-  private id = 3 // id ricevuto dalla schermata precedente
+  public id!: number;
+  private task: any
   private taskCompleted: TaskCompleted;
 
   constructor(
@@ -37,6 +38,11 @@ export class TaskConfirmationPage implements OnInit {
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    localStorage.getItem('viewTask');
+    this.task = JSON.parse(localStorage.getItem('viewTask') || '{}')
+    console.log(this.task)
+    this.id = this.task.id_task
 
     this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))

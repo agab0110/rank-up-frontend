@@ -9,6 +9,8 @@ import { Team } from '../models/team/team';
 import { Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { UserGetPrize } from '../models/userGetPrize/user-get-prize';
+import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 
 @Component({
   selector: 'app-prizes-page',
@@ -27,6 +29,7 @@ export class PrizesPagePage implements OnInit {
     private location: Location,
     public alertCtrl: AlertController,
     private prizeService: PrizeService,
+    private userGetPrizeService: UserGetPrizeService,
     private userJoinsTeamService: UserJoinsTeamService
   ) {
     this.prizes = new Array<Prize>
@@ -51,6 +54,9 @@ export class PrizesPagePage implements OnInit {
           cssClass: 'alert-button-blue',
           handler: () => {
             this.subtractUserPoints(this.team.codice, this.user.id, idPrize);
+            this.userGetPrizeService.addUserPrizes(this.user.id, idPrize).subscribe(data => {
+              console.log(data)
+            })
           }
         }
       ]
@@ -64,10 +70,10 @@ export class PrizesPagePage implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
 
-    this.Listprize(this.team.codice);
+    this.listprize(this.team.codice);
   }
 
-  Listprize(idTeam: Number) {
+  listprize(idTeam: Number) {
     this.prizeService.listPrize(this.team.codice).subscribe(response => {
       this.prizes = response;
     }, (error: Response) => {

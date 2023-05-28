@@ -24,6 +24,7 @@ export class CreateTeamPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
+  teamNameError: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -64,6 +65,21 @@ export class CreateTeamPage implements OnInit {
       console.log(JSON.parse(JSON.stringify(data)))
       this.router.navigate(['/user/home'])
     })
+  }
+
+  teamName() {
+    const teamName = this.nomeTeam;
+
+    if (teamName && teamName.trim() !== '') {
+      const teamPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!teamPattern.test(teamName)) {
+        this.teamNameError = '';
+      } else {
+        this.teamNameError = '';
+      }
+    } else {
+      this.teamNameError = 'Il nome del Team è necessario.';
+    }
   }
 
   async presentAlert() {

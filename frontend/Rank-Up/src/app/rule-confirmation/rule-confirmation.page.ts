@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
-import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
@@ -14,10 +13,11 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 })
 export class RuleConfirmationPage implements OnInit {
 
-  
+
   data: any
   stato = false
-  id = 1 // id ricevuto dalla schermata precedente
+  public id!: number;
+  private rule: any
   public user: User;
   ruleCompleted: RuleCompleted;
   comment!: string;
@@ -36,16 +36,19 @@ export class RuleConfirmationPage implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    if(this.id) {
-      this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
-        console.log(data)
-      })
-    }
+    localStorage.getItem('viewRule');
+    this.rule = JSON.parse(localStorage.getItem('viewRule') || '{}')
+    console.log(this.rule)
+    this.id = this.rule.id_rule
+
+    this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
+      this.data = JSON.parse(JSON.stringify(data))
+      console.log(data)
+    })
   }
 
   backButton() {
@@ -66,7 +69,7 @@ export class RuleConfirmationPage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   async presentAlertConfirm() {
@@ -83,7 +86,7 @@ export class RuleConfirmationPage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
 
@@ -95,11 +98,11 @@ export class RuleConfirmationPage implements OnInit {
     this.ruleCompleted.comment = this.comment;
     this.ruleCompleted.bonus = this.bonusPoints;
     this.status = 2;
-    
+
     this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
       console.log("patch succesfull");
       console.log(r);
-    },(error: Response) => {
+    }, (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
       } else {
@@ -118,7 +121,7 @@ export class RuleConfirmationPage implements OnInit {
     this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
       console.log("patch succesfull");
       console.log(r);
-    },(error: Response) => {
+    }, (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
       } else {
@@ -127,5 +130,5 @@ export class RuleConfirmationPage implements OnInit {
       console.log(error);
     });
     this.backButton();
-    }
+  }
 }
