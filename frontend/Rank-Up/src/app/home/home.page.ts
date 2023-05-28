@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
     private adminService: AdminService
-    ) {
+  ) {
     this.user = new User();
     this.teamsUser = [];
     this.teamsAdmin = [];
@@ -112,7 +112,7 @@ export class HomePage implements OnInit {
   }
 
   userOrAdmin(team: Team) {
-    if(this.teamsUser.includes(team))
+    if (this.teamsUser.includes(team))
       return true;
     else
       return false;
