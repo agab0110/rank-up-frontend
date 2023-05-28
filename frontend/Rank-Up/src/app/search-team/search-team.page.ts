@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { TeamService } from '../services/team/team.service';
+import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-search-team',
@@ -12,15 +14,21 @@ import { TeamService } from '../services/team/team.service';
 export class SearchTeamPage implements OnInit {
 
   teams: any;
+  public user: User;
 
   constructor(
     private alertController: AlertController,
+    private userJoinsTeamService: UserJoinsTeamService,
     private router: Router,
     private location: Location,
     private teamService: TeamService
-  ) { }
+  ) { 
+    this.user = new User();
+  }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
     this.getTeams()
   }
 
@@ -28,7 +36,7 @@ export class SearchTeamPage implements OnInit {
     this.location.back();
   }
 
-  async presentAlert() {
+  async presentAlert(idTeam: number) {
     const alert = await this.alertController.create({
       header: 'Vuoi unirti al Team?',
       buttons: [
@@ -36,7 +44,9 @@ export class SearchTeamPage implements OnInit {
           text: 'Sì',
           cssClass: 'alert-button-blue',
           handler: () => {
-            this.router.navigate(["user/team"])
+            this.userJoinsTeamService.addUser(idTeam, this.user.id).subscribe(data => {
+              console.log(data)
+            })
           }
         },
         {

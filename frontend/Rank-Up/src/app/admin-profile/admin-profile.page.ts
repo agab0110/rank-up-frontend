@@ -32,14 +32,14 @@ export class AdminProfilePage implements OnInit {
 
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      this.user = JSON.parse(localStorage.getItem('user') || '{}');
-      this.team = JSON.parse(localStorage.getItem('team') || '{}');
-      localStorage.getItem('viewUserJoinsTeam');
-      this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    localStorage.getItem('viewUserJoinsTeam');
+    this.userJoin = JSON.parse(localStorage.getItem('viewUserJoinsTeam') || '{}')
 
-      this.getUserPrizes();
-      this.getUserRules();
-      this.getUserTasks();
+    this.getUserPrizes();
+    this.getUserRules();
+    this.getUserTasks();
   }
 
   constructor(
@@ -49,16 +49,16 @@ export class AdminProfilePage implements OnInit {
     private taskCompletedService: TaskCompletedService,
     private ruleCompletedService: RuleCompletedService,
     private navCtrl: NavController
-    ) {
-      this.userProfile = new User();
-      this.user = new User();
-      this.team = new Team();
-      this.prizes = [];
-      this.userJoin = new UserJoinsTeam();
-      this.rulesCompleted = [];
-      this.tasksCompleted = [];
-      this.activities = [];
-     }
+  ) {
+    this.userProfile = new User();
+    this.user = new User();
+    this.team = new Team();
+    this.prizes = [];
+    this.userJoin = new UserJoinsTeam();
+    this.rulesCompleted = [];
+    this.tasksCompleted = [];
+    this.activities = [];
+  }
 
   backButton() {
     this.location.back();
@@ -68,23 +68,23 @@ export class AdminProfilePage implements OnInit {
     this.stato = !this.stato;
   }
 
-  getUserPrizes(){
-  this.userGetPrizeService.getUserPrizes(this.userJoin.id, this.team.codice).subscribe(
-    (response: any) => {
-      this.prizes = response;
-      console.log(this.prizes);
-    }), (error: Response) => {
-      if(error.status == 400) {
-        console.log("400 error");
-      }
-      else {
-        console.log('An unexpected error occured');
-      }
-      console.log(error);
-    };
+  getUserPrizes() {
+    this.userGetPrizeService.getUserPrizes(this.userJoin.id, this.team.codice).subscribe(
+      (response: any) => {
+        this.prizes = response;
+        console.log(this.prizes);
+      }), (error: Response) => {
+        if (error.status == 400) {
+          console.log("400 error");
+        }
+        else {
+          console.log('An unexpected error occured');
+        }
+        console.log(error);
+      };
   }
 
-  getUserRules(){
+  getUserRules() {
     this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
       this.rulesCompleted = response;
       response.forEach(element => {

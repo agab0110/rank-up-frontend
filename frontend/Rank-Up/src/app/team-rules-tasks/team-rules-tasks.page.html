@@ -5,6 +5,7 @@
     </ion-button>
 
     <h1 class="title">{{team.name}}</h1>
+    <div id="div-code">Codice: {{team.codice}}</div>
 
     <ion-button class="rightIcon" *ngIf="!stato" [routerLink] = "['/create-rule']">
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>

@@ -42,6 +42,7 @@ export class TeamRulesTasksPage implements OnInit {
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+   
     if (localStorage.getItem('team') == null) {
       this.router.navigate(["/user/home"]);
     }
@@ -50,15 +51,7 @@ export class TeamRulesTasksPage implements OnInit {
     }
     this.listRule();
     this.listTask();
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')//{
-      //this.router.navigate(['user/home']);
-    //}
-    this.team = JSON.parse(localStorage.getItem('this.team') || '{}');
-    /*if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == ''){
-      this.router.navigate(['user/home']);
-    }*/
-    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
-    //this.team.name= "Team prova";
+    
   }
 
 

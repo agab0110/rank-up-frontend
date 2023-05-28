@@ -5,6 +5,7 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { Team } from '../models/team/team';
+import { Rule } from '../models/rule/rule';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -23,7 +24,7 @@ export class PendingTasksPage implements OnInit {
     private ruleCompletedService: RuleCompletedService,
     private taskCompletedService: TaskCompletedService,
     private router: Router
-  ) { 
+  ) {
     this.user = new User();
     this.team = new Team();
   }
@@ -31,20 +32,34 @@ export class PendingTasksPage implements OnInit {
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-   
+
     if (localStorage.getItem('team') == null) {
       this.router.navigate(["/user/home"]);
     }
 
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
-   
+
     this.ruleCompletedService.getPending(this.team.codice).subscribe(data => {
       this.rules = data;
       this.taskCompletedService.getPending(this.team.codice).subscribe(data => {
         this.tasks = data;
       });
     })
+  }
+
+  clickUserRule(rule: Rule) {
+    let letRule = JSON.stringify(rule);
+    localStorage.setItem("viewRule", letRule);
+    this.router.navigate(['/rule-confirmation']);
+  }
+
+  
+  clickUserTask(task: Task) {
+    let letTask = JSON.stringify(task);
+    localStorage.setItem("viewTask", letTask);
+    console.log(letTask)
+    this.router.navigate(['/task-confirmation']);
   }
 
   backButton() {
