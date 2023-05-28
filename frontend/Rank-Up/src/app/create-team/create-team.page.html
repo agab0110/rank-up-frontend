@@ -17,7 +17,8 @@
     </ion-item>
 
     <h4 class="insertName">Inserire Nome del Team</h4>
-    <ion-input [(ngModel)]="this.nomeTeam" fill="outline" shape="round" mode="md" class="formInput" class="teamName" [placeholder]="'Nome Team'"></ion-input>
+    <ion-input [(ngModel)]="this.nomeTeam" (ionInput)="teamName()" [type]="'text'" fill="outline" shape="round" mode="md" class="formInput" class="teamName" [placeholder]="'Nome Team'"></ion-input>
+    <div *ngIf="teamNameError" class="error-message">{{ teamNameError }}</div>
 
     <ion-item class="membersquare">
       <ion-icon class="icon" name="person-add-outline" [routerLink]="['/admin/add-user']"></ion-icon>
