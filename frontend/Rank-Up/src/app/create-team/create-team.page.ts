@@ -20,6 +20,7 @@ export class CreateTeamPage implements OnInit {
   public codiceTeam: any;
   public nomeTeam: string = ""
   public admin: Admin;
+  public team: Team;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
@@ -35,21 +36,12 @@ export class CreateTeamPage implements OnInit {
   ) {
     this.user = new User();
     this.admin = new Admin();
+    this.team = new Team();
   }
 
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    //localStorage.setItem('adminId','');
-    //localStorage.setItem('teamId', '');
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (localStorage.getItem('team') == null) {
-      this.router.navigate(["/user/home"]);
-    }
-    if (localStorage.getItem('user') == null) {
-      this.router.navigate(["/login"]);
-    }
-
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
@@ -58,6 +50,9 @@ export class CreateTeamPage implements OnInit {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
     });
 
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
   backButton() {
