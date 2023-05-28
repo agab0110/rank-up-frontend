@@ -17,7 +17,6 @@ import { Admin } from '../models/admin/admin';
 export class CreateTeamPage implements OnInit {
 
   public user: User;
-  public team: Team;
   public codiceTeam: any;
   public nomeTeam: string = ""
   public admin: Admin;
@@ -34,7 +33,6 @@ export class CreateTeamPage implements OnInit {
     private adminService: AdminService
   ) {
     this.user = new User();
-    this.team = new Team();
     this.admin = new Admin();
   }
 
@@ -43,7 +41,6 @@ export class CreateTeamPage implements OnInit {
   ngOnInit() {
     //localStorage.setItem('adminId','');
     //localStorage.setItem('teamId', '');
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     if (localStorage.getItem('team') == null) {
       this.router.navigate(["/user/home"]);
@@ -119,11 +116,20 @@ export class CreateTeamPage implements OnInit {
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(data => {
-        this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
-          console.log("Admin aggiunto con successo");
-          this.router.navigate(['/admin/admin-home-team'])
-        })
+        console.log(data)
       })
+
+      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
+        console.log("Admin aggiunto con successo");
+        console.log(response);
+      }, (error: Response) => {
+        if( error.status == 400)
+        console.log("400 error");
+        else {
+          console.log('An unexpected error occured');
+        }
+        console.log(error);
+      });
     }
   }
 }

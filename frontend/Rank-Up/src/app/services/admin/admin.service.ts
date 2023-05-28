@@ -20,7 +20,7 @@ export class AdminService {
     .set('idTeam', idTeam)
     .set('idUser', idUser);
 
-    return this.http.post<Admin>(this.baseUrl + "/addAdmin",null, {params});
+    return this.http.post<Admin>(this.baseUrl + "/addAdmin", null, {params});
   }
 
   public getTeams(idUser: number) {
