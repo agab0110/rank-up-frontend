@@ -5,20 +5,20 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h2 class="title">Crea un Task<br/>per [Nome Team]</h2>
+    <h2 class="title">Crea un Task<br/>per {{team.name}}</h2>
 
     <div class="text-input">
-      <app-input placeholder="Nome"></app-input>
+      <ion-input [(ngModel)]="task.name" class="formInput" [type]="'text'" [placeholder]="'Nome'" fill="outline" shape="round" mode="md"></ion-input>
 
       <div class="input-div">
-        <app-input placeholder="Punti"></app-input>
+        <ion-input [(ngModel)]="task.points" class="formInput" [type]="'text'" [placeholder]="'Punti'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
       <div class="input-div">
-        <app-input placeholder="Scadenza"></app-input>
+        <ion-input [(ngModel)]="task.endDate" class="formInput" [type]="'text'" [placeholder]="'Scadenza'" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
-      <ion-textarea fill="outline" placeholder="Descrizione"></ion-textarea>
+      <ion-textarea [(ngModel)]="task.desctiption" fill="outline" placeholder="Descrizione"></ion-textarea>
 
       <div class="button-div">
         <ion-button (click)="presentAlert()" class="exclusive-button">
@@ -30,7 +30,7 @@
       </div>
 
       <div class="create-task-button">
-        <app-bt-admin-small text="Crea Task" (click)="backButton()"></app-bt-admin-small>
+        <app-bt-admin-small text="Crea Task" (click)="backButton()" (click)="createTask()"></app-bt-admin-small>
       </div>
     </div>
   

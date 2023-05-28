@@ -4,6 +4,8 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
+import { Team } from '../models/team/team';
+import { Rule } from '../models/rule/rule';
 
 @Component({
   selector: 'app-pending-tasks',
@@ -15,28 +17,49 @@ export class PendingTasksPage implements OnInit {
   public user: User;
   public rules: any
   public tasks: any
+  public team: Team;
 
   constructor(
     private location: Location,
     private ruleCompletedService: RuleCompletedService,
     private taskCompletedService: TaskCompletedService,
     private router: Router
-  ) { 
+  ) {
     this.user = new User();
+    this.team = new Team();
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      this.router.navigate(['login']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    this.ruleCompletedService.getPending(1).subscribe(data => {
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+      this.router.navigate(['login']);
+
+    this.ruleCompletedService.getPending(this.team.codice).subscribe(data => {
       this.rules = data;
-      this.taskCompletedService.getPending(1).subscribe(data => {
+      this.taskCompletedService.getPending(this.team.codice).subscribe(data => {
         this.tasks = data;
       });
     })
+  }
+
+  clickUserRule(rule: Rule) {
+    let letRule = JSON.stringify(rule);
+    localStorage.setItem("viewRule", letRule);
+    this.router.navigate(['/rule-confirmation']);
+  }
+
+  
+  clickUserTask(task: Task) {
+    let letTask = JSON.stringify(task);
+    localStorage.setItem("viewTask", letTask);
+    console.log(letTask)
+    this.router.navigate(['/task-confirmation']);
   }
 
   backButton() {

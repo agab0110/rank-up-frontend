@@ -8,6 +8,9 @@ import { AdminService } from '../services/admin/admin.service';
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
+import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
+import { log } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -19,7 +22,7 @@ export class AddUserPage implements OnInit {
   team: Team;
   admin: Admin;
   query!: string;
-  id_user!: Number;
+  idUser!: number;
   user : User;
   idTeam! : number;
   responseData: any;
@@ -27,8 +30,9 @@ export class AddUserPage implements OnInit {
   constructor(
     private location: Location,
     private userService: UserService,
-    private userJoinsTeam: UserJoinsTeamService,
+    private userJoinsTeamService: UserJoinsTeamService,
     private adminService: AdminService,
+    private router: Router
     ) {
 
     this.users = new Array<User>;
@@ -38,12 +42,16 @@ export class AddUserPage implements OnInit {
   }
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-      //this.router.navigate(['user/home']);
+    localStorage.setItem('admin','');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-      //this.router.navigate(['user/home']);
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+   
     this.getUsers();
   }
 
@@ -68,7 +76,7 @@ export class AddUserPage implements OnInit {
     if(this.query == ""){
       this.getUsers();
     }
-    this.userJoinsTeam.getListUserSearch(this.query).subscribe(response => {
+    this.userJoinsTeamService.getListUserSearch(this.query).subscribe(response => {
       this.users = response;
     }, (error: Response) => {
       if(error.status == 400)
@@ -80,11 +88,42 @@ export class AddUserPage implements OnInit {
     });
   }
 
-  addAdmin(idUser: number, idTeam:number) {
-    idTeam = 1;
-    this.adminService.newAdmin(idUser, idTeam).subscribe(response => {
+  addAdmin(idUser: number) {
+    this.idUser = idUser;
+    console.log(idUser);
+    
+    this.adminService.newAdmin(idUser, this.team.codice).subscribe(response => {
       console.log("Admin aggiunto con successo");
       console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+  
+  /*addUser(){
+    this.userJoinsTeamService.addUser(this.idUser,this.idTeam).subscribe(response => {
+      console.log("User aggiunto con successo");
+      console.log(response);
+    }, (error: Response) => {
+      if( error.status == 400)
+      console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }*/
+
+  addUser(idUser:number) {
+    this.idUser = idUser;
+
+    this.userJoinsTeamService.addUser(this.team.codice,idUser).subscribe(response => {
+      console.log("Utente inserito");
     }, (error: Response) => {
       if( error.status == 400)
       console.log("400 error");

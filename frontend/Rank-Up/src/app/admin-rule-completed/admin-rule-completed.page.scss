@@ -55,6 +55,14 @@ ion-textarea{
     margin-top: 10vh;
 }
 
-.leftIcon {
-    --background: var(--ion-color-admin);
+.commentArea {
+    height: 30vh;
+}
+  
+.label {
+margin-bottom: -3vh;
+margin-top: 5vh;
+text-align: left;
+margin-left: 15vh;
+width: 100%;
 }

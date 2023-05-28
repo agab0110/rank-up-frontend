@@ -6,6 +6,8 @@ import { Team } from '../models/team/team';
 import { TeamService } from '../services/team/team.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
+import { AdminService } from '../services/admin/admin.service';
+import { Admin } from '../models/admin/admin';
 
 @Component({
   selector: 'app-create-team',
@@ -17,40 +19,67 @@ export class CreateTeamPage implements OnInit {
   public user: User;
   public codiceTeam: any;
   public nomeTeam: string = ""
-
+  public admin: Admin;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
   blobURL: string | undefined | null;
+  teamNameError: string = '';
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private teamService: TeamService,
-    private router: Router
-  ) { 
+    private router: Router,
+    private adminService: AdminService
+  ) {
     this.user = new User();
+    this.admin = new Admin();
   }
 
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
-      this.router.navigate(['login']);
+    //localStorage.setItem('adminId','');
+    //localStorage.setItem('teamId', '');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    
+    if (localStorage.getItem('team') == null) {
+      this.router.navigate(["/user/home"]);
+    }
+    if (localStorage.getItem('user') == null) {
+      this.router.navigate(["/login"]);
+    }
+
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
-    team.photo = "https://t3.ftcdn.net/jpg/00/64/67/52/240_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg"
+    team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
     this.teamService.newTeam(team).subscribe(data => {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
-    })
+    });
+
   }
 
   backButton() {
-    this.location.back();
+    this.teamService.undo(this.codiceTeam).subscribe(data => {
+      console.log(JSON.parse(JSON.stringify(data)))
+      this.router.navigate(['/user/home'])
+    })
+  }
+
+  teamName() {
+    const teamName = this.nomeTeam;
+
+    if (teamName && teamName.trim() !== '') {
+      const teamPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!teamPattern.test(teamName)) {
+        this.teamNameError = '';
+      } else {
+        this.teamNameError = '';
+      }
+    } else {
+      this.teamNameError = 'Il nome del Team è necessario.';
+    }
   }
 
   async presentAlert() {
@@ -70,7 +99,6 @@ export class CreateTeamPage implements OnInit {
           handler: () => {
             this.privacyTeam = false;
           }
-
         },
       ],
     });
@@ -104,8 +132,22 @@ export class CreateTeamPage implements OnInit {
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(data => {
-        this.router.navigate(['/admin/admin-home-team'])
+        console.log(data)
       })
+
+      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
+        console.log("Admin aggiunto con successo");
+        console.log(response);
+        this.router.navigate(['/user/home']);
+      }, (error: Response) => {
+        if (error.status == 400)
+          console.log("400 error");
+        else {
+          console.log('An unexpected error occured');
+        }
+        console.log(error);
+        this.router.navigate(['/user/home']);
+      });
     }
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
+import { Task } from 'src/app/models/task/task';
 import { TaskCompleted } from 'src/app/models/taskCompleted/task-completed';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class TaskCompletedService {
     this.baseUrl = "http://localhost:8080/taskCompletedApi";
   }
 
-  public getTaskCompletedByUser(idUser: number, idTeam: number) {
+  public getTaskCompletedByUser(idUser: number, idTeam: number): Observable<TaskCompleted[]> {
     return this.http.get<TaskCompleted[]>(this.baseUrl + "/getTaskForSpecificUser/" + idTeam + "/" + idUser);
   }
 
@@ -39,11 +40,15 @@ export class TaskCompletedService {
     return this.http.post(this.baseUrl + "/taskCompleted", taskCompleted)
   }
 
-  public confirmationTaskCompleted(id_task_completed: number, status: number ,ruleCompleted: RuleCompleted) {
-    return this.http.patch(this.baseUrl + "/confirmation/" + id_task_completed + "/" + status, ruleCompleted)
+  public confirmationTaskCompleted(idTaskCompleted: number, status: number , taskCompleted: TaskCompleted) {
+    return this.http.patch(this.baseUrl + "/confirmation/" + idTaskCompleted + "/" + status, taskCompleted)
   }
 
   public getPending(id_team: any) {
     return this.http.get(this.baseUrl + "/pending/" + id_team);
+  }
+
+  public getTaskCompleted(idTask: number) {
+    return this.http.get<TaskCompleted>(this.baseUrl + "/taskCompletedDetails/" + idTask);
   }
 }

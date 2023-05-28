@@ -5,11 +5,11 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h2 class="title">Richieste di Accesso<br/>al Team<br/>[Nome Team]</h2>
+    <h2 class="title">Richieste di Accesso<br/>al Team<br/>{{team.name}}</h2>
 
   <div class="listBox">
     <ion-list class="list" lines="none">
-      <ion-button (click)="presentAlert()" *ngFor="let item of [].constructor(14); let i = index" class="buttons">[Data] - [Nome Utente] ha richiesto di<br/>entrare nel Team [Nome Team]</ion-button>
+      <ion-button *ngFor="let u of userJoin" (click)="presentAlert(u)" class="buttons">{{u.user.name}} ha richiesto di<br/>entrare nel Team {{u.team.name}}</ion-button>
     </ion-list>
   </div>
   

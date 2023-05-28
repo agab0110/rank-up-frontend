@@ -1,20 +1,16 @@
 <ion-content [fullscreen]="true">
-  <!--
-    Questa pagina è impostata in modo che viene creata una pagina nuova da zero ogni volta che cambia il segment,
-    Sarebbe meglio trovare un modo per cambiare solo il css (oltre alle notifiche ovviamente) al cambiare della variabile type
-  -->
 
   <div [ngSwitch]="type">
 
-    <div *ngSwitchCase="'utente'" class="backgroundUser" >
+    <div *ngSwitchCase="'utente'" class="backgroundUser">
 
-      <ion-button class="leftIcon"  (click)="backButton()" > 
-        <ion-icon name="arrow-back-outline" size="large" ></ion-icon>
+      <ion-button class="leftIcon" (click)="backButton()">
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
       </ion-button>
-    
+
       <h1 align="center" class="title">Notifiche</h1>
-    
-      <ion-segment class="choseUser" value="utente" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+
+      <ion-segment class="choseUser" value="utente" [(ngModel)]="type" (ionChange)="notificheUser($event)">
         <ion-segment-button value=utente>
           <ion-label>Utente</ion-label>
         </ion-segment-button>
@@ -22,22 +18,12 @@
           <ion-label>Admin</ion-label>
         </ion-segment-button>
       </ion-segment>
-  
+
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" [routerLink] = "['/user/user-notification-description']">
-          <ion-label class="data">[data]</ion-label>
-          <ion-label class="titolo">[titolo]</ion-label>
-          <ion-label class="nomeTeam">[nome team]</ion-label>
-        </ion-item>
-        <ion-item class="item" [routerLink] = "['/user/user-notification-description']">
-          <ion-label class="data">[data]</ion-label>
-          <ion-label class="titolo">[titolo]</ion-label>
-          <ion-label class="nomeTeam">[nome team]</ion-label>
-        </ion-item>
-        <ion-item class="item user" [routerLink] = "['/user/user-notification-description']">
-          <ion-label class="data">[data]</ion-label>
-          <ion-label class="titolo">[titolo]</ion-label>
-          <ion-label class="nomeTeam">[nome team]</ion-label>
+        <ion-item class="item" *ngFor="let n of this.nUser" [routerLink]="['/user/user-notification-description']">
+          <ion-label class="label">{{n.date}}</ion-label>
+          <ion-label class="label">{{n.title}}</ion-label>
+          <ion-label class="label">{{n.teamName}}</ion-label>
         </ion-item>
       </ion-list>
     </div>
@@ -45,12 +31,12 @@
     <div *ngSwitchCase="'admin'" class="backgroundAdmin">
 
       <ion-button class="leftIcon" (click)="backButton()">
-        <ion-icon name="arrow-back-outline" size="large" ></ion-icon>
+        <ion-icon name="arrow-back-outline" size="large"></ion-icon>
       </ion-button>
-    
+
       <h1 align="center" class="title">Notifiche</h1>
-    
-      <ion-segment class="choseAdmin" value="utente" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+
+      <ion-segment class="choseAdmin" value="utente" [(ngModel)]="type" (ionChange)="notificheAdmin($event)">
         <ion-segment-button value=utente>
           <ion-label>Utente</ion-label>
         </ion-segment-button>
@@ -58,20 +44,12 @@
           <ion-label>Admin</ion-label>
         </ion-segment-button>
       </ion-segment>
-      
+
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" [routerLink] = "['/admin/admin-notification-description']">
-          <ion-label class="data">[data]</ion-label>
-          <ion-label class="titolo">[titolo]</ion-label>
-          <ion-label class="nomeTeam">[nome team]</ion-label>
-        </ion-item>
-        <ion-item class="item admin" id="ingresso" [routerLink] = "['/admin/admin-notification-description']">
-          <ion-label class="titolo">[data] L'utente [nome utente] richiede di entrare nel team [nome team]</ion-label>
-        </ion-item>
-        <ion-item class="item" [routerLink] = "['/admin/admin-notification-description']">
-          <ion-label class="data">[data]</ion-label>
-          <ion-label class="titolo">[titolo]</ion-label>
-          <ion-label class="nomeTeam">[nome team]</ion-label>
+        <ion-item class="item" *ngFor="let n of this.nAdmin" [routerLink]="['/admin/admin-notification-description']">
+          <ion-label class="label">{{n.date}}</ion-label>
+          <ion-label class="label">{{n.title}}</ion-label>
+          <ion-label class="label">{{n.teamName}}</ion-label>
         </ion-item>
       </ion-list>
     </div>
@@ -79,8 +57,5 @@
   </div>
 </ion-content>
 
-<ion-alert
-  trigger="ingresso"
-  header="Accettare l'utente [nome utente] nel team [nome team]?"
-  [buttons]="alertBtns"
-></ion-alert>
+<ion-alert trigger="ingresso" header="Accettare l'utente [nome utente] nel team [nome team]?"
+  [buttons]="alertBtns"></ion-alert>

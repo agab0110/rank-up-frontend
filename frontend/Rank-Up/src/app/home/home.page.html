@@ -14,91 +14,30 @@
     <app-bt-admin-large (click)="newTeam()" class="margine" [text]="'Crea nuovo team'" [routerLink]="['/create-team']"></app-bt-admin-large>
 
     <ion-item class="barraricerca">
-      <ion-input class="input-codice-team" placeholder="Codice Team"></ion-input>
-      <ion-button shape="round" class="unisciti" clear [routerLink]="['/user/team']">Unisciti</ion-button>
+      <ion-input class="input-codice-team" placeholder="Codice Team"  [(ngModel)]="idTeamInput"></ion-input>
+      <ion-button shape="round" class="unisciti" clear (click)="addTeam()">Unisciti</ion-button>
     </ion-item>
 
     <div class="list-teams" scroll="true">
-      <ion-grid>
+      <ion-grid [ariaColCount]="2">
         <ion-row>
-          <ion-col>
-            <div class="team-card"[routerLink]="['/user/team']">
+          <ion-col *ngFor="let team of teams" sizeLg="6"  sizeMd="6" sizeXs="6" >
+            <div *ngIf="userOrAdmin(team)"class="team-card" (click)="goToTeamUser(team)">
               <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+                <img sizes="large" alt="Team" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images" />
               </div>
               <div class="team-name">
-                <span>Team Fasano</span>
+                <span>{{team.name}}</span>
               </div>
             </div>
-          </ion-col>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/admin/admin-home-team']">
+            <div *ngIf="!userOrAdmin(team)"class="team-card" (click)="goToTeamAdmin(team)">
               <div class="img-team-admin">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
+                <img sizes="large" alt="Team" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images" />
               </div>
               <div class="team-name">
-                <span>Team Fasano</span>
+                <span>{{team.name}}</span>
               </div>
             </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/user/team']">
-              <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
-              </div>
-              <div class="team-name">
-                <span>Team Fasano</span>
-              </div>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/user/team']">
-              <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
-              </div>
-              <div class="team-name">
-                <span>Team Fasano</span>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/user/team']">
-              <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
-              </div>
-              <div class="team-name">
-                <span>Team Fasano</span>
-              </div>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/user/team']">
-              <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
-              </div>
-              <div class="team-name">
-                <span>Team Fasano</span>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <div class="team-card" [routerLink]="['/user/team']">
-              <div class="img-team-user">
-                <img sizes="large" alt="Team" src="../../assets/image/unimol.png" />
-              </div>
-              <div class="team-name">
-                <span>Team Fasano</span>
-              </div>
-            </div>
-          </ion-col>
-          <ion-col>
-
           </ion-col>
         </ion-row>
       </ion-grid>

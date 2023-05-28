@@ -1,30 +1,32 @@
 <ion-content [fullscreen]="true">
   <div class="backgroundUser">
-    <ion-button class="leftIcon" [routerLink] = "['/user/team']">
+    <ion-button class="leftIcon" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <div id="div-image">
-      <img>
-    </div>
+    <img class="imgUser" alt="Utente" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+
     <div id="div-image-title">{{user.name}} </div>
 
-    <div id="div-points">Punti: {{user_points}}</div>
+    <div id="div-points">Punti: {{userJoinsTeam.points}}</div>
 
     <div id="div-title-prizes">Premi</div>
     <div id="div-prizes" scroll="true">
       <div id="div-prize" *ngFor="let prize of prizes">
 
         <div id="div-div-prizes">
-          <div id="div-div-prizes-name" >{{prize.name}}</div>
-          <ion-button *ngIf="user_points >= prize.price; else conditionFalse" (click)="showAlert(prize.name, prize.price)" id="div-div-prizes-button">{{prize.price}} pt.</ion-button>
+          <div id="div-div-prizes-name">{{prize.name}}</div>
+          <ion-button *ngIf="userJoinsTeam.points >= prize.price; else conditionFalse"
+            (click)="showAlert(prize.name, prize.price, prize.id)" id="div-div-prizes-button">{{prize.price}}
+            pt.</ion-button>
           <ng-template #conditionFalse>
-            <ion-button [disabled]="true" (click)="showAlert(prize.name, prize.price)" id="div-div-prizes-button-disable">{{prize.price}} pt.</ion-button>
+            <ion-button [disabled]="true" (click)="showAlert(prize.name, prize.price, prize.id)"
+              id="div-div-prizes-button-disable">{{prize.price}} pt.</ion-button>
           </ng-template>
         </div>
 
       </div>
-      </div>
+    </div>
 
   </div>
 </ion-content>

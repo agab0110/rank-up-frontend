@@ -46,4 +46,16 @@ export class UserService {
       this.userUrl + "/getUser/" + idUser
     );
   }
+
+  public changeEmail(userId: number, newEmail: string) {
+    return this.http.patch<User>(
+      this.userUrl + "/changeEmail/" + userId, newEmail
+    );
+  }
+
+  public changePassword(userId: number, newPassword: string) {
+    return this.http.patch<User>(
+      this.userUrl + "/changePassword/" + userId, newPassword
+    );
+  }
 }

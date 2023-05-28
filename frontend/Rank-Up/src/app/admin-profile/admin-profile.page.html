@@ -5,7 +5,7 @@
     </ion-button>
 
     <img class="imgUser" alt="Utente" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    <h1 class="nameUser">{{userProfile.name}}</h1>
+    <h1 class="nameUser">{{userJoin.user.name}}</h1>
     <h2 class="scoreUser">Punti: {{userJoin.points}}</h2>
 
     <div class="switch">
@@ -22,19 +22,16 @@
 
 
     <div class="listBox" *ngIf="!stato">
-        <div class="item" *ngFor="let item of [].constructor(6); let i = index" [routerLink]="['/admin-rule-completed']">
-          <div class="div-label-fakebutton">
-            <div class="label" >Regola {{i+1}}</div>
-            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+        <ion-list *ngFor="let activity of activities">
+          <div class="div-label-fakebutton" *ngIf="ruleOrTask(activity)" (click)="goToRule(activity)">
+            <div class="label">{{activity.rule.name}}</div>
+            <ion-button class="fakebutton" [disabled]="true">{{activity.rule.points}} pt</ion-button>
           </div>
-        </div>
-
-        <div class="item" *ngFor="let item of [].constructor(3); let i = index" [routerLink]="['/completed-task']">
-          <div class="div-label-fakebutton">
-            <div class="label" >Task {{i+1}}</div>
-            <ion-button class="fakebutton">{{i+1*i+1*i+1}} pt</ion-button>
+          <div class="div-label-fakebutton" *ngIf="!ruleOrTask(activity)" (click)="goToTask(activity)">
+            <div class="label">{{activity.task.name}}</div>
+            <ion-button class="fakebutton" [disabled]="true">{{activity.task.points}} pt</ion-button>
           </div>
-        </div>
+      </ion-list>
     </div>
 
     <div class="listBox" *ngIf="stato">

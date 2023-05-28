@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
-import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
-import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { TaskCompleted } from '../models/taskCompleted/task-completed';
+import { Task } from '../models/task/task';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -14,42 +14,40 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 })
 export class TaskConfirmationPage implements OnInit {
 
-  data: any
-  stato = false
-  id = 1 // id ricevuto dalla schermata precedente
+  public data: any
+  public stato = false
   public user: User;
-  ruleCompleted: RuleCompleted;
-  comment!: string;
-  bonusPoints!: number;
+  public comment!: string;
+  public bonusPoints!: number;
+  public id!: number;
+  private task: any
+  private taskCompleted: TaskCompleted;
 
   constructor(
     private alertController: AlertController,
     private router: Router,
     private location: Location,
-    private ruleCompletedService: RuleCompletedService,
     private taskCompletedService: TaskCompletedService
   ) {
     this.user = new User();
-    this.ruleCompleted = new RuleCompleted();
+    this.taskCompleted = new TaskCompleted();
   }
 
   ngOnInit() {
     localStorage.setItem('teamId', '');
-    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    if(this.id) {
-      this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
-        console.log(data)
-      })
-    } else {
-      this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
-        console.log(data)
-      })
-    }
+    localStorage.getItem('viewTask');
+    this.task = JSON.parse(localStorage.getItem('viewTask') || '{}')
+    console.log(this.task)
+    this.id = this.task.id_task
+
+    this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
+      this.data = JSON.parse(JSON.stringify(data))
+      console.log(data)
+    })
   }
 
   backButton() {
@@ -62,7 +60,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            this.rejectActivity();
+            this.sendTask(2);
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -70,7 +68,7 @@ export class TaskConfirmationPage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
   async presentAlertConfirm() {
@@ -79,7 +77,7 @@ export class TaskConfirmationPage implements OnInit {
       buttons: [
         {
           handler: () => {
-            this.confirmActivity();
+            this.sendTask(1);
           },
           text: 'Chiudi',
           cssClass: 'alert-button-red',
@@ -87,33 +85,20 @@ export class TaskConfirmationPage implements OnInit {
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
-
 
   mostra() {
     this.stato = !this.stato;
   }
 
-  invia(status:number) {
-    this.ruleCompleted.id = this.id
-    this.ruleCompleted.status = status
-    this.ruleCompleted.comment = "grggr"
+  sendTask(status: number) {
+    this.taskCompleted.id = this.id
+    this.taskCompleted.comment = this.comment
+    this.taskCompleted.bonus = this.bonusPoints
 
-    this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.ruleCompleted).subscribe(data => {
+    this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.taskCompleted).subscribe(data => {
       console.log(data)
     })
   }
-
-  rejectActivity() {
-    const status = 2;
-    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
-    this.backButton();
-  }
-
-  confirmActivity() {
-    const status = 1;
-    this.ruleCompletedService.acceptationActivity(this.id, this.comment, this.bonusPoints, status);
-    this.backButton();
-    }
-  }
+}

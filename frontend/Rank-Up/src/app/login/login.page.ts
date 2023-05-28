@@ -35,6 +35,8 @@ export class LoginPage implements OnInit{
   ngOnInit() {
     localStorage.setItem('user', '');
     localStorage.setItem('team', '');
+    localStorage.setItem('admin', '');
+    localStorage.setItem('userJoinsTeam', '');
   }
 
   login() {

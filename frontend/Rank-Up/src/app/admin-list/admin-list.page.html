@@ -4,13 +4,13 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Partecipanti<br/>[Nome Team]</h1>
+    <h1 class="title">Partecipanti<br/>{{team.name}}</h1>
 
     <ion-button class="rightIcon" [routerLink]="['/admin/add-user']">
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>
     </ion-button>
 
-    <ion-searchbar class="search" placeholder="Cerca"></ion-searchbar>
+    <ion-searchbar class="search" (ionInput)="ricerca($event)" placeholder="Cerca"></ion-searchbar>
 
     <div class="choice">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
@@ -24,15 +24,31 @@
     </div>
 
     <div class="listBox" *ngIf="stato">
-      <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let userJoin of usersJoinsTeam let i = index">
-          <ion-item class="item" (click)="clickUser(user, userJoin)" [routerLink]="['/admin/admin-profile']" >
+      <ion-list class="list" lines="none" *ngIf="!statoRicerca">
+        <ion-item-sliding *ngFor="let user of usersJoinsTeam; let i = index">
+          <ion-item class="item" (click)="clickUser(user)" [routerLink]="['/admin/admin-profile']">
             <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{users[i].name}}</ion-label>
-            <ion-label class="points-label">{{userJoin.points}}</ion-label>
+              <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-label class="nomeUtente">{{user.user.username}}</ion-label>
+              <ion-label class="points-label">{{user.points}}</ion-label>
             </div>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
 
+      <ion-list class="list" lines="none" *ngIf="statoRicerca">
+        <ion-item-sliding *ngFor="let user of userJoinsTeamSearch; let i = index">
+          <ion-item class="item" (click)="clickUserId(user.id, user.username, user.points)" [routerLink]="['/admin/admin-profile']">
+            <div class="item-div">
+              <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-label class="nomeUtente">{{user.username}}</ion-label>
+              <ion-label class="points-label">{{user.points}}</ion-label>
+            </div>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option>
@@ -44,13 +60,30 @@
     </div>
 
     <div class="listBox" *ngIf="!stato">
-      <ion-list class="list" lines="none">
-        <ion-item-sliding *ngFor="let userJoin of usersJoinsTeam let i = index">
-          <ion-item class="item" (click)="clickUser(users[i], userJoin)" [routerLink]="['/admin/admin-profile']">
+      <ion-list class="list" lines="none" *ngIf="!statoRicerca">
+        <ion-item-sliding *ngFor="let user of usersJoinsTeam">
+          <ion-item class="item" (click)="clickUser(user)" [routerLink]="['/admin/admin-profile']">
             <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            <ion-label class="nomeUtente">{{users[i].name}}</ion-label>
-            <ion-label class="points-label">{{userJoin.points}}</ion-label>
+              <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-label class="nomeUtente">{{user.user.username}}</ion-label>
+              <ion-label class="points-label">{{user.points}}</ion-label>
+            </div>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option>
+              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <ion-list class="list" lines="none" *ngIf="statoRicerca">
+        <ion-item-sliding *ngFor="let user of userJoinsTeamSearch; let i = index">
+          <ion-item class="item" (click)="clickUserId(user.id, user.username, user.points)" [routerLink]="['/admin/admin-profile']">
+            <div class="item-div">
+              <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-label class="nomeUtente">{{user.username}}</ion-label>
+              <ion-label class="points-label">{{user.points}}</ion-label>
             </div>
           </ion-item>
           <ion-item-options side="end">

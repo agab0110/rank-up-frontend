@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
@@ -13,18 +14,25 @@ export class SignupPage {
   user: User;
   password!: string;
   errorCheck: boolean = false;
+  b:boolean = false;
 
   log_error_username = 'Inserisci un username valido';
-  log_error_password: string = 'Inserisci una password valida';
+  log_error_password: string = '';
 
-  lenUsername = 8;
-  lenPassword = 8;
+  lenUsername = 3;
+  lenPassword = 6;
+  passwordTouched: boolean = false;
+  passwordValid: boolean = false;
+  
 
   ion_touched = true;
   ion_invalid = true;
 
+  emailErrorMessage: string = '';
+  emailDuplicateError: string = '';
 
   constructor(
+    private location: Location,
     private router: Router,
     private service: UserService
     ) {
@@ -77,42 +85,81 @@ export class SignupPage {
     return false;
   }
 
-
-
   password_checker() {
-    const div = document.getElementById('password');
-    if (this.user.password !== '' && this.user.password !== undefined && this.user.password !== null) {
-      let a = new RegExp("^(?=.*?[A-Z])");
-      if (!a.exec(this.user.password)) this.log_error_password = 'La password deve contenere almeno una lettera maiuscola';
-      else {
-        a = new RegExp("^(?=.*?[a-z])");
-        if(!a.exec(this.user.password)) this.log_error_password = 'La password deve contenere almeno una lettera minuscola';
-        else {
-          a = new RegExp("^(?=.*?[#?!@$%^&*-])");
-          if(!a.exec(this.user.password)) this.log_error_password = 'La password deve contenere almeno un carattere speciale';
-          else {
-            a = new RegExp("^(?=.*?[0-9])");
-            if(!a.exec(this.user.password)) this.log_error_password = 'La password deve contenere almeno un numero';
-          else {
-              a = new RegExp("^.{" + this.lenPassword + ",}");
-              if(!a.exec(this.user.password)) this.log_error_password = 'La password deve essere lunga almeno ' + this.lenPassword + ' caratteri';
-              else {
-                this.log_error_password = 'Password valida';
-                if (div != null) div.style.color = 'var(--ion-color-user)';
-                return true;
-              }
-            }
-          }
-        }
+    const passwordControl = this.password;
+  
+    if (passwordControl && passwordControl.trim() !== '') {
+      const uppercasePattern = /^(?=.*?[A-Z])/;
+      const lowercasePattern = /^(?=.*?[a-z])/;
+      const specialCharacterPattern = /^(?=.*?[#?!@$%^&*-])/;
+      const numberPattern = /^(?=.*?[0-9])/;
+      const lengthPattern = new RegExp(`^.{${this.lenPassword},}`);
+  
+      let errorMessages = [];
+  
+      if (!uppercasePattern.test(passwordControl)) {
+        errorMessages.push('La password deve contenere almeno una lettera maiuscola');
+      }
+      if (!lowercasePattern.test(passwordControl)) {
+        errorMessages.push('La password deve contenere almeno una lettera minuscola');
+      }
+      if (!specialCharacterPattern.test(passwordControl)) {
+        errorMessages.push('La password deve contenere almeno un carattere speciale');
+      }
+      if (!numberPattern.test(passwordControl)) {
+        errorMessages.push('La password deve contenere almeno un numero');
+      }
+      if (!lengthPattern.test(passwordControl)) {
+        errorMessages.push(`La password deve essere lunga almeno ${this.lenPassword} caratteri`);
+      }
+  
+      if (errorMessages.length > 0) {
+        this.log_error_password = errorMessages.join(' , ');
+        const div = document.getElementById('password');
+        if (div != null) div.style.color = 'var(--ion-color-admin)';
+        return false;
+      } else {
+        this.log_error_password = '';
+        const div = document.getElementById('password');
+        if (div != null) div.style.color = 'var(--ion-color-user)';
+        return true;
       }
     } else {
       this.log_error_password = 'Inserisci una password valida';
-      if (div != null) div.style.color = "gray";
-      return false
+      const div = document.getElementById('password');
+      if (div != null) div.style.color = 'gray';
+      return false;
     }
-    if (div != null) div.style.color = 'var(--ion-color-admin)';
-    return false;
+    }
+
+  passwordInputChanged() {
+    this.passwordTouched = true;
+    this.passwordValid = this.password_checker();
+    }
+
+  emailChecker() {
+    const emailControl = this.user.email;
+
+    if (emailControl && emailControl.trim() !== '') {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|virgilio\.it)$/i;
+      if (!emailPattern.test(emailControl)) {
+        this.emailErrorMessage = 'Formato email non valido.';
+        this.b = false;
+        return this.b;
+      } else {
+        this.emailErrorMessage = '';
+        this.b = true;
+        return this.b;
+      }
+    } else {
+      this.emailErrorMessage = 'Email mancante.';
+      this.b = false;
+      return this.b;
+    }
   }
 
 
+  backButton() {
+    this.location.back();
+  }
 }

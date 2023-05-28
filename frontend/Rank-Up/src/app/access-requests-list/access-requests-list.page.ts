@@ -5,6 +5,7 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -16,6 +17,8 @@ export class AccessRequestsListPage implements OnInit {
   requests : Notification[];
   team: Team;
   admin: Admin;
+  user: User;
+  userJoin: UserJoinsTeam[];
 
   constructor(
     private location: Location,
@@ -24,8 +27,10 @@ export class AccessRequestsListPage implements OnInit {
     ) {
       this.userJoinsTeam = new UserJoinsTeam();
       this.requests = new Array<Notification>;
+      this.userJoin = new Array<UserJoinsTeam>;
       this.team = new Team();
       this.admin = new Admin();
+      this.user = new User();
     }
 
   ngOnInit() {
@@ -34,40 +39,42 @@ export class AccessRequestsListPage implements OnInit {
        if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
          //this.router.navigate(['user/home']);
        this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+       this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+       this.getRequest();
   }
 
   backButton() {
     this.location.back();
   }
 
-  async presentAlert() {
+  async presentAlert(u: UserJoinsTeam) {
     const alert = await this.alertController.create({
-      header: "Accettare l'utente [Nome Utente] nel Team [Nome Team]?",
+      header: "Accettare l'utente " + u.user.name + " nel Team " + u.team.name + "?",
       buttons: [
         {
           text: 'Accetta',
           cssClass: 'alert-button-blue',
+          handler: () => {
+            this.manageRequest(u.user.id);
+          }
         },
         {
           text: 'Rifiuta',
           cssClass: 'alert-button-red',
           handler: () => {
-            this.deleteRequest();
+            this.deleteRequest(u.id);
           }
         },
       ],
     });
 
-  await alert.present();
+    await alert.present();
   }
 
-  deleteRequest(){
-    this.userJoinsTeamService.deleteRequest(this.userJoinsTeam);
-  }
-
- /* public getRequests(){
-    this.userJoinsTeamService.getListPendingRequests(this.team.codice).subscribe(response =>{
-      this.requests = response;
+  deleteRequest(id: number){
+    this.userJoinsTeamService.deleteRequest(id).subscribe(() => {
+      console.log('Delete successful');
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -76,5 +83,32 @@ export class AccessRequestsListPage implements OnInit {
       }
       console.log(error);
     });
-  }*/
+  }
+
+  public getRequest(){
+    this.userJoinsTeamService.getRequests(this.team.codice).subscribe(response =>{
+      this.userJoin = response;
+    }, (error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+
+  public manageRequest(id: number) {
+    this.userJoinsTeamService.manageRequest(this.team.codice, id, "1").subscribe(() => {
+      console.log("patch successful");
+    }, (error: Response) => {
+      if (error.status == 400) {
+        console.log("Error 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    }
+    );
+  }
 }

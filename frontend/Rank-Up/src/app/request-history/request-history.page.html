@@ -15,14 +15,68 @@
       <app-search-bar (ionInput)="ricerca($event)"></app-search-bar>
     </div>
 
-    <div class="listBox">
+    <ion-segment class="choise" [(ngModel)] = "segmentValue" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="rule">
+        <ion-label class="segmentText">Regole</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="task">
+        <ion-label class="segmentText">Task</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="prize">
+        <ion-label class="segmentText">Premi</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="listBox" *ngIf="segmentValue === 'rule'">
       <ion-list class="notifications" lines="none">
 
-        <ion-item class={{class}} *ngFor="let activity of history" [routerLink]="['/task-rejected']">
-          <ion-icon name={{icon}} size="small" class="icon"></ion-icon>
-          <ion-label class="label">{{activity.user.name}}</ion-label>
-          <ion-label class="label">{{activity.rule.name}}</ion-label>
-          <ion-label class="label">{{activity.timestamp}}</ion-label>
+        <P>Accettate</P>
+        <ion-item class={{classAccepted}} *ngFor="let rule of rulesCompleted" (click)="clickRule(rule)"  [routerLink]="['/admin-rule-completed']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{rule?.user?.name}}</ion-label>
+          <ion-label class="label">{{rule?.rule?.name}}</ion-label>
+          <ion-label class="label">{{rule.timestamp}}</ion-label>
+        </ion-item>
+
+        <p>Rifiutate</p>
+        <ion-item class={{classRejected}} *ngFor="let rule of rulesRejected" (click)="clickRule(rule)"  [routerLink]="['/rule-rejected']">
+          <ion-icon name={{iconRejected}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{rule?.user?.name}}</ion-label>
+          <ion-label class="label">{{rule?.rule?.name}}</ion-label>
+          <ion-label class="label">{{rule.timestamp}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="segmentValue === 'task'">
+      <ion-list class="notifications" lines="none">
+
+        <p>Accettati</p>
+        <ion-item class={{classAccepted}} *ngFor="let task of tasksCompleted" (click)="clickTask(task)" [routerLink]="['/completed-task']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{task?.user?.name}}</ion-label>
+          <ion-label class="label">{{task?.task?.name}}</ion-label>
+          <ion-label class="label">{{task.timestamp}}</ion-label>
+        </ion-item>
+
+        <p>Rifiutati</p>
+        <ion-item class={{classRejected}} *ngFor="let task of tasksRejected"  (click)="clickTask(task)" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconRejected}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{task?.user?.name}}</ion-label>
+          <ion-label class="label">{{task?.task?.name}}</ion-label>
+          <ion-label class="label">{{task.timestamp}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <div class="listBox" *ngIf="segmentValue === 'prize'">
+      <ion-list class="notifications" lines="none">
+
+        <ion-item *ngFor="let prize of prizes" (click)="clickPrize(prize)" [routerLink]="['/task-rejected']">
+          <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
+          <ion-label class="label">{{prize}}</ion-label>
         </ion-item>
 
       </ion-list>

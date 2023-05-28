@@ -5,16 +5,18 @@
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
 
-    <h1 class="title">Regola di<br/>[Nome Utente] rifiutata</h1>
+    <h1 class="title">Regola di<br/>{{rule.user.name}} rifiutata</h1>
 
     <div class="div-element-bar">
-      <app-admin-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="'[Nome Regola]'"></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Regola'" [labelText]="rule.rule.name"></app-admin-element-bar>
       <div class="space-div"></div>
-      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="'[Punti]'"></app-admin-element-bar>
+      <app-admin-element-bar class="elementbar" [buttonText]="'Punti'" [labelText]="rule.rule.points"></app-admin-element-bar>
     </div>
 
-    <ion-textarea class="descriptionArea" fill="outline" placeholder="Descrizione" shape="round" [readonly] = true></ion-textarea>
-    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true></ion-textarea>
+
+    <!-- Placeholder descrizione e commento vanno rivisti in quanto la posizione e' buggata (label="Descrizione" labelPlacement="stacked")-->
+    <ion-textarea class="descriptionArea" fill="outline" shape="round" [readonly] = true>{{rule.rule.description}}</ion-textarea>
+    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true>{{ruleCompleted.comment}}</ion-textarea>
 
     <ion-grid class="buttons-grid">
       <ion-row>

@@ -4,6 +4,7 @@ import { Rule } from '../models/rule/rule';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { User } from '../models/user/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-rule-completed',
@@ -15,23 +16,38 @@ export class UserRuleCompletedPage implements OnInit {
   ruleCompleted: RuleCompleted;
   user: User;
   rule: Rule;
+  id: number;
 
   constructor(
     private location: Location,
-    private ruleCompletedService: RuleCompletedService
+    private ruleCompletedService: RuleCompletedService,
+    private route: ActivatedRoute
     ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
     this.rule = new Rule();
+    this.id = 0;
   }
 
   ngOnInit() {
-    this.ruleCompletedService.getRuleCompleted(1).subscribe((response) => {
+    this.route.queryParams.subscribe((params) => {
+      this.id = params["ruleId"];
+    });
+
+    this.ruleCompletedService.getRuleCompleted(this.id).subscribe((response) => {
       this.ruleCompleted = response;
       this.rule = this.ruleCompleted.rule;
       this.user = this.ruleCompleted.user;
       console.log(response);
     });
+    if(!this.rule.description)
+    {
+      this.rule.description = "Descrizione assente";
+    }
+    if(!this.ruleCompleted.comment)
+    {
+      this.ruleCompleted.comment = "Commento assente";
+    }
   }
 
   backButton() {

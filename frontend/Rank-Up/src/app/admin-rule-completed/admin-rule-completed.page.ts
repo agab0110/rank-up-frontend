@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Rule } from '../models/rule/rule';
+import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-admin-rule-completed',
@@ -8,9 +12,21 @@ import { Location } from '@angular/common';
 })
 export class AdminRuleCompletedPage implements OnInit {
 
-  constructor(private location: Location) { }
+  ruleCompleted: RuleCompleted;
+  user: User;
+  rule: RuleCompleted;
+  
+  constructor(
+    private location: Location,
+    private ruleCompletedService: RuleCompletedService
+    ) { 
+    this.ruleCompleted = new RuleCompleted();
+    this.user = new User();
+    this.rule = new RuleCompleted();
+  }
 
   ngOnInit() {
+    this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
   }
 
   backButton() {
