@@ -126,9 +126,9 @@ export class CreateTeamPage implements OnInit {
 
   navigate() {
     if (this.nomeTeam != "") {
-      this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(data => {
-        console.log(data)
-      })
+      this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
+        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
+      });
 
       this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
         console.log("Admin aggiunto con successo");
