@@ -45,6 +45,7 @@ export class AddUserPage implements OnInit {
     localStorage.setItem('admin', '');
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    
     if (localStorage.getItem('team') == null) {
       this.router.navigate(["/user/home"]);
     }

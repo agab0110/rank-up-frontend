@@ -42,17 +42,22 @@ export class CreateTeamPage implements OnInit {
   privacyTeam: boolean = true;
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+  
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
     team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
     this.teamService.newTeam(team).subscribe(data => {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
-    });
+      team.codice = this.codiceTeam
+      localStorage.setItem('team',  JSON.stringify(team));
 
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
+        console.log("Admin aggiunto con successo");
+        console.log(response);
+      })
+    });
   }
 
   backButton() {
@@ -127,21 +132,10 @@ export class CreateTeamPage implements OnInit {
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
-        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
-      });
-
-      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
-        console.log("Admin aggiunto con successo");
-        console.log(response);
-        this.router.navigate(['/user/home']);
-      }, (error: Response) => {
-        if (error.status == 400)
-          console.log("400 error");
-        else {
-          console.log('An unexpected error occured');
-        }
-        console.log(error);
-        this.router.navigate(['/user/home']);
+        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {
+            console.log(data)
+            this.router.navigate(['/user/home']);
+          });
       });
     }
   }
