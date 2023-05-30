@@ -145,4 +145,18 @@ export class CreateTeamPage implements OnInit {
       });
     }
   }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Team creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 }

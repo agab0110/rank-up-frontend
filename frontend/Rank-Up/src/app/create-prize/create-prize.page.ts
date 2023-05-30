@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Admin } from '../models/admin/admin';
 import { TeamService } from '../services/team/team.service';
 import { User } from '../models/user/user';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-prize',
@@ -23,7 +24,9 @@ export class CreatePrizePage implements OnInit {
     private location: Location,
     private prizeService: PrizeService,
     private router: Router,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private alertController: AlertController,
+    ) {
 
     this.prize = new Prize();
     this.team = new Team();
@@ -48,9 +51,23 @@ export class CreatePrizePage implements OnInit {
     this.location.back();
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Premio creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   public createPrize(){
-    this.prize.beloggingTeam = this.team;    
-    this.prize.admin = this.admin;           
+    this.prize.beloggingTeam = this.team;
+    this.prize.admin = this.admin;
     this.prizeService.newPrize(this.prize).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);

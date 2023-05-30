@@ -65,6 +65,21 @@ export class CreateTaskPage implements OnInit {
   backButton() {
     this.location.back();
   }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Task creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   public createTask(){
     this.task.admin = this.admin;   //setta l'admin presente nel local storage, api 1
     this.task.team = this.team;     //setta il team presente nel local storage, api 1
