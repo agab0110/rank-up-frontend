@@ -72,6 +72,7 @@ export class SendTaskPage implements OnInit {
       this.data = data
       console.log(data)
     });
+    this.location.back();
   }
 
   loadFileFromDevice(event: any) {

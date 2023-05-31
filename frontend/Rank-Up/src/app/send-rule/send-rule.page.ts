@@ -48,7 +48,9 @@ export class SendRulePage implements OnInit {
         this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
           console.log(data)
         });
+        this.location.back();
       }
+      
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;

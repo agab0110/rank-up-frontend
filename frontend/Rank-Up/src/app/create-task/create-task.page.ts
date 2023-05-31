@@ -68,16 +68,17 @@ export class CreateTaskPage implements OnInit {
   public createTask(){
     this.task.admin = this.admin;   //setta l'admin presente nel local storage, api 1
     this.task.team = this.team;     //setta il team presente nel local storage, api 1
-    this.taskService.newTask(this.task).subscribe(response => {
+    this.taskService.newTask(this.task,this.task.name).subscribe(response => {
     console.log("task creato con sucesso");
     console.log(response);
-  }, (error: Response) => {
-    if (error.status == 400)
-      console.log("400 error");
-    else {
-      console.log('An unexpected error occured');
-    }
+  }, async (error: Response) => {
     console.log(error);
+    const alert = await this.alertController.create({
+      header: "Nome già in uso",
+      message: "Inserire un altro nome",
+      buttons: ['Chiudi']
+    });
+    await alert.present();
   });
 }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rule } from 'src/app/models/rule/rule';
@@ -19,9 +19,10 @@ export class RuleService {
     );
   }
 
-  public newRule(rule: Rule) {
+  public newRule(rule: Rule,name:string) {
+    const params = new HttpParams().set('name', name);
     return this.http.post<Rule>(
-      this.baseUrl + "/createRule", rule
+      this.baseUrl + "/createRule", rule, {params}
     );
   }
 

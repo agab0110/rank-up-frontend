@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models/task/task';
@@ -26,9 +26,10 @@ export class TaskService {
       );
   }
 
-  public newTask(task: Task) {
+  public newTask(task: Task,name:string) {
+    const params = new HttpParams().set('name', name);
     return this.http.post<Task>(
-      this.baseUrl + "/createTask", task
+      this.baseUrl + "/createTask", task, {params}
       );
   }
 }

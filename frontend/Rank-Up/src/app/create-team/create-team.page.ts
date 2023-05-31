@@ -128,21 +128,32 @@ export class CreateTeamPage implements OnInit {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(data => {
         console.log(data)
-      })
-
-      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
-        console.log("Admin aggiunto con successo");
-        console.log(response);
-        this.router.navigate(['/user/home']);
-      }, (error: Response) => {
-        if (error.status == 400)
-          console.log("400 error");
-        else {
-          console.log('An unexpected error occured');
-        }
+        this.addAdmin();
+      },async (error: Response) => {
         console.log(error);
-        this.router.navigate(['/user/home']);
+        const alert = await this.alertController.create({
+          header: "Nome già in uso",
+          message: "Inserire un altro nome",
+          buttons: ['Chiudi']
+        });
+        await alert.present();
       });
     }
+  }
+
+  addAdmin() {
+    this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
+      console.log("Admin aggiunto con successo");
+      console.log(response);
+      this.router.navigate(['/user/home']);
+    }, (error: Response) => {
+      if (error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+      this.router.navigate(['/user/home']);
+    });
   }
 }
