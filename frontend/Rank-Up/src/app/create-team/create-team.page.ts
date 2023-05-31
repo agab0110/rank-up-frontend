@@ -138,7 +138,7 @@ export class CreateTeamPage implements OnInit {
       this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
         console.log("Admin aggiunto con successo");
         console.log(response);
-        this.router.navigate(['/user/home']);
+        this.router.navigate(['/admin/admin-home-team']);
       }, (error: Response) => {
         if (error.status == 400)
           console.log("400 error");
