@@ -6,6 +6,7 @@ import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { AdminService } from '../services/admin/admin.service';
 import { Admin } from '../models/admin/admin';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private alertController: AlertController,
   ) {
     this.user = new User();
     this.teamsUser = [];
@@ -116,6 +118,20 @@ export class HomePage implements OnInit {
       return true;
     else
       return false;
+  }
+
+  async nullCodeAlert() {
+    const alert = await this.alertController.create({
+      header: 'Codice del Team non inserito!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   addTeam() {

@@ -65,9 +65,23 @@ export class CreatePrizePage implements OnInit {
     await alert.present();
   }
 
-  async rejectedAlert() {
+  async emptyNameAlert() {
     const alert = await this.alertController.create({
-      header: 'Errore nel creare il premio',
+      header: 'Nome della regola vuoto, regola non creata',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyPointsAlert() {
+    const alert = await this.alertController.create({
+      header: 'Punti della regola mancanti, regola non creata',
       buttons: [
         {
           text: 'OK',
@@ -80,6 +94,12 @@ export class CreatePrizePage implements OnInit {
   }
 
   public createPrize(){
+    if(!this.prize.name){
+      this.emptyNameAlert();
+    }
+    if(!this.prize.price){
+      this.emptyPointsAlert();
+    }
     this.prize.beloggingTeam = this.team;
     this.prize.admin = this.admin;
     this.prizeService.newPrize(this.prize).subscribe(response => {
@@ -89,11 +109,9 @@ export class CreatePrizePage implements OnInit {
     }, (error: Response) => {
       if(error.status == 400){
         console.log("400 error");
-        this.rejectedAlert();
       }
       else {
         console.log('An unexpected error occured');
-        this.rejectedAlert();
       }
       console.log(error);
     });

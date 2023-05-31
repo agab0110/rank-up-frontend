@@ -190,7 +190,7 @@ export class CreateTeamPage implements OnInit {
 
   async rejectedAlert() {
     const alert = await this.alertController.create({
-      header: 'Errore nella creazione del Team!',
+      header: 'Nome del Team vuoto, Team non creato!',
       buttons: [
         {
           text: 'OK',

@@ -62,9 +62,37 @@ export class CreateRulePage implements OnInit{
     await alert.present();
   }
 
-  async rejectedAlert() {
+  async emptyNameAlert() {
     const alert = await this.alertController.create({
-      header: 'Errore nel creare la regola',
+      header: 'Nome della regola vuoto, regola non creata',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyPointsAlert() {
+    const alert = await this.alertController.create({
+      header: 'Punti della regola mancanti, regola non creata',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyDescriptionAlert() {
+    const alert = await this.alertController.create({
+      header: 'Descrizione della regola vuota, regola non creata',
       buttons: [
         {
           text: 'OK',
@@ -77,6 +105,15 @@ export class CreateRulePage implements OnInit{
   }
 
   public createRule(){
+    if(!this.rule.name){
+      this.emptyNameAlert();
+    }
+    if(!this.rule.points){
+      this.emptyPointsAlert();
+    }
+    if(!this.rule.description){
+      this.emptyDescriptionAlert();
+    }
       this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
       this.rule.team = this.team;     //setta il team presente nel local storage, api 1
       this.ruleService.newRule(this.rule).subscribe(response => {
@@ -86,11 +123,9 @@ export class CreateRulePage implements OnInit{
     }, (error: Response) => {
       if (error.status == 400){
         console.log("400 error");
-        this.rejectedAlert();
       }
       else {
         console.log('An unexpected error occured');
-        this.rejectedAlert();
       }
       console.log(error);
     });
