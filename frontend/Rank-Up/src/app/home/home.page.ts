@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { TeamService } from '../services/team/team.service';
@@ -12,7 +12,7 @@ import { Admin } from '../models/admin/admin';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit{
   user: User;
   teamsUser: Team[];
   teamsAdmin: Team[];
@@ -78,6 +78,17 @@ export class HomePage implements OnInit {
     });
 
     console.log(this.teams);
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.teamsUser = [];
+      this.teamsAdmin = [];
+      this.teams = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
   }
 
   team() {
