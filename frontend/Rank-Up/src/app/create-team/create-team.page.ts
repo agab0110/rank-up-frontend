@@ -134,8 +134,9 @@ export class CreateTeamPage implements OnInit {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
         this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {
             console.log(data)
-            this.router.navigate(['/user/home']);
+            this.router.navigate(['/admin/admin-home-team']);
           });
+        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
       });
     }
   }
