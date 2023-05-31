@@ -39,6 +39,15 @@ export class AdminPrizesPagePage implements OnInit {
 
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.prizes = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }

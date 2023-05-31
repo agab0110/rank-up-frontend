@@ -65,6 +65,16 @@ export class NotificationsPage implements OnInit {
     })
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.nAdmin = [];
+      this.nUser = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   segmentChanged(ev: any, idUser: Number, idAdmin: Number){
     this.stato = !this.stato;
     if(!this.stato){

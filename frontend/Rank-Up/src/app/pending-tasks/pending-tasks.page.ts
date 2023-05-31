@@ -48,6 +48,16 @@ export class PendingTasksPage implements OnInit {
     })
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.rules = [];
+      this.tasks = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   clickUserRule(rule: Rule) {
     let letRule = JSON.stringify(rule);
     localStorage.setItem("viewRule", letRule);

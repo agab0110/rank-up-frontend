@@ -87,6 +87,18 @@ export class UserTeamProfilePage implements OnInit {
     });
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.rulesCompleted = [];
+      this.tasksCompleted = [];
+      this.prizes = [];
+      this.activities = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   ruleOrTask(activity: any) {
     if (this.rulesCompleted.includes(activity)) {
       return true;

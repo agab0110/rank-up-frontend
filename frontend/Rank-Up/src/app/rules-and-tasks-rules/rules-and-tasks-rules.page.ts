@@ -47,6 +47,16 @@ export class RulesAndTasksRulesPage implements OnInit {
     this.listTask();
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.rules = [];
+      this.tasks = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
 
   backButton() {
     this.location.back();

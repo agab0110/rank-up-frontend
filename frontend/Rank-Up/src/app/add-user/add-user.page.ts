@@ -55,6 +55,15 @@ export class AddUserPage implements OnInit {
     this.getUsers();
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.users = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }
