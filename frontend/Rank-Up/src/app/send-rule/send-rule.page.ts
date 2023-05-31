@@ -85,6 +85,8 @@ export class SendRulePage implements OnInit {
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+
     
     this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data
@@ -120,7 +122,7 @@ export class SendRulePage implements OnInit {
 
   sendNotification() {
     this.notification.title = "Regola completata";
-    this.notification.description = "La regola [Nome Regola] e' stata completata da " + this.user.username;
+    this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " e' stata completata da " + this.user.username;
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
 
