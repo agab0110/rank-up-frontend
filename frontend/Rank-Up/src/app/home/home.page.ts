@@ -91,6 +91,34 @@ export class HomePage implements OnInit {
     this.teamService.newTeam(team);
   }
 
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Codice Team non valido!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Ora fai parte del Team con codice: ' + this.idTeamInput,
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   goToTeamUser(team: Team) {
     localStorage.setItem('team', JSON.stringify(team));
     this.userJoinsTeamService.getPartecipantsPoints(team.codice).subscribe(response => {
@@ -120,23 +148,20 @@ export class HomePage implements OnInit {
       return false;
   }
 
-  async nullCodeAlert() {
-    const alert = await this.alertController.create({
-      header: 'Codice del Team non inserito!',
-      buttons: [
-        {
-          text: 'OK',
-          cssClass: 'alert-button-red' ,
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
   addTeam() {
     this.userJoinsTeamService.addUser(this.idTeamInput, this.user.id).subscribe(data => {
       console.log(data)
-    })
+      this.confirmationAlert();
+    }, (error: Response) => {
+      if(error.status == 400){
+        this.errorAlert();
+        console.log("400 error");
+      }
+      else {
+        this.errorAlert();
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
   }
 }

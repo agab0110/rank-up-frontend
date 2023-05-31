@@ -104,6 +104,20 @@ export class CreateRulePage implements OnInit{
     await alert.present();
   }
 
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nella creazione della regola!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   public createRule(){
     if(!this.rule.name){
       this.emptyNameAlert();
@@ -123,9 +137,11 @@ export class CreateRulePage implements OnInit{
     }, (error: Response) => {
       if (error.status == 400){
         console.log("400 error");
+        this.rejectedAlert();
       }
       else {
         console.log('An unexpected error occured');
+        this.rejectedAlert();
       }
       console.log(error);
     });

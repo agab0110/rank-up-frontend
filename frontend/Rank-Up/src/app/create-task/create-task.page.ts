@@ -108,6 +108,21 @@ export class CreateTaskPage implements OnInit {
     await alert.present();
   }
 
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nella creazione del task!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async emptyDateAlert() {
     const alert = await this.alertController.create({
       header: 'Scadenza del task non inserita, task non creato',
@@ -141,9 +156,11 @@ export class CreateTaskPage implements OnInit {
   }, (error: Response) => {
     if (error.status == 400){
       console.log("400 error");
+      this.rejectedAlert();
     }
     else {
       console.log('An unexpected error occured');
+      this.rejectedAlert();
     }
     console.log(error);
   });
