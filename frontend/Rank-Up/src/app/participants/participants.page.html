@@ -9,7 +9,7 @@
 
     <ion-searchbar class="search" (ionInput)="ricerca($event)" placeholder="Cerca"></ion-searchbar>
 
-    <div class="search">
+    <div class="search" *ngIf="team.pointVisibility">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
         <ion-segment-button value=1>
           <ion-label class="segmentText">Nome</ion-label>
