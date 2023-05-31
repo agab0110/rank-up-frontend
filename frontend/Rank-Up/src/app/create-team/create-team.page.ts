@@ -43,7 +43,7 @@ export class CreateTeamPage implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-  
+
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
@@ -51,7 +51,7 @@ export class CreateTeamPage implements OnInit {
     this.teamService.newTeam(team).subscribe(data => {
       this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
       team.codice = this.codiceTeam
-      localStorage.setItem('team',  JSON.stringify(team));
+      localStorage.setItem('team', JSON.stringify(team));
 
       this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
         console.log("Admin aggiunto con successo");
@@ -133,10 +133,10 @@ export class CreateTeamPage implements OnInit {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
         this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {
-            console.log(data)
-            this.router.navigate(['/admin/admin-home-team']);
-          });
-        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
+          console.log(data)
+          this.router.navigate(['/admin/admin-home-team']);
+        });
+        this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => { console.log(data) });
       });
     }
   }
