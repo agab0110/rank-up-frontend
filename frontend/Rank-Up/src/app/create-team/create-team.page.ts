@@ -18,8 +18,10 @@ export class CreateTeamPage implements OnInit {
 
   public user: User;
   public codiceTeam: any;
+  public idTeam: any;
   public nomeTeam: string = ""
   public admin: Admin;
+  public team: Team;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
   blob: Blob | undefined | null;
@@ -35,33 +37,28 @@ export class CreateTeamPage implements OnInit {
   ) {
     this.user = new User();
     this.admin = new Admin();
+    this.team = new Team();
   }
 
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    //localStorage.setItem('adminId','');
-    //localStorage.setItem('teamId', '');
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (localStorage.getItem('team') == null) {
-      this.router.navigate(["/user/home"]);
-    }
-    if (localStorage.getItem('user') == null) {
-      this.router.navigate(["/login"]);
-    }
-
     const team = new Team();
     team.name = "temp"
     team.privacy = this.privacyTeam
     team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
     this.teamService.newTeam(team).subscribe(data => {
-      this.codiceTeam = JSON.parse(JSON.stringify(data)).codice
+      this.codiceTeam = JSON.parse(JSON.stringify(data)).code;
+      this.idTeam = JSON.parse(JSON.stringify(data)).codice;
     });
 
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
   }
 
   backButton() {
-    this.teamService.undo(this.codiceTeam).subscribe(data => {
+    this.teamService.undo(this.idTeam).subscribe(data => {
       console.log(JSON.parse(JSON.stringify(data)))
       this.router.navigate(['/user/home'])
     })
@@ -135,7 +132,7 @@ export class CreateTeamPage implements OnInit {
         this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
       });
 
-      this.adminService.newAdmin(this.user.id, this.codiceTeam).subscribe(response => {
+      this.adminService.newAdmin(this.user.id, this.idTeam).subscribe(response => {
         console.log("Admin aggiunto con successo");
         console.log(response);
         this.router.navigate(['/admin/admin-home-team']);
