@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team/team';
 
 @Injectable({
@@ -55,5 +56,9 @@ export class TeamService {
   
   public undo(teamId: any) {
     return this.http.delete(this.teamUrl + "/undo/" + teamId)
+  }
+
+  public getTeamByCode(teamCode: string): Observable<Team> {
+    return this.http.get<Team>(this.teamUrl + "/getTeamByCode/" + teamCode);
   }
 }
