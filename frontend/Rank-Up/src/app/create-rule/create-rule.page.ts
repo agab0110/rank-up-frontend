@@ -48,9 +48,23 @@ export class CreateRulePage implements OnInit{
     this.location.back();
   }
 
-  async presentAlert() {
+  async confirmationAlert() {
     const alert = await this.alertController.create({
       header: 'Regola creata con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nel creare la regola',
       buttons: [
         {
           text: 'OK',
@@ -68,11 +82,15 @@ export class CreateRulePage implements OnInit{
       this.ruleService.newRule(this.rule).subscribe(response => {
       console.log("Regola creata con successo");
       console.log(response);
+      this.confirmationAlert();
     }, (error: Response) => {
-      if (error.status == 400)
+      if (error.status == 400){
         console.log("400 error");
+        this.rejectedAlert();
+      }
       else {
         console.log('An unexpected error occured');
+        this.rejectedAlert();
       }
       console.log(error);
     });

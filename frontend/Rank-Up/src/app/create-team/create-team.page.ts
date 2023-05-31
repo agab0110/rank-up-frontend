@@ -153,6 +153,7 @@ export class CreateTeamPage implements OnInit {
       this.teamService.changeTeamName(this.team.codice, this.nomeTeam).subscribe(data => {
         console.log(data)
         this.router.navigate(['/user/home']);
+        this.confirmationAlert();
       })
 
       /*this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
@@ -168,12 +169,28 @@ export class CreateTeamPage implements OnInit {
         console.log(error);
         this.router.navigate(['/user/home']);
       });*/
+    }else{
+      this.rejectedAlert();
     }
   }
 
   async confirmationAlert() {
     const alert = await this.alertController.create({
       header: 'Team creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nella creazione del Team!',
       buttons: [
         {
           text: 'OK',

@@ -51,9 +51,23 @@ export class CreatePrizePage implements OnInit {
     this.location.back();
   }
 
-  async presentAlert() {
+  async confirmationAlert() {
     const alert = await this.alertController.create({
       header: 'Premio creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nel creare il premio',
       buttons: [
         {
           text: 'OK',
@@ -71,11 +85,15 @@ export class CreatePrizePage implements OnInit {
     this.prizeService.newPrize(this.prize).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);
+      this.confirmationAlert();
     }, (error: Response) => {
-      if(error.status == 400)
+      if(error.status == 400){
         console.log("400 error");
+        this.rejectedAlert();
+      }
       else {
         console.log('An unexpected error occured');
+        this.rejectedAlert();
       }
       console.log(error);
     });
