@@ -17,7 +17,7 @@ export class HomePage implements OnInit{
   teamsUser: Team[];
   teamsAdmin: Team[];
   teams: Team[];
-  idTeamInput: any
+  codeTeamInput: any
 
   constructor(
     private router: Router,
@@ -130,7 +130,7 @@ export class HomePage implements OnInit{
   }
 
   addTeam() {
-    this.userJoinsTeamService.addUser(this.idTeamInput, this.user.id).subscribe(data => {
+    this.userJoinsTeamService.addUserByCOde(this.codeTeamInput, this.user.id).subscribe(data => {
       console.log(data)
     })
   }
