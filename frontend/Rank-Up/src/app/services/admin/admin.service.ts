@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Admin } from 'src/app/models/admin/admin';
 import { Team } from 'src/app/models/team/team';
 
@@ -29,5 +30,9 @@ export class AdminService {
 
   public getAdmin(idTeam: number, idUser: number) {
     return this.http.get<Admin>(this.baseUrl + "/getAdmin/" + idTeam + "/" + idUser);
+  }
+
+  public getAdmins(idTeam: number): Observable<Admin[]> {
+    return this.http.get<Admin[]>(this.baseUrl + "/getAdmins/" + idTeam);
   }
 }
