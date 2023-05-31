@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Admin } from '../models/admin/admin';
 import { TeamService } from '../services/team/team.service';
 import { User } from '../models/user/user';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-prize',
@@ -23,7 +24,9 @@ export class CreatePrizePage implements OnInit {
     private location: Location,
     private prizeService: PrizeService,
     private router: Router,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private alertController: AlertController
+    ) {
 
     this.prize = new Prize();
     this.team = new Team();
@@ -51,16 +54,17 @@ export class CreatePrizePage implements OnInit {
   public createPrize(){
     this.prize.beloggingTeam = this.team;    
     this.prize.admin = this.admin;           
-    this.prizeService.newPrize(this.prize).subscribe(response => {
+    this.prizeService.newPrize(this.prize,this.prize.name).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);
-    }, (error: Response) => {
-      if(error.status == 400)
-        console.log("400 error");
-      else {
-        console.log('An unexpected error occured');
-      }
+    }, async (error: Response) => {
       console.log(error);
+      const alert = await this.alertController.create({
+        header: "Nome già in uso",
+        message: "Inserire un altro nome",
+        buttons: ['Chiudi']
+      });
+      await alert.present();
     });
   }
 }
