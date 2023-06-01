@@ -45,13 +45,14 @@ export class CreateTeamPage implements OnInit {
     this.team = new Team();
     this.team.name = "nuovo Team"
     this.team.privacy = this.privacyTeam
-    this.team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images";
+    this.team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
 
     //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
 
     this.teamService.newTeam(this.team).subscribe(response => {
+      console.log(response)
       this.team = response;
       localStorage.setItem('team', JSON.stringify(response));
       console.log(this.team);

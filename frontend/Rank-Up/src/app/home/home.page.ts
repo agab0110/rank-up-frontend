@@ -118,7 +118,7 @@ export class HomePage implements OnInit{
 
   async confirmationAlert() {
     const alert = await this.alertController.create({
-      header: 'Ora fai parte del Team con codice: ' + this.idTeamInput,
+      header: 'Ora fai parte del Team con codice: ' + this.codeTeamInput,
       buttons: [
         {
           text: 'OK',
