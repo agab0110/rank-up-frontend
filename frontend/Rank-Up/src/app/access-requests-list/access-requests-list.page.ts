@@ -6,6 +6,10 @@ import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { User } from '../models/user/user';
+import { Router } from '@angular/router';
+import { NotificationService } from '../services/notification/notification.service';
+import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+import { Notification } from '../models/notification/notification';
 
 @Component({
   selector: 'app-access-requests-list',
@@ -19,11 +23,15 @@ export class AccessRequestsListPage implements OnInit {
   admin: Admin;
   user: User;
   userJoin: UserJoinsTeam[];
+  notification: Notification;
 
   constructor(
     private location: Location,
     private alertController: AlertController,
-    private userJoinsTeamService: UserJoinsTeamService
+    private userJoinsTeamService: UserJoinsTeamService,
+    private router: Router,
+    private notificationService: NotificationService,
+    private userReciveNotificationService: UserReciveNotificationService
     ) {
       this.userJoinsTeam = new UserJoinsTeam();
       this.requests = new Array<Notification>;
@@ -31,13 +39,17 @@ export class AccessRequestsListPage implements OnInit {
       this.team = new Team();
       this.admin = new Admin();
       this.user = new User();
+      this.notification = new Notification();
     }
 
   ngOnInit() {
-       //this.router.navigate(['user/home']);
        this.team = JSON.parse(localStorage.getItem('team') || '{}');
        if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-         //this.router.navigate(['user/home']);
+         this.router.navigate(['user/home']);
+
+       if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
+          this.router.navigate(['user/home']);
+
        this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
        this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -75,6 +87,7 @@ export class AccessRequestsListPage implements OnInit {
   deleteRequest(id: number){
     this.userJoinsTeamService.deleteRequest(id).subscribe(() => {
       console.log('Delete successful');
+      this.sendRejectNotification();
     }, (error: Response) => {
       if(error.status == 400)
         console.log("400 error");
@@ -101,6 +114,7 @@ export class AccessRequestsListPage implements OnInit {
   public manageRequest(id: number) {
     this.userJoinsTeamService.manageRequest(this.team.codice, id, "1").subscribe(() => {
       console.log("patch successful");
+      this.sendAcceptNotification();
     }, (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
@@ -110,5 +124,52 @@ export class AccessRequestsListPage implements OnInit {
       console.log(error);
     }
     );
+  }
+
+  sendRejectNotification() {
+    this.notification.title = "Richiesta rifiutata";
+    this.notification.description = "La tua richiesta per il team " + this.team.name +  " è stata rifiutata";
+    
+    this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
+      console.log(n);
+      this.addUserNotification(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  sendAcceptNotification() {
+    this.notification.title = "Richiesta accettata";
+    this.notification.description = "La tua richiesta per il team " + this.team.name +  " è stata accettata";
+    
+    this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
+      console.log(n);
+      this.addUserNotification(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  addUserNotification(n: Notification){
+      this.userReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+        console.log(n);
+      },(error: Response) => {
+        if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
   }
 }
