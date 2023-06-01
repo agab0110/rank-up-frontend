@@ -56,6 +56,7 @@ export class CreateTeamPage implements OnInit {
       this.team = response;
       localStorage.setItem('team', JSON.stringify(response));
       console.log(this.team);
+      this.codiceTeam = this.team.codice
 
       this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
         console.log("Admin aggiunto con successo");

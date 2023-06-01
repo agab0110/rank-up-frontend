@@ -6,6 +6,11 @@ import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
 import { Task } from '../models/task/task';
+import { Notification } from '../models/notification/notification';
+import { NotificationService } from '../services/notification/notification.service';
+import { Team } from '../models/team/team';
+import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -22,19 +27,29 @@ export class TaskConfirmationPage implements OnInit {
   public id!: number;
   private task: any
   private taskCompleted: TaskCompleted;
+  notification: Notification;
+  team: Team;
 
   constructor(
     private alertController: AlertController,
     private router: Router,
     private location: Location,
-    private taskCompletedService: TaskCompletedService
+    private taskCompletedService: TaskCompletedService,
+    private notificationService: NotificationService,
+    private userJoinsTeamService: UserJoinsTeamService,
+    private userReciveNotificationService: UserReciveNotificationService
   ) {
     this.user = new User();
     this.taskCompleted = new TaskCompleted();
+    this.notification = new Notification();
+    this.team = new Team();
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
+    if (localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      this.router.navigate(['user/home']);
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -98,7 +113,44 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompleted.bonus = this.bonusPoints
 
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.taskCompleted).subscribe(data => {
-      console.log(data)
+      console.log(data);
+      this.sendNotification(status);
+
     })
+  }
+
+  sendNotification(status: number) {
+    if (status == 1) {
+      this.notification.title = "Conferma task";
+      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato confermato";
+    } else {
+      this.notification.title = "Rifiuto task";
+      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato rifiutato";
+    }
+    
+    this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
+      console.log(n);
+      this.addUserNotification(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  addUserNotification(n: Notification){
+      this.userReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+        console.log(n);
+      },(error: Response) => {
+        if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
   }
 }

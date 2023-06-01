@@ -5,6 +5,11 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { Team } from '../models/team/team';
+import { NotificationService } from '../services/notification/notification.service';
+import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
+import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+import { Notification } from '../models/notification/notification';
 
 @Component({
   selector: 'app-rule-confirmation',
@@ -23,19 +28,29 @@ export class RuleConfirmationPage implements OnInit {
   comment!: string;
   bonusPoints!: number;
   status!: number;
+  team: Team;
+  notification: Notification;
 
   constructor(
     private alertController: AlertController,
     private router: Router,
     private location: Location,
     private ruleCompletedService: RuleCompletedService,
+    private notificationService: NotificationService,
+    private userJoinsTeamService: UserJoinsTeamService,
+    private userReciveNotificationService: UserReciveNotificationService
   ) {
     this.user = new User();
     this.ruleCompleted = new RuleCompleted();
+    this.team = new Team();
+    this.notification = new Notification();
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
+    if (localStorage.getItem('team') == null || localStorage.getItem('team') == '')
+      this.router.navigate(['user/home']);
+    this.user = JSON.parse(localStorage.getItem('team') || '{}');
+
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -102,6 +117,7 @@ export class RuleConfirmationPage implements OnInit {
     this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
       console.log("patch succesfull");
       console.log(r);
+      this.sendNotification(this.status);
     }, (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
@@ -121,6 +137,7 @@ export class RuleConfirmationPage implements OnInit {
     this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
       console.log("patch succesfull");
       console.log(r);
+      this.sendNotification(this.status);
     }, (error: Response) => {
       if (error.status == 400) {
         console.log("Error 400");
@@ -130,5 +147,40 @@ export class RuleConfirmationPage implements OnInit {
       console.log(error);
     });
     this.backButton();
+  }
+
+  sendNotification(status: number) {
+    if (status == 1) {
+      this.notification.title = "Conferma regola";
+      this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato confermato";
+    } else {
+      this.notification.title = "Rifiuto regola";
+      this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato rifiutato";
+    }
+    
+    this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
+      console.log(n);
+      this.addUserNotification(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  addUserNotification(n: Notification){
+      this.userReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+        console.log(n);
+      },(error: Response) => {
+        if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
   }
 }
