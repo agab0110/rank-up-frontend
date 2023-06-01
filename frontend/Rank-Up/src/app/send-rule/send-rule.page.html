@@ -39,7 +39,7 @@
   </div>
 </ion-content>
 
-<ion-alert
+<ion-alert *ngIf="this.rule"
   trigger="descrizione"
   header="Descrizione"
   message={{rule.description}}

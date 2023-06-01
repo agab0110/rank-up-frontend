@@ -87,14 +87,17 @@ export class SendTaskPage implements OnInit {
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
+
+    this.idTask = this.task.id;
   
     this.taskService.getTask(this.idTask).subscribe(data => {
       this.data = data
       console.log(data)
     });
-    this.location.back();
 
-    this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
+    
   }
 
   loadFileFromDevice(event: any) {
