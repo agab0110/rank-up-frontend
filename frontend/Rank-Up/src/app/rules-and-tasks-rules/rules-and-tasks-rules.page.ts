@@ -7,6 +7,8 @@ import { Task } from '../models/task/task';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { Router } from '@angular/router';
+import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
+import { TaskCompleted } from '../models/taskCompleted/task-completed';
 
 @Component({
   selector: 'app-rules-and-tasks-rules',
@@ -78,5 +80,14 @@ export class RulesAndTasksRulesPage implements OnInit {
       }
       console.log(error);
     });
+  }
+  clickRule(rule:Rule) {
+    let rules = JSON.stringify(rule);
+    localStorage.setItem("viewRule", rules);
+  }
+
+  clickTask(task:Task) {
+    let tasks = JSON.stringify(task);
+    localStorage.setItem("viewTask", tasks);
   }
 }

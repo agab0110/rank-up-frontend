@@ -19,8 +19,8 @@
     </div>
 
     <div id="div-rules-tasks" scroll="true" *ngIf="!stato">
-      <ion-list id="div-rule-task" *ngFor="let rule of rules">
-          <ion-item id="div-rule-task" [routerLink] = "['/send-rule']">
+      <ion-list id="div-rule-task" *ngFor="let rule of rules" >
+          <ion-item id="div-rule-task" [routerLink] = "['/send-rule']" (click)="clickRule(rule)">
             <ion-label class="label" >{{rule.name}}</ion-label>
           <ion-button class="fakebutton" [disabled]="true" >{{rule.points}}</ion-button>
 
@@ -35,7 +35,7 @@
 
     <div id="div-rules-tasks" scroll="true" *ngIf="stato">
       <ion-list id="div-rule-task" *ngFor="let task of tasks">
-          <ion-item id="div-rule-task" [routerLink] = "['/send-task']">
+          <ion-item id="div-rule-task" [routerLink] = "['/send-task']" (click)="clickTask(task)">
             <ion-label class="label">{{task.name}}</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{task.points}}</ion-button>
 
