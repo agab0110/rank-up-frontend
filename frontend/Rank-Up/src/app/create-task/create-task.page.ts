@@ -76,6 +76,7 @@ export class CreateTaskPage implements OnInit {
     const alert = await this.alertController.create({
       header: "Nome già in uso",
       message: "Inserire un altro nome",
+      cssClass: 'alert-button-red',
       buttons: ['Chiudi']
     });
     await alert.present();
