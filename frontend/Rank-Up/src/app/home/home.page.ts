@@ -42,8 +42,11 @@ export class HomePage implements OnInit{
     this.notification = new Notification();
     this.admins = [];
   }
+  ngOnInit(){
 
-  ngOnInit() {
+  }
+  
+  ionViewWillEnter() {
     localStorage.setItem('team', '');
     localStorage.setItem('admin', '');
     localStorage.setItem('userJoinsTeam', '');
