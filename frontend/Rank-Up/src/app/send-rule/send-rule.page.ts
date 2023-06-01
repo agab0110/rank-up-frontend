@@ -28,6 +28,7 @@ export class SendRulePage implements OnInit {
   public ruleCompleted: RuleCompleted
   team: Team;
   admins: Admin[];
+  public rule: Rule;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -53,7 +54,9 @@ export class SendRulePage implements OnInit {
         this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
           console.log(data)
         });
+        this.location.back();
       }
+      
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
@@ -74,6 +77,7 @@ export class SendRulePage implements OnInit {
     this.notification = new Notification();
     this.team = new Team();
     this.admins = [];
+    this.rule = new Rule();
   }
 
   ngOnInit() {
@@ -85,6 +89,7 @@ export class SendRulePage implements OnInit {
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
     
     this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data

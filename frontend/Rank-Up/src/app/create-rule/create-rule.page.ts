@@ -130,7 +130,7 @@ export class CreateRulePage implements OnInit{
     }
       this.rule.admin = this.admin;   //setta l'admin presente nel local storage, api 1
       this.rule.team = this.team;     //setta il team presente nel local storage, api 1
-      this.ruleService.newRule(this.rule).subscribe(response => {
+      this.ruleService.newRule(this.rule, this.rule.name).subscribe(response => {
       console.log("Regola creata con successo");
       console.log(response);
       this.confirmationAlert();
@@ -143,7 +143,6 @@ export class CreateRulePage implements OnInit{
         console.log('An unexpected error occured');
         this.rejectedAlert();
       }
-      console.log(error);
     });
   }
 }

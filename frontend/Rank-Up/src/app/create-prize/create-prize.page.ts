@@ -25,7 +25,7 @@ export class CreatePrizePage implements OnInit {
     private prizeService: PrizeService,
     private router: Router,
     private teamService: TeamService,
-    private alertController: AlertController,
+    private alertController: AlertController
     ) {
 
     this.prize = new Prize();
@@ -114,13 +114,13 @@ export class CreatePrizePage implements OnInit {
     if(!this.prize.price){
       this.emptyPointsAlert();
     }
-    this.prize.beloggingTeam = this.team;
-    this.prize.admin = this.admin;
-    this.prizeService.newPrize(this.prize).subscribe(response => {
-      console.log("Premio creato con successo!");
+    this.prize.beloggingTeam = this.team;    
+    this.prize.admin = this.admin;           
+    this.prizeService.newPrize(this.prize,this.prize.name).subscribe(response => {
+      console.log("Premio creato con successo");
       console.log(response);
       this.confirmationAlert();
-    }, (error: Response) => {
+    }, async (error: Response) => {
       if(error.status == 400){
         console.log("400 error");
         this.rejectedAlert();
@@ -129,7 +129,6 @@ export class CreatePrizePage implements OnInit {
         console.log('An unexpected error occured');
         this.rejectedAlert();
       }
-      console.log(error);
     });
   }
 }
