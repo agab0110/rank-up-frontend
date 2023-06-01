@@ -125,7 +125,7 @@ export class SendRulePage implements OnInit {
     this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " e' stata completata da " + this.user.username;
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
-
+      this.getAdmins();
       this.addAdminNotification(n);
     },(error: Response) => {
       if (error.status == 400) {

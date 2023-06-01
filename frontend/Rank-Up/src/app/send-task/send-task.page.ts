@@ -123,7 +123,7 @@ export class SendTaskPage implements OnInit {
     this.notification.description = "La regola " + this.taskCompleted.task.name +  " e' stata completata da " + this.user.username;
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
-
+      this.getAdmins();
       this.addAdminNotification(n);
     },(error: Response) => {
       if (error.status == 400) {
