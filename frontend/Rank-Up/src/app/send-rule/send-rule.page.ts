@@ -46,9 +46,8 @@ export class SendRulePage implements OnInit {
           }
           this.ruleCompleted.status = 0;
           this.ruleCompleted.user = this.user;
-          const rule = new Rule();
-          rule.id = this.idRule;
-          this.ruleCompleted.rule = rule;
+          this.rule.id = this.idRule;
+          this.ruleCompleted.rule = this.rule;
         }
     
         this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
@@ -89,10 +88,10 @@ export class SendRulePage implements OnInit {
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
+    this.rule = JSON.parse(localStorage.getItem('viewRule') || '{}');
     
-    this.ruleService.getRule(this.idRule).subscribe(data => {
-      this.data = data
+    this.ruleService.getRule(this.rule.id).subscribe(data => {
+      this.rule = data
       console.log(data)
     });
   }

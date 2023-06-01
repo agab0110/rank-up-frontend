@@ -7,7 +7,7 @@
 
     <h1 align="center" class="title">Regola</h1>
 
-    <div class="description" *ngIf="this.data">
+    <div class="description" *ngIf="this.rule">
       <app-user-element-bar labelText={{rule.name}} buttonText="Regola"></app-user-element-bar>
       <br>
       <app-user-element-bar labelText={{rule.points}} buttonText="Punti"></app-user-element-bar>
@@ -42,7 +42,7 @@
 <ion-alert
   trigger="descrizione"
   header="Descrizione"
-  message={{this.data.description}}
+  message={{rule.description}}
   [buttons]="descrBtns"
 ></ion-alert>
 
