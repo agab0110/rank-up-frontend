@@ -8,17 +8,18 @@
     <h2 class="title">Crea un Task<br/>per {{team.name}}</h2>
 
     <div class="text-input">
-      <ion-input [(ngModel)]="task.name" class="formInput" [type]="'text'" [placeholder]="'Nome'" fill="outline" shape="round" mode="md"></ion-input>
+      <ion-input [(ngModel)]="task.name" class="formInput" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
 
       <div class="input-div">
-        <ion-input [(ngModel)]="task.points" class="formInput" [type]="'text'" [placeholder]="'Punti'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="task.points" class="formInput" [type]="'text'" label="Punti" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
       <div class="input-div">
-        <ion-input [(ngModel)]="task.endDate" class="formInput" [type]="'text'" [placeholder]="'Scadenza'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="task.endDate" class="formInput" [type]="'text'" label="Scadenza (AAAA-MM-GG)" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
-      <ion-textarea [(ngModel)]="task.desctiption" fill="outline" placeholder="Descrizione"></ion-textarea>
+      <ion-label class="label">Descrizione:</ion-label>
+      <ion-textarea [(ngModel)]="task.desctiption" fill="outline"></ion-textarea>
 
       <div class="button-div">
         <ion-button (click)="presentAlert()" class="exclusive-button">
