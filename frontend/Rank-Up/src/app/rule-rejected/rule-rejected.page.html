@@ -14,9 +14,10 @@
     </div>
 
 
-    <!-- Placeholder descrizione e commento vanno rivisti in quanto la posizione e' buggata (label="Descrizione" labelPlacement="stacked")-->
-    <ion-textarea class="descriptionArea" fill="outline" shape="round" [readonly] = true>{{rule.rule.description}}</ion-textarea>
-    <ion-textarea class="commentArea" fill="outline" placeholder="Commento" shape="round" [readonly] = true>{{ruleCompleted.comment}}</ion-textarea>
+    <ion-label class="label">Descrizione:</ion-label>
+    <ion-textarea class="descriptionArea" fill="outline" placeholder={{rule.rule.description}} shape="round" [readonly] = true></ion-textarea>
+    <ion-label class="label">Commento:</ion-label>
+    <ion-textarea class="commentArea" fill="outline" placeholder={{ruleCompleted.comment}} shape="round" [readonly] = true></ion-textarea>
 
     <ion-grid class="buttons-grid">
       <ion-row>

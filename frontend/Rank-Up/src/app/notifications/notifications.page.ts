@@ -102,7 +102,7 @@ export class NotificationsPage implements OnInit {
   }
 
   backButton() {
-    this.location.back();
+    this.router.navigate(['user/home']);
   }
 
   public getUserNotification(idUser: Number) {
