@@ -68,6 +68,7 @@ export class CreateTeamPage implements OnInit {
           console.log('An unexpected error occured');
         }
         console.log(error);
+        this.router.navigate(['/user/home']);
       });
 
     }, (error: Response) => {
