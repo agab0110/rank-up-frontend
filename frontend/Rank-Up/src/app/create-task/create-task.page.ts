@@ -65,17 +65,102 @@ export class CreateTaskPage implements OnInit {
   backButton() {
     this.location.back();
   }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Task creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyNameAlert() {
+    const alert = await this.alertController.create({
+      header: 'Nome del task vuoto, task non creato',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyPointsAlert() {
+    const alert = await this.alertController.create({
+      header: 'Punti del task mancanti, task non creato',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nella creazione del task!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyDateAlert() {
+    const alert = await this.alertController.create({
+      header: 'Scadenza del task non inserita, task non creato',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   public createTask(){
+    if(!this.task.name){
+      this.emptyNameAlert();
+    }
+    if(!this.task.points){
+      this.emptyPointsAlert();
+    }
+    if(!this.task.endDate){
+      this.emptyDateAlert();
+    }
     this.task.admin = this.admin;   //setta l'admin presente nel local storage, api 1
     this.task.team = this.team;     //setta il team presente nel local storage, api 1
     this.taskService.newTask(this.task).subscribe(response => {
     console.log("task creato con sucesso");
     console.log(response);
+    this.confirmationAlert();
   }, (error: Response) => {
-    if (error.status == 400)
+    if (error.status == 400){
       console.log("400 error");
+      this.rejectedAlert();
+    }
     else {
       console.log('An unexpected error occured');
+      this.rejectedAlert();
     }
     console.log(error);
   });

@@ -9,6 +9,7 @@ import { UserReciveNotificationService } from '../services/userReciveNotificatio
 import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 import { Admin } from '../models/admin/admin';
+import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -29,6 +30,7 @@ export class NotificationsPage implements OnInit {
   notifications:UserReciveNotification[];
   adminNotifications: AdminReciveNotification[];
   team: Team;
+  router: Router;
 
   constructor(
     private location: Location,
@@ -42,6 +44,7 @@ export class NotificationsPage implements OnInit {
     this.user = new User();
     this.admin = new Admin();
     this.stato = false;
+    this.router = new Router();
   }
 
   ngOnInit() {
@@ -126,5 +129,10 @@ export class NotificationsPage implements OnInit {
        }
        console.log(error);
      });
+  }
+
+  navigate(idNotification: number){
+    const parameter = idNotification;
+    this.router.navigate(['/admin-notification-description/', parameter]);
   }
 }

@@ -6,6 +6,7 @@ import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { AdminService } from '../services/admin/admin.service';
 import { Admin } from '../models/admin/admin';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit{
     private router: Router,
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private alertController: AlertController,
   ) {
     this.user = new User();
     this.teamsUser = [];
@@ -100,6 +102,34 @@ export class HomePage implements OnInit{
     this.teamService.newTeam(team);
   }
 
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Codice Team non valido!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Ora fai parte del Team con codice: ' + this.idTeamInput,
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   goToTeamUser(team: Team) {
     localStorage.setItem('team', JSON.stringify(team));
     this.userJoinsTeamService.getPartecipantsPoints(team.codice).subscribe(response => {
@@ -132,6 +162,17 @@ export class HomePage implements OnInit{
   addTeam() {
     this.userJoinsTeamService.addUserByCOde(this.codeTeamInput, this.user.id).subscribe(data => {
       console.log(data)
-    })
+      this.confirmationAlert();
+    }, (error: Response) => {
+      if(error.status == 400){
+        this.errorAlert();
+        console.log("400 error");
+      }
+      else {
+        this.errorAlert();
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
   }
 }

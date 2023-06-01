@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { UserService } from '../services/user/user.service';
-import { error } from 'console';
 import { Team } from '../models/team/team';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
@@ -55,6 +54,20 @@ export class UserProfilePage implements OnInit {
 
   }
 
+  async emptyAlert() {
+    const alert = await this.alertController.create({
+      header: 'Campo vuoto, modifica non effettuata',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async presentAlert1() {
     const alert = await this.alertController.create({
       header: 'Inserisci nuovo nome:',
@@ -83,10 +96,13 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if (error.status == 400)
+              if (error.status == 400){
                 console.log("400 error");
+                this.emptyAlert();
+              }
               else {
                 console.log('An unexpected error occured');
+                this.emptyAlert();
               }
               console.log(error);
             });
@@ -153,10 +169,13 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if (error.status == 400)
+              if (error.status == 400){
                 console.log("400 error");
+                this.emptyAlert();
+              }
               else {
                 console.log('An unexpected error occured');
+                this.emptyAlert();
               }
               console.log(error);
             });
@@ -218,10 +237,13 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if (error.status == 400)
+              if (error.status == 400){
                 console.log("400 error");
+                this.emptyAlert();
+              }
               else {
                 console.log('An unexpected error occured');
+                this.emptyAlert();
               }
               console.log(error);
             });
@@ -252,7 +274,9 @@ export class UserProfilePage implements OnInit {
           text: 'Conferma',
           cssClass: 'alert-button-blue',
           handler: (alertData) => {
-            console.log("Ok");
+            if(!alertData[0]){
+              this.emptyAlert();
+            }else{ console.log("Ok");
             const hashedPassword = SHA3(alertData[0]).toString();
 
             this.userService.changePassword(this.user.id, hashedPassword).subscribe(response => {
@@ -268,14 +292,18 @@ export class UserProfilePage implements OnInit {
                 this.user_photo = JSON.parse(JSON.stringify(data)).photo;
               });
             }, (error: Response) => {
-              if (error.status == 400)
+              if (error.status == 400){
                 console.log("400 error");
+                this.emptyAlert();
+              }
               else {
                 console.log('An unexpected error occured');
+                this.emptyAlert();
               }
               console.log(error);
             });
           }
+        }
         },
         {
           text: 'Annulla',

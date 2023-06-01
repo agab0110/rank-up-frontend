@@ -50,7 +50,7 @@ const routes: Routes = [
         loadChildren: () => import('../../team-rules-tasks/team-rules-tasks.module').then( m => m.TeamRulesTasksPageModule)
       },
       {
-        path: 'admin-notification-description/:n.notification.id',
+        path: 'admin-notification-description',
         loadChildren: () => import('../../admin-notification-description/admin-notification-description.module').then( m => m.AdminNotificationDescriptionPageModule)
       },
     ]

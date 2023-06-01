@@ -18,7 +18,6 @@ export class CreateTeamPage implements OnInit {
 
   public user: User;
   public codiceTeam: any;
-  public idTeam: any;
   public nomeTeam: string = ""
   public admin: Admin;
   public team: Team;
@@ -43,22 +42,46 @@ export class CreateTeamPage implements OnInit {
   privacyTeam: boolean = true;
 
   ngOnInit() {
-    const team = new Team();
-    team.name = "temp"
-    team.privacy = this.privacyTeam
-    team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
-    this.teamService.newTeam(team).subscribe(data => {
-      this.codiceTeam = JSON.parse(JSON.stringify(data)).code;
-      this.idTeam = JSON.parse(JSON.stringify(data)).codice;
-    });
+    this.team = new Team();
+    this.team.name = "nuovo Team"
+    this.team.privacy = this.privacyTeam
+    this.team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images";
 
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+    //this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
+
+    this.teamService.newTeam(this.team).subscribe(response => {
+      this.team = response;
+      localStorage.setItem('team', JSON.stringify(response));
+      console.log(this.team);
+
+      this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
+        console.log("Admin aggiunto con successo");
+        console.log(response);
+        localStorage.setItem('admin', JSON.stringify(response));
+      }, (error: Response) => {
+        if (error.status == 400)
+          console.log("400 error");
+        else {
+          console.log('An unexpected error occured');
+        }
+        console.log(error);
+      });
+
+    }, (error: Response) => {
+      if (error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+      this.router.navigate(['/user/home']);
+    });
   }
 
   backButton() {
-    this.teamService.undo(this.idTeam).subscribe(data => {
+    this.teamService.undo(this.team.codice).subscribe(data => {
       console.log(JSON.parse(JSON.stringify(data)))
       this.router.navigate(['/user/home'])
     })
@@ -128,11 +151,13 @@ export class CreateTeamPage implements OnInit {
 
   navigate() {
     if (this.nomeTeam != "") {
-      this.teamService.changeTeamName(this.idTeam, this.nomeTeam).subscribe(data => {
+      this.teamService.changeTeamName(this.team.codice, this.nomeTeam).subscribe(data => {
         console.log(data)
+        this.router.navigate(['/user/home']);
+        this.confirmationAlert();
       })
 
-      this.adminService.newAdmin(this.user.id, this.idTeam).subscribe(response => {
+      /*this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
         console.log("Admin aggiunto con successo");
         console.log(response);
         this.router.navigate(['/user/home']);
@@ -144,7 +169,37 @@ export class CreateTeamPage implements OnInit {
         }
         console.log(error);
         this.router.navigate(['/user/home']);
-      });
+      });*/
+    }else{
+      this.rejectedAlert();
     }
+  }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Team creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Nome del Team vuoto, Team non creato!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
