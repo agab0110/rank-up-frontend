@@ -7,8 +7,6 @@ import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.s
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
-import { Rule } from '../models/rule/rule';
-import { Task } from '../models/task/task';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { TaskCompleted } from '../models/taskCompleted/task-completed';
 import { NavController } from '@ionic/angular';
@@ -51,7 +49,7 @@ export class UserTeamProfilePage implements OnInit {
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
@@ -85,6 +83,18 @@ export class UserTeamProfilePage implements OnInit {
       });
       console.log(response);
     });
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.rulesCompleted = [];
+      this.tasksCompleted = [];
+      this.prizes = [];
+      this.activities = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
   }
 
   ruleOrTask(activity: any) {

@@ -1,11 +1,15 @@
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <div class="backgroundAdmin">
     <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
     <h1 class="title">{{team.name}}</h1>
-    <div id="div-code">Codice: {{team.codice}}</div>
+    <div id="div-code">Codice: {{team.code}}</div>
 
     <ion-button class="rightIcon" *ngIf="!stato" [routerLink] = "['/create-rule']">
       <ion-icon name="add-circle-outline" size="large" class="iconaRicerca"></ion-icon>

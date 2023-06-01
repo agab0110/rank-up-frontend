@@ -51,6 +51,16 @@ export class AdminListPage implements OnInit {
       this.sortDesc();
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.usersJoinsTeam = [];
+      this.users = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }

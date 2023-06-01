@@ -16,6 +16,14 @@ export class UserJoinsTeamService {
     this.userJoinsTeamUrl = 'http://localhost:8080/userJoinsTeamApi';
    }
 
+   addUserByCOde(codeTeam: any, idUser: number) {
+    const params = new HttpParams()
+    .set('codeTeam', codeTeam.toString())
+    .set('idUser', idUser.toString());
+    
+    return this.http.post<UserJoinsTeam>(this.userJoinsTeamUrl + "/addUserByCode",null,{params});
+  }
+
    deleteRequest(id: number) {
     return this.http.delete(this.userJoinsTeamUrl + "/deleteRequest/" + id);
   }

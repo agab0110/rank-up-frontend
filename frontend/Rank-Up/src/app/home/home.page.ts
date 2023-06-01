@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { TeamService } from '../services/team/team.service';
@@ -6,29 +6,41 @@ import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { AdminService } from '../services/admin/admin.service';
 import { Admin } from '../models/admin/admin';
+import { AlertController } from '@ionic/angular';
+import { NotificationService } from '../services/notification/notification.service';
+import { Notification } from '../models/notification/notification';
+import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit{
   user: User;
   teamsUser: Team[];
   teamsAdmin: Team[];
   teams: Team[];
-  idTeamInput: any
+  codeTeamInput!: string;
+  notification: Notification;
+  admins: Admin[];
+  searchedTeam!: Team;
 
   constructor(
     private router: Router,
     private teamService: TeamService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private alertController: AlertController,
+    private notificationService: NotificationService,
+    private adminReciveNotificationService: AdminReciveNotificationService
   ) {
     this.user = new User();
     this.teamsUser = [];
     this.teamsAdmin = [];
     this.teams = [];
+    this.notification = new Notification();
+    this.admins = [];
   }
 
   ngOnInit() {
@@ -80,6 +92,17 @@ export class HomePage implements OnInit {
     console.log(this.teams);
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.teamsUser = [];
+      this.teamsAdmin = [];
+      this.teams = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   team() {
     this.router.navigate(['team'])
   }
@@ -87,6 +110,34 @@ export class HomePage implements OnInit {
   newTeam() {
     const team = new Team();
     this.teamService.newTeam(team);
+  }
+
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Codice Team non valido!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Ora fai parte del Team con codice: ' + this.codeTeamInput,
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   goToTeamUser(team: Team) {
@@ -118,9 +169,79 @@ export class HomePage implements OnInit {
       return false;
   }
 
+  getTeam() {
+    this.teamService.getTeamByCode(this.codeTeamInput).subscribe(result => {
+      this.searchedTeam = result;
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
   addTeam() {
-    this.userJoinsTeamService.addUser(this.idTeamInput, this.user.id).subscribe(data => {
+    this.userJoinsTeamService.addUserByCOde(this.codeTeamInput, this.user.id).subscribe(data => {
       console.log(data)
-    })
+      this.sendNotification();
+      this.confirmationAlert();
+    }, (error: Response) => {
+      if(error.status == 400){
+        this.errorAlert();
+        console.log("400 error");
+      }
+      else {
+        this.errorAlert();
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
+  }
+
+  sendNotification() {
+    this.notification.title = "Richiesta d'accesso";
+    this.notification.description = "L'utente " + this.user.username +  " ha richiesto l'accesso al team " + this.searchedTeam.name;
+    this.notificationService.newNotification(this.notification, this.searchedTeam.codice).subscribe(n => {
+      console.log(n);
+
+      this.addAdminNotification(n);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  getAdmins() {
+    this.adminService.getAdmins(this.searchedTeam.codice).subscribe(result => {
+      this.admins = result;
+      console.log(this.admins);
+    },(error: Response) => {
+      if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  addAdminNotification(n: Notification){
+    this.admins.forEach(admin => {
+      this.adminReciveNotificationService.addNotification(admin.id, n.id).subscribe(n => {
+        console.log(n);
+      },(error: Response) => {
+        if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);});
+    });
   }
 }

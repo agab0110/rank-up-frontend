@@ -1,4 +1,9 @@
 <ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <div class="backgroundAdmin">
     <ion-button class="leftIcon" (click)="backButton()" fill="clear">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
@@ -20,11 +25,11 @@
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option class="option-one">
-              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addAdmin(user.id)"></ion-icon>
+              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addAdmin(user.idUser)"></ion-icon>
               Admin
             </ion-item-option>
             <ion-item-option class="option-two">
-              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addUser(user.id)"></ion-icon>
+              <ion-icon slot="top" name="person-add-outline" size="large" (click)="addUser(user.idUser)"></ion-icon>
               Utente
             </ion-item-option>
           </ion-item-options>

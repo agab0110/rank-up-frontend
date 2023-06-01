@@ -8,14 +8,14 @@
     <h2 class="title">Crea un premio per<br/>{{team.name}}</h2>
 
     <div class="text-input">
-      <ion-input [(ngModel)]="prize.name" class="formInput" [type]="'text'" [placeholder]="'Nome'" fill="outline" shape="round" mode="md"></ion-input>
+      <ion-input [(ngModel)]="prize.name" class="formInput" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
 
       <div class="input-div">
-        <ion-input [(ngModel)]="prize.price" class="formInput" [type]="'text'" [placeholder]="'Punti'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="prize.price" class="formInput" [type]="'text'" label="Punti" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
       <div class="create-prize-button">
-        <app-bt-admin-small text="Crea Premio" (click)="backButton()" (click)="createPrize()"></app-bt-admin-small>
+        <app-bt-admin-small text="Crea Premio" (click)="createPrize()" (click)="backButton()"></app-bt-admin-small>
       </div>
     </div>
 

@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team/team';
 
 @Injectable({
@@ -39,8 +40,8 @@ export class TeamService {
     return this.http.get(this.teamUrl + "/getAllTeams");
   }
 
-  public newTeam(team: any) {
-    return this.http.post(this.teamUrl + "/team", team)
+  public newTeam(team: Team) {
+    return this.http.post<Team>(this.teamUrl + "/team", team)
   }
 
   public changePrivacyUser(teamId: number, privacy: boolean) {
@@ -52,8 +53,12 @@ export class TeamService {
     const params = new HttpParams().set('privacy', privacy);
     return this.http.patch<Team>(this.teamUrl + "/changePrivacyTeam/" + teamId, params);
   }
-  
+
   public undo(teamId: any) {
     return this.http.delete(this.teamUrl + "/undo/" + teamId)
+  }
+
+  public getTeamByCode(teamCode: string): Observable<Team> {
+    return this.http.get<Team>(this.teamUrl + "/getTeamByCode/" + teamCode);
   }
 }

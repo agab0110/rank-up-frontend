@@ -47,6 +47,15 @@ export class ParticipantsPage implements OnInit {
     this.getPartecipantsPoints(this.team.codice);
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.partecipantsPoints = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }

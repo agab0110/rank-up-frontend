@@ -73,6 +73,15 @@ export class PrizesPagePage implements OnInit {
     this.listprize(this.team.codice);
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.prizes = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   listprize(idTeam: Number) {
     this.prizeService.listPrize(this.team.codice).subscribe(response => {
       this.prizes = response;

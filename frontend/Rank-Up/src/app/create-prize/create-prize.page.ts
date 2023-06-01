@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Admin } from '../models/admin/admin';
 import { TeamService } from '../services/team/team.service';
 import { User } from '../models/user/user';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-prize',
@@ -23,7 +24,9 @@ export class CreatePrizePage implements OnInit {
     private location: Location,
     private prizeService: PrizeService,
     private router: Router,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private alertController: AlertController
+    ) {
 
     this.prize = new Prize();
     this.team = new Team();
@@ -48,19 +51,84 @@ export class CreatePrizePage implements OnInit {
     this.location.back();
   }
 
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Premio creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async rejectedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Errore nella creazione del premio!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyNameAlert() {
+    const alert = await this.alertController.create({
+      header: 'Nome del premio vuoto, premio non creato!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async emptyPointsAlert() {
+    const alert = await this.alertController.create({
+      header: 'Punti del premio mancanti, premio non creato!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   public createPrize(){
+    if(!this.prize.name){
+      this.emptyNameAlert();
+    }
+    if(!this.prize.price){
+      this.emptyPointsAlert();
+    }
     this.prize.beloggingTeam = this.team;    
     this.prize.admin = this.admin;           
-    this.prizeService.newPrize(this.prize).subscribe(response => {
+    this.prizeService.newPrize(this.prize,this.prize.name).subscribe(response => {
       console.log("Premio creato con successo");
       console.log(response);
-    }, (error: Response) => {
-      if(error.status == 400)
+      this.confirmationAlert();
+    }, async (error: Response) => {
+      if(error.status == 400){
         console.log("400 error");
+        this.rejectedAlert();
+      }
       else {
         console.log('An unexpected error occured');
+        this.rejectedAlert();
       }
-      console.log(error);
     });
   }
 }

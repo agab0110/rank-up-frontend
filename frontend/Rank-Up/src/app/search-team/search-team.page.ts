@@ -32,6 +32,15 @@ export class SearchTeamPage implements OnInit {
     this.getTeams()
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.teams = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }

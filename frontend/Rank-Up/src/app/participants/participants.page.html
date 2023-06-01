@@ -1,15 +1,18 @@
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="backgroundUser">
 
     <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" class="iconaBack" size="large"></ion-icon>
     </ion-button>
     <h1 class="title">{{team.name}}</h1>
-    <h2 class="team-code">Codice: {{team.codice}}</h2>
+    <h2 class="team-code">Codice: {{team.code}}</h2>
 
     <ion-searchbar class="search" (ionInput)="ricerca($event)" placeholder="Cerca"></ion-searchbar>
 
-    <div class="search">
+    <div class="search" *ngIf="team.pointVisibility">
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
         <ion-segment-button value=1>
           <ion-label class="segmentText">Nome</ion-label>

@@ -81,6 +81,18 @@ export class RequestHistoryPage implements OnInit {
       this.getTaskRejected();
     }
 
+    handleRefresh(event: any) {
+      setTimeout(() => {
+        // Any calls to load data go here
+        this.rulesCompleted = [];
+        this.rulesRejected = [];
+        this.tasksCompleted = [];
+        this.tasksRejected = [];
+        this.prizes = [];
+        this.ngOnInit();
+        event.target.complete();
+      }, 1000);
+    }
 
   sortByData() {
     this.rulesCompleted.sort((a, b) => {

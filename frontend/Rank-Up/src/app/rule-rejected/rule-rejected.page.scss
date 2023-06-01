@@ -59,6 +59,10 @@ ion-textarea{
     --background: var(--ion-color-admin);
 }
 
-label {
-    
-}
+.label {
+    margin-bottom: -3vh;
+    margin-top: 3vh;
+    text-align: left;
+    margin-left: 15vh;
+    width: 100%;
+  }

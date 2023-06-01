@@ -10,6 +10,9 @@ import { Rule } from '../models/rule/rule';
 import { Notification } from '../models/notification/notification';
 import { NotificationService } from '../services/notification/notification.service';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
+import { Team } from '../models/team/team';
+import { Admin } from '../models/admin/admin';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-send-rule',
@@ -23,6 +26,9 @@ export class SendRulePage implements OnInit {
   public data: any;
   public idRule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public ruleCompleted: RuleCompleted
+  team: Team;
+  admins: Admin[];
+  public rule: Rule;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -48,7 +54,9 @@ export class SendRulePage implements OnInit {
         this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
           console.log(data)
         });
+        this.location.back();
       }
+      
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
@@ -61,18 +69,29 @@ export class SendRulePage implements OnInit {
     private ruleCompletedService: RuleCompletedService,
     private router: Router,
     private notificationService: NotificationService,
-    private adminReciveNotificationService: AdminReciveNotificationService
+    private adminReciveNotificationService: AdminReciveNotificationService,
+    private adminService: AdminService
   ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
     this.notification = new Notification();
+    this.team = new Team();
+    this.admins = [];
+    this.rule = new Rule();
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
+    if (localStorage.getItem('team') == null || localStorage.getItem('team') == '') {
+      this.router.navigate(['user/home'])
+    }
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
+
     if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
+
+    this.idRule = this.rule.id;
     
     this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data
@@ -109,8 +128,9 @@ export class SendRulePage implements OnInit {
   sendNotification() {
     this.notification.title = "Regola completata";
     this.notification.description = "La regola [Nome Regola] e' stata completata da " + this.user.username;
-    this.notificationService.newNotification(this.notification, 1).subscribe(n => {
+    this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
+
       this.addAdminNotification(n);
     },(error: Response) => {
       if (error.status == 400) {
@@ -122,15 +142,31 @@ export class SendRulePage implements OnInit {
     });
   }
 
-  addAdminNotification(n: Notification){
-    this.adminReciveNotificationService.addNotification(/*this.admin.id*/1, n.id).subscribe(n => {
-      console.log(n);
+  getAdmins() {
+    this.adminService.getAdmins(this.team.codice).subscribe(result => {
+      this.admins = result;
+      console.log(this.admins);
     },(error: Response) => {
       if (error.status == 400) {
-      console.log("Errore 400");
-    } else {
-      console.log("Unexpected error");
-    }
-    console.log(error);});
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);
+    });
+  }
+
+  addAdminNotification(n: Notification){
+    this.admins.forEach(admin => {
+      this.adminReciveNotificationService.addNotification(admin.id, n.id).subscribe(n => {
+        console.log(n);
+      },(error: Response) => {
+        if (error.status == 400) {
+        console.log("Errore 400");
+      } else {
+        console.log("Unexpected error");
+      }
+      console.log(error);});
+    });
   }
 }

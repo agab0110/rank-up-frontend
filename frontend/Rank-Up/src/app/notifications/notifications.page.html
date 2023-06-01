@@ -1,5 +1,9 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="bg">
 
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <div [ngSwitch]="type">
 
     <div *ngSwitchCase="'utente'" class="backgroundUser">
@@ -20,7 +24,7 @@
       </ion-segment>
 
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" *ngFor="let n of this.nUser" [routerLink]="['/user/user-notification-description']">
+        <ion-item class="item" *ngFor="let n of this.nUser" [routerLink]="['/user/user-notification-description, n.id']">
           <ion-label class="label">{{n.date}}</ion-label>
           <ion-label class="label">{{n.title}}</ion-label>
           <ion-label class="label">{{n.teamName}}</ion-label>
@@ -46,7 +50,7 @@
       </ion-segment>
 
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" *ngFor="let n of this.nAdmin" [routerLink]="['/admin/admin-notification-description']">
+        <ion-item class="item" *ngFor="let n of this.nAdmin" (click)="navigate(n.id)">
           <ion-label class="label">{{n.date}}</ion-label>
           <ion-label class="label">{{n.title}}</ion-label>
           <ion-label class="label">{{n.teamName}}</ion-label>

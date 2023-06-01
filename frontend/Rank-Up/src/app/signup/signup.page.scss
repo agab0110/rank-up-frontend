@@ -39,9 +39,18 @@ app-bt-user-small{
 }
 
 .error-message {
-  align-items: center;
   color: red;
   font-size: 12px;
   margin-top: -2vh;
-  margin-bottom: 4vh;
+  margin-bottom: 1vh;
+  align-items: left;
 }
+
+.error-message ul {
+  list-style: none;
+  width: 110%;
+  padding-left: 0vh;
+  margin-top: 0vh;
+  margin-bottom: 0;
+}
+

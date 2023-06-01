@@ -1,11 +1,14 @@
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="backgroundUser">
     <ion-button class="leftIcon" fill="clear" (click)="backButton()">
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
     <h1 class="title">{{team.name}}</h1>
-    <div id="div-code">Codice: {{team.codice}}</div>
+    <div id="div-code">Codice: {{team.code}}</div>
 
     <div>
       <ion-segment value="1" (ionChange)="segmentChanged($event)">
@@ -19,8 +22,8 @@
     </div>
 
     <div id="div-rules-tasks" scroll="true" *ngIf="!stato">
-      <ion-list id="div-rule-task" *ngFor="let rule of rules">
-          <ion-item id="div-rule-task" [routerLink] = "['/send-rule']">
+      <ion-list id="div-rule-task" *ngFor="let rule of rules" >
+          <ion-item id="div-rule-task" (click)="clickRule(rule)" [routerLink] = "['/send-rule']">
             <ion-label class="label" >{{rule.name}}</ion-label>
           <ion-button class="fakebutton" [disabled]="true" >{{rule.points}}</ion-button>
 
@@ -35,7 +38,7 @@
 
     <div id="div-rules-tasks" scroll="true" *ngIf="stato">
       <ion-list id="div-rule-task" *ngFor="let task of tasks">
-          <ion-item id="div-rule-task" [routerLink] = "['/send-task']">
+          <ion-item id="div-rule-task" (click)="clickTask(task)" [routerLink] = "['/send-task']">
             <ion-label class="label">{{task.name}}</ion-label>
           <ion-button class="fakebutton" [disabled]="true">{{task.points}}</ion-button>
 

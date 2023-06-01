@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Prize } from 'src/app/models/prize/prize';
@@ -18,8 +18,9 @@ export class PrizeService {
     );
   }
 
-   public newPrize(prize: Prize) {
+   public newPrize(prize: Prize, name:string ) {
+    const params = new HttpParams().set('name', name);
     return this.http.post<Prize>(
-    this.baseUrl + "/createPrize", prize);
+    this.baseUrl + "/createPrize", prize,{params});
    }
 }

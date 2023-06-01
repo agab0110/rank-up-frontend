@@ -44,6 +44,14 @@ export class AccessRequestsListPage implements OnInit {
        this.getRequest();
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.userJoin = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
+
   backButton() {
     this.location.back();
   }
