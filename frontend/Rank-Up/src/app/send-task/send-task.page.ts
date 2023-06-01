@@ -20,6 +20,7 @@ export class SendTaskPage implements OnInit {
   public data: any;
   public idTask: any = 1; //l'id deve essere ricevuto dalla pagina precedente
   public taskCompleted: TaskCompleted;
+  public task: Task;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -60,6 +61,7 @@ export class SendTaskPage implements OnInit {
   ) { 
     this.taskCompleted = new TaskCompleted();
     this.user = new User();
+    this.task = new Task();
   }
 
   ngOnInit() {
@@ -73,6 +75,8 @@ export class SendTaskPage implements OnInit {
       console.log(data)
     });
     this.location.back();
+
+    this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
   }
 
   loadFileFromDevice(event: any) {

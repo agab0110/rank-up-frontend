@@ -8,9 +8,9 @@
     <h1 align="center" class="title">Task</h1>
 
     <div class="description" *ngIf="this.data">
-      <app-user-element-bar labelText={{this.data.taskName}} buttonText="Task"></app-user-element-bar>
+      <app-user-element-bar labelText={{task.name}} buttonText="Task"></app-user-element-bar>
       <br>
-      <app-user-element-bar labelText={{this.data.points}} buttonText="Punti"></app-user-element-bar>
+      <app-user-element-bar labelText={{task.points}} buttonText="Punti"></app-user-element-bar>
     </div>
 
     <div class="buttons">
