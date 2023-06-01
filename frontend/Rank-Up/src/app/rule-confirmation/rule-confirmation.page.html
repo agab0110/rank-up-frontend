@@ -5,8 +5,8 @@
         <div class="barra" (click)="mostra()"></div>
       </div>
       <h1 class="hde">Attività confermata</h1>
-      <ion-input [(ngModel)]="bonusPoints" [type]="'number'" [placeholder]="'Bonus/Malus'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-input [(ngModel)]="comment" [type]="'text'" [placeholder]="'Commento'" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="bonusPoints" [type]="'number'" label="Bonus/Malus" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="comment" [type]="'text'" label="Commento" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
     </div>
 
     <div class="chiuso" *ngIf="!stato">

@@ -11,12 +11,21 @@
         Username già in uso o campi mancanti
      </ul>
       <ion-input [(ngModel)]="user.name" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      
       <ion-input [(ngModel)]="user.surname" [type]="'text'" label="Cognome" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+
       <ion-input [(ngModel)]="user.email" (ionInput)="emailChecker()" [type]="'text'" label="Email" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
       <ion-text *ngIf="emailErrorMessage" class="email-error-message">{{emailErrorMessage}}</ion-text>
+
       <ion-input [(ngModel)]="user.username" (ionInput)="username_checker()" [type]="'text'" label="Username" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-text *ngIf="log_error_username" class="error-message">{{log_error_username}}</ion-text>
+
       <ion-input [(ngModel)]="password" (ionInput)="password_checker()" type="password" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
-      <ion-text *ngIf="log_error_password" class="error-message">{{log_error_password}}</ion-text>
+      <ion-text class="error-message">
+        <ul *ngIf="log_error_password">
+          <li *ngFor="let error of log_error_password.split(',')">{{ error }}</li>
+        </ul>
+      </ion-text>
 
       <ion-button [disabled]="!(password_checker() && username_checker() && emailChecker())" id="btUserSmall" (click)="signup()">Registrati</ion-button>
     </div>

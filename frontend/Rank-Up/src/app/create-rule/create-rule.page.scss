@@ -18,7 +18,7 @@ ion-textarea {
     height: 18vh;
     width: 100%;
 
-    margin-top: 4vh;
+    margin-top: 0vh;
 
     text-indent: 3vh;
 }
@@ -26,4 +26,9 @@ ion-textarea {
 .create-rule-button {
     text-align: center;
     margin-top: 9vh;
+}
+
+.label {
+    margin-left: 2vh;
+    margin-bottom: -19vh;
 }

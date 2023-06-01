@@ -16,20 +16,18 @@ export class SignupPage {
   errorCheck: boolean = false;
   b:boolean = false;
 
-  log_error_username = 'Inserisci un username valido';
+  log_error_username: string = '';
   log_error_password: string = '';
+  emailErrorMessage: string = '';
 
-  lenUsername = 3;
+  lenUsername = 2;
   lenPassword = 6;
   passwordTouched: boolean = false;
   passwordValid: boolean = false;
   
+  //ion_touched = true;
+  //ion_invalid = true;
 
-  ion_touched = true;
-  ion_invalid = true;
-
-  emailErrorMessage: string = '';
-  emailDuplicateError: string = '';
 
   constructor(
     private location: Location,
@@ -60,29 +58,36 @@ export class SignupPage {
         console.log(error);
       });
   }
-  username_checker() {
-    const div = document.getElementById('username');
-    if (this.user.username !== '' && this.user.username !== undefined && this.user.username !== null) {
 
-      if (this.user.username.length < this.lenUsername && this.user.username !== '') {
-        this.log_error_username = 'L\'username deve contenere almeno ' + this.lenUsername + ' caratteri';
+  username_checker() {
+    const usernameControl = this.user.username;
+  
+    if (usernameControl && usernameControl.trim() !== '') {
+      const lengthPattern = new RegExp(`^.{${this.lenUsername},}`);
+  
+      let errorMessages = [];
+  
+      if (!lengthPattern.test(usernameControl)) {
+        errorMessages.push(`L'username deve essere lungo almeno ${this.lenUsername} caratteri`);
+      }
+  
+      if (errorMessages.length > 0) {
+        this.log_error_username = errorMessages.join('');
+        const div = document.getElementById('username');
+        if (div != null) div.style.color = 'var(--ion-color-admin)';
+        return false;
       } else {
-          const a = new RegExp("^[a-zA-Z0-9._-]+$");
-          if (!a.exec(this.user.username)) {
-            this.log_error_username = 'I caratteri speciali consentiti sono . _ -'
-          } else {
-            this.log_error_username = 'Username valido'
-            if (div != null) div.style.color = 'var(--ion-color-user)';
-            return true;
-          }
-        }
+        this.log_error_username = '';
+        const div = document.getElementById('username');
+        if (div != null) div.style.color = 'var(--ion-color-user)';
+        return true;
+      }
     } else {
-      this.log_error_username = 'Inserisci un username valido';
+      this.log_error_username = 'Il campo username non puo\' essere vuoto';
+      const div = document.getElementById('username');
       if (div != null) div.style.color = 'gray';
       return false;
     }
-    if (div != null) div.style.color = 'var(--ion-color-admin)';
-    return false;
   }
 
   password_checker() {
@@ -123,19 +128,14 @@ export class SignupPage {
         const div = document.getElementById('password');
         if (div != null) div.style.color = 'var(--ion-color-user)';
         return true;
-      }
+        }
     } else {
-      this.log_error_password = 'Inserisci una password valida';
+      this.log_error_password = 'La password non puo\' essere vuota';
       const div = document.getElementById('password');
       if (div != null) div.style.color = 'gray';
       return false;
     }
-    }
-
-  passwordInputChanged() {
-    this.passwordTouched = true;
-    this.passwordValid = this.password_checker();
-    }
+  }
 
   emailChecker() {
     const emailControl = this.user.email;
@@ -157,7 +157,6 @@ export class SignupPage {
       return this.b;
     }
   }
-
 
   backButton() {
     this.location.back();

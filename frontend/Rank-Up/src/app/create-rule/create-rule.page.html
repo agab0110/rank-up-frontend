@@ -8,13 +8,14 @@
     <h2 class="title">Crea una Regola<br/>per {{team.name}}</h2>
 
     <div class="text-input">
-      <ion-input [(ngModel)]="rule.name" class="formInput" [type]="'text'" [placeholder]="'Nome'" fill="outline" shape="round" mode="md"></ion-input>
+      <ion-input [(ngModel)]="rule.name" class="formInput" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
 
       <div class="input-div">
-        <ion-input [(ngModel)]="rule.points" class="formInput" [type]="'text'" [placeholder]="'Punti'" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="rule.points" class="formInput" [type]="'text'" label="Punti" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
       </div>
 
-      <ion-textarea [(ngModel)]="rule.description" fill="outline" placeholder="Descrizione"></ion-textarea>
+      <ion-label class="label">Descrizione:</ion-label>
+      <ion-textarea [(ngModel)]="rule.description" fill="outline"></ion-textarea>
 
       <div class="create-rule-button">
           <app-bt-admin-small text="Crea Regola" (click)="createRule()" (click)="backButton()"></app-bt-admin-small>
