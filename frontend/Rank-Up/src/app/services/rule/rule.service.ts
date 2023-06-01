@@ -27,7 +27,7 @@ export class RuleService {
   }
 
   public getRule(idRule: any) {
-    return this.http.get(
+    return this.http.get<Rule>(
       this.baseUrl + "/rule/" + idRule
     );
   }
