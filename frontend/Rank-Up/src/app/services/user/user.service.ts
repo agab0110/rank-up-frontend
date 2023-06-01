@@ -23,17 +23,17 @@ export class UserService {
     );
   }
 
-  public getAllUsers() : Observable<User[]> {
+  public getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(
       this.userUrl + "/getAllUsers"
     );
   }
 
-    public changeUsername(teamId: number, username: string){
-      return this.http.patch<User>(
-        this.userUrl + "/changeUsername/" + teamId, username
-      );
-    }
+  public changeUsername(teamId: number, username: string) {
+    return this.http.patch<User>(
+      this.userUrl + "/changeUsername/" + teamId, username
+    );
+  }
 
   public changeName(userId: number, newName: string) {
     return this.http.patch<User>(
@@ -57,5 +57,9 @@ export class UserService {
     return this.http.patch<User>(
       this.userUrl + "/changePassword/" + userId, newPassword
     );
+  }
+
+  public getNewUsers(idTeam: number) {
+    return this.http.get(this.userUrl + "/getNewUsers/" + idTeam);
   }
 }

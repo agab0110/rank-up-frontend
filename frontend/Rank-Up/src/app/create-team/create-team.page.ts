@@ -158,20 +158,6 @@ export class CreateTeamPage implements OnInit {
         this.router.navigate(['/user/home']);
         this.confirmationAlert();
       })
-
-      /*this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
-        console.log("Admin aggiunto con successo");
-        console.log(response);
-        this.router.navigate(['/user/home']);
-      }, (error: Response) => {
-        if (error.status == 400)
-          console.log("400 error");
-        else {
-          console.log('An unexpected error occured');
-        }
-        console.log(error);
-        this.router.navigate(['/user/home']);
-      });*/
     }else{
       this.rejectedAlert();
     }
