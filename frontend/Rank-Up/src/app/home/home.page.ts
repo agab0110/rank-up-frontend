@@ -205,7 +205,7 @@ export class HomePage implements OnInit{
     this.notification.description = "L'utente " + this.user.username +  " ha richiesto l'accesso al team " + this.searchedTeam.name;
     this.notificationService.newNotification(this.notification, this.searchedTeam.codice).subscribe(n => {
       console.log(n);
-
+      this.getAdmins();
       this.addAdminNotification(n);
     },(error: Response) => {
       if (error.status == 400) {

@@ -18,4 +18,10 @@ export class UserReciveNotificationService {
       this.userReciveNotificationUrl + "/getNotification/" + idUser
     );
   }
+
+  public addNotification(idUser: number, idNotification: number){
+    return this.http.post<UserReciveNotification>(
+      this.userReciveNotificationUrl + "/newNotification/" + idUser + "/" + idNotification, null
+    )
+  }
 }
