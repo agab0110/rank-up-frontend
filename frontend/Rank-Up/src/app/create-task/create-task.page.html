@@ -21,14 +21,14 @@
       <ion-label class="label">Descrizione:</ion-label>
       <ion-textarea [(ngModel)]="task.desctiption" fill="outline"></ion-textarea>
 
-      <div class="button-div">
-        <ion-button (click)="presentAlert()" class="exclusive-button">
-          <div class="internal-div">
-            <span class="button-text">Rendi esclusivo per...</span>
-            <ion-icon class="button-icon" name="add-outline" size="large"></ion-icon>
-          </div>
-        </ion-button>
-      </div>
+      <!--<div class="button-div">-->
+      <!--  <ion-button (click)="presentAlert()" class="exclusive-button">-->
+      <!--    <div class="internal-div">-->
+      <!--      <span class="button-text">Rendi esclusivo per...</span>-->
+      <!--      <ion-icon class="button-icon" name="add-outline" size="large"></ion-icon>-->
+      <!--    </div>-->
+      <!--  </ion-button>-->
+      <!--</div>-->
 
       <div class="create-task-button">
         <app-bt-admin-small text="Crea Task" (click)="backButton()" (click)="createTask()"></app-bt-admin-small>

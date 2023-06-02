@@ -14,6 +14,7 @@ export class LoginPage implements OnInit{
   user: User;
   password!: string;
   errorCheck: boolean = false;
+  showPassword: boolean = false;
   loginForm!: FormGroup;
 
   constructor(
@@ -63,4 +64,13 @@ export class LoginPage implements OnInit{
     });
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      event.preventDefault(); // Ignora il carattere spazio
+    }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 }
