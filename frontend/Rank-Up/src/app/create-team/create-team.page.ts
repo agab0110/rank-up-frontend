@@ -61,7 +61,11 @@ export class CreateTeamPage implements OnInit {
       this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
         console.log("Admin aggiunto con successo");
         console.log(response);
-        localStorage.setItem('admin', JSON.stringify(response));
+        this.adminService.getAdmin(this.team.codice, this.user.id).subscribe(response => {
+          console.log(response);
+          this.admin = response;
+          localStorage.setItem('admin', JSON.stringify(this.admin));
+        });
       }, (error: Response) => {
         if (error.status == 400)
           console.log("400 error");
