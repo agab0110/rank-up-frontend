@@ -131,8 +131,13 @@ export class RuleConfirmationPage implements OnInit {
 
   confirmActivity() {
     this.ruleCompleted.comment = this.comment;
-    this.ruleCompleted.bonus = this.bonusPoints;
     this.status = 1;
+
+    if (this.bonusPoints == null) {
+      this.ruleCompleted.bonus = 0;
+    } else {
+      this.ruleCompleted.bonus = this.bonusPoints;
+    }
 
     this.ruleCompletedService.ruleAcceptation(this.id, this.status, this.ruleCompleted).subscribe(r => {
       console.log("patch succesfull");
