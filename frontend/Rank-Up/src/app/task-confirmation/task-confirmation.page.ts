@@ -117,6 +117,8 @@ export class TaskConfirmationPage implements OnInit {
       this.sendNotification(status);
 
     })
+
+    this.backButton();
   }
 
   sendNotification(status: number) {
