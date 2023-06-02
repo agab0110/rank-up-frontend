@@ -155,9 +155,20 @@ export class CreateTeamPage implements OnInit {
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
+
         this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
         this.router.navigate(['/user/home']);
         this.confirmationAlert();
+      },(error: Response) => {
+        console.log(error);
+        if (error.status == 400){
+          console.log("400 error");
+          this.duplicateNameAlert();
+        }
+        else {
+          console.log('An unexpected error occured');
+          this.rejectedAlert();
+        }
       });
     }else{
       this.rejectedAlert();
@@ -167,6 +178,19 @@ export class CreateTeamPage implements OnInit {
   async confirmationAlert() {
     const alert = await this.alertController.create({
       header: 'Team creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  async duplicateNameAlert() {
+    const alert = await this.alertController.create({
+      header: 'Team non creato!Nome già presente',
       buttons: [
         {
           text: 'OK',
