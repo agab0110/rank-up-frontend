@@ -32,4 +32,8 @@ export class TaskService {
       this.baseUrl + "/createTask", task, {params}
       );
   }
+
+  public deliteTask(idTask:number, teamId:number){
+    return this.http.delete<Task>(this.baseUrl + "/deleteTask/"+idTask + "/"+ teamId);
+  }
 }

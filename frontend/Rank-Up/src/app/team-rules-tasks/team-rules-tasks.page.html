@@ -40,7 +40,7 @@
         </ion-item>
           <ion-item-options side="end">
             <ion-item-option>
-              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+              <ion-icon (click)="presentAlert1(rule.id)" name="trash-outline" size="large" color="danger"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
@@ -57,7 +57,7 @@
         </ion-item>
           <ion-item-options side="end">
             <ion-item-option>
-              <ion-icon name="trash-outline" size="large" color="danger"></ion-icon>
+              <ion-icon (click)="presentAlert(task.id)" name="trash-outline" size="large" color="danger"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
