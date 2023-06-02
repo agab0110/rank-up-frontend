@@ -289,6 +289,8 @@ export class UserProfilePage implements OnInit {
   }
   
   async presentAlert5() {
+    this.showPassword = false;
+
     const alert = await this.alertController.create({
       header: 'Inserisci nuova password:',
       inputs: [
