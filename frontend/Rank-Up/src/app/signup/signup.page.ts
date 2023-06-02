@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
 import { SHA3 } from 'crypto-js';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +33,8 @@ export class SignupPage {
   constructor(
     private location: Location,
     private router: Router,
-    private service: UserService
+    private service: UserService,
+    private alertController: AlertController
     ) {
     this.user = new User();
   }
@@ -50,8 +52,10 @@ export class SignupPage {
         this.router.navigate(['/login']);
       }, (error: Response) => {  
         this.errorCheck = true;
-        if(error.status == 400)  
-          console.log("400 error");  
+        if(error.status == 400){
+          console.log("400 error");
+          this.duplicateEmailAlert();
+        }
         else {  
           console.log('An unexpected error occured');   
         }
@@ -160,5 +164,18 @@ export class SignupPage {
 
   backButton() {
     this.location.back();
+  }
+  async duplicateEmailAlert() {
+    const alert = await this.alertController.create({
+      header: 'Utente non Registrato! Email gia presente',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
