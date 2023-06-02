@@ -49,7 +49,7 @@ export class RuleConfirmationPage implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('team') == null || localStorage.getItem('team') == '')
       this.router.navigate(['user/home']);
-    this.user = JSON.parse(localStorage.getItem('team') || '{}');
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
 
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
@@ -152,10 +152,10 @@ export class RuleConfirmationPage implements OnInit {
   sendNotification(status: number) {
     if (status == 1) {
       this.notification.title = "Conferma regola";
-      this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato confermato";
+      this.notification.description = "La regola " + this.rule.name +  " è stata confermata";
     } else {
-      this.notification.title = "Rifiuto regola";
-      this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato rifiutato";
+      this.notification.title = "Regola rifiutata";
+      this.notification.description = "La regola " + this.rule.name +  " è stata rifiutata";
     }
     
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
