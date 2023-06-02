@@ -20,7 +20,7 @@
     </ion-button>
 
     <h1 class="title" *ngIf="this.data">Richiesta {{this.data.username}} <br/>per  {{this.data.name}}</h1>
-    <ion-button slot="start" class="btn" *ngIf="this.data">Vedi Allegato</ion-button>
+    <ion-button slot="start" class="btn" *ngIf="this.data" href={{this.data.attached}}>Vedi Allegato</ion-button>
     <ion-button class="notBtn" *ngIf="this.data">Data: {{this.data.timestamp}}</ion-button>
 
     <div class="subTitle">Accettare richiesta di completamento?</div>

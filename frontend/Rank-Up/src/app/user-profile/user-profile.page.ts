@@ -48,7 +48,6 @@ export class UserProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('teamId', '');
     if (localStorage.getItem('user') == null || localStorage.getItem('user') == '')
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -62,6 +61,15 @@ export class UserProfilePage implements OnInit {
       this.user_photo = JSON.parse(JSON.stringify(data)).photo;
     });
 
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.user = new User();
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
   }
 
   async emptyAlert() {

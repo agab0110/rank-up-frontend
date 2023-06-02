@@ -17,8 +17,6 @@ import { Notification } from '../models/notification/notification';
   styleUrls: ['./rule-confirmation.page.scss'],
 })
 export class RuleConfirmationPage implements OnInit {
-
-
   data: any
   stato = false
   public id!: number;

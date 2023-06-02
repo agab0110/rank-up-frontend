@@ -110,6 +110,7 @@ export class SendRulePage implements OnInit {
     reader.onerror = (error) => {
       console.log('Error: ', error);
     };
+    this.ruleCompleted.attached = this.blobURL || '';
   }
 
   closeModal() {
