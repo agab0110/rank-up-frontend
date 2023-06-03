@@ -13,6 +13,7 @@ import { AdminReciveNotificationService } from '../services/adminReciveNotificat
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { AdminService } from '../services/admin/admin.service';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-send-rule',
@@ -29,6 +30,7 @@ export class SendRulePage implements OnInit {
   team: Team;
   admins: Admin[];
   public rule: Rule;
+  file: any;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -50,13 +52,26 @@ export class SendRulePage implements OnInit {
           rule.id = this.idRule;
           this.ruleCompleted.rule = rule;
         }
-    
-        this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
-          console.log(data)
-        });
-        this.location.back();
+
+        if(this.file){
+          this.fileService.uploadFile(this.file).subscribe((data: any) => {
+            console.log(data);
+            let attached = data.id;
+            this.ruleCompleted.attached = attached;
+            this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
+              console.log(data)
+            });
+            this.location.back();
+          }), (error: any) => {
+            console.log(error);
+          };
+        } else {
+          this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
+            console.log(data)
+          });
+          this.location.back();
       }
-      
+      }      
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
@@ -70,6 +85,7 @@ export class SendRulePage implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private adminReciveNotificationService: AdminReciveNotificationService,
+    private fileService: FileService,
     private adminService: AdminService
   ) { 
     this.ruleCompleted = new RuleCompleted();
@@ -100,20 +116,11 @@ export class SendRulePage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
-    this.ruleCompleted.attached = this.blobURL || '';
+    this.file = event.target.files[0];
   }
 
   closeModal() {
+    this.file = null;
     this.blob = null;
     this.blobURL = null;
     this.modal.dismiss();
