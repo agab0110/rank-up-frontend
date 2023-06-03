@@ -116,6 +116,7 @@ export class SendRulePage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
+    event.target.files = null;
     this.file = event.target.files[0];
   }
 
