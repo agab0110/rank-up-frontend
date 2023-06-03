@@ -10,6 +10,7 @@ import { NotificationService } from '../services/notification/notification.servi
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { Notification } from '../models/notification/notification';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-rule-confirmation',
@@ -28,6 +29,8 @@ export class RuleConfirmationPage implements OnInit {
   status!: number;
   team: Team;
   notification: Notification;
+  file: any;
+  url: any;
 
   constructor(
     private alertController: AlertController,
@@ -36,7 +39,8 @@ export class RuleConfirmationPage implements OnInit {
     private ruleCompletedService: RuleCompletedService,
     private notificationService: NotificationService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private userReciveNotificationService: UserReciveNotificationService
+    private userReciveNotificationService: UserReciveNotificationService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.ruleCompleted = new RuleCompleted();
@@ -60,7 +64,12 @@ export class RuleConfirmationPage implements OnInit {
 
     this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
-      console.log(data)
+      console.log(data);
+      this.fileService.getFile(this.data.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
     })
   }
 

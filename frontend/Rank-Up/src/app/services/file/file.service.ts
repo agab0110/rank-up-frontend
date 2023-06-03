@@ -25,6 +25,6 @@ export class FileService {
 
   public getFile(id: string) {
     return this.http.get(
-      this.baseUrl + "/files/" + id);
+      this.baseUrl + "/fileUrl/" + id);
   }
 }
