@@ -144,7 +144,7 @@ export class TeamRulesTasksPage implements OnInit {
           handler: () => {
            this.ruleservice.deliteRule(idRule,this.team.codice).subscribe(data =>{
             console.log(data);
-            this.confirmationAlert();
+            this.confirmationAlert1();
            });
             
           }
@@ -155,6 +155,19 @@ export class TeamRulesTasksPage implements OnInit {
         },
       ],
     });
+    await alert.present();
+  }
+  async confirmationAlert1() {
+    const alert = await this.alertController.create({
+      header: 'regola eliminato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
     await alert.present();
   }
 }
