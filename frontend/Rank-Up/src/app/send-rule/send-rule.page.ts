@@ -43,9 +43,6 @@ export class SendRulePage implements OnInit {
       cssClass: 'alert-button-blue',
       handler: () => {
         if(this.data) {
-          if(this.blobURL) {
-            this.ruleCompleted.attached = this.blobURL;
-          }
           this.ruleCompleted.status = 0;
           this.ruleCompleted.user = this.user;
           const rule = new Rule();
@@ -75,8 +72,6 @@ export class SendRulePage implements OnInit {
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
-  blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
 
   constructor(
     private location: Location,
@@ -122,8 +117,6 @@ export class SendRulePage implements OnInit {
 
   closeModal() {
     this.file = null;
-    this.blob = null;
-    this.blobURL = null;
     this.modal.dismiss();
   }
 
