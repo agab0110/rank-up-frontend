@@ -53,6 +53,7 @@ export class SearchTeamPage implements OnInit {
           text: 'Sì',
           cssClass: 'alert-button-blue',
           handler: () => {
+            this.joinPublicTeam();
             this.userJoinsTeamService.addUser(idTeam, this.user.id).subscribe(data => {
               console.log(data)
             })
@@ -83,5 +84,20 @@ export class SearchTeamPage implements OnInit {
     } else {
       this.getTeams()
     }
+  }
+
+  async joinPublicTeam() {
+    const alert = await this.alertController.create({
+      header: 'Accesso al team effettuato!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

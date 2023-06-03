@@ -51,6 +51,9 @@ export class LoginPage implements OnInit{
       console.log(this.user.password)
       this.router.navigate(['user/home']);
       localStorage.setItem('user', JSON.stringify(this.user));
+      this.user.username = '';
+      this.password = ''; // Pulisci il valore del campo di input
+      this.showPassword = false;
     }, (error: Response) => {
       this.errorCheck = true;
       if(error.status == 400) {
