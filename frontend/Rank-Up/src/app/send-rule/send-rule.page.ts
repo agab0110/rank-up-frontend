@@ -22,8 +22,9 @@ import { FileService } from '../services/file/file.service';
 })
 
 export class SendRulePage implements OnInit {
-  notification: Notification;
+  
   public user: User;
+  notification: Notification;
   public data: any;
   public idRule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public ruleCompleted: RuleCompleted
@@ -68,7 +69,7 @@ export class SendRulePage implements OnInit {
           });
           this.location.back();
       }
-      }      
+      }
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
@@ -82,7 +83,7 @@ export class SendRulePage implements OnInit {
     private adminReciveNotificationService: AdminReciveNotificationService,
     private fileService: FileService,
     private adminService: AdminService
-  ) { 
+  ) {
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
     this.notification = new Notification();
@@ -103,7 +104,7 @@ export class SendRulePage implements OnInit {
     this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
 
     this.idRule = this.rule.id;
-    
+
     this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data
       console.log(data)

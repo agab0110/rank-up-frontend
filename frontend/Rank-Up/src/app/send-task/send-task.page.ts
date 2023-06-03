@@ -13,6 +13,7 @@ import { Notification } from '../models/notification/notification';
 import { NotificationService } from '../services/notification/notification.service';
 import { AdminService } from '../services/admin/admin.service';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-send-task',
@@ -24,12 +25,13 @@ export class SendTaskPage implements OnInit {
 
   public user: User;
   public data: any;
-  public idTask: any = 1; //l'id deve essere ricevuto dalla pagina precedente
+  public idTask: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public taskCompleted: TaskCompleted;
   public task: Task;
   team: Team;
   admins: Admin[];
   notification: Notification;
+  file: any;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -42,20 +44,31 @@ export class SendTaskPage implements OnInit {
       cssClass: 'alert-button-blue',
       handler: () => {
         if(this.data) {
-          if(this.blobURL) {
-            this.taskCompleted.attached = this.blobURL;
-          }
           this.taskCompleted.status = 0;
           this.taskCompleted.user = this.user;
           const task = new Task();
           task.id = this.idTask;
           this.taskCompleted.task = task;
         }
-    
-        this.taskCompletedService.insertTaskCompleted(this.taskCompleted).subscribe((data: any) => {
-          console.log(data)
-        });
-        this.location.back();
+
+        if(this.file){
+          this.fileService.uploadFile(this.file).subscribe((data: any) => {
+            console.log(data);
+            let attached = data.id;
+            this.taskCompleted.attached = attached;
+            this.taskCompletedService.insertTaskCompleted(this.taskCompleted).subscribe(data => {
+              console.log(data)
+            });
+            this.location.back();
+          }), (error: any) => {
+            console.log(error);
+          };
+        } else {
+          this.taskCompletedService.insertTaskCompleted(this.taskCompleted).subscribe(data => {
+            console.log(data)
+          });
+          this.location.back();
+      }
       }
     }
   ];
@@ -70,8 +83,9 @@ export class SendTaskPage implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private adminService: AdminService,
-    private adminReciveNotificationService: AdminReciveNotificationService
-  ) { 
+    private adminReciveNotificationService: AdminReciveNotificationService,
+    private fileService: FileService
+  ) {
     this.taskCompleted = new TaskCompleted();
     this.user = new User();
     this.task = new Task();
@@ -92,31 +106,22 @@ export class SendTaskPage implements OnInit {
     this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
 
     this.idTask = this.task.id;
-  
+
     this.taskService.getTask(this.idTask).subscribe(data => {
       this.data = data
       console.log(data)
     });
 
-    
+
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+    event.target.files = null;
+    this.file = event.target.files[0];
   }
 
   closeModal() {
-    this.blob = null;
-    this.blobURL = null;
+    this.file = null;
     this.modal.dismiss();
   }
 

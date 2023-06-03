@@ -11,6 +11,7 @@ import { NotificationService } from '../services/notification/notification.servi
 import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -29,6 +30,8 @@ export class TaskConfirmationPage implements OnInit {
   private taskCompleted: TaskCompleted;
   notification: Notification;
   team: Team;
+  file: any;
+  url: any;
 
   constructor(
     private alertController: AlertController,
@@ -37,7 +40,8 @@ export class TaskConfirmationPage implements OnInit {
     private taskCompletedService: TaskCompletedService,
     private notificationService: NotificationService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private userReciveNotificationService: UserReciveNotificationService
+    private userReciveNotificationService: UserReciveNotificationService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.taskCompleted = new TaskCompleted();
@@ -62,6 +66,11 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
       console.log(data)
+      this.fileService.getFile(this.data.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
     })
   }
 
@@ -129,7 +138,7 @@ export class TaskConfirmationPage implements OnInit {
       this.notification.title = "Rifiuto task";
       this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato rifiutato";
     }
-    
+
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
       this.addUserNotification(n);
