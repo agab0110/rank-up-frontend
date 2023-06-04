@@ -111,7 +111,7 @@ export class PrizesPagePage implements OnInit {
   }
 
   getUsersPoints(idTeam: number) {
-    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response => {
+    this.userJoinsTeamService.getPartecipantsPoints(this.team.codice).subscribe(response => {
       this.userJoin = response;
     }, (error: Response) => {
       if (error.status == 400)
