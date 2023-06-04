@@ -55,6 +55,7 @@ export class SendTaskPage implements OnInit {
         this.taskCompletedService.insertTaskCompleted(this.taskCompleted).subscribe((data: any) => {
           console.log(data)
         });
+        this.location.back();
       }
     }
   ];

@@ -115,15 +115,17 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompleted.task = new Task();
     this.taskCompleted.task.id = this.task.id_task
     this.taskCompleted.user = new User();
-    this.taskCompleted.user.id = this.user.id
+    this.taskCompleted.user.id = this.task.id_user
+    
     this.taskCompleted.task.team = new Team();
     this.taskCompleted.task.team.codice = this.team.codice;
     
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.taskCompleted).subscribe(data => {
       console.log(data);
       this.sendNotification(status);
-      this.router.navigate(['/admin/pending-tasks']);
+      this.location.back();
     })
+    this.location.back();
   }
 
   sendNotification(status: number) {

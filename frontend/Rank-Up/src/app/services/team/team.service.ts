@@ -32,12 +32,12 @@ export class TeamService {
     return this.http.patch<Team>(this.teamUrl + "/changePhoto" + "/" + userId, photo);
   }
 
-  public getTeam(nameTeam: any) {
-    return this.http.get(this.teamUrl + "/researchTeam/" + nameTeam);
+  public getTeam(idUser: number, nameTeam: any) {
+    return this.http.get(this.teamUrl + "/researchTeam/" + idUser + "/" + nameTeam);
   }
 
-  public getAllTeams() {
-    return this.http.get(this.teamUrl + "/getAllTeams");
+  public getAllTeams(idUser: number) {
+    return this.http.get(this.teamUrl + "/getAllTeams/" + idUser);
   }
 
   public newTeam(team: Team) {
