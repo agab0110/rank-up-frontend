@@ -4,6 +4,7 @@ import { Rule } from '../models/rule/rule';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { User } from '../models/user/user';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-rule-rejected',
@@ -15,10 +16,13 @@ export class RuleRejectedPage implements OnInit {
   ruleCompleted: RuleCompleted;
   user: User;
   rule: RuleCompleted;
+  file: any;
+  url: any;
   
   constructor(
     private location: Location,
-    private ruleCompletedService: RuleCompletedService
+    private ruleCompletedService: RuleCompletedService,
+    private fileService: FileService
     ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
@@ -27,6 +31,12 @@ export class RuleRejectedPage implements OnInit {
 
   ngOnInit() {
     this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
+
+    this.fileService.getFile(this.rule.attached).subscribe(file => {
+      console.log(file);
+      this.file = file;
+      this.url = this.file.url;
+    });
   }
 
   backButton() {
