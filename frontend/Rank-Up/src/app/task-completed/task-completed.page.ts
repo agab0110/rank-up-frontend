@@ -5,6 +5,7 @@ import { Task } from '../models/task/task';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { ActivatedRoute } from '@angular/router';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-task-completed',
@@ -17,11 +18,14 @@ export class TaskCompletedPage implements OnInit {
   task: Task;
   user: User;
   id: number;
+  file: any;
+  url: any;
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private taskCompletedService: TaskCompletedService
+    private taskCompletedService: TaskCompletedService,
+    private fileService: FileService
     ) {
     this.taskCompleted = new TaskCompleted();
     this.task = new Task();
@@ -39,6 +43,11 @@ export class TaskCompletedPage implements OnInit {
       this.task = this.taskCompleted.task;
       this.user = this.taskCompleted.user;
       console.log(response);
+      this.fileService.getFile(this.taskCompleted.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
     });
     if(!this.taskCompleted.comment)
     {
