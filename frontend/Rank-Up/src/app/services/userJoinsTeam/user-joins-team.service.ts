@@ -84,6 +84,6 @@ export class UserJoinsTeamService {
     return this.http.get<UserJoinsTeam[]>(this.userJoinsTeamUrl + "/requests/" + idTeam);
   }
   public leveTeam(idTeam:number, idUser:number){
-    return this.http.delete<UserJoinsTeam>(this.userJoinsTeamUrl + "/leveTeam/"+ idTeam + "/"+ idUser);
+    return this.http.delete<UserJoinsTeam>(this.userJoinsTeamUrl + "/leaveTeam/"+ idTeam + "/"+ idUser);
   }
 }
