@@ -5,6 +5,7 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { User } from '../models/user/user';
 import { ActivatedRoute } from '@angular/router';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-user-rule-completed',
@@ -17,11 +18,14 @@ export class UserRuleCompletedPage implements OnInit {
   user: User;
   rule: Rule;
   id: number;
+  file: any;
+  url: any;
 
   constructor(
     private location: Location,
     private ruleCompletedService: RuleCompletedService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fileService: FileService
     ) { 
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
@@ -39,6 +43,12 @@ export class UserRuleCompletedPage implements OnInit {
       this.rule = this.ruleCompleted.rule;
       this.user = this.ruleCompleted.user;
       console.log(response);
+      
+      this.fileService.getFile(this.ruleCompleted.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
     });
     if(!this.rule.description)
     {
