@@ -139,7 +139,7 @@ export class UserProfilePage implements OnInit {
 
   loadFileFromDevice(event: any) {
     event.target.files = null;
-    this.photo = event.target.files[0];;
+    this.photo = event.target.files[0];
   }
 
   closeModal() {
