@@ -19,7 +19,7 @@ export class UserRuleCompletedPage implements OnInit {
   rule: Rule;
   id: number;
   file: any;
-  url: any;
+  url: any = null;
 
   constructor(
     private location: Location,
@@ -44,11 +44,15 @@ export class UserRuleCompletedPage implements OnInit {
       this.user = this.ruleCompleted.user;
       console.log(response);
       
-      this.fileService.getFile(this.ruleCompleted.attached).subscribe(file => {
-        console.log(file);
-        this.file = file;
-        this.url = this.file.url;
-      });
+      if(this.ruleCompleted.attached != null) {
+        this.fileService.getFile(this.ruleCompleted.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url;
+        });
+      } else {
+        this.file = null;
+      }
     });
     if(!this.rule.description)
     {

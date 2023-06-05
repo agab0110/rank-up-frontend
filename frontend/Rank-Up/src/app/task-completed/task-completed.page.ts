@@ -19,7 +19,7 @@ export class TaskCompletedPage implements OnInit {
   user: User;
   id: number;
   file: any;
-  url: any;
+  url: any = null;
 
   constructor(
     private location: Location,
@@ -43,11 +43,16 @@ export class TaskCompletedPage implements OnInit {
       this.task = this.taskCompleted.task;
       this.user = this.taskCompleted.user;
       console.log(response);
-      this.fileService.getFile(this.taskCompleted.attached).subscribe(file => {
-        console.log(file);
-        this.file = file;
-        this.url = this.file.url;
-      });
+
+      if(this.taskCompleted.attached != null) {
+        this.fileService.getFile(this.taskCompleted.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url;
+        });
+      } else {
+        this.file = null;
+      }
     });
     if(!this.taskCompleted.comment)
     {

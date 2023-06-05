@@ -17,7 +17,7 @@ export class AdminRuleCompletedPage implements OnInit {
   user: User;
   rule: RuleCompleted;
   file: any;
-  url: any;
+  url: any = null;
   
   constructor(
     private location: Location,
@@ -32,11 +32,17 @@ export class AdminRuleCompletedPage implements OnInit {
   ngOnInit() {
     this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
 
-    this.fileService.getFile(this.rule.attached).subscribe(file => {
-      console.log(file);
-      this.file = file;
-      this.url = this.file.url;
-    });
+    console.log(this.rule);
+    if(this.rule.attached != null) {
+      this.fileService.getFile(this.rule.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url || null;
+      });
+    }
+    else {
+      this.url = null;
+    }
   }
 
   backButton() {

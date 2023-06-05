@@ -17,7 +17,7 @@ export class RuleRejectedPage implements OnInit {
   user: User;
   rule: RuleCompleted;
   file: any;
-  url: any;
+  url: any = null;
   
   constructor(
     private location: Location,
@@ -31,12 +31,16 @@ export class RuleRejectedPage implements OnInit {
 
   ngOnInit() {
     this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
-
-    this.fileService.getFile(this.rule.attached).subscribe(file => {
-      console.log(file);
-      this.file = file;
-      this.url = this.file.url;
-    });
+    if(this.rule.attached != null){
+      this.fileService.getFile(this.rule.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
+    }
+    else {
+      this.url = null;
+    }
   }
 
   backButton() {

@@ -17,7 +17,7 @@ export class CompletedTaskPage implements OnInit {
   task: TaskCompleted;
   user: User;
   file: any;
-  url: any;
+  url: any = null;
 
   constructor(
     private location: Location,
@@ -32,11 +32,16 @@ export class CompletedTaskPage implements OnInit {
   ngOnInit() {
     this.task= JSON.parse(localStorage.getItem('viewTask') || '{}');
 
-    this.fileService.getFile(this.task.attached).subscribe(file => {
-      console.log(file);
-      this.file = file;
-      this.url = this.file.url;
-    });
+    if(this.task.attached != null){
+      this.fileService.getFile(this.task.attached).subscribe(file => {
+        console.log(file);
+        this.file = file;
+        this.url = this.file.url;
+      });
+    }
+    else {
+      this.url = null;
+    }
   }
 
   backButton() {
