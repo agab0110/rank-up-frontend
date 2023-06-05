@@ -12,6 +12,7 @@ import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { FileService } from '../services/file/file.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -66,16 +67,34 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
       console.log(data)
-      this.fileService.getFile(this.data.attached).subscribe(file => {
-        console.log(file);
-        this.file = file;
-        this.url = this.file.url;
-      });
+      if(this.data.attached != null){
+        this.fileService.getFile(this.data.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url ;
+        });
+      }else{
+        this.url = null;
+      }
     })
   }
 
   backButton() {
     this.location.back();
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async presentAlertReject() {

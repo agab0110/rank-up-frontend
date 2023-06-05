@@ -5,6 +5,7 @@ import { Task } from '../models/task/task';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { FileService } from '../services/file/file.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-completed-task',
@@ -22,7 +23,8 @@ export class CompletedTaskPage implements OnInit {
   constructor(
     private location: Location,
     private taskCompletedService: TaskCompletedService,
-    private fileService: FileService
+    private fileService: FileService,
+    private alertController: AlertController
     ) {
     this.taskCompleted = new TaskCompleted();
     this.task = new TaskCompleted();
@@ -42,6 +44,20 @@ export class CompletedTaskPage implements OnInit {
     else {
       this.url = null;
     }
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   backButton() {

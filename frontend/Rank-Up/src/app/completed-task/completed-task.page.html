@@ -15,12 +15,12 @@
 
     <ion-label class="label">Commento:</ion-label>
     <ion-textarea class="commentArea" fill="outline" placeholder={{taskCompleted.comment}} shape="round" [readonly] = true></ion-textarea>
-    
+
     <ion-grid class="buttons-grid">
       <ion-row>
         <ion-col class="left-col">
           <ion-button class="visualize-attached" *ngIf="this.url !== null" href="{{this.url}}">Visualizza<br/>Allegato</ion-button>
-          <ion-button class="visualize-attached" *ngIf="this.url === null">Visualizza<br/>Allegato</ion-button>
+          <ion-button class="visualize-attached" *ngIf="this.url === null" (click)="nullAttachedAlert()">Visualizza<br/>Allegato</ion-button>
         </ion-col>
         <ion-col class=right-col>
           <app-bt-admin-small shape="round"  clear [text]="'Chiudi'" (click)="backButton()"></app-bt-admin-small>

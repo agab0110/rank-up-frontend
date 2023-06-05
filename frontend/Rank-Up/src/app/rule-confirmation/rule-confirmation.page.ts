@@ -65,16 +65,34 @@ export class RuleConfirmationPage implements OnInit {
     this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
       console.log(data);
-      this.fileService.getFile(this.data.attached).subscribe(file => {
-        console.log(file);
-        this.file = file;
-        this.url = this.file.url;
-      });
+      if(this.data. attached != null){
+        this.fileService.getFile(this.data.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url ;
+        });
+      }else{
+        this.url = null;
+      }
     })
   }
 
   backButton() {
     this.location.back();
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async presentAlertReject() {
@@ -164,7 +182,7 @@ export class RuleConfirmationPage implements OnInit {
       this.notification.title = "Rifiuto regola";
       this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato rifiutato";
     }
-    
+
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
       this.addUserNotification(n);
