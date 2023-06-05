@@ -69,7 +69,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes() {
-    this.userGetPrizeService.getUserPrizes(this.userJoin.id, this.team.codice).subscribe(
+    this.userGetPrizeService.getUserPrizes(this.userJoin.user.id, this.team.codice).subscribe(
       (response: any) => {
         this.prizes = response;
         console.log(this.prizes);
@@ -85,7 +85,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserRules() {
-    this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+    this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.user.id, this.team.codice).subscribe(response => {
       this.rulesCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
@@ -102,7 +102,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserTasks() {
-    this.taskCompletedService.getTaskCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+    this.taskCompletedService.getTaskCompletedByUser(this.userJoin.user.id, this.team.codice).subscribe(response => {
       this.tasksCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
