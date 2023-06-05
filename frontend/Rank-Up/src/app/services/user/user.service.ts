@@ -59,6 +59,12 @@ export class UserService {
     );
   }
 
+  public changePhoto(userId: number, newPhoto: string) {
+    return this.http.patch<User>(
+      this.userUrl + "/changePhoto/" + userId, newPhoto
+    );
+  }
+
   public getNewUsers(idTeam: number) {
     return this.http.get(this.userUrl + "/getNewUsers/" + idTeam);
   }
