@@ -14,7 +14,7 @@
       <ion-list>
         <div *ngIf="this.rules">
           <ion-item class="item" (click)="clickUserRule(rule)" *ngFor="let rule of rules">
-            <img class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+            <img class="icon" name=iconName src={{rule.photo}}>
             <ion-label class="label">{{rule.username}}</ion-label>
             <ion-label class="label">{{rule.name}}</ion-label>
           </ion-item>
@@ -22,7 +22,7 @@
 
         <div *ngIf="this.tasks">
           <ion-item class="item" (click)="clickUserTask(task)" *ngFor="let task of tasks">
-            <img alt="User" class="icon" name=iconName src="https://ionicframework.com/docs/img/demos/avatar.svg">
+            <img alt="User" class="icon" name=iconName src={{task.photo}}>
             <ion-label class="label">{{task.username}}</ion-label>
             <ion-label class="label">{{task.name}}</ion-label>
           </ion-item>

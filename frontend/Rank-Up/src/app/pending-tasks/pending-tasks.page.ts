@@ -42,8 +42,10 @@ export class PendingTasksPage implements OnInit {
 
     this.ruleCompletedService.getPending(this.team.codice).subscribe(data => {
       this.rules = data;
+      console.log(this.rules)
       this.taskCompletedService.getPending(this.team.codice).subscribe(data => {
         this.tasks = data;
+        console.log(this.tasks)
       });
     })
   }
