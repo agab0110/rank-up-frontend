@@ -43,6 +43,10 @@ export class RequestHistoryPage implements OnInit {
   segmentValue: string = "rule";
   task:Task;
   rules:Rule;
+  checkRuleCompletedList: boolean;
+  checkRuleRejectedList: boolean;
+  checkTaskCompletedList: boolean;
+  checkTaskRejectedList: boolean;
 
   constructor(
     private alertController: AlertController,
@@ -61,6 +65,10 @@ export class RequestHistoryPage implements OnInit {
       this.admin = new Admin();
       this.task = new Task();
       this.rules = new Rule();
+      this.checkRuleCompletedList = true;
+      this.checkRuleRejectedList = true;
+      this.checkTaskCompletedList = true;
+      this.checkTaskRejectedList = true;
      }
 
      ngOnInit() {
@@ -73,7 +81,7 @@ export class RequestHistoryPage implements OnInit {
     if (localStorage.getItem('user') == null) {
       this.router.navigate(["/login"]);
     }
-     
+
       this.getRulesCompleted();
       this.getRulesRejected();
 
@@ -289,10 +297,13 @@ export class RequestHistoryPage implements OnInit {
       this.sortByUsername();
       console.log(this.rulesCompleted);
     },(error: Response) => {
-      if(error.status == 400)
+      if(error.status == 400){
         console.log("400 error");
+        this.checkRuleCompletedList = false;
+      }
       else {
         console.log('An unexpected error occured');
+        this.checkRuleCompletedList = false;
       }
       console.log(error);
       });
@@ -304,10 +315,13 @@ export class RequestHistoryPage implements OnInit {
       this.sortByUsername();
       console.log(this.rulesRejected);
     },(error: Response) => {
-      if(error.status == 400)
+      if(error.status == 400){
+        this.checkRuleRejectedList = false;
         console.log("400 error");
+      }
       else {
         console.log('An unexpected error occured');
+        this.checkRuleRejectedList = false;
       }
       console.log(error);
       });
@@ -319,10 +333,13 @@ export class RequestHistoryPage implements OnInit {
       this.sortByUsername();
       console.log(this.tasksCompleted);
     },(error: Response) => {
-      if(error.status == 400)
+      if(error.status == 400){
+        this.checkTaskCompletedList = false;
         console.log("400 error");
+      }
       else {
         console.log('An unexpected error occured');
+        this.checkTaskCompletedList = false;
       }
       console.log(error);
       });
@@ -334,10 +351,13 @@ export class RequestHistoryPage implements OnInit {
       this.sortByUsername();
       console.log(this.tasksCompleted);
     },(error: Response) => {
-      if(error.status == 400)
+      if(error.status == 400){
+        this.checkTaskRejectedList = false;
         console.log("400 error");
+      }
       else {
         console.log('An unexpected error occured');
+        this.checkTaskRejectedList = false;
       }
       console.log(error);
       });
