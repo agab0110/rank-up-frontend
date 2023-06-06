@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Task } from '../models/task/task';
 import { Rule } from '../models/rule/rule';
+import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
+import { UserGetPrize } from '../models/userGetPrize/user-get-prize';
 
 @Component({
   selector: 'app-request-history',
@@ -27,7 +29,7 @@ export class RequestHistoryPage implements OnInit {
   tasksCompleted: TaskCompleted[];
   tasksRejected: TaskCompleted[];
 
-  prizes: Prize[];
+  prizes: UserGetPrize[];
   activitySort: any;
   team: Team;
   stato = 0;
@@ -53,14 +55,15 @@ export class RequestHistoryPage implements OnInit {
     private location: Location,
     private ruleCompletedService : RuleCompletedService,
     private taskCompletedService : TaskCompletedService,
+    private prizeService: UserGetPrizeService,
     private router: Router) {
       this.rulesCompleted = new Array<RuleCompleted>;
       this.rulesRejected = new Array<RuleCompleted>;
       this.tasksCompleted = new Array<TaskCompleted>;
       this.tasksRejected = new Array<TaskCompleted>;
+      this.prizes = new Array<UserGetPrize>();
 
       this.team = new Team();
-      this.prizes = new Array<Prize>;
       this.user = new User();
       this.admin = new Admin();
       this.task = new Task();
@@ -87,6 +90,8 @@ export class RequestHistoryPage implements OnInit {
 
       this.getTaskAccepted();
       this.getTaskRejected();
+
+      this.getPrizes();
     }
 
     handleRefresh(event: any) {
@@ -139,6 +144,15 @@ export class RequestHistoryPage implements OnInit {
       }
       return 0;
     });
+    this.prizes.sort((a, b) => {
+      if (a.date > b.date) {
+        return 1;
+      }
+      if (a.date < b.date) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
   sortByUsername() {
@@ -170,6 +184,15 @@ export class RequestHistoryPage implements OnInit {
       return 0;
     });
     this.tasksRejected.sort((a, b) => {
+      if (a.user.username > b.user.username) {
+        return 1;
+      }
+      if (a.user.username < b.user.username) {
+        return -1;
+      }
+      return 0;
+    });
+    this.prizes.sort((a, b) => {
       if (a.user.username > b.user.username) {
         return 1;
       }
@@ -213,6 +236,15 @@ export class RequestHistoryPage implements OnInit {
         return 1;
       }
       if (a.task.name < b.task.name) {
+        return -1;
+      }
+      return 0;
+    });
+    this.prizes.sort((a, b) => {
+      if (a.prize.name > b.prize.name) {
+        return 1;
+      }
+      if (a.prize.name < b.prize.name) {
         return -1;
       }
       return 0;
@@ -363,6 +395,21 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
+  getPrizes() {
+    this.prizeService.getTeamPrizes(this.team.codice).subscribe(response =>{
+      this.prizes = response;
+      this.sortByUsername();
+      console.log(this.prizes);
+    },(error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+      });
+  }
+
   ricerca(event: any) {
     const query = event.target.value.toLowerCase();
     if(query == ""){
@@ -382,9 +429,5 @@ export class RequestHistoryPage implements OnInit {
   clickTask(task:TaskCompleted) {
     let tasks = JSON.stringify(task);
     localStorage.setItem("viewTask", tasks);
-  }
-  clickPrize(prize:Prize) {
-    let prizes = JSON.stringify(prize);
-    localStorage.setItem("viewPrize", prizes);
   }
 }
