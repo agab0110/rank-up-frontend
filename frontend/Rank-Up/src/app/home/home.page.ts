@@ -207,8 +207,7 @@ export class HomePage implements OnInit{
     this.notification.description = "L'utente " + this.user.username +  " ha richiesto l'accesso al team " + this.searchedTeam.name;
     this.notificationService.newNotification(this.notification, this.searchedTeam.codice).subscribe(n => {
       console.log(n);
-      this.getAdmins();
-      this.addAdminNotification(n);
+      this.getAdmins(n);
     },(error: Response) => {
       if (error.status == 400) {
         console.log("Errore 400");
@@ -219,10 +218,11 @@ export class HomePage implements OnInit{
     });
   }
 
-  getAdmins() {
+  getAdmins(n: Notification) {
     this.adminService.getAdmins(this.searchedTeam.codice).subscribe(result => {
       this.admins = result;
       console.log(this.admins);
+      this.passNotification(n);
     },(error: Response) => {
       if (error.status == 400) {
         console.log("Errore 400");
@@ -259,5 +259,9 @@ export class HomePage implements OnInit{
     });
 
     await alert.present();
+  }
+  
+  passNotification(n: Notification) {
+    this.addAdminNotification(n);
   }
 }

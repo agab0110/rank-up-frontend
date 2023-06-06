@@ -160,10 +160,10 @@ export class TaskConfirmationPage implements OnInit {
   sendNotification(status: number) {
     if (status == 1) {
       this.notification.title = "Conferma task";
-      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato confermato";
+      this.notification.description = "Il task " + this.task.name +  " è stato confermato";
     } else {
       this.notification.title = "Rifiuto task";
-      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato rifiutato";
+      this.notification.description = "Il task " + this.task.name +  " è stato rifiutato";
     }
 
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {

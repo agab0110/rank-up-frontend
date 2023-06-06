@@ -130,11 +130,10 @@ export class SendRulePage implements OnInit {
 
   sendNotification() {
     this.notification.title = "Regola completata";
-    this.notification.description = "La regola [Nome Regola] e' stata completata da " + this.user.username;
+    this.notification.description = "La regola " + this.rule.name +  " e' stata completata da " + this.user.username;
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
-      this.getAdmins();
-      this.addAdminNotification(n);
+      this.getAdmins(n);
     },(error: Response) => {
       if (error.status == 400) {
         console.log("Errore 400");
@@ -145,10 +144,11 @@ export class SendRulePage implements OnInit {
     });
   }
 
-  getAdmins() {
+  getAdmins(n: Notification) {
     this.adminService.getAdmins(this.team.codice).subscribe(result => {
       this.admins = result;
       console.log(this.admins);
+      this.passNotification(n);
     },(error: Response) => {
       if (error.status == 400) {
         console.log("Errore 400");
@@ -171,5 +171,9 @@ export class SendRulePage implements OnInit {
       }
       console.log(error);});
     });
+  }
+
+  passNotification(n: Notification) {
+    this.addAdminNotification(n);
   }
 }
