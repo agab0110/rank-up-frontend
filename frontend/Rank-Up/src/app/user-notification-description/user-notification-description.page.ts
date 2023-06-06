@@ -23,10 +23,7 @@ export class UserNotificationDescriptionPage implements OnInit {
      }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.idNotification = params['n.notification.id'];
-      this.getNotification(this.idNotification);
-    });
+    this.notification = JSON.parse(localStorage.getItem('viewNotificationUser') || '{}');
   }
   backButton() {
     this.location.back();

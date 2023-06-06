@@ -24,7 +24,7 @@
       </ion-segment>
 
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" *ngFor="let n of this.nUser" [routerLink]="['/user/user-notification-description, n.id']">
+        <ion-item class="item" *ngFor="let n of this.nUser" [routerLink]="['/user/user-notification-description']" (click)="clicknotificationUser(n)">
           <ion-label class="label">{{n.date}}</ion-label>
           <ion-label class="label">{{n.title}}</ion-label>
           <ion-label class="label">{{n.teamName}}</ion-label>
@@ -50,7 +50,7 @@
       </ion-segment>
 
       <ion-list class="notifications" lines="none">
-        <ion-item class="item" *ngFor="let n of this.nAdmin" (click)="navigate(n.id)">
+        <ion-item class="item" *ngFor="let n of this.nAdmin" [routerLink]="['/admin/admin-notification-description']" (click)="clicknotificationAdmin(n)" >
           <ion-label class="label">{{n.date}}</ion-label>
           <ion-label class="label">{{n.title}}</ion-label>
           <ion-label class="label">{{n.teamName}}</ion-label>
