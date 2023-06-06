@@ -41,8 +41,8 @@ export class RequestHistoryPage implements OnInit {
   iconAccepted: string = "checkmark-circle-outline";
   iconRejected: string = "close-circle-outline";
   segmentValue: string = "rule";
-  task:Task;
-  rules:Rule;
+  task: Task;
+  rules: Rule;
   checkRuleCompletedList: boolean;
   checkRuleRejectedList: boolean;
   checkTaskCompletedList: boolean;
@@ -51,28 +51,28 @@ export class RequestHistoryPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private location: Location,
-    private ruleCompletedService : RuleCompletedService,
-    private taskCompletedService : TaskCompletedService,
+    private ruleCompletedService: RuleCompletedService,
+    private taskCompletedService: TaskCompletedService,
     private router: Router) {
-      this.rulesCompleted = new Array<RuleCompleted>;
-      this.rulesRejected = new Array<RuleCompleted>;
-      this.tasksCompleted = new Array<TaskCompleted>;
-      this.tasksRejected = new Array<TaskCompleted>;
+    this.rulesCompleted = new Array<RuleCompleted>;
+    this.rulesRejected = new Array<RuleCompleted>;
+    this.tasksCompleted = new Array<TaskCompleted>;
+    this.tasksRejected = new Array<TaskCompleted>;
 
-      this.team = new Team();
-      this.prizes = new Array<Prize>;
-      this.user = new User();
-      this.admin = new Admin();
-      this.task = new Task();
-      this.rules = new Rule();
-      this.checkRuleCompletedList = true;
-      this.checkRuleRejectedList = true;
-      this.checkTaskCompletedList = true;
-      this.checkTaskRejectedList = true;
-     }
+    this.team = new Team();
+    this.prizes = new Array<Prize>;
+    this.user = new User();
+    this.admin = new Admin();
+    this.task = new Task();
+    this.rules = new Rule();
+    this.checkRuleCompletedList = true;
+    this.checkRuleRejectedList = true;
+    this.checkTaskCompletedList = true;
+    this.checkTaskRejectedList = true;
+  }
 
-     ngOnInit() {
-      this.team = JSON.parse(localStorage.getItem('team') || '{}');
+  ngOnInit() {
+    this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     if (localStorage.getItem('team') == null) {
@@ -82,25 +82,25 @@ export class RequestHistoryPage implements OnInit {
       this.router.navigate(["/login"]);
     }
 
-      this.getRulesCompleted();
-      this.getRulesRejected();
+    this.getRulesCompleted();
+    this.getRulesRejected();
 
-      this.getTaskAccepted();
-      this.getTaskRejected();
-    }
+    this.getTaskAccepted();
+    this.getTaskRejected();
+  }
 
-    handleRefresh(event: any) {
-      setTimeout(() => {
-        // Any calls to load data go here
-        this.rulesCompleted = [];
-        this.rulesRejected = [];
-        this.tasksCompleted = [];
-        this.tasksRejected = [];
-        this.prizes = [];
-        this.ngOnInit();
-        event.target.complete();
-      }, 1000);
-    }
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.rulesCompleted = [];
+      this.rulesRejected = [];
+      this.tasksCompleted = [];
+      this.tasksRejected = [];
+      this.prizes = [];
+      this.ngOnInit();
+      event.target.complete();
+    }, 1000);
+  }
 
   sortByData() {
     this.rulesCompleted.sort((a, b) => {
@@ -219,7 +219,7 @@ export class RequestHistoryPage implements OnInit {
     });
   }
 
-    async presentAlert() {
+  async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Filtra per:',
       buttons: [
@@ -263,25 +263,25 @@ export class RequestHistoryPage implements OnInit {
 
     switch (selectedValue) {
       case 'rule':
-        if(this.filter === 1)
+        if (this.filter === 1)
           this.sortByUsername();
-        else if(this.filter === 2)
+        else if (this.filter === 2)
           this.sortByData();
         else
           this.sortByActivity();
         break;
       case 'task':
-        if(this.filter === 1)
+        if (this.filter === 1)
           this.sortByUsername();
-        else if(this.filter === 2)
+        else if (this.filter === 2)
           this.sortByData();
         else
           this.sortByActivity();
         break;
       case 'prize':
-        if(this.filter === 1)
+        if (this.filter === 1)
           this.sortByUsername();
-        else if(this.filter === 2)
+        else if (this.filter === 2)
           this.sortByData();
         else
           this.sortByActivity();
@@ -291,13 +291,13 @@ export class RequestHistoryPage implements OnInit {
     }
   }
 
-  getRulesCompleted(){
-    this.ruleCompletedService.ruleAccepted(this.team.codice).subscribe(Response =>{
+  getRulesCompleted() {
+    this.ruleCompletedService.ruleAccepted(this.team.codice).subscribe(Response => {
       this.rulesCompleted = Response;
       this.sortByUsername();
       console.log(this.rulesCompleted);
-    },(error: Response) => {
-      if(error.status == 400){
+    }, (error: Response) => {
+      if (error.status == 400) {
         console.log("400 error");
         this.checkRuleCompletedList = false;
       }
@@ -306,16 +306,16 @@ export class RequestHistoryPage implements OnInit {
         this.checkRuleCompletedList = false;
       }
       console.log(error);
-      });
+    });
   }
 
-  getRulesRejected(){
-    this.ruleCompletedService.rulerejected(this.team.codice).subscribe(Response =>{
+  getRulesRejected() {
+    this.ruleCompletedService.rulerejected(this.team.codice).subscribe(Response => {
       this.rulesRejected = Response;
       this.sortByUsername();
       console.log(this.rulesRejected);
-    },(error: Response) => {
-      if(error.status == 400){
+    }, (error: Response) => {
+      if (error.status == 400) {
         this.checkRuleRejectedList = false;
         console.log("400 error");
       }
@@ -324,16 +324,16 @@ export class RequestHistoryPage implements OnInit {
         this.checkRuleRejectedList = false;
       }
       console.log(error);
-      });
+    });
   }
 
-  getTaskAccepted(){
-    this.taskCompletedService.taskAccepted(this.team.codice).subscribe(Response =>{
+  getTaskAccepted() {
+    this.taskCompletedService.taskAccepted(this.team.codice).subscribe(Response => {
       this.tasksCompleted = Response;
       this.sortByUsername();
       console.log(this.tasksCompleted);
-    },(error: Response) => {
-      if(error.status == 400){
+    }, (error: Response) => {
+      if (error.status == 400) {
         this.checkTaskCompletedList = false;
         console.log("400 error");
       }
@@ -342,16 +342,16 @@ export class RequestHistoryPage implements OnInit {
         this.checkTaskCompletedList = false;
       }
       console.log(error);
-      });
+    });
   }
 
-    getTaskRejected(){
-    this.taskCompletedService.taskRejected(this.team.codice).subscribe(Response =>{
+  getTaskRejected() {
+    this.taskCompletedService.taskRejected(this.team.codice).subscribe(Response => {
       this.tasksRejected = Response;
       this.sortByUsername();
       console.log(this.tasksCompleted);
-    },(error: Response) => {
-      if(error.status == 400){
+    }, (error: Response) => {
+      if (error.status == 400) {
         this.checkTaskRejectedList = false;
         console.log("400 error");
       }
@@ -360,11 +360,11 @@ export class RequestHistoryPage implements OnInit {
         this.checkTaskRejectedList = false;
       }
       console.log(error);
-      });
+    });
   }
 
   ricerca(event: any) {
-    if(event.target.value != "") {
+    if (event.target.value != "") {
       this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
         this.data = JSON.parse(JSON.stringify(data))
 
@@ -372,16 +372,16 @@ export class RequestHistoryPage implements OnInit {
       });
     }
   }
-  clickRule(rule:RuleCompleted) {
+  clickRule(rule: RuleCompleted) {
     let rules = JSON.stringify(rule);
     localStorage.setItem("viewRule", rules);
   }
 
-  clickTask(task:TaskCompleted) {
+  clickTask(task: TaskCompleted) {
     let tasks = JSON.stringify(task);
     localStorage.setItem("viewTask", tasks);
   }
-  clickPrize(prize:Prize) {
+  clickPrize(prize: Prize) {
     let prizes = JSON.stringify(prize);
     localStorage.setItem("viewPrize", prizes);
   }
