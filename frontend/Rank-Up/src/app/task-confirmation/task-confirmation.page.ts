@@ -139,7 +139,13 @@ export class TaskConfirmationPage implements OnInit {
   sendTask(status: number) {
     this.taskCompleted.id = this.id
     this.taskCompleted.comment = this.comment
-    this.taskCompleted.bonus = this.bonusPoints
+
+    if (this.bonusPoints == null) {
+      this.taskCompleted.bonus = 0;
+    } else {
+      this.taskCompleted.bonus = this.bonusPoints;
+    }
+    
     this.taskCompleted.task = new Task();
     this.taskCompleted.task.id = this.task.id_task
     this.taskCompleted.user = new User();
