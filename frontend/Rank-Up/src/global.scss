@@ -202,3 +202,7 @@ ion-modal ion-content {
     color: black;
     width: 100%;
 }
+
+.ionic-content {
+    --offset-bottom: 0 !important;
+}

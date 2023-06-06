@@ -4,6 +4,8 @@ import { UserService } from '../services/user/user.service';
 import { User } from '../models/user/user';
 import { SHA3 } from 'crypto-js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocalNotifications } from '@capacitor/local-notifications';
+import { NotificationService } from '../services/notification/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginPage implements OnInit{
   constructor(
     private router: Router,
     private service: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
     ) {
       this.user = new User();
       this.loginForm = this.formBuilder.group({
@@ -38,6 +41,8 @@ export class LoginPage implements OnInit{
     localStorage.setItem('team', '');
     localStorage.setItem('admin', '');
     localStorage.setItem('userJoinsTeam', '');
+
+    LocalNotifications.requestPermissions();
   }
 
   login() {
