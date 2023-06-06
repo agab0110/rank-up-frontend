@@ -250,7 +250,6 @@ export class HomePage implements OnInit{
   async joinRequest() {
     const alert = await this.alertController.create({
       header: 'Richiesta inviata!',
-      message: 'Attendi che l\' admin ti aggiunga.',
       buttons: [
         {
           text: 'OK',
