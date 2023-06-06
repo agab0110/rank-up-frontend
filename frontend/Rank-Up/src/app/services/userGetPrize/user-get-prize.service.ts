@@ -24,4 +24,10 @@ export class UserGetPrizeService {
       this.userGetPrizeUrl + "/addUserPrizes/" + idPrize + "/" + userId
     );
   }
+
+  public getTeamPrizes(teamId: number): Observable<Prize[]> {
+    return this.http.get<Prize[]>(
+      this.userGetPrizeUrl + "/getPrizes/" + teamId
+    );
+  }
 }

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Task } from '../models/task/task';
 import { Rule } from '../models/rule/rule';
+import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';
 
 @Component({
   selector: 'app-request-history',
@@ -49,6 +50,7 @@ export class RequestHistoryPage implements OnInit {
     private location: Location,
     private ruleCompletedService : RuleCompletedService,
     private taskCompletedService : TaskCompletedService,
+    private prizeService: UserGetPrizeService,
     private router: Router) {
       this.rulesCompleted = new Array<RuleCompleted>;
       this.rulesRejected = new Array<RuleCompleted>;
@@ -79,6 +81,8 @@ export class RequestHistoryPage implements OnInit {
 
       this.getTaskAccepted();
       this.getTaskRejected();
+
+      this.getPrizes();
     }
 
     handleRefresh(event: any) {
@@ -343,6 +347,21 @@ export class RequestHistoryPage implements OnInit {
       });
   }
 
+  getPrizes() {
+    this.prizeService.getTeamPrizes(this.team.codice).subscribe(response =>{
+      this.prizes = response;
+      this.sortByUsername();
+      console.log(this.prizes);
+    },(error: Response) => {
+      if(error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+      });
+  }
+
   ricerca(event: any) {
     if(event.target.value != "") {
       this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
@@ -360,9 +379,5 @@ export class RequestHistoryPage implements OnInit {
   clickTask(task:TaskCompleted) {
     let tasks = JSON.stringify(task);
     localStorage.setItem("viewTask", tasks);
-  }
-  clickPrize(prize:Prize) {
-    let prizes = JSON.stringify(prize);
-    localStorage.setItem("viewPrize", prizes);
   }
 }
