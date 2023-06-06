@@ -32,7 +32,7 @@ export class AdminNotificationDescriptionPage implements OnInit {
   }
 
   getNotification(idNotification: Number){
-    this.notificationService.getUserNotification(1).subscribe(response => {
+    this.notificationService.getUserNotification(idNotification).subscribe(response => {
       this.notification = response;
     },(error: Response) => {
       if(error.status == 400)
