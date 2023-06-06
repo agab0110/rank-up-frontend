@@ -20,6 +20,13 @@ export class TaskService {
   }
 
 
+  public userTasks(teamId: number, idUser: number): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      this.baseUrl + "/userTasks/" + teamId + "/" + idUser
+    );
+  }
+
+
   public getTask(idTask: any) {
     return this.http.get(
       this.baseUrl + "/task/" + idTask

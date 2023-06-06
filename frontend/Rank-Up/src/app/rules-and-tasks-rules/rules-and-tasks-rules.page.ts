@@ -80,7 +80,7 @@ export class RulesAndTasksRulesPage implements OnInit {
   }
 
   listTask(){
-    this.taskservice.listTask(this.team.codice).subscribe(response =>{
+    this.taskservice.userTasks(this.team.codice, this.user.id).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)

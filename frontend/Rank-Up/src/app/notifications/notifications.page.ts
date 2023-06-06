@@ -9,7 +9,7 @@ import { UserReciveNotificationService } from '../services/userReciveNotificatio
 import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 import { Admin } from '../models/admin/admin';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
