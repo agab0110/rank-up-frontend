@@ -180,7 +180,7 @@ export class TaskConfirmationPage implements OnInit {
   }
 
   addUserNotification(n: Notification){
-      this.userReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+      this.userReciveNotificationService.addNotification(this.task.id_user, n.id).subscribe(n => {
         console.log(n);
       },(error: Response) => {
         if (error.status == 400) {
