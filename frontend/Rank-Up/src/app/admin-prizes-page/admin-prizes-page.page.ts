@@ -81,6 +81,27 @@ export class AdminPrizesPagePage implements OnInit {
     );
   }
 
+  async confirmRemovePrize(idPrice: number) {
+    const alert = await this.alertController.create({
+      header: 'Sicuro di cancellare il premio?',
+      buttons: [
+        {
+          text: 'Conferma',
+          cssClass: 'alert-button-blue',
+          handler: () => {
+            this.removePrize(idPrice);
+          }
+        },
+        {
+          text: 'Annulla',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async removedPrizeAlert() {
     const alert = await this.alertController.create({
       header: 'Premio rimosso con successo!',
