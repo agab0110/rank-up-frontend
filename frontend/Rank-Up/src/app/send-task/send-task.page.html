@@ -28,7 +28,7 @@
           <div class="text">Rifiuta</div>
         </div>
         <div class="titoloBox">
-          <ion-button class="pulsante conferma" id="conferma">
+          <ion-button class="pulsante conferma" id="conferma"  (click)="sendNotification()">
             <ion-icon name="checkmark-circle-outline"></ion-icon>
           </ion-button>
           <div class="text">Accetta</div>
@@ -36,7 +36,6 @@
       </div>
     </div>
   </div>
-</ion-content>
 
 <ion-alert *ngIf="this.data"
   trigger="descrizione"
@@ -74,3 +73,4 @@
     </ion-content>
   </ng-template>
 </ion-modal>
+</ion-content>

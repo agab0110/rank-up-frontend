@@ -5,6 +5,8 @@ import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { User } from '../models/user/user';
 import { ActivatedRoute } from '@angular/router';
+import { FileService } from '../services/file/file.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-rule-completed',
@@ -17,12 +19,16 @@ export class UserRuleCompletedPage implements OnInit {
   user: User;
   rule: Rule;
   id: number;
+  file: any;
+  url: any = null;
 
   constructor(
     private location: Location,
     private ruleCompletedService: RuleCompletedService,
-    private route: ActivatedRoute
-    ) { 
+    private route: ActivatedRoute,
+    private fileService: FileService,
+    private alertController: AlertController
+    ) {
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
     this.rule = new Rule();
@@ -39,6 +45,16 @@ export class UserRuleCompletedPage implements OnInit {
       this.rule = this.ruleCompleted.rule;
       this.user = this.ruleCompleted.user;
       console.log(response);
+
+      if(this.ruleCompleted.attached != null) {
+        this.fileService.getFile(this.ruleCompleted.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url;
+        });
+      } else {
+        this.url = null;
+      }
     });
     if(!this.rule.description)
     {
@@ -52,5 +68,19 @@ export class UserRuleCompletedPage implements OnInit {
 
   backButton() {
     this.location.back();
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

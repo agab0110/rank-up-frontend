@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TeamService } from '../services/team/team.service';
 import { Team } from '../models/team/team';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-admin-team-settings',
@@ -14,17 +15,17 @@ import { Team } from '../models/team/team';
 export class AdminTeamSettingsPage implements OnInit {
 
   @ViewChild(IonModal) modal!: IonModal;
-  blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
   team: Team;
   choice_privacy_utente: boolean = true;
   choice_privacy_team: boolean = true;
+  photo: any;
 
   constructor(
     private alertController: AlertController,
     private location: Location,
     private router: Router,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private fileService: FileService
   ) {
     this.team = new Team();
    }
@@ -170,38 +171,28 @@ export class AdminTeamSettingsPage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+    event.target.files = null;
+    this.photo = event.target.files[0];
   }
 
   closeModal() {
-    this.blob = null;
-    this.blobURL = null;
+    this.photo = null;
     this.modal.dismiss();
   }
 
   attach() {
-    this.teamService.changePhoto(this.team.codice, "this.blobURL?.toString()").subscribe(
-      response => {
-        this.team = response;
-        localStorage.setItem('this.team', JSON.stringify(this.team));
-      },
-      (error: Response) => {
-        if (error.status == 400) {
-          console.log("Error 400");
-        } else {
-          console.log("Unespected error");
-        }
-        console.log(error);
+    this.fileService.uploadFile(this.photo).subscribe(response => {
+      console.log(response);
+      let id = JSON.parse(JSON.stringify(response)).id;
+      console.log(id);
+      this.fileService.getFile(id).subscribe(data => {
+        let photo = JSON.parse(JSON.stringify(data)).url;
+        this.teamService.changePhoto(this.team.codice, photo).subscribe(response => {
+          localStorage.setItem('team', JSON.stringify(response));
+          window.location.reload();
+        });
       });
+    });
     this.modal.dismiss();
   }
 

@@ -27,7 +27,7 @@
       <ion-list class="list" lines="none" *ngIf="!statoRicerca">
         <ion-item class="item" *ngFor="let user of partecipantsPoints">
           <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img class="imgUser" alt="User" src={{user.user.photo}} />
             <ion-label class="nomeUtente">{{user.user.username}}</ion-label>
             <ion-label class="points-label">{{user.points}}</ion-label>
           </div>
@@ -37,7 +37,7 @@
       <ion-list class="list" lines="none" *ngIf="statoRicerca">
         <ion-item class="item" *ngFor="let user of userJoinsTeamSearch">
           <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img class="imgUser" alt="User" src={{user.photo}} />
             <ion-label class="nomeUtente">{{user.username}}</ion-label>
             <ion-label class="points-label">{{user.points}}</ion-label>
           </div>
@@ -48,7 +48,7 @@
       <ion-list class="list" lines="none" *ngIf="!statoRicerca">
         <ion-item class="item" *ngFor="let user of partecipantsPoints">
           <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img class="imgUser" alt="User" src={{user.user.photo}} />
             <ion-label class="nomeUtente">{{user.user.username}}</ion-label>
           </div>
         </ion-item>
@@ -57,7 +57,7 @@
       <ion-list class="list" lines="none" *ngIf="statoRicerca">
         <ion-item class="item" *ngFor="let user of userJoinsTeamSearch">
           <div class="item-div">
-            <img class="imgUser" alt="User" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img class="imgUser" alt="User" src={{user.photo}} />
             <ion-label class="nomeUtente">{{user.username}}</ion-label>
           </div>
         </ion-item>

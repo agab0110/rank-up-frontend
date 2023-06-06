@@ -22,5 +22,11 @@ export class PrizeService {
     const params = new HttpParams().set('name', name);
     return this.http.post<Prize>(
     this.baseUrl + "/createPrize", prize,{params});
-   }
+  }
+
+  public removePrize(idTeam: number, idPrize: number) {
+    return this.http.delete<Prize>(this.baseUrl + "/removePrize/" + idTeam + "/" + idPrize);
+  }
+
+  
 }

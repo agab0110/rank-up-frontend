@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { AdminService } from '../services/admin/admin.service';
 import { Admin } from '../models/admin/admin';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-create-team',
@@ -23,8 +24,7 @@ export class CreateTeamPage implements OnInit {
   public team: Team;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
-  blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
+  photo: any;
   teamNameError: string = '';
 
   constructor(
@@ -32,7 +32,8 @@ export class CreateTeamPage implements OnInit {
     private location: Location,
     private teamService: TeamService,
     private router: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.admin = new Admin();
@@ -45,6 +46,7 @@ export class CreateTeamPage implements OnInit {
     this.team = new Team();
     this.team.name = "nuovo Team"
     this.team.privacy = this.privacyTeam
+    this.team.pointVisibility = true
     this.team.photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.kindpng.com%2Fpicc%2Fm%2F410-4108064_transparent-groups-of-people-clipart-team-icon-png.png&f=1&nofb=1&ipt=7e6d77faf7d2d967292fd2c9900358d6078b1dad3e041cc7d26632084638e101&ipo=images"
 
     //this.team = JSON.parse(localStorage.getItem('team') || '{}');
@@ -61,7 +63,11 @@ export class CreateTeamPage implements OnInit {
       this.adminService.newAdmin(this.user.id, this.team.codice).subscribe(response => {
         console.log("Admin aggiunto con successo");
         console.log(response);
-        localStorage.setItem('admin', JSON.stringify(response));
+        this.adminService.getAdmin(this.team.codice, this.user.id).subscribe(response => {
+          console.log(response);
+          this.admin = response;
+          localStorage.setItem('admin', JSON.stringify(this.admin));
+        });
       }, (error: Response) => {
         if (error.status == 400)
           console.log("400 error");
@@ -130,34 +136,47 @@ export class CreateTeamPage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+    event.target.files = null;
+    this.photo = event.target.files[0];
   }
 
   closeModal() {
-    this.blob = null;
-    this.blobURL = null;
+    this.photo = null;
     this.modal.dismiss();
   }
 
   attach() {
+    this.fileService.uploadFile(this.photo).subscribe(response => {
+      console.log(response);
+      let id = JSON.parse(JSON.stringify(response)).id;
+      console.log(id);
+      this.fileService.getFile(id).subscribe(data => {
+        let photo = JSON.parse(JSON.stringify(data)).url;
+        this.teamService.changePhoto(this.team.codice, photo).subscribe(response => {
+          localStorage.setItem('team', JSON.stringify(response));
+        });
+      });
+    });
     this.modal.dismiss();
   }
 
   navigate() {
     if (this.nomeTeam != "") {
       this.teamService.changeTeamName(this.codiceTeam, this.nomeTeam).subscribe(() => {
+
         this.teamService.changePrivacyTeam(this.codiceTeam, this.privacyTeam).subscribe(data => {console.log(data)});
         this.router.navigate(['/user/home']);
         this.confirmationAlert();
+      },(error: Response) => {
+        console.log(error);
+        if (error.status == 400){
+          console.log("400 error");
+          this.duplicateNameAlert();
+        }
+        else {
+          console.log('An unexpected error occured');
+          this.rejectedAlert();
+        }
       });
     }else{
       this.rejectedAlert();
@@ -167,6 +186,19 @@ export class CreateTeamPage implements OnInit {
   async confirmationAlert() {
     const alert = await this.alertController.create({
       header: 'Team creato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  async duplicateNameAlert() {
+    const alert = await this.alertController.create({
+      header: 'Team non creato!Nome già presente',
       buttons: [
         {
           text: 'OK',

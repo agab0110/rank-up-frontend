@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back-outline" size="large"></ion-icon>
     </ion-button>
 
-    <img class="imgUser" alt="Utente" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    <img class="imgUser" alt="Utente"  src={{user.photo}} />
     <h1 class="nameUser">{{userJoin.user.name}}</h1>
     <h2 class="scoreUser">Punti: {{userJoin.points}}</h2>
 
@@ -23,11 +23,11 @@
 
     <div class="listBox" *ngIf="!stato">
         <ion-list *ngFor="let activity of activities">
-          <div class="div-label-fakebutton" *ngIf="ruleOrTask(activity)" (click)="goToRule(activity)">
+          <div class="div-label-fakebutton" *ngIf="ruleOrTask(activity)" (click)="clickRule(activity)" (click)="goToRule(activity)">
             <div class="label">{{activity.rule.name}}</div>
             <ion-button class="fakebutton" [disabled]="true">{{activity.rule.points}} pt</ion-button>
           </div>
-          <div class="div-label-fakebutton" *ngIf="!ruleOrTask(activity)" (click)="goToTask(activity)">
+          <div class="div-label-fakebutton" *ngIf="!ruleOrTask(activity)" (click)="clickTask(activity)" (click)="goToTask(activity)">
             <div class="label">{{activity.task.name}}</div>
             <ion-button class="fakebutton" [disabled]="true">{{activity.task.points}} pt</ion-button>
           </div>

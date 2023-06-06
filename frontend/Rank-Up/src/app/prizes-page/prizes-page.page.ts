@@ -24,6 +24,7 @@ export class PrizesPagePage implements OnInit {
   team: Team;
   points: Number;
   userJoinsTeam: UserJoinsTeam;
+  public user_photo: string | undefined
 
   constructor(
     private location: Location,
@@ -70,6 +71,8 @@ export class PrizesPagePage implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
 
+    this.user_photo = this.user.photo;
+
     this.listprize(this.team.codice);
   }
 
@@ -111,7 +114,7 @@ export class PrizesPagePage implements OnInit {
   }
 
   getUsersPoints(idTeam: number) {
-    this.userJoinsTeamService.getPartecipantsPoints(1).subscribe(response => {
+    this.userJoinsTeamService.getPartecipantsPoints(this.team.codice).subscribe(response => {
       this.userJoin = response;
     }, (error: Response) => {
       if (error.status == 400)

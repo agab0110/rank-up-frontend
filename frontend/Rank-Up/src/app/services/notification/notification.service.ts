@@ -34,4 +34,20 @@ export class NotificationService {
   public getAdminNotifications(idUser: number) {
     return this.http.get(this.notificationUrl + "/getAdminNotification/" + idUser);
   }
+
+  public userNotificationDisplayed(idUser: number) {
+    return this.http.get(this.notificationUrl + "/userNotificationDisplayed/" + idUser);
+  }
+
+  public adminNotificationDisplayed(idUser: number) {
+    return this.http.get(this.notificationUrl + "/adminNotificationDisplayed/" + idUser);
+  }
+
+  public getUserDisplayed(idUser: number) {
+    return this.http.get(this.notificationUrl + "/getUserDisplayed/" + idUser);
+  }
+
+  public getAdminDisplayed(idUser: number) {
+    return this.http.get(this.notificationUrl + "/getAdminDisplayed/" + idUser);
+  }
 }

@@ -53,8 +53,10 @@ export class SearchTeamPage implements OnInit {
           text: 'Sì',
           cssClass: 'alert-button-blue',
           handler: () => {
+            this.joinPublicTeam();
             this.userJoinsTeamService.addUser(idTeam, this.user.id).subscribe(data => {
               console.log(data)
+              this.router.navigate(['user/home']);
             })
           }
         },
@@ -68,14 +70,14 @@ export class SearchTeamPage implements OnInit {
   }
 
   getTeams() {
-    this.teamService.getAllTeams().subscribe(data => {
+    this.teamService.getAllTeams(this.user.id).subscribe(data => {
       this.teams = JSON.parse(JSON.stringify(data))
     })
   }
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.teamService.getTeam(event.target.value.toLowerCase()).subscribe(data => {
+      this.teamService.getTeam(this.user.id, event.target.value.toLowerCase()).subscribe(data => {
         this.teams = JSON.parse(JSON.stringify(data))
 
         console.log(data)
@@ -83,5 +85,20 @@ export class SearchTeamPage implements OnInit {
     } else {
       this.getTeams()
     }
+  }
+
+  async joinPublicTeam() {
+    const alert = await this.alertController.create({
+      header: 'Accesso al team effettuato!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

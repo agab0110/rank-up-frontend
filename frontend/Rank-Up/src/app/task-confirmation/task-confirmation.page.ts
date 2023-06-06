@@ -11,6 +11,9 @@ import { NotificationService } from '../services/notification/notification.servi
 import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
+import { FileService } from '../services/file/file.service';
+import { error } from 'console';
+import { log } from 'console';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -29,6 +32,8 @@ export class TaskConfirmationPage implements OnInit {
   private taskCompleted: TaskCompleted;
   notification: Notification;
   team: Team;
+  file: any;
+  url: any;
 
   constructor(
     private alertController: AlertController,
@@ -37,7 +42,8 @@ export class TaskConfirmationPage implements OnInit {
     private taskCompletedService: TaskCompletedService,
     private notificationService: NotificationService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private userReciveNotificationService: UserReciveNotificationService
+    private userReciveNotificationService: UserReciveNotificationService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.taskCompleted = new TaskCompleted();
@@ -57,16 +63,39 @@ export class TaskConfirmationPage implements OnInit {
     localStorage.getItem('viewTask');
     this.task = JSON.parse(localStorage.getItem('viewTask') || '{}')
     console.log(this.task)
-    this.id = this.task.id_task
+    this.id = this.task.id_task_completed
 
     this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
       console.log(data)
+      if(this.data.attached != null){
+        this.fileService.getFile(this.data.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url ;
+        });
+      }else{
+        this.url = null;
+      }
     })
   }
 
   backButton() {
     this.location.back();
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async presentAlertReject() {
@@ -110,24 +139,39 @@ export class TaskConfirmationPage implements OnInit {
   sendTask(status: number) {
     this.taskCompleted.id = this.id
     this.taskCompleted.comment = this.comment
-    this.taskCompleted.bonus = this.bonusPoints
 
+    if (this.bonusPoints == null) {
+      this.taskCompleted.bonus = 0;
+    } else {
+      this.taskCompleted.bonus = this.bonusPoints;
+    }
+    
+    this.taskCompleted.task = new Task();
+    this.taskCompleted.task.id = this.task.id_task
+    this.taskCompleted.user = new User();
+    this.taskCompleted.user.id = this.task.id_user
+    
+    this.taskCompleted.task.team = new Team();
+    this.taskCompleted.task.team.codice = this.team.codice;
+    
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.taskCompleted).subscribe(data => {
       console.log(data);
       this.sendNotification(status);
-
+      this.location.back();
     })
+
+    this.backButton();
   }
 
   sendNotification(status: number) {
     if (status == 1) {
       this.notification.title = "Conferma task";
-      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato confermato";
+      this.notification.description = "Il task " + this.task.name +  " è stato confermato";
     } else {
       this.notification.title = "Rifiuto task";
-      this.notification.description = "Il task " + this.taskCompleted.task.name +  " è stato rifiutato";
+      this.notification.description = "Il task " + this.task.name +  " è stato rifiutato";
     }
-    
+
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
       this.addUserNotification(n);
@@ -142,7 +186,7 @@ export class TaskConfirmationPage implements OnInit {
   }
 
   addUserNotification(n: Notification){
-      this.userReciveNotificationService.addNotification(this.user.id, n.id).subscribe(n => {
+      this.userReciveNotificationService.addNotification(this.task.id_user, n.id).subscribe(n => {
         console.log(n);
       },(error: Response) => {
         if (error.status == 400) {

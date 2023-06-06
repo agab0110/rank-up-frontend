@@ -21,7 +21,8 @@
     <ion-grid class="buttons-grid">
       <ion-row>
         <ion-col class="left-col">
-          <ion-button class="visualize-attached">Visualizza<br/>Allegato</ion-button>
+          <ion-button class="visualize-attached" *ngIf="this.url !== null" href="{{this.url}}">Visualizza<br/>Allegato</ion-button>
+          <ion-button class="visualize-attached" *ngIf="this.url === null" (click)="nullAttachedAlert()">Visualizza<br/>Allegato</ion-button>
         </ion-col>
         <ion-col class=right-col>
           <app-bt-user-small shape="round"  clear [text]="'Chiudi'" (click)="backButton()"></app-bt-user-small>

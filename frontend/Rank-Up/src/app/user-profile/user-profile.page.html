@@ -1,7 +1,10 @@
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="backgroundUser">
 
-    <img class="imgUser" alt="Utente" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    <img class="imgUser" alt="Utente" src={{user_photo}} />
 
     <div id="div-image-title">{{user_name}} {{user_surname}}</div>
 
@@ -105,20 +108,19 @@
   <ng-template>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Cambia foto</ion-title>
+        <ion-title>Modifica Foto</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <div class="modal">
-        <ion-icon name="document-attach-outline" class="icon"></ion-icon>
+        <ion-icon name="images-outline" class="icona" size="large"></ion-icon>
         <ion-button fill="clear">
-          <ion-input type="file" (change)="loadFileFromDevice($event)" id="file-input" accept="all">
+          <ion-input type="file" (change)="loadFileFromDevice($event)" id="file-input" accept="image/png, image/jpeg">
           </ion-input>
         </ion-button>
-
         <div>
-          <app-bt-user-small text="Annulla" (click)="closeModal()" style="padding-right: 0.5vh;"></app-bt-user-small>
-          <app-bt-user-small text="Cambia" (click)="attach()" style="padding-left: 0.5vh;"></app-bt-user-small>
+          <app-bt-admin-small text="Annulla" (click)="closeModal()" style="margin-right: 0.5vh;"></app-bt-admin-small>
+          <app-bt-user-small text="Conferma" (click)="attach()" style="margin-left: 0.5vh;"></app-bt-user-small>
         </div>
       </div>
     </ion-content>

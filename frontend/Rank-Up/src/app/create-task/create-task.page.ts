@@ -26,29 +26,29 @@ export class CreateTaskPage implements OnInit {
     this.user = new User();
    }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Inserire Nome Utente:',
-      inputs: [
-        {
-          placeholder: 'Nome Utente',
-          cssClass: 'alert-input',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Aggiungi',
-          cssClass: 'alert-button-blue',
-        },
-        {
-          text: 'Annulla',
-          cssClass: 'alert-button-red',
-        },
-      ],
-    });
-
-  await alert.present();
-  }
+  //async presentAlert() {
+  //  const alert = await this.alertController.create({
+  //    header: 'Inserire Nome Utente:',
+  //    inputs: [
+  //      {
+  //        placeholder: 'Nome Utente',
+  //        cssClass: 'alert-input',
+  //      },
+  //    ],
+  //    buttons: [
+  //      {
+  //        text: 'Aggiungi',
+  //        cssClass: 'alert-button-blue',
+  //      },
+  //      {
+  //        text: 'Annulla',
+  //        cssClass: 'alert-button-red',
+  //      },
+  //    ],
+  //  });
+  //await alert.present();
+  //}
+  // -----Implementazione Futura---------
 
   ngOnInit() {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
@@ -143,9 +143,6 @@ export class CreateTaskPage implements OnInit {
     }
     if(!this.task.points){
       this.emptyPointsAlert();
-    }
-    if(!this.task.endDate){
-      this.emptyDateAlert();
     }
     this.task.admin = this.admin; 
     this.task.team = this.team;  

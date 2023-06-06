@@ -20,6 +20,13 @@ export class TaskService {
   }
 
 
+  public userTasks(teamId: number, idUser: number): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      this.baseUrl + "/userTasks/" + teamId + "/" + idUser
+    );
+  }
+
+
   public getTask(idTask: any) {
     return this.http.get(
       this.baseUrl + "/task/" + idTask
@@ -31,5 +38,9 @@ export class TaskService {
     return this.http.post<Task>(
       this.baseUrl + "/createTask", task, {params}
       );
+  }
+
+  public deliteTask(idTask:number, teamId:number){
+    return this.http.delete<Task>(this.baseUrl + "/deleteTask/"+idTask + "/"+ teamId);
   }
 }

@@ -29,6 +29,8 @@ export class AdminProfilePage implements OnInit {
   rulesCompleted: RuleCompleted[];
   tasksCompleted: TaskCompleted[];
   activities: any[];
+  task:Task;
+  rules:Rule;
 
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
@@ -58,6 +60,8 @@ export class AdminProfilePage implements OnInit {
     this.rulesCompleted = [];
     this.tasksCompleted = [];
     this.activities = [];
+    this.task = new Task();
+    this.rules = new Rule();
   }
 
   backButton() {
@@ -69,7 +73,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserPrizes() {
-    this.userGetPrizeService.getUserPrizes(this.userJoin.id, this.team.codice).subscribe(
+    this.userGetPrizeService.getUserPrizes(this.userJoin.user.id, this.team.codice).subscribe(
       (response: any) => {
         this.prizes = response;
         console.log(this.prizes);
@@ -85,7 +89,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserRules() {
-    this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+    this.ruleCompletedService.getRulesCompletedByUser(this.userJoin.user.id, this.team.codice).subscribe(response => {
       this.rulesCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
@@ -102,7 +106,7 @@ export class AdminProfilePage implements OnInit {
   }
 
   getUserTasks() {
-    this.taskCompletedService.getTaskCompletedByUser(this.userJoin.id, this.team.codice).subscribe(response => {
+    this.taskCompletedService.getTaskCompletedByUser(this.userJoin.user.id, this.team.codice).subscribe(response => {
       this.tasksCompleted = response;
       response.forEach(element => {
         this.activities.push(element);
@@ -143,5 +147,14 @@ export class AdminProfilePage implements OnInit {
       }
     };
     this.navCtrl.navigateForward(['/admin-rule-completed'], navigationExtras);
+  }
+  clickRule(rule:RuleCompleted) {
+    let rules = JSON.stringify(rule);
+    localStorage.setItem("viewRule", rules);
+  }
+
+  clickTask(task:TaskCompleted) {
+    let tasks = JSON.stringify(task);
+    localStorage.setItem("viewTask", tasks);
   }
 }

@@ -7,7 +7,7 @@ export class Task {
     id!: number;
     name!: string;
     points!: number;
-    desctiption!: string;
+    description!: string;
     endDate!: Date;
     startDate!: Date;
     team!: Team;
