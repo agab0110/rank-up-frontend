@@ -8,6 +8,7 @@ import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { User } from '../models/user/user';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-team-rules-tasks',
@@ -27,7 +28,7 @@ export class TeamRulesTasksPage implements OnInit {
   admin: Admin;
   user:User;
 
-  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService,private router: Router) {
+  constructor(private location: Location, private ruleservice : RuleService, private taskservice :TaskService,private router: Router,private alertController: AlertController) {
     this.rules = new Array<Rule>;
     this.tasks = new Array<Task>;
     this.team = new Team();
@@ -95,5 +96,78 @@ export class TeamRulesTasksPage implements OnInit {
       }
       console.log(error);
     });
+  }
+  async presentAlert(idTask:number) {
+    const alert = await this.alertController.create({
+      header: 'eliminare il task?',
+      buttons: [
+        {
+          text: 'Sì',
+          cssClass: 'alert-button-blue',
+          handler: () => {
+           this.taskservice.deliteTask(idTask,this.team.codice).subscribe(data =>{
+            console.log(data);
+            this.confirmationAlert();
+           });
+            
+          }
+        },
+        {
+          text: 'No',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  async confirmationAlert() {
+    const alert = await this.alertController.create({
+      header: 'task eliminato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  async presentAlert1(idRule:number) {
+    const alert = await this.alertController.create({
+      header: 'eliminare la regola?',
+      buttons: [
+        {
+          text: 'Sì',
+          cssClass: 'alert-button-blue',
+          handler: () => {
+           this.ruleservice.deliteRule(idRule,this.team.codice).subscribe(data =>{
+            console.log(data);
+            this.confirmationAlert1();
+           });
+            
+          }
+        },
+        {
+          text: 'No',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+    await alert.present();
+  }
+  async confirmationAlert1() {
+    const alert = await this.alertController.create({
+      header: 'regola eliminato con successo!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

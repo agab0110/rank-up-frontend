@@ -30,13 +30,13 @@ export class NotificationsPage implements OnInit {
   notifications:UserReciveNotification[];
   adminNotifications: AdminReciveNotification[];
   team: Team;
-  router: Router;
 
   constructor(
     private location: Location,
     private userNotificationService:UserReciveNotificationService,
     private adminNotificationService: AdminReciveNotificationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
     ) {
     this.notifications = new Array<UserReciveNotification>;
     this.adminNotifications = new Array<AdminReciveNotification>;
@@ -44,7 +44,6 @@ export class NotificationsPage implements OnInit {
     this.user = new User();
     this.admin = new Admin();
     this.stato = false;
-    this.router = new Router();
   }
 
   ngOnInit() {
@@ -130,9 +129,12 @@ export class NotificationsPage implements OnInit {
        console.log(error);
      });
   }
-
-  navigate(idNotification: number){
-    const parameter = idNotification;
-    this.router.navigate(['/admin-notification-description/', parameter]);
+  clicknotificationUser(notifications:Notification) {
+    let notificationUser = JSON.stringify(notifications);
+    localStorage.setItem("viewNotificationUser", notificationUser);
+  }
+  clicknotificationAdmin(notifications:Notification) {
+    let notificationAdmin = JSON.stringify(notifications);
+    localStorage.setItem("viewNotificationAdmin", notificationAdmin);
   }
 }

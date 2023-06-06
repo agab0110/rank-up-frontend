@@ -144,9 +144,6 @@ export class CreateTaskPage implements OnInit {
     if(!this.task.points){
       this.emptyPointsAlert();
     }
-    if(!this.task.endDate){
-      this.emptyDateAlert();
-    }
     this.task.admin = this.admin; 
     this.task.team = this.team;  
     this.taskService.newTask(this.task,this.task.name).subscribe(response => {

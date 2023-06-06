@@ -13,6 +13,7 @@ export class AdminNotificationDescriptionPage implements OnInit {
   idNotification: Number;
   notification: Notification;
 
+
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -23,10 +24,7 @@ export class AdminNotificationDescriptionPage implements OnInit {
    }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.idNotification = params['parameter'];
-      this.getNotification(this.idNotification);
-    });
+    this.notification= JSON.parse(localStorage.getItem('viewNotificationAdmin') || '{}');
   }
   backButton() {
     this.location.back();

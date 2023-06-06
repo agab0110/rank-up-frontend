@@ -31,4 +31,7 @@ export class RuleService {
       this.baseUrl + "/rule/" + idRule
     );
   }
+  public deliteRule(idRule:number, teamId:number){
+    return this.http.delete<Rule>(this.baseUrl + "/deleteRule/"+idRule + "/"+ teamId);
+  }
 }

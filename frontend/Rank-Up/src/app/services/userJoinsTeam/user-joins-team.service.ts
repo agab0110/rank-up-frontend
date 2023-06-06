@@ -87,4 +87,8 @@ export class UserJoinsTeamService {
   public removeUserFromTeam(idTeam: number, idUser: number) {
     return this.http.delete<UserJoinsTeam>(this.userJoinsTeamUrl + "/removeUser/" + idTeam + "/" + idUser);
   }
+
+  public leveTeam(idTeam:number, idUser:number){
+    return this.http.delete<UserJoinsTeam>(this.userJoinsTeamUrl + "/leaveTeam/"+ idTeam + "/"+ idUser);
+  }
 }
