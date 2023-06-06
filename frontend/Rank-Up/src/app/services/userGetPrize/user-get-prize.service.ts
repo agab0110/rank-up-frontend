@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Prize } from 'src/app/models/prize/prize';
+import { UserGetPrize } from 'src/app/models/userGetPrize/user-get-prize';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class UserGetPrizeService {
     );
   }
 
-  public getTeamPrizes(teamId: number): Observable<Prize[]> {
-    return this.http.get<Prize[]>(
+  public getTeamPrizes(teamId: number){
+    return this.http.get<UserGetPrize[]>(
       this.userGetPrizeUrl + "/getPrizes/" + teamId
     );
   }

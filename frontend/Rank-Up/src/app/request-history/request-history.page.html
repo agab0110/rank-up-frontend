@@ -77,12 +77,13 @@
     <div class="listBox" *ngIf="segmentValue === 'prize'">
       <ion-list class="notifications" lines="none">
 
-        <!--ion-item class={{classAccepted}} *ngFor="let prize of prizes" >
+        <p>Premi riscossi</p>
+        <ion-item class={{classAccepted}} *ngFor="let prize of prizes" >
           <ion-icon name={{iconAccepted}} size="small" class="icon"></ion-icon>
           <ion-label class="label">{{prize?.user?.name}}</ion-label>
-          <ion-label class="label">{{prize?.task?.name}}</ion-label>
-          <ion-label class="label">{{prize.timestamp}}</ion-label>
-        </ion-item-->
+          <ion-label class="label">{{prize?.prize?.name}}</ion-label>
+          <ion-label class="label">{{prize?.date}}</ion-label>
+        </ion-item>
 
       </ion-list>
     </div>
