@@ -55,8 +55,6 @@ export class HomePage implements OnInit{
       this.router.navigate(['login']);
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    LocalNotifications.checkPermissions()
-
     this.userJoinsTeamService.getTeams(this.user.id).subscribe(response => {
       this.teamsUser = response;
       this.teamsUser.forEach(team => {
