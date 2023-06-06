@@ -24,7 +24,8 @@ export class AdminNotificationDescriptionPage implements OnInit {
    }
 
   ngOnInit() {
-    this.notification= JSON.parse(localStorage.getItem('viewNotificationAdmin') || '{}');
+    this.idNotification= JSON.parse(localStorage.getItem('viewNotificationAdmin') || '{}');
+    this.getNotification(this.idNotification);
   }
   backButton() {
     this.location.back();
