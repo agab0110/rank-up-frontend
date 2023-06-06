@@ -43,6 +43,7 @@ export class LoginPage implements OnInit{
     localStorage.setItem('userJoinsTeam', '');
 
     LocalNotifications.requestPermissions();
+    LocalNotifications.checkPermissions();
   }
 
   login() {
