@@ -4,6 +4,7 @@ import { UserService } from '../services/user/user.service';
 import { User } from '../models/user/user';
 import { SHA3 } from 'crypto-js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-login',
@@ -38,8 +39,26 @@ export class LoginPage implements OnInit{
     localStorage.setItem('team', '');
     localStorage.setItem('admin', '');
     localStorage.setItem('userJoinsTeam', '');
+
+    LocalNotifications.requestPermissions();
+
+    setInterval(() => {
+      this.schedule()
+    }, 1000);
   }
 
+  async schedule() {
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "ok",
+          body: "Ok",
+          id: 1
+        }
+      ]
+    })
+  }
+  
   login() {
     const hashedPassword = SHA3(this.password).toString();
 

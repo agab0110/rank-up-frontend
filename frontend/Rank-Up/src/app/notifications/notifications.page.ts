@@ -9,7 +9,10 @@ import { UserReciveNotificationService } from '../services/userReciveNotificatio
 import { AdminReciveNotification } from '../models/adminReciveNotification/admin-recive-notification';
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 import { Admin } from '../models/admin/admin';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { LocalNotifications } from '@capacitor/local-notifications';
+import { interval } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications',
@@ -17,27 +20,27 @@ import { Router} from '@angular/router';
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  user : User;
-  admin : Admin;
-  stato : Boolean;
+  user: User;
+  admin: Admin;
+  stato: Boolean;
 
   idUser: any = 2;
   nUser: any
   nAdmin: any
 
   public alertBtns = ["Accetta", "Rifiuta"];
-  type='utente';
-  notifications:UserReciveNotification[];
+  type = 'utente';
+  notifications: UserReciveNotification[];
   adminNotifications: AdminReciveNotification[];
   team: Team;
 
   constructor(
     private location: Location,
-    private userNotificationService:UserReciveNotificationService,
+    private userNotificationService: UserReciveNotificationService,
     private adminNotificationService: AdminReciveNotificationService,
     private notificationService: NotificationService,
     private router: Router
-    ) {
+  ) {
     this.notifications = new Array<UserReciveNotification>;
     this.adminNotifications = new Array<AdminReciveNotification>;
     this.team = new Team();
@@ -65,6 +68,22 @@ export class NotificationsPage implements OnInit {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })
+
+    setInterval(() => {
+      this.schedule()
+    }, 1000);
+  }
+
+  async schedule() {
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "ok",
+          body: "Ok",
+          id: 1
+        }
+      ]
+    })
   }
 
   handleRefresh(event: any) {
@@ -77,23 +96,23 @@ export class NotificationsPage implements OnInit {
     }, 1000);
   }
 
-  segmentChanged(ev: any, idUser: Number, idAdmin: Number){
+  segmentChanged(ev: any, idUser: Number, idAdmin: Number) {
     this.stato = !this.stato;
-    if(!this.stato){
+    if (!this.stato) {
       this.getUserNotification(idUser);
-    }else{
+    } else {
       this.getAdminNotification(idAdmin)
     }
   }
 
-  notificheUser(event: any){
+  notificheUser(event: any) {
     this.notificationService.getUserNotifications(this.user.id).subscribe(data => {
       this.nUser = data;
       console.log(this.nUser)
     })
   }
 
-  notificheAdmin(event: any){
+  notificheAdmin(event: any) {
     this.notificationService.getAdminNotifications(this.user.id).subscribe(data => {
       this.nAdmin = data;
       console.log(this.nAdmin)
@@ -106,9 +125,9 @@ export class NotificationsPage implements OnInit {
 
   public getUserNotification(idUser: Number) {
     this.userNotificationService.getNotification(this.user.id).subscribe(response => {
-      this.notifications= response;
+      this.notifications = response;
     }, (error: Response) => {
-      if(error.status == 400)
+      if (error.status == 400)
         console.log("400 error");
       else {
         console.log('An unexpected error occured');
@@ -117,23 +136,23 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  public getAdminNotification(idAmin: Number){
-    this.adminNotificationService.getAdminNotification(this.admin.id).subscribe(response =>{
+  public getAdminNotification(idAmin: Number) {
+    this.adminNotificationService.getAdminNotification(this.admin.id).subscribe(response => {
       this.adminNotifications = response;
-     }, (error: Response) => {
-       if(error.status == 400)
-         console.log("400 error");
-       else {
-         console.log('An unexpected error occured');
-       }
-       console.log(error);
-     });
+    }, (error: Response) => {
+      if (error.status == 400)
+        console.log("400 error");
+      else {
+        console.log('An unexpected error occured');
+      }
+      console.log(error);
+    });
   }
-  clicknotificationUser(notifications:Notification) {
+  clicknotificationUser(notifications: Notification) {
     let notificationUser = JSON.stringify(notifications);
     localStorage.setItem("viewNotificationUser", notificationUser);
   }
-  clicknotificationAdmin(notifications:Notification) {
+  clicknotificationAdmin(notifications: Notification) {
     let notificationAdmin = JSON.stringify(notifications);
     localStorage.setItem("viewNotificationAdmin", notificationAdmin);
   }

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user/user.service';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,7 @@ import { UserService } from './services/user/user.service';
     IonicModule.forRoot(), 
     AppRoutingModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService],
   bootstrap: [AppComponent],
