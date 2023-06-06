@@ -154,6 +154,27 @@ export class AdminListPage implements OnInit {
     );
   }
 
+  async confirmRemoveUser(idUser: number) {
+    const alert = await this.alertController.create({
+      header: 'Sicuro di rimuovere l\'utente dal team?',
+      buttons: [
+        {
+          text: 'Conferma',
+          cssClass: 'alert-button-blue',
+          handler: () => {
+            this.removeUserFromTeam(idUser);
+          }
+        },
+        {
+          text: 'Annulla',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async removedUserAlert() {
     const alert = await this.alertController.create({
       header: 'Utente rimosso con successo!',
