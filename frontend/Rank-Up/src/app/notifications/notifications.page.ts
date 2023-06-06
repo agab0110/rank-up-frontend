@@ -68,22 +68,6 @@ export class NotificationsPage implements OnInit {
       this.nAdmin = data;
       console.log(this.nAdmin)
     })
-
-    setInterval(() => {
-      this.schedule()
-    }, 1000);
-  }
-
-  async schedule() {
-    await LocalNotifications.schedule({
-      notifications: [
-        {
-          title: "ok",
-          body: "Ok",
-          id: 1
-        }
-      ]
-    })
   }
 
   handleRefresh(event: any) {

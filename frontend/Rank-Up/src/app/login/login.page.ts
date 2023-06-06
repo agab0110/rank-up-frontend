@@ -5,6 +5,7 @@ import { User } from '../models/user/user';
 import { SHA3 } from 'crypto-js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { NotificationService } from '../services/notification/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit{
   constructor(
     private router: Router,
     private service: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
     ) {
       this.user = new User();
       this.loginForm = this.formBuilder.group({
@@ -42,23 +44,8 @@ export class LoginPage implements OnInit{
 
     LocalNotifications.requestPermissions();
 
-    setInterval(() => {
-      this.schedule()
-    }, 1000);
   }
 
-  async schedule() {
-    await LocalNotifications.schedule({
-      notifications: [
-        {
-          title: "ok",
-          body: "Ok",
-          id: 1
-        }
-      ]
-    })
-  }
-  
   login() {
     const hashedPassword = SHA3(this.password).toString();
 
