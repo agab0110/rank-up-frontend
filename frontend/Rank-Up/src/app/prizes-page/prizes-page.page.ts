@@ -24,6 +24,7 @@ export class PrizesPagePage implements OnInit {
   team: Team;
   points: Number;
   userJoinsTeam: UserJoinsTeam;
+  public user_photo: string | undefined
 
   constructor(
     private location: Location,
@@ -69,6 +70,8 @@ export class PrizesPagePage implements OnInit {
     this.team = JSON.parse(localStorage.getItem('team') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.userJoinsTeam = JSON.parse(localStorage.getItem('userJoinsTeam') || '{}');
+
+    this.user_photo = this.user.photo;
 
     this.listprize(this.team.codice);
   }
