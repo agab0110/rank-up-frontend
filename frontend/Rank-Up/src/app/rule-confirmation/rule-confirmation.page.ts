@@ -10,6 +10,7 @@ import { NotificationService } from '../services/notification/notification.servi
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { Notification } from '../models/notification/notification';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-rule-confirmation',
@@ -28,6 +29,8 @@ export class RuleConfirmationPage implements OnInit {
   status!: number;
   team: Team;
   notification: Notification;
+  file: any;
+  url: any;
 
   constructor(
     private alertController: AlertController,
@@ -36,7 +39,8 @@ export class RuleConfirmationPage implements OnInit {
     private ruleCompletedService: RuleCompletedService,
     private notificationService: NotificationService,
     private userJoinsTeamService: UserJoinsTeamService,
-    private userReciveNotificationService: UserReciveNotificationService
+    private userReciveNotificationService: UserReciveNotificationService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.ruleCompleted = new RuleCompleted();
@@ -60,12 +64,35 @@ export class RuleConfirmationPage implements OnInit {
 
     this.ruleCompletedService.getRuleDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
-      console.log(data)
+      console.log(data);
+      if(this.data. attached != null){
+        this.fileService.getFile(this.data.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url ;
+        });
+      }else{
+        this.url = null;
+      }
     })
   }
 
   backButton() {
     this.location.back();
+  }
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async presentAlertReject() {
@@ -155,7 +182,7 @@ export class RuleConfirmationPage implements OnInit {
       this.notification.title = "Rifiuto regola";
       this.notification.description = "La regola " + this.ruleCompleted.rule.name +  " è stato rifiutato";
     }
-    
+
     this.notificationService.newNotification(this.notification, this.team.codice).subscribe(n => {
       console.log(n);
       this.addUserNotification(n);

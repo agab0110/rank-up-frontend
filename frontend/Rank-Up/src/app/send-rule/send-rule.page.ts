@@ -13,6 +13,7 @@ import { AdminReciveNotificationService } from '../services/adminReciveNotificat
 import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { AdminService } from '../services/admin/admin.service';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-send-rule',
@@ -21,14 +22,16 @@ import { AdminService } from '../services/admin/admin.service';
 })
 
 export class SendRulePage implements OnInit {
-  notification: Notification;
+  
   public user: User;
+  notification: Notification;
   public data: any;
   public idRule: number = 1; //l'id deve essere ricevuto dalla pagina precedente
   public ruleCompleted: RuleCompleted
   team: Team;
   admins: Admin[];
   public rule: Rule;
+  file: any;
 
   public descrBtns = ["Chiudi"];
   public confirmBtns = [
@@ -41,27 +44,35 @@ export class SendRulePage implements OnInit {
       cssClass: 'alert-button-blue',
       handler: () => {
         if(this.data) {
-          if(this.blobURL) {
-            this.ruleCompleted.attached = this.blobURL;
-          }
           this.ruleCompleted.status = 0;
           this.ruleCompleted.user = this.user;
           const rule = new Rule();
           rule.id = this.idRule;
           this.ruleCompleted.rule = rule;
         }
-    
-        this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
-          console.log(data)
-        });
-        this.location.back();
+
+        if(this.file){
+          this.fileService.uploadFile(this.file).subscribe((data: any) => {
+            console.log(data);
+            let attached = data.id;
+            this.ruleCompleted.attached = attached;
+            this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
+              console.log(data)
+            });
+            this.location.back();
+          }), (error: any) => {
+            console.log(error);
+          };
+        } else {
+          this.ruleCompletedService.insertRuleCompleted(this.ruleCompleted).subscribe(data => {
+            console.log(data)
+          });
+          this.location.back();
       }
-      
+      }
     }
   ];
   @ViewChild(IonModal) modal!: IonModal;
-  blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
 
   constructor(
     private location: Location,
@@ -70,8 +81,9 @@ export class SendRulePage implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private adminReciveNotificationService: AdminReciveNotificationService,
+    private fileService: FileService,
     private adminService: AdminService
-  ) { 
+  ) {
     this.ruleCompleted = new RuleCompleted();
     this.user = new User();
     this.notification = new Notification();
@@ -92,7 +104,7 @@ export class SendRulePage implements OnInit {
     this.rule= JSON.parse(localStorage.getItem('viewRule') || '{}');
 
     this.idRule = this.rule.id;
-    
+
     this.ruleService.getRule(this.idRule).subscribe(data => {
       this.data = data
       console.log(data)
@@ -100,22 +112,12 @@ export class SendRulePage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
-    this.ruleCompleted.attached = this.blobURL || '';
+    event.target.files = null;
+    this.file = event.target.files[0];
   }
 
   closeModal() {
-    this.blob = null;
-    this.blobURL = null;
+    this.file = null;
     this.modal.dismiss();
   }
 

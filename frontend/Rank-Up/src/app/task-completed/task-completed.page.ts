@@ -5,6 +5,8 @@ import { Task } from '../models/task/task';
 import { TaskCompletedService } from '../services/taskCompleted/task-completed.service';
 import { User } from '../models/user/user';
 import { ActivatedRoute } from '@angular/router';
+import { FileService } from '../services/file/file.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-task-completed',
@@ -12,16 +14,20 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./task-completed.page.scss'],
 })
 export class TaskCompletedPage implements OnInit {
-  
+
   taskCompleted: TaskCompleted;
   task: Task;
   user: User;
   id: number;
+  file: any;
+  url: any = null;
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private taskCompletedService: TaskCompletedService
+    private taskCompletedService: TaskCompletedService,
+    private fileService: FileService,
+    private alertController: AlertController
     ) {
     this.taskCompleted = new TaskCompleted();
     this.task = new Task();
@@ -39,6 +45,16 @@ export class TaskCompletedPage implements OnInit {
       this.task = this.taskCompleted.task;
       this.user = this.taskCompleted.user;
       console.log(response);
+
+      if(this.taskCompleted.attached != null) {
+        this.fileService.getFile(this.taskCompleted.attached).subscribe(file => {
+          console.log(file);
+          this.file = file;
+          this.url = this.file.url;
+        });
+      } else {
+        this.url = null;
+      }
     });
     if(!this.taskCompleted.comment)
     {
@@ -48,5 +64,20 @@ export class TaskCompletedPage implements OnInit {
 
   backButton() {
     this.location.back();
+  }
+
+
+  async nullAttachedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Allegato non presente!',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue' ,
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

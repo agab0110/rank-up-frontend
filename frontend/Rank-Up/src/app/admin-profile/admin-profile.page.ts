@@ -29,6 +29,8 @@ export class AdminProfilePage implements OnInit {
   rulesCompleted: RuleCompleted[];
   tasksCompleted: TaskCompleted[];
   activities: any[];
+  task:Task;
+  rules:Rule;
 
   ngOnInit() {
     //if(localStorage.getItem('user') == null || localStorage.getItem('user') == '')
@@ -58,6 +60,8 @@ export class AdminProfilePage implements OnInit {
     this.rulesCompleted = [];
     this.tasksCompleted = [];
     this.activities = [];
+    this.task = new Task();
+    this.rules = new Rule();
   }
 
   backButton() {
@@ -143,5 +147,14 @@ export class AdminProfilePage implements OnInit {
       }
     };
     this.navCtrl.navigateForward(['/admin-rule-completed'], navigationExtras);
+  }
+  clickRule(rule:RuleCompleted) {
+    let rules = JSON.stringify(rule);
+    localStorage.setItem("viewRule", rules);
+  }
+
+  clickTask(task:TaskCompleted) {
+    let tasks = JSON.stringify(task);
+    localStorage.setItem("viewTask", tasks);
   }
 }
