@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../models/user/user';
 import { AdminService } from '../services/admin/admin.service';
 import { Admin } from '../models/admin/admin';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-create-team',
@@ -23,8 +24,7 @@ export class CreateTeamPage implements OnInit {
   public team: Team;
   public descrBtns = ["Chiudi"];
   @ViewChild(IonModal) modal!: IonModal;
-  blob: Blob | undefined | null;
-  blobURL: string | undefined | null;
+  photo: any;
   teamNameError: string = '';
 
   constructor(
@@ -32,7 +32,8 @@ export class CreateTeamPage implements OnInit {
     private location: Location,
     private teamService: TeamService,
     private router: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private fileService: FileService
   ) {
     this.user = new User();
     this.admin = new Admin();
@@ -135,25 +136,27 @@ export class CreateTeamPage implements OnInit {
   }
 
   loadFileFromDevice(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = () => {
-      this.blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-      this.blobURL = URL.createObjectURL(this.blob);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+    event.target.files = null;
+    this.photo = event.target.files[0];
   }
 
   closeModal() {
-    this.blob = null;
-    this.blobURL = null;
+    this.photo = null;
     this.modal.dismiss();
   }
 
   attach() {
+    this.fileService.uploadFile(this.photo).subscribe(response => {
+      console.log(response);
+      let id = JSON.parse(JSON.stringify(response)).id;
+      console.log(id);
+      this.fileService.getFile(id).subscribe(data => {
+        let photo = JSON.parse(JSON.stringify(data)).url;
+        this.teamService.changePhoto(this.team.codice, photo).subscribe(response => {
+          localStorage.setItem('team', JSON.stringify(response));
+        });
+      });
+    });
     this.modal.dismiss();
   }
 
