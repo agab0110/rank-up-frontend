@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Prize } from 'src/app/models/prize/prize';
+import { UserGetPrize } from 'src/app/models/userGetPrize/user-get-prize';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class UserGetPrizeService {
   public addUserPrizes(userId: number, idPrize: number) {
     return this.http.get(
       this.userGetPrizeUrl + "/addUserPrizes/" + idPrize + "/" + userId
+    );
+  }
+
+  public getTeamPrizes(teamId: number){
+    return this.http.get<UserGetPrize[]>(
+      this.userGetPrizeUrl + "/getPrizes/" + teamId
     );
   }
 }
