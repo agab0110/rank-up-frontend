@@ -364,14 +364,16 @@ export class RequestHistoryPage implements OnInit {
   }
 
   ricerca(event: any) {
-    if(event.target.value != "") {
-      this.ruleCompletedService.getUserHistory(this.idTeam, event.target.value.toLowerCase()).subscribe(data => {
-        this.data = JSON.parse(JSON.stringify(data))
-
-        console.log(data)
-      });
+    const query = event.target.value.toLowerCase();
+    if(query == ""){
+      this.ngOnInit()
     }
+    this.rulesCompleted = this.rulesCompleted.filter((d) => d.user.username.toLowerCase().indexOf(query) > -1);
+    this.rulesRejected = this.rulesRejected.filter((d) => d.user.username.toLowerCase().indexOf(query) > -1);
+    this.tasksCompleted = this.tasksCompleted.filter((d) => d.user.username.toLowerCase().indexOf(query) > -1);
+    this.tasksRejected = this.tasksRejected.filter((d) => d.user.username.toLowerCase().indexOf(query) > -1);
   }
+
   clickRule(rule:RuleCompleted) {
     let rules = JSON.stringify(rule);
     localStorage.setItem("viewRule", rules);
