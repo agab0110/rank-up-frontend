@@ -99,7 +99,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
   async presentAlert(idTask:number) {
     const alert = await this.alertController.create({
-      header: 'eliminare il task?',
+      header: 'Eliminare il task?',
       buttons: [
         {
           text: 'Sì',
@@ -123,7 +123,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
   async confirmationAlert() {
     const alert = await this.alertController.create({
-      header: 'task eliminato con successo!',
+      header: 'Task eliminato con successo!',
       buttons: [
         {
           text: 'OK',
@@ -136,7 +136,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
   async presentAlert1(idRule:number) {
     const alert = await this.alertController.create({
-      header: 'eliminare la regola?',
+      header: 'Eliminare la regola?',
       buttons: [
         {
           text: 'Sì',
@@ -159,7 +159,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
   async confirmationAlert1() {
     const alert = await this.alertController.create({
-      header: 'regola eliminato con successo!',
+      header: 'Regola eliminato con successo!',
       buttons: [
         {
           text: 'OK',
