@@ -56,6 +56,7 @@ export class SearchTeamPage implements OnInit {
             this.joinPublicTeam();
             this.userJoinsTeamService.addUser(idTeam, this.user.id).subscribe(data => {
               console.log(data)
+              this.router.navigate(['user/home']);
             })
           }
         },
@@ -69,14 +70,14 @@ export class SearchTeamPage implements OnInit {
   }
 
   getTeams() {
-    this.teamService.getAllTeams().subscribe(data => {
+    this.teamService.getAllTeams(this.user.id).subscribe(data => {
       this.teams = JSON.parse(JSON.stringify(data))
     })
   }
 
   ricerca(event: any) {
     if(event.target.value != "") {
-      this.teamService.getTeam(event.target.value.toLowerCase()).subscribe(data => {
+      this.teamService.getTeam(this.user.id, event.target.value.toLowerCase()).subscribe(data => {
         this.teams = JSON.parse(JSON.stringify(data))
 
         console.log(data)

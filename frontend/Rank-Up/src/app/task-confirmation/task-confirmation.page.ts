@@ -13,6 +13,7 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { FileService } from '../services/file/file.service';
 import { error } from 'console';
+import { log } from 'console';
 
 @Component({
   selector: 'app-task-confirmation',
@@ -62,7 +63,7 @@ export class TaskConfirmationPage implements OnInit {
     localStorage.getItem('viewTask');
     this.task = JSON.parse(localStorage.getItem('viewTask') || '{}')
     console.log(this.task)
-    this.id = this.task.id_task
+    this.id = this.task.id_task_completed
 
     this.taskCompletedService.getTaskDelivered(this.id).subscribe(data => {
       this.data = JSON.parse(JSON.stringify(data))
@@ -139,11 +140,18 @@ export class TaskConfirmationPage implements OnInit {
     this.taskCompleted.id = this.id
     this.taskCompleted.comment = this.comment
     this.taskCompleted.bonus = this.bonusPoints
-
+    this.taskCompleted.task = new Task();
+    this.taskCompleted.task.id = this.task.id_task
+    this.taskCompleted.user = new User();
+    this.taskCompleted.user.id = this.task.id_user
+    
+    this.taskCompleted.task.team = new Team();
+    this.taskCompleted.task.team.codice = this.team.codice;
+    
     this.taskCompletedService.confirmationTaskCompleted(this.id, status, this.taskCompleted).subscribe(data => {
       console.log(data);
       this.sendNotification(status);
-
+      this.location.back();
     })
 
     this.backButton();

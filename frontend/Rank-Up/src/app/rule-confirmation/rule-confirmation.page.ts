@@ -151,7 +151,7 @@ export class RuleConfirmationPage implements OnInit {
       }
       console.log(error);
     });
-    this.backButton();
+    this.location.back();
   }
 
   confirmActivity() {
@@ -171,7 +171,7 @@ export class RuleConfirmationPage implements OnInit {
       }
       console.log(error);
     });
-    this.backButton();
+    this.location.back();
   }
 
   sendNotification(status: number) {
