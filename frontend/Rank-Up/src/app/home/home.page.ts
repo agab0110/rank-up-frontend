@@ -25,6 +25,7 @@ export class HomePage implements OnInit{
   notification: Notification;
   admins: Admin[];
   searchedTeam!: Team;
+  isJoinRequestAlertOpen: boolean = false;
 
   constructor(
     private router: Router,
@@ -184,7 +185,8 @@ export class HomePage implements OnInit{
 
   addTeam() {
     this.userJoinsTeamService.addUserByCOde(this.codeTeamInput, this.user.id).subscribe(data => {
-      console.log(data)
+      this.joinRequest();
+      console.log(data);
       this.sendNotification();
       this.confirmationAlert();
     }, (error: Response) => {
@@ -243,5 +245,20 @@ export class HomePage implements OnInit{
       }
       console.log(error);});
     });
+  }
+
+  async joinRequest() {
+    const alert = await this.alertController.create({
+      header: 'Richiesta inviata!',
+      message: 'Attendi che l\' admin ti aggiunga.',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-blue',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

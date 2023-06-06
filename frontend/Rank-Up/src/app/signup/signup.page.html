@@ -20,7 +20,10 @@
       <ion-input [(ngModel)]="user.username" (ionInput)="username_checker()" [type]="'text'" label="Username" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
       <ion-text *ngIf="log_error_username" class="error-message">{{log_error_username}}</ion-text>
 
-      <ion-input [(ngModel)]="password" (ionInput)="password_checker()" type="password" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
+      <ion-input [(ngModel)]="password" (keydown)="handleKeyDown($event)" (ionInput)="password_checker()" [type]="showPassword ? 'text' : 'password'" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput with-eye-icon">
+        <ion-icon name="{{ showPassword ? 'eye' : 'eye-off' }}" (click)="togglePasswordVisibility()" slot="end" class="eye-icon"></ion-icon>
+      </ion-input>  
+          
       <ion-text class="error-message">
         <ul *ngIf="log_error_password">
           <li *ngFor="let error of log_error_password.split(',')">{{ error }}</li>

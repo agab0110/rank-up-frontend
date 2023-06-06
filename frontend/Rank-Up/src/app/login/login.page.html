@@ -12,7 +12,9 @@
           Email o password errati
         </ul>
         <ion-input [(ngModel)]="user.username" required class="formInput" [type]="'username'" label="Username" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
-        <ion-input [(ngModel)]="password" required class="formInput" [type]="'password'" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md"></ion-input>
+        <ion-input [(ngModel)]="password" (keydown)="handleKeyDown($event)" [type]="showPassword ? 'text' : 'password'" label="Password" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput with-eye-icon">
+          <ion-icon name="{{ showPassword ? 'eye' : 'eye-off' }}" (click)="togglePasswordVisibility()" slot="end" class="eye-icon"></ion-icon>
+        </ion-input>
       </div>
 
       <ion-button [disabled]="!isFormValid()" id="btUserSmall" (click)="login()">Accedi</ion-button>

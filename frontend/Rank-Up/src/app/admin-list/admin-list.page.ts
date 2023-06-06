@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { User } from '../models/user/user';
@@ -28,6 +29,7 @@ export class AdminListPage implements OnInit {
   constructor(
     private location: Location,
     private userJoinsTeamService: UserJoinsTeamService,
+    private alertController: AlertController,
     private router: Router
     ) {
       this.users = new Array<User>;
@@ -138,5 +140,32 @@ export class AdminListPage implements OnInit {
       this.statoRicerca = false
       this.getPartecipantsPoints(this.team.codice);
     }
+  }
+
+  removeUserFromTeam(idUser: number) {
+    this.userJoinsTeamService.removeUserFromTeam(this.team.codice, idUser).subscribe(
+      (response) => {
+        this.removedUserAlert();
+        console.log('Utente rimosso dal team con successo');
+        // Aggiorna la lista degli utenti del team
+        this.getPartecipants(this.team.codice);
+        this.handleRefresh(event);
+      }
+    );
+  }
+
+  async removedUserAlert() {
+    const alert = await this.alertController.create({
+      header: 'Utente rimosso con successo!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

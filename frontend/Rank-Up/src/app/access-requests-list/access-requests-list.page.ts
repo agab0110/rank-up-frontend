@@ -76,6 +76,7 @@ export class AccessRequestsListPage implements OnInit {
           text: 'Accetta',
           cssClass: 'alert-button-blue',
           handler: () => {
+            this.addUserAlert();
             this.manageRequest(u.user.id);
           }
         },
@@ -179,5 +180,20 @@ export class AccessRequestsListPage implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  async addUserAlert() {
+    const alert = await this.alertController.create({
+      header: 'Utente aggiunto con successo!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

@@ -24,6 +24,8 @@ export class SignupPage {
   lenPassword = 6;
   passwordTouched: boolean = false;
   passwordValid: boolean = false;
+  showPassword: boolean = false;
+
   
   //ion_touched = true;
   //ion_invalid = true;
@@ -87,6 +89,16 @@ export class SignupPage {
       const div = document.getElementById('username');
       if (div != null) div.style.color = 'gray';
       return false;
+    }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === ' ') {
+      event.preventDefault(); // Ignora il carattere spazio
     }
   }
 

@@ -5,6 +5,7 @@ import { PrizeService } from '../services/prize/prize.service';
 import { Team } from '../models/team/team';
 import { Router } from '@angular/router';
 import { User } from '../models/user/user';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,14 @@ export class AdminPrizesPagePage implements OnInit {
   team:Team;
   prize:Prize;
   user: User;
-  constructor(private location: Location, private pizeservice : PrizeService,private router: Router) {
+
+  constructor(
+    private location: Location,
+    private pizeservice : PrizeService,
+    private router: Router,
+    private alertController: AlertController) 
+    
+  {
     this.prizes = new Array<Prize>;
     this.team = new Team();
     this.prize = new Prize();
@@ -35,7 +43,6 @@ export class AdminPrizesPagePage implements OnInit {
       this.router.navigate(["/user/home"]);
     }
     this.listPrize();
-    
 
   }
 
@@ -62,5 +69,30 @@ export class AdminPrizesPagePage implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  removePrize(idPrize: number) {
+    this.pizeservice.removePrize(this.team.codice, idPrize).subscribe(
+      (response) => {
+        this.removedPrizeAlert();
+        console.log('Premio rimosso dal team con successo');
+        this.handleRefresh("");
+      }
+    );
+  }
+
+  async removedPrizeAlert() {
+    const alert = await this.alertController.create({
+      header: 'Premio rimosso con successo!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

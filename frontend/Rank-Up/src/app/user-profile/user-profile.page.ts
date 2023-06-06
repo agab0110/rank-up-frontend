@@ -23,6 +23,8 @@ export class UserProfilePage implements OnInit {
   public user_photo: string | undefined
   team: Team;
   password: any;
+  showPassword: boolean = false;
+  
 
   lenPassword = 6;
   lenUsername = 2;
@@ -295,16 +297,30 @@ export class UserProfilePage implements OnInit {
   }
   
   async presentAlert5() {
+    this.showPassword = false;
+
     const alert = await this.alertController.create({
       header: 'Inserisci nuova password:',
       inputs: [
         {
           placeholder: 'Password',
-          type: 'password',
+          type: this.showPassword ? 'text' : 'password',
           cssClass: 'alert-input',
         },
       ],
       buttons: [
+        {
+          text: "Visibilità Password",
+          cssClass: 'alert-button-blue',
+          handler: () => {
+            this.showPassword = !this.showPassword;
+            const input = document.querySelector('ion-alert input');
+            if (input) {
+              input.setAttribute('type', this.showPassword ? 'text' : 'password');
+            }
+            return false;
+          },
+        },
         {
           text: 'Conferma',
           cssClass: 'alert-button-blue',

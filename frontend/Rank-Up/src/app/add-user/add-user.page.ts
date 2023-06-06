@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 import { UserService } from '../services/user/user.service';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
@@ -32,7 +33,8 @@ export class AddUserPage implements OnInit {
     private userService: UserService,
     private userJoinsTeamService: UserJoinsTeamService,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {
 
     this.users = new Array<User>;
@@ -88,6 +90,7 @@ export class AddUserPage implements OnInit {
     this.idUser = idUser;
 
     this.adminService.newAdmin(idUser, this.team.codice).subscribe(response => {
+      this.addAdminAlert();
       console.log("Admin aggiunto con successo");
       this.getNewUsers();
     })
@@ -113,6 +116,7 @@ export class AddUserPage implements OnInit {
     this.idUser = idUser;
 
     this.userJoinsTeamService.addUser(this.team.codice, idUser).subscribe(response => {
+      this.addUserAlert();
       console.log("Utente inserito");
       this.getNewUsers();
     })
@@ -120,4 +124,33 @@ export class AddUserPage implements OnInit {
     this.getNewUsers();
   }
 
+  async addUserAlert() {
+    const alert = await this.alertController.create({
+      header: 'Utente aggiunto con successo!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  
+  async addAdminAlert() {
+    const alert = await this.alertController.create({
+      header: 'Admin aggiunto con successo!',
+      message: '',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 }

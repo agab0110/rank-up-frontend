@@ -64,6 +64,7 @@
     height: 0.4vh;
     width: 15vh;
 }
+
 #btUserSmall {
     color: var(--ion-color-white);
     --background: var(--ion-color-user);
@@ -77,7 +78,24 @@
   
     color: black;
     font-weight: bold;
-  }
+}
+
 .formInput {
     height: 2vh;
+}
+
+.with-eye-icon {
+    position: relative;
+    padding-right: 32px;
+}
+  
+.with-eye-icon .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 3vh;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: var(--ion-color-medium);
+    z-index: 9999;
+    pointer-events: auto;
 }
