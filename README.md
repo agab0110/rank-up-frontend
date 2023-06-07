@@ -1,5 +1,6 @@
 # ISTRUZIONI PER APK
-- sostituire nei services, al posto di "localhost" l'indirizzo ip del proprio pc
+- nella cartella "globalVarables" si trova un file con all'interno una variabile globale contenente un url.
+  Una volta dockerizzato il backend sostituire "localhost" con il proprio indirizzo ip
 - buildare apk
 
 ## Per manifest
