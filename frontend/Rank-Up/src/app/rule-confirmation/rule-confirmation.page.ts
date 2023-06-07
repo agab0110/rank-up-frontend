@@ -11,6 +11,7 @@ import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { Notification } from '../models/notification/notification';
 import { FileService } from '../services/file/file.service';
+import { DatePipe } from '@angular/common';  //Utilizzato per troncare il timestamp nell'html
 
 @Component({
   selector: 'app-rule-confirmation',
