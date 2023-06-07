@@ -7,8 +7,6 @@ import { Task } from '../models/task/task';
 import { User } from '../models/user/user';
 import { Team } from '../models/team/team';
 import { Router } from '@angular/router';
-import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
-import { TaskCompleted } from '../models/taskCompleted/task-completed';
 
 @Component({
   selector: 'app-rules-and-tasks-rules',

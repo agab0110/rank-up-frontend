@@ -12,8 +12,6 @@ import { Team } from '../models/team/team';
 import { UserJoinsTeamService } from '../services/userJoinsTeam/user-joins-team.service';
 import { UserReciveNotificationService } from '../services/userReciveNotification/user-recive-notification.service';
 import { FileService } from '../services/file/file.service';
-import { error } from 'console';
-import { log } from 'console';
 
 @Component({
   selector: 'app-task-confirmation',

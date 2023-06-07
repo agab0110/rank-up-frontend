@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Rule } from '../models/rule/rule';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { User } from '../models/user/user';

@@ -10,9 +10,6 @@ import { AdminReciveNotification } from '../models/adminReciveNotification/admin
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 import { Admin } from '../models/admin/admin';
 import { Router } from '@angular/router';
-import { LocalNotifications } from '@capacitor/local-notifications';
-import { interval } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications',

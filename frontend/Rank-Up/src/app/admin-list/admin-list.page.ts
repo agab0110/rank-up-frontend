@@ -8,7 +8,6 @@ import { Team } from '../models/team/team';
 import { Admin } from '../models/admin/admin';
 import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Router } from '@angular/router';
-import { log } from 'console';
 
 @Component({
   selector: 'app-admin-list',
