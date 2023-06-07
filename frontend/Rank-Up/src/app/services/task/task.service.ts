@@ -13,6 +13,12 @@ export class TaskService {
     this.baseUrl = "http://localhost:8080/taskApi";
   }
 
+  public listAdminTask(teamId: number): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      this.baseUrl + "/getAdminTask" + teamId
+    );
+  }
+
   public listTask(teamId: Number): Observable<Task[]> {
     return this.http.get<Task[]>(
       this.baseUrl + "/tasks/" + teamId
