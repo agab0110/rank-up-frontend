@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { RuleCompleted } from 'src/app/models/ruleCompleted/rule-completed';
 import { Task } from 'src/app/models/task/task';
 import { TaskCompleted } from 'src/app/models/taskCompleted/task-completed';
@@ -13,7 +14,7 @@ export class TaskCompletedService {
   private baseUrl: String;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/taskCompletedApi";
+    this.baseUrl = host + "/taskCompletedApi";
   }
 
   public getTaskCompletedByUser(idUser: number, idTeam: number): Observable<TaskCompleted[]> {

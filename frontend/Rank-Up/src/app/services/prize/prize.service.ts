@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Prize } from 'src/app/models/prize/prize';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class PrizeService {
   private baseUrl: String;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/prizeApi";
+    this.baseUrl = host + "/prizeApi";
   }
   public listPrize(teamId: Number): Observable<Prize[]> {
     return this.http.get<Prize[]>(

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Team } from 'src/app/models/team/team';
 import { User } from 'src/app/models/user/user';
 import { UserJoinsTeam } from 'src/app/models/userJoinsTeam/user-joins-team';
@@ -13,7 +14,7 @@ export class UserJoinsTeamService {
   userJoinsTeamUrl: string;
 
   constructor(private http: HttpClient) {
-    this.userJoinsTeamUrl = 'http://localhost:8080/userJoinsTeamApi';
+    this.userJoinsTeamUrl = host + "/userJoinsTeamApi";
    }
 
    addUserByCOde(codeTeam: any, idUser: number) {

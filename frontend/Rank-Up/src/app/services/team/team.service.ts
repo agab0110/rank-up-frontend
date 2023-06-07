@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Team } from 'src/app/models/team/team';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class TeamService {
   constructor(
     private http: HttpClient
   ) {
-    this.teamUrl = 'http://localhost:8080/teamApi'
+    this.teamUrl = host + "/teamApi";
   }
 
   public changeTeamName(teamId: number, teamName: string) {

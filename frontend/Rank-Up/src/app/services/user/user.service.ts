@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { User } from 'src/app/models/user/user';
 
 @Injectable()
@@ -8,7 +9,7 @@ export class UserService {
   private userUrl: string;
 
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://localhost:8080/userApi'
+    this.userUrl = host + "/userApi";
   }
 
   public save(user: User) {

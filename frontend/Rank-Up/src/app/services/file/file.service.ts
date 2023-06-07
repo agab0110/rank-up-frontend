@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { host } from 'src/app/globalVarables/urlVariable';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class FileService {
   private baseUrl: String;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/fileApi";
+    this.baseUrl = host + "/fileApi";
   }
 
   public uploadFile(file: File) {
