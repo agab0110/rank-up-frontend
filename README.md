@@ -2,6 +2,11 @@
 
 Front-end progetto ingegneria del software.
 
+# Per manifest
+
+aggiungere android:usesCleartextTraffic="true" nel tag application
+aggiungere come tag uses-permission android:name="android.permission.ACCESS_NETWORK_STATE
+
 ## Elenco pagine
 
 | Numero | Nome |
