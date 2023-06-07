@@ -86,7 +86,7 @@ export class TeamRulesTasksPage implements OnInit {
   }
 
   listTask(){
-    this.taskservice.listTask(this.team.codice).subscribe(response =>{
+    this.taskservice.listAdminTask(this.team.codice).subscribe(response =>{
       this.tasks = response;
     }, (error: Response) => {
       if(error.status == 400)
