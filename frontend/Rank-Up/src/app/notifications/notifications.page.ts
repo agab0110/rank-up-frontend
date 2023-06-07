@@ -47,11 +47,6 @@ export class NotificationsPage implements OnInit {
   }
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.getUserNotification(this.user.id);
