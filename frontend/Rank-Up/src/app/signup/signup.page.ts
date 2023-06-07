@@ -55,7 +55,7 @@ export class SignupPage {
       {
         console.log(this.user.password);
         this.router.navigate(['/login']);
-      }, async (error: HttpErrorResponse) => {  
+      }, (error: HttpErrorResponse) => {  
         this.errorCheck = true;
         if(error.status == 400){
           console.log("400 error");
