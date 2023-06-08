@@ -16,7 +16,7 @@ export class TaskService {
 
   public listAdminTask(teamId: number): Observable<Task[]> {
     return this.http.get<Task[]>(
-      this.baseUrl + "/getAdminTask" + teamId
+      this.baseUrl + "/getAdminTask/" + teamId
     );
   }
 
