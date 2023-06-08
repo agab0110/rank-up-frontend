@@ -77,7 +77,7 @@ export class UserProfilePage implements OnInit {
 
   async emptyAlert() {
     const alert = await this.alertController.create({
-      header: 'Campo vuoto, modifica non effettuata',
+      header: 'Modifica non effettuata',
       buttons: [
         {
           text: 'OK',
