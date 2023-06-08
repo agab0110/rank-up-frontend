@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../services/notification/notification.service';
 import { Notification } from '../models/notification/notification';
+import { DatePipe } from '@angular/common';     // Viene usato nell'html per troncare la data
 
 @Component({
   selector: 'app-user-notification-description',
