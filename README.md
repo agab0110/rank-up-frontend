@@ -1,5 +1,5 @@
 # ISTRUZIONI PER APK
-- nella cartella "globalVarables" si trova un file con all'interno una variabile globale contenente un url.
+- nella cartella "globalVariables" si trova un file con all'interno una variabile globale contenente un url.
   Una volta dockerizzato il backend sostituire "localhost" con il proprio indirizzo ip
 - buildare apk
 
