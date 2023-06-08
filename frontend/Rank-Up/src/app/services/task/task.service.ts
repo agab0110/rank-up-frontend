@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { host } from 'src/app/globalVarables/urlVariable';
+import { host } from 'src/app/globalVariables/urlVariable';
 import { Task } from 'src/app/models/task/task';
 
 @Injectable({

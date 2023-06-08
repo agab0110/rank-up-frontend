@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { host } from 'src/app/globalVarables/urlVariable';
+import { host } from 'src/app/globalVariables/urlVariable';
 import { Team } from 'src/app/models/team/team';
 import { User } from 'src/app/models/user/user';
 import { UserJoinsTeam } from 'src/app/models/userJoinsTeam/user-joins-team';

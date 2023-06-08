@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { host } from 'src/app/globalVarables/urlVariable';
+import { host } from 'src/app/globalVariables/urlVariable';
 import { Prize } from 'src/app/models/prize/prize';
 import { UserGetPrize } from 'src/app/models/userGetPrize/user-get-prize';
 
