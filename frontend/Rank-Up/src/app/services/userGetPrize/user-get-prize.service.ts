@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Prize } from 'src/app/models/prize/prize';
 import { UserGetPrize } from 'src/app/models/userGetPrize/user-get-prize';
 
@@ -11,7 +12,7 @@ export class UserGetPrizeService {
   private userGetPrizeUrl: string;
 
   constructor(private http: HttpClient) {
-    this.userGetPrizeUrl = 'http://localhost:8080/userGetPrizeApi'
+    this.userGetPrizeUrl = host + "/userGetPrizeApi";
   }
 
   public getUserPrizes(userId: number, teamId: number): Observable<Prize[]> {

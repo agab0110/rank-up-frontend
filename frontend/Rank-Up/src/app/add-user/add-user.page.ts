@@ -9,8 +9,6 @@ import { AdminService } from '../services/admin/admin.service';
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Team } from '../models/team/team';
-import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
-import { log } from 'console';
 import { Router } from '@angular/router';
 
 @Component({

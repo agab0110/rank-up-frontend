@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Admin } from 'src/app/models/admin/admin';
 import { Team } from 'src/app/models/team/team';
 
@@ -13,7 +14,7 @@ export class AdminService {
   constructor(
     private http: HttpClient
   ) {
-    this.baseUrl = "http://localhost:8080/adminManageTeamApi"
+    this.baseUrl = host + "/adminManageTeamApi";
   }
 
   public newAdmin(idUser: number, idTeam: number) {  

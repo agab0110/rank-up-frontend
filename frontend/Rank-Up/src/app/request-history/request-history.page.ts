@@ -6,12 +6,9 @@ import { TaskCompletedService } from '../services/taskCompleted/task-completed.s
 import { RuleCompletedService } from '../services/ruleCompleted/rule-completed.service';
 import { RuleCompleted } from '../models/ruleCompleted/rule-completed';
 import { Team } from '../models/team/team';
-import { Prize } from '../models/prize/prize';
-import { timestamp } from 'rxjs';
 import { User } from '../models/user/user';
 import { Admin } from '../models/admin/admin';
 import { Router } from '@angular/router';
-import { UserJoinsTeam } from '../models/userJoinsTeam/user-joins-team';
 import { Task } from '../models/task/task';
 import { Rule } from '../models/rule/rule';
 import { UserGetPrizeService } from '../services/userGetPrize/user-get-prize.service';

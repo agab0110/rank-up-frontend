@@ -28,10 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
   {
-    path: 'components-page',
-    loadChildren: () => import('./components-page/components-page.module').then( m => m.ComponentsPagePageModule)
-  },
-  {
     path: 'task-completed',
     loadChildren: () => import('./task-completed/task-completed.module').then( m => m.TaskCompletedPageModule)
   },
@@ -90,7 +86,8 @@ const routes: Routes = [
   {
     path: 'notifications',
     loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
-  },  {
+  },
+  {
     path: 'rule-confirmation',
     loadChildren: () => import('./rule-confirmation/rule-confirmation.module').then( m => m.RuleConfirmationPageModule)
   },

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Task } from 'src/app/models/task/task';
 
 @Injectable({
@@ -10,7 +11,13 @@ export class TaskService {
   private baseUrl: String;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/taskApi";
+    this.baseUrl = host + "/taskApi";
+  }
+
+  public listAdminTask(teamId: number): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      this.baseUrl + "/getAdminTask" + teamId
+    );
   }
 
   public listTask(teamId: Number): Observable<Task[]> {

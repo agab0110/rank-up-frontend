@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { Notification } from 'src/app/models/notification/notification';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class NotificationService {
   constructor(
     private http: HttpClient
   ) {
-    this.notificationUrl = "http://localhost:8080/notificationApi";
+    this.notificationUrl = host + "/notificationApi";
   }
 
   public newNotification(notification: Notification, idTeam: number) {

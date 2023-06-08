@@ -521,4 +521,19 @@ export class UserProfilePage implements OnInit {
       return false;
     }
   }
+
+  async presentAlert9() {
+    const alert = await this.alertController.create({
+      header: 'Attenzione',
+      message: 'Funzionalità non ancora implementata',
+      buttons: [
+        {
+          text: 'Ok',
+          cssClass: 'alert-button-red',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 }

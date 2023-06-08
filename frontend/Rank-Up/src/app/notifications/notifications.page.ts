@@ -10,9 +10,7 @@ import { AdminReciveNotification } from '../models/adminReciveNotification/admin
 import { AdminReciveNotificationService } from '../services/adminReciveNotification/admin-recive-notification.service';
 import { Admin } from '../models/admin/admin';
 import { Router } from '@angular/router';
-import { LocalNotifications } from '@capacitor/local-notifications';
-import { interval } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';     // Viene usato nell'html per troncare la data
 
 @Component({
   selector: 'app-notifications',
@@ -50,11 +48,6 @@ export class NotificationsPage implements OnInit {
   }
 
   ngOnInit() {
-    //if(localStorage.getItem('team') == null || localStorage.getItem('team') == '')
-    //this.router.navigate(['user/home']);
-    //this.team = JSON.parse(localStorage.getItem('team') || '{}');
-    //if(localStorage.getItem('admin') == null || localStorage.getItem('admin') == '')
-    //this.router.navigate(['user/home']);
     this.admin = JSON.parse(localStorage.getItem('admin') || '{}');
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.getUserNotification(this.user.id);

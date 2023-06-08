@@ -5,6 +5,8 @@ import { User } from '../models/user/user';
 import { UserService } from '../services/user/user.service';
 import { SHA3 } from 'crypto-js';
 import { AlertController } from '@ionic/angular';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-signup',
@@ -46,17 +48,19 @@ export class SignupPage {
 
     this.user.password = hashedPassword;
     this.user.photo = "https://ionicframework.com/docs/img/demos/avatar.svg";
+    
 
     this.errorCheck = false;
     this.service.save(this.user).subscribe(result => 
       {
         console.log(this.user.password);
         this.router.navigate(['/login']);
-      }, (error: Response) => {  
+      }, (error: HttpErrorResponse) => {  
         this.errorCheck = true;
         if(error.status == 400){
           console.log("400 error");
-          this.duplicateEmailAlert();
+          const responseBody = error.error;
+          this.duplicateEmailAlert(responseBody);
         }
         else {  
           console.log('An unexpected error occured');   
@@ -157,7 +161,7 @@ export class SignupPage {
     const emailControl = this.user.email;
 
     if (emailControl && emailControl.trim() !== '') {
-      const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|virgilio\.it)$/i;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|virgilio\.it|studenti\.unimol\.it|unimol\.it)$/i;
       if (!emailPattern.test(emailControl)) {
         this.emailErrorMessage = 'Formato email non valido.';
         this.b = false;
@@ -177,9 +181,11 @@ export class SignupPage {
   backButton() {
     this.location.back();
   }
-  async duplicateEmailAlert() {
+
+  async duplicateEmailAlert(responseBody: string) {
     const alert = await this.alertController.create({
-      header: 'Utente non Registrato! Email gia presente',
+      header: 'Utente non registrato!',
+      message: responseBody,
       buttons: [
         {
           text: 'OK',

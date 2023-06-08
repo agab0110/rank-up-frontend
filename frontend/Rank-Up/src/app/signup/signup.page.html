@@ -8,7 +8,7 @@
     <div class="signup">
       <h3 class="titolo">Registrazione</h3>
       <ul *ngIf="errorCheck">
-        Username già in uso o campi mancanti
+        Campi mancanti
      </ul>
       <ion-input [(ngModel)]="user.name" [type]="'text'" label="Nome" labelPlacement="stacked" fill="outline" shape="round" mode="md" class="formInput"></ion-input>
       

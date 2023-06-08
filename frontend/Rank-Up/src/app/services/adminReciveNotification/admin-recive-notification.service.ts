@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { host } from 'src/app/globalVarables/urlVariable';
 import { AdminReciveNotification } from 'src/app/models/adminReciveNotification/admin-recive-notification';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class AdminReciveNotificationService {
   adminReciveNotificationUrl: String;
 
   constructor(private http: HttpClient) {
-    this.adminReciveNotificationUrl = 'http://localhost:8080/adminReciveNotificationApi'
+    this.adminReciveNotificationUrl = host + '/adminReciveNotificationApi'
   }
 
   public getAdminNotification(idAdmin: Number): Observable<AdminReciveNotification[]> {
